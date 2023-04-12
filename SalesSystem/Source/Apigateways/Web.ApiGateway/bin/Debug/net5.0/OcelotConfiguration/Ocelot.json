@@ -1,0 +1,124 @@
+{
+  "Routes": [
+    //Product Service
+    {
+      "ServiceName": "ProductService",
+      "UseServiceDiscovery": true,
+
+      "DownstreamPathTemplate": "/api/product/{everything}",
+      "DownstreamScheme": "http",
+
+      "UpstreamPathTemplate": "/product/{everything}",
+      "UpstreamHttpMethod": [ "Post", "Get", "Put", "Delete" ],
+      "UpStreamScheme": "http"
+    },
+    //Picture Service
+    {
+      "ServiceName": "ProductService",
+      "UseServiceDiscovery": true,
+
+      "DownstreamPathTemplate": "/api/picture/{everything}",
+      "DownstreamScheme": "http",
+
+      "UpstreamPathTemplate": "/picture/{everything}",
+      "UpstreamHttpMethod": [ "Post", "Get", "Put", "Delete" ],
+      "UpStreamScheme": "http"
+    },
+    //UpCategory Service
+    {
+      "ServiceName": "ProductService",
+      "UseServiceDiscovery": true,
+
+      "DownstreamPathTemplate": "/api/upcategory/{everything}",
+      "DownstreamScheme": "http",
+
+      "UpstreamPathTemplate": "/upcategory/{everything}",
+      "UpstreamHttpMethod": [ "Post", "Get", "Put", "Delete" ],
+      "UpStreamScheme": "http"
+    },
+    //DownCategory Service
+    {
+      "ServiceName": "ProductService",
+      "UseServiceDiscovery": true,
+
+      "DownstreamPathTemplate": "/api/downcategory/{everything}",
+      "DownstreamScheme": "http",
+
+      "UpstreamPathTemplate": "/downcategory/{everything}",
+      "UpstreamHttpMethod": [ "Post", "Get", "Put", "Delete" ],
+      "UpStreamScheme": "http"
+    },
+    //Brand Service
+    {
+      "ServiceName": "ProductService",
+      "UseServiceDiscovery": true,
+
+      "DownstreamPathTemplate": "/api/brand/{everything}",
+      "DownstreamScheme": "http",
+
+      "UpstreamPathTemplate": "/brand/{everything}",
+      "UpstreamHttpMethod": [ "Post", "Get", "Put", "Delete" ],
+      "UpStreamScheme": "http"
+    },
+    //Auth Service
+    {
+      "ServiceName": "IdentityService",
+      "UseServiceDiscovery": true,
+
+      "DownstreamPathTemplate": "/api/Auth/{everything}",
+      "DownstreamScheme": "http",
+
+
+      "UpstreamPathTemplate": "/auth/{everything}",
+      "UpstreamHttpMethod": [ "Post" ],
+      "UpStreamScheme": "http"
+    },
+    //Basket Service
+    {
+      "ServiceName": "BasketService",
+      "UseServiceDiscovery": true,
+
+      "DownstreamPathTemplate": "/api/Basket/{everything}",
+      "DownstreamScheme": "http",
+
+      "UpstreamPathTemplate": "/basket/{everything}",
+      "UpstreamHttpMethod": [ "Post", "Get", "Delete" ],
+      "UpStreamScheme": "http"
+    },
+    //Order Service
+    {
+      "ServiceName": "OrderService",
+      "UseServiceDiscovery": true,
+
+      "DownstreamPathTemplate": "/api/Order/{everything}",
+      "DownstreamScheme": "http",
+
+      "UpstreamPathTemplate": "/order/{everything}",
+      "UpstreamHttpMethod": [ "Post", "Get", "Delete" ],
+      "UpStreamScheme": "http"
+    },
+
+    //PaymentMethod Service
+    {
+      "ServiceName": "OrderService",
+      "UseServiceDiscovery": true,
+
+      "DownstreamPathTemplate": "/api/PaymentMethod/{everything}",
+      "DownstreamScheme": "http",
+
+      "UpstreamPathTemplate": "/paymentMethod/{everything}",
+      "UpstreamHttpMethod": [ "Post", "Get" ],
+      "UpStreamScheme": "http"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:5000",
+    "ServiceDiscoveryProvider": {
+      "Scheme": "http",
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "Consul"
+    }
+  }
+
+}

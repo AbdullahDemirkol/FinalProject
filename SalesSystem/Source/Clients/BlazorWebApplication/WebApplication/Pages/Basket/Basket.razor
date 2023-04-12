@@ -1,0 +1,164 @@
+﻿@page  "/Basket"
+
+@if (identityService.IsLoggedIn)
+{
+    <!-- breadcrumb-section -->
+    <div class="breadcrumb-section breadcrumb-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 text-center">
+                    <div class="breadcrumb-text">
+                        <p>Fresh and Organic</p>
+                        <h1>Sepet</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end breadcrumb section -->
+    <!-- cart -->
+    <div class="cart-section mt-150 mb-150">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-12">
+                    <div class="cart-table-wrap">
+                        <table class="cart-table">
+                            <thead class="cart-table-head">
+                                <tr class="table-head-row">
+                                    <th class="product-remove"></th>
+                                    <th class="product-image">Ürün Resimi</th>
+                                    <th class="product-name">Ürün Adı</th>
+                                    <th class="product-price">Ürün Fiyatı</th>
+                                    <th class="product-quantity">Ürün Adeti</th>
+                                    <th class="product-total">Toplam Ürün Adeti</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (basketModel.BasketItems.Any())
+                                {
+                                    @foreach (var basketItem in basketModel.BasketItems)
+                                    {
+
+                                        <tr class="table-body-row">
+                                            @{ string pictureUrl = "http://localhost:5001/pics" + basketItem.PictureUrl;}
+                                            <td class="product-remove"><a href="#" @onclick="@(async()=>await RemoveItemFromList(basketItem))"><i class="far fa-window-close"></i></a></td>
+                                            <td class="product-image"><img src="assets/img/products/product-img-3.jpg" alt=""></td>
+                                            <td class="product-name">@basketItem.ProductName</td>
+                                            <td class="product-price">@basketItem.UnitPrice.ToString("N2") TL</td>
+                                            <td class="product-quantity"><input type="number" placeholder="0"></td>
+                                            <td class="product-total">@basketItem.Quantity</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="total-section">
+                        <table class="total-table">
+                            <thead class="total-table-head">
+                                <tr class="table-total-row">
+                                    <th>Total</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="total-data">
+                                    <td><strong>Total Adet: </strong></td>
+                                    <td>@basketModel.TotalQuantity()</td>
+                                </tr>
+                                @*<tr class="total-data">
+                                    <td><strong>Shipping: </strong></td>
+                                    <td>$45</td>
+                                </tr>*@
+                            <tr class="total-data">
+                                <td><strong>Total Fiyat: </strong></td>
+                                <td>@basketModel.TotalUnitPrice() TL</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="cart-buttons">
+                            <a href="" @onclick="(()=>ReloadPage())" class="boxed-btn">Sepeti Yenile</a>
+                            @if (basketModel.BasketItems.Count > 0)
+                            {
+                                <a href="" class="boxed-btn black" @onclick="@(()=>CheckOut())">Check Out</a>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end cart -->
+}
+else
+{
+
+    <p>giriş başarısız</p>
+}
+@code {
+    private bool isLoggedIn = false;
+
+    CustomerBasket basketModel = new CustomerBasket();
+    [Inject]
+    IBasketService basketService { get; set; }
+    [Inject]
+    IIdentityService identityService { get; set; }
+    [Inject]
+    StateManager stateManager { get; set; }
+
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+    [Inject]
+    public IJSRuntime jsRuntime { get; set; }
+    protected async override Task OnInitializedAsync()
+    {
+        isLoggedIn = identityService.IsLoggedIn;
+        if (isLoggedIn)
+        {
+            basketModel = await basketService.GetBasket();
+        }
+        else
+        {
+            await jsRuntime.InvokeVoidAsync("myFunction");
+            navigationManager.NavigateTo($"login?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
+        }
+    }
+
+    protected async override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await jsRuntime.InvokeVoidAsync("myFunction");
+            //stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
+        }
+    }
+    //private async Task StateManager_StateChanged(ComponentBase component, string property)
+    //{
+    //    if (property.Contains("basketPage"))
+    //    {
+    //        await InvokeAsync(StateHasChanged);
+    //    }
+
+    //}
+
+    void CheckOut()
+    {
+        navigationManager.NavigateTo("/CheckOut");
+    }
+    async Task ReloadPage()
+    {
+        basketModel = await basketService.GetBasket();
+        stateManager.UpdateContent(this, "basketPage");
+    }
+    async Task RemoveItemFromList(BasketItem item)
+    {
+        basketModel.BasketItems.Remove(item);
+        basketModel = await basketService.UpdateBasket(basketModel);
+        stateManager.UpdateCard(this);
+    }
+
+}

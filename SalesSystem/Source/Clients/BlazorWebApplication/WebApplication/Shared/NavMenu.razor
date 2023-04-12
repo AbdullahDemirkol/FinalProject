@@ -1,0 +1,198 @@
+﻿<!-- header -->
+<div class="top-header-area" id="sticker">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 text-center">
+                <div class="main-menu-wrap">
+                    <!-- logo -->
+                    <div class="site-logo">
+                        <a href="/">
+                            <img src="assets/img/logo.png" alt="">
+                        </a>
+                    </div>
+                    <!-- logo -->
+                    <!-- menu start -->
+                    <nav class="main-menu">
+                        <ul>
+                            <li class="current-list-item">
+                                <a href="/Index">Anasayfa</a>
+                            </li>
+                            <li>
+                                <a href="/Product">Tüm Ürünler</a>
+                                @*<ul class="sub-menu">
+                @foreach (var upCategory in upCategories)
+                {
+                    <li><a href="@("https://localhost:44345/Product/?upCategory="+upCategory.Id+"&downCategory=1&brand=1")" >@upCategory.UpCategoryName</a></li>
+                }
+            </ul>*@
+                            </li>
+                            @if (!isLoggedIn)
+                            {
+                                GetUser();
+                                <li>
+                                    <a href="/login" @onclick=@GoLoginPage>Giriş Yap</a>
+                                </li>
+                            }
+                            else
+                            {
+                                @if (_userDto.Role == "admin")
+                                {
+                                    <li>
+                                        <a href="https://localhost:44350/" >Admin Panel</a>
+                                    </li>
+                                }
+                                <li>
+                                    <a>@_userDto.FirstName @_userDto.LastName</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="/Account">Hesabım</a></li>
+                                        <li><a href="/Orders">Siparişlerim</a></li>
+                                        <li><a href="/PaymentMethods">Ödeme Yöntemlerim</a></li>
+                                        <li><a class="ml-md-auto" @onclick=@GoLogoutPage>Çıkış Yap</a></li>
+                                    </ul>
+                                </li>
+                            }
+                            @*<ul class="sub-menu">
+            <li><a href="news.html">News</a></li>
+            <li>
+                <a href="single-news.html">Single News</a>
+                <ul class="sub-menu">
+                    <li><a href="news.html">News</a></li>
+                    <li><a href="single-news.html">Single News</a></li>
+                </ul>
+            </li>
+        </ul>*@
+                            <li><a href="/About">Hakkımızda</a></li>
+                            @if (isLoggedIn)
+                            {
+                                <li><a href="/Contact">İletişim</a></li>
+                            }
+
+                            <li>
+                                <div class="header-icons">
+                                    @if (isLoggedIn)
+                                    {
+                                        <a class="shopping-cart" href="/Basket"><i class="fas fa-shopping-cart"></i></a>
+                                    }
+                                    <a class="mobile-hide search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                                </div>
+                            </li>
+                        </ul>
+                    </nav>
+                    <a class="mobile-show search-bar-icon" href="#"><i class="fas fa-search"></i></a>
+                    <div class="mobile-menu"></div>
+                    <!-- menu end -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end header -->
+<!-- search area -->
+<div class="search-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <span class="close-btn"><i class="fas fa-window-close"></i></span>
+                <div class="search-bar">
+                    <div class="search-bar-tablecell">
+                        <h3>Search For:</h3>
+                        <input type="text" placeholder="Keywords">
+                        <button type="submit">Search <i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end search area -->
+@*<div class="top-row pl-4 navbar navbar-dark">
+        <a class="navbar-brand" href="">WebApplication</a>
+        <button class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+
+    <div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
+        <ul class="nav flex-column">
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
+                    <span class="oi oi-home" aria-hidden="true"></span> Home
+                </NavLink>
+            </li>
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="product">
+                    <span class="oi oi-list-rich" aria-hidden="true"></span> Product Listesi
+                </NavLink>
+            </li>
+        </ul>
+    </div>*@
+
+@code {
+    @*@onclick="() => GetProducts(upCategory.Id,1)"*@
+[Inject]
+NavigationManager navigationManager { get; set; }
+[Inject]
+IProductService productService { get; set; }
+[Inject]
+IIdentityService identityService { get; set; }
+[Inject]
+StateManager stateManager { get; set; }
+private bool isLoggedIn = false;
+
+List<UpCategory> upCategories = new List<UpCategory>();
+UserDTO _userDto { get; set; }
+
+protected async override Task OnInitializedAsync()
+{
+    upCategories = await productService.GetUpCategoryItems();
+    isLoggedIn = identityService.IsLoggedIn;
+}
+
+protected override void OnAfterRender(bool firstRender)
+{
+    if (firstRender)
+    {
+        stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
+    }
+}
+private void GetUser()
+{
+    _userDto= identityService.GetUserModel(identityService.GetUserToken());
+}
+private async Task StateManager_StateChanged(ComponentBase component, string property)
+{
+    if (component == this)
+    {
+        return;
+    }
+    if (property == "increase")
+    {
+        //basketItemCount++;
+    }
+    else if (property == "checkBasket")
+    {
+        //await calculateItemCount();
+    }
+    else if (property == "login")
+    {
+        isLoggedIn = identityService.IsLoggedIn;
+        GetUser();
+    }
+    await InvokeAsync(StateHasChanged);
+}
+
+
+private void GoLoginPage()
+{
+    navigationManager.NavigateTo($"login?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}");
+}
+private void GoLogoutPage()
+{
+    navigationManager.NavigateTo($"logout?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}");
+}
+private void CheckBasket()
+{
+    stateManager.UpdateCard(this);
+}
+
+}

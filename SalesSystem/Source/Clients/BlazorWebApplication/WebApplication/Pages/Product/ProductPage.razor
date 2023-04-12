@@ -1,0 +1,49 @@
+﻿@*@page "/product"*@
+
+<div class="row">
+    @if (model.Data != null && model.Data.Any())
+    {
+        foreach (var productItem in model.Data)
+        {
+            <WebApplication.Pages.Product.ProductView ProductItem="productItem" OnClick="()=>AddToCart(productItem)" />
+        }
+    }
+
+</div>
+
+<h3>ProductPage</h3>
+
+@code {
+
+    [Inject]
+    IProductService categoryService { get; set; }
+    [Inject]
+    IIdentityService identityService { get; set; }
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+    [Inject]
+    public IBasketService basketService { get; set; }
+    [Inject]
+    StateManager stateManager { get; set; }
+
+    PaginatedViewModel<Product> model = new PaginatedViewModel<Product>();
+
+    //protected async override Task OnInitializedAsync()
+    //{
+    //    //model = await categoryService.GetProductsAsync(0,0,0,0);
+    //}
+
+    public async Task AddToCart(Product product)
+    {
+        if (!identityService.IsLoggedIn)
+        {
+            navigationManager.NavigateTo($"login?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
+            return;
+        }
+        await basketService.AddItemToBasket(product.Id);
+
+        stateManager.IncraseProductCount(this);
+
+    }
+
+}

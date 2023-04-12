@@ -1,0 +1,76 @@
+﻿@inherits LayoutComponentBase
+
+@if (isLoggedIn)
+{
+    <div class="page">
+        <div class="sidebar">
+            <NavMenu />
+        </div>
+
+        <div class="main">
+            <div class="top-row px-4">
+                <button class="main-btn" @onclick="GoUserPanel">Kullanıcı Paneli</button>
+                <button class="main-btn" @onclick="GoLogoutPage">Logout</button>
+
+                @*<a href="http://blazor.net" target="_blank" class="ml-md-auto">Logout</a>*@
+            </div>
+
+            <div class="content px-4">
+                @Body
+            </div>
+        </div>
+    </div>
+}
+else { 
+   <WebApplicationAdminPanel.Pages.Login.LoginPage></WebApplicationAdminPanel.Pages.Login.LoginPage>
+}
+@code{
+    private bool isLoggedIn = false;
+    [Inject]
+    private IIdentityService _identityService { get; set; }
+    [Inject]
+    StateManager stateManager { get; set; }
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+    bool logout = false;
+    protected override Task OnInitializedAsync()
+    {
+        isLoggedIn = _identityService.IsLoggedIn;
+        return base.OnInitializedAsync();
+    }
+    protected override void OnInitialized()
+    {
+        isLoggedIn = _identityService.IsLoggedIn;
+    }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        isLoggedIn = _identityService.IsLoggedIn;
+        if (firstRender)
+        {
+            stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
+        }
+        var collection = HttpUtility.ParseQueryString(new Uri(navigationManager.Uri).Query);
+        string retunUrl = collection.Get("logout") ?? "/";
+        if (retunUrl=="true")
+        {
+            stateManager.LoginChanged(this);
+            navigationManager.NavigateTo(navigationManager.BaseUri);
+        }
+    }
+
+    private async Task StateManager_StateChanged(ComponentBase component, string property)
+    {
+        if (property== "login")
+        {
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+    private void GoLogoutPage()
+    {
+        navigationManager.NavigateTo($"logout");
+    }
+    private void GoUserPanel()
+    {
+        navigationManager.NavigateTo("https://localhost:44345/");
+    }
+}

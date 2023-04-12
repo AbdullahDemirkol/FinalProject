@@ -1,0 +1,132 @@
+.emp-profile[b-q4e62ilcw4] {
+    padding: 3%;
+    border-radius: 0.5rem;
+    background: #fff;
+    border: 1px solid;
+}
+
+.forAccountBackgroundPadding[b-q4e62ilcw4] {
+    padding: 1.5% 0;
+}
+
+.profile-img[b-q4e62ilcw4] {
+    text-align: center;
+}
+
+.profile-img img[b-q4e62ilcw4] {
+    width: 70%;
+    height: 100%;
+}
+
+.profile-img .file[b-q4e62ilcw4] {
+    position: relative;
+    overflow: hidden;
+    margin-top: -20%;
+    width: 70%;
+    border: none;
+    border-radius: 0;
+    font-size: 15px;
+    background: #212529b8;
+}
+
+.profile-img .file input[b-q4e62ilcw4] {
+    position: absolute;
+    opacity: 0;
+    right: 0;
+    top: 0;
+}
+
+.profile-head h5[b-q4e62ilcw4] {
+    color: #333;
+}
+
+.profile-head h6[b-q4e62ilcw4] {
+    color: #0062cc;
+}
+
+.profile-edit-btn[b-q4e62ilcw4] {
+    border: none;
+    border-radius: 1.5rem;
+    width: 70%;
+    padding: 2%;
+    font-weight: 600;
+    color: #6c757d;
+    cursor: pointer;
+}
+
+.proile-rating[b-q4e62ilcw4] {
+    font-size: 12px;
+    color: #818182;
+    margin: 5% 0;
+}
+
+    .proile-rating span[b-q4e62ilcw4] {
+        color: #495057;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+.profile-head .nav-tabs[b-q4e62ilcw4] {
+    margin-bottom: 5%;
+}
+
+    .profile-head .nav-tabs .nav-link[b-q4e62ilcw4] {
+        font-weight: 600;
+        border: none;
+    }
+
+        .profile-head .nav-tabs .nav-link.active[b-q4e62ilcw4] {
+            border: none;
+            border-bottom: 2px solid #0062cc;
+        }
+
+.profile-work[b-q4e62ilcw4] {
+    padding: 14%;
+    margin-top: -15%;
+}
+
+    .profile-work p[b-q4e62ilcw4] {
+        font-size: 12px;
+        color: #818182;
+        font-weight: 600;
+        margin-top: 10%;
+    }
+
+    .profile-work a[b-q4e62ilcw4] {
+        text-decoration: none;
+        color: #495057;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .profile-work ul[b-q4e62ilcw4] {
+        list-style: none;
+    }
+
+.profile-tab label[b-q4e62ilcw4] {
+    font-weight: 600;
+}
+
+.profile-tab p[b-q4e62ilcw4] {
+    font-weight: 600;
+    color: #0062cc;
+}
+.orderCard[b-q4e62ilcw4] {
+    border: 1px #6c757d solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.card[b-q4e62ilcw4] {
+    margin: 10px 0;
+}
+.statusSelect[b-q4e62ilcw4] {
+    padding: 5px;
+    margin-top: 1px;
+    border-radius: 5px;
+}
+.orderHead[b-q4e62ilcw4] {
+    border-bottom: 1px black solid;
+    margin: 0 5px 5px 5px;
+    padding-bottom: 5px;
+}

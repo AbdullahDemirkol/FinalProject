@@ -1,0 +1,247 @@
+﻿@page  "/PaymentMethods"
+    <!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>We sale fresh fruits</p>
+                    <h1>Ödeme Yöntemlerim</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end breadcrumb section -->
+<div class="forAccountBackground">
+
+    <div class="forAccountBackgroundPadding"></div>
+    <div class="container emp-profile">
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="profile-head">
+                    <h5>
+                        @_userModel.Username
+                    </h5>
+                    <h6>
+                        @_userModel.FirstName @_userModel.LastName
+                    </h6>
+                    <p class="proile-rating">Toplam Ödeme Yöntemi Adeti : <span>@_paymentMethodModels.Count()</span></p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <select id="StatusSelect" class="statusSelect" @onchange="OptionSelected">
+                            <option value="0">Tümü</option>
+                            @foreach (var cardType in _cardTypeModels)
+                            {
+                                <option value="@cardType.Id">@cardType.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <input type="submit" class="profile-edit-btn list-btn" @onclick="()=>GetPaymentMethodByCardType()" value="Listele" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-8">
+                        <input type="submit" class="profile-edit-btn add-button" data-toggle="modal" data-target="#exampleModal" value="Ödeme Yöntemi Ekle">
+                    </div>
+                </div>
+            </div>
+        </div>
+        @if (_paymentMethodModels != null)
+        {
+
+            @foreach (var _paymentMethodModel in _paymentMethodModels)
+            {
+                <div class="paymentMethodCard">
+                    <div class="row" style="margin-right: -5px;">
+                        <div class="col-md-12 paymentMethodHead">
+                            <h5>Ödeme Yöntemi</h5>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-md-9">
+                            <div class="tab-content profile-tab" id="myTabContent">
+                                <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="home-tab">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label>Kart No</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <p>@_paymentMethodModel.CardNumber.Substring(0, 4) **** **** @_paymentMethodModel.CardNumber.Substring(_paymentMethodModel.CardNumber.Length - 4)</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label>Kart Üstündeki İsim</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <p>@_paymentMethodModel.CardHolderName</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label>Kart Son Kullanma Tarihi</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <p>@_paymentMethodModel.CardExpirationShortFormat()</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label>Kart Güvenlik Numarası</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <p>**@_paymentMethodModel.SecurityNumber.Substring(_paymentMethodModel.SecurityNumber.Length - 1)</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <label>Kart Türü</label>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <p>@_cardTypeModels.FirstOrDefault(p => p.Id == _paymentMethodModel.CardTypeId).Name</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="submit" class="profile-edit-btn" @onclick="()=>DeletePaymentMethod(_paymentMethodModel.Id)" value="Kartı Sil" />
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+        }
+
+
+    </div>
+    <div class="forAccountBackgroundPadding"></div>
+    <!-- End My Account -->
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Yeni Ödeme Yöntemi Ekle</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <EditForm Model="@_paymentMethod" OnValidSubmit="@AddPaymentMethod">
+                    <div class="modal-body">
+                        <form>
+                            <div class="form-group">
+                                <label class="col-form-label">Kart Numarası:</label>
+                                <InputText @bind-Value="_paymentMethod.CardNumber" class="form-control" />
+                                <ValidationMessage For="@(()=>_paymentMethod.CardNumber)" />
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Kart Üstündeki İsim:</label>
+                                <InputText @bind-Value="_paymentMethod.CardHolderName" class="form-control" />
+                                <ValidationMessage For="@(()=>_paymentMethod.CardHolderName)" />
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Kartın Son Kullanma Tarihi:</label>
+                                <InputText @bind-Value="_paymentMethod.CardExpirationShort" class="form-control" />
+                                <ValidationMessage For="@(()=>_paymentMethod.CardExpirationShort)" />
+                            </div>
+                            <div class="form-group">
+                                <label class="col-form-label">Kartın Güvenlik Numarası</label>
+                                <InputText @bind-Value="_paymentMethod.SecurityNumber" class="form-control" />
+                                <ValidationMessage For="@(()=>_paymentMethod.SecurityNumber)" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input type="button" class="profile-edit-btn" data-dismiss="modal" value="Kapat" />
+                            </div>
+                            <div class="col-md-6">
+                                <a href="/PaymentMethods"><input type="submit" class="profile-edit-btn"@onclick="()=>AddPaymentMethod()"  data-dismiss="modal" value="Ekle" /></a>
+                            </div>
+                        </div>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>
+</div>
+@code {
+    private bool isLoggedIn = false;
+    [Inject]
+    public IJSRuntime jsRuntime { get; set; }
+    [Inject]
+    StateManager stateManager { get; set; }
+    [Inject]
+    IIdentityService identityService { get; set; }
+    [Inject]
+    IOrderService orderService { get; set; }
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+
+    UserDTO _userModel { get; set; } = new UserDTO();
+    List<PaymentMethod> _paymentMethodModels { get; set; } = new List<PaymentMethod>();
+    List<CardType> _cardTypeModels { get; set; } = new List<CardType>();
+    private int selectedOption;
+    PaymentMethod _paymentMethod { get; set; } = new PaymentMethod();
+
+    private void OptionSelected(ChangeEventArgs e)
+    {
+        selectedOption = Convert.ToInt32(e.Value);
+    }
+
+    protected async override Task OnInitializedAsync()
+    {
+        isLoggedIn = identityService.IsLoggedIn;
+        if (!isLoggedIn)
+        {
+            navigationManager.NavigateTo($"login?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
+        }
+        _userModel = identityService.GetUserModel(identityService.GetUserToken());
+        _paymentMethodModels = await orderService.GetPaymentMethodsDetailByBuyerName(_userModel.Username, 0);
+        await GetSearchValue();
+
+        stateManager.UpdateContent(this, "paymentMethodPage");
+    }
+    protected async override void OnInitialized()
+    {
+        await jsRuntime.InvokeVoidAsync("myFunction");
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await jsRuntime.InvokeVoidAsync("myFunction");
+        }
+    }
+    protected async Task GetPaymentMethodByCardType()
+    {
+        _paymentMethodModels = await orderService.GetPaymentMethodsDetailByBuyerName(_userModel.Username, selectedOption);
+        stateManager.UpdateContent(this, "orderPage");
+    }
+    protected async Task GetSearchValue()
+    {
+        _cardTypeModels = await orderService.GetCardTypes();
+    }
+    protected async Task AddPaymentMethod()
+    {
+        _paymentMethodModels = await orderService.AddPaymentMethod(_paymentMethod, _userModel.Username);
+        stateManager.UpdateContent(this, "orderPage");
+    }
+    private async void DeletePaymentMethod(Guid paymentMethodId)
+    {
+        _paymentMethodModels = await orderService.CancelPaymentMethod(paymentMethodId);
+        stateManager.UpdateContent(this, "orderPage");
+    }
+
+}

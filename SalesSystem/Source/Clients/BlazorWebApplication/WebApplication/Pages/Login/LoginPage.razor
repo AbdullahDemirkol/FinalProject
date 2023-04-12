@@ -1,0 +1,187 @@
+﻿@page "/login"
+
+
+@if (!isLoggedIn)
+{
+    <div class="loginBackground">
+        <!-- breadcrumb-section -->
+        <div class="breadcrumb-section breadcrumb-bg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 offset-lg-2 text-center">
+                        <div class="breadcrumb-text">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end breadcrumb section -->
+        <!-- LOGİN START -->
+
+        <div class="cont">
+            <div class="form sign-in">
+                <h2>Giriş Yap</h2>
+
+                <EditForm Model="@loginRequest" OnValidSubmit="loginProcess">
+                    <DataAnnotationsValidator />
+                    <div class="form-group">
+                        <span>Kullanıcı Adı</span>
+                        <input @bind-value="loginRequest.UserName" class="inputt" type="text" name="username" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <span>Parola</span>
+                        <input @bind-value="loginRequest.Password" class="inputt" type="password" name="password" placeholder="Parola">
+                    </div>
+                    <div class="form-group">
+                        <button class="submit buttonn btn btn-info btn-block">Giriş Yap</button>
+                    </div>
+                </EditForm>
+            </div>
+
+            <div class="sub-cont">
+                <div class="displayImg">
+                    <div class="displayImg-text m-up">
+                        <h1>Burada Yeni Misin?</h1>
+                        <p>Kayıt Ol ve Alışverişe Başla</p>
+                    </div>
+                    <div class="displayImg-text m-in">
+                        <h1>Bir Hesabın Var Mı?</h1>
+                        <p>O Zaman Sadece Giriş Yap</p>
+                    </div>
+                    <div class="displayImg-btn">
+                        <span class="m-up" >Kayıt Ol</span>
+                        <span class="m-in" >Giriş Yap</span>
+                    </div>
+                </div>
+                <div class="form sign-up">
+                    <h2>Kayıt Ol</h2>
+                    <EditForm Model="@registerRequest" OnValidSubmit="registerProcess">
+                        <DataAnnotationsValidator />
+                        <div class="form-group">
+                            <span>İsim</span>
+                            <input @bind-value="registerRequest.FirstName" class="inputt" type="text" name="email" placeholder="İsim">
+                        </div>
+                        <div class="form-group">
+                            <span>Soyisim</span>
+                            <input @bind-value="registerRequest.LastName" class="inputt" type="text" name="email" placeholder="Soyisim">
+                        </div>
+                        <div class="form-group">
+                            <span>Kullanıcı Adı</span>
+                            <input @bind-value="registerRequest.Username" class="inputt" type="text" name="email" placeholder="Username">
+                        </div>
+                        <div class="form-group">
+                            <span>Email Adresi</span>
+                            <input @bind-value="registerRequest.LastName" class="inputt" type="email" name="email" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <span>Telefon Numarası</span>
+                            <input @bind-value="registerRequest.Phone" class="inputt" type="tel" name="phone" placeholder="Telefon">
+                        </div>
+                        <div class="form-group">
+                            <span>Parola</span>
+                            <input @bind-value="registerRequest.Password" class="inputt" type="password" name="password" placeholder="Parola">
+                        </div>
+
+                        <div class="form-group">
+                            <button class="submit buttonn btn btn-info btn-block">Kayıt Ol</button>
+                        </div>
+                    </EditForm>
+                </div>
+            </div>
+        </div>
+        <div class="forLoginBackground"></div>
+    </div>
+}
+            else
+            {
+                <span>giriş yapılı</span>
+            }
+<!-- LOGİN BİTİŞ -->
+@*<div class="container-fluid h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class=" col col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                <EditForm Model="@loginRequest" OnValidSubmit="loginProcess">
+                    <DataAnnotationsValidator />
+                    <div class="form-group">
+                        <input @bind-value="loginRequest.UserName" class=" form-control form-control-lg" type="text" placeholder="User Name" />
+                    </div>
+                    <div class="form-group">
+                        <input @bind-value="loginRequest.Password" class=" form-control form-control-lg" type="password" placeholder="Password" />
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-info btn-block">Login</button>
+                    </div>
+                </EditForm>
+            </div>
+        </div>
+    </div>*@
+
+
+@code {
+    [Inject]
+    IIdentityService identityService { get; set; }
+    [Inject]
+    public IJSRuntime jsRuntime { get; set; }
+
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+
+    private LoginRequest loginRequest = new LoginRequest("", "");
+    private UserDTO registerRequest = new UserDTO();
+
+
+    [Inject]
+    StateManager stateManager { get; set; }
+    bool isLoggedIn { get; set; }
+    protected override void OnInitialized()
+    {
+        isLoggedIn = identityService.IsLoggedIn;
+    }
+
+    protected async override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await jsRuntime.InvokeVoidAsync("myFunction");
+            await jsRuntime.InvokeVoidAsync("toggleDisplayImgClass");
+        }
+        //jSObjectReference = await jsRuntime.InvokeAsync<IJSObjectReference>("import", navigationManager.BaseUri + "assets/js/login.js");
+        //if (firstRender)
+        //{
+        //    stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
+        //}
+    }
+    //private async Task StateManager_StateChanged(ComponentBase component, string property)
+    //{
+    //    //jSObjectReference = await jsRuntime.InvokeAsync<IJSObjectReference>("import", navigationManager.BaseUri + "assets/js/login.js");
+    //    //await InvokeAsync(StateHasChanged);
+
+    //}
+    private async Task loginProcess()
+    {
+        var result = await identityService.Login(loginRequest.UserName, loginRequest.Password);
+        if (result)
+        {
+            stateManager.LoginChanged(this);
+            var collection = HttpUtility.ParseQueryString(new Uri(navigationManager.Uri).Query);
+            string retunUrl = collection.Get("returnUrl") ?? "/";
+            navigationManager.NavigateTo(retunUrl);
+        }
+    }
+    private async Task registerProcess()
+    {
+        var result = await identityService.Login(loginRequest.UserName, loginRequest.Password);
+        if (result)
+        {
+            var collection = HttpUtility.ParseQueryString(new Uri(navigationManager.Uri).Query);
+            string retunUrl = collection.Get("returnUrl") ?? "/";
+            navigationManager.NavigateTo(retunUrl);
+        }
+    }
+    //public async Task ToggleClass()
+    //{
+    //    await jsRuntime.InvokeAsync<object>("toggleDisplayImgClass");
+    //}
+}

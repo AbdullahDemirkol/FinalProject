@@ -1,0 +1,282 @@
+﻿@page  "/Orders"
+    <!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>We sale fresh fruits</p>
+                    <h1>Siparişlerim</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end breadcrumb section -->
+<div class="forAccountBackground">
+    <!-- Start My Account  -->
+    @*<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">*@
+    <!------ Include the above in your HEAD tag ---------->
+
+    <div class="forAccountBackgroundPadding"></div>
+    <div class="container emp-profile">
+        
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="profile-head">
+                        <h5>
+                            @_userModel.Username
+                        </h5>
+                        <h6>
+                            @_userModel.FirstName @_userModel.LastName
+                        </h6>
+                        <p class="proile-rating">Toplam Sipariş Adeti : <span>@_orderModels.Count()</span></p>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <select id="StatusSelect" class="statusSelect" @onchange="OptionSelected">
+                        <option value="0">Tümü</option>
+                        @foreach (var _orderStatus in _orderStatuses)
+                        {
+                            <option value="@_orderStatus.Id">@_orderStatus.Name</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" class="profile-edit-btn" @onclick="()=>GetOrderByOrderStatus()" value="Listele" />
+                </div>
+            </div>
+            @if (_orderModels != null)
+            {
+                @foreach (var _orderModel in _orderModels)
+                {
+                    <div class="orderCard">
+                        <div class="row" style="margin-right: -5px;">
+                            <div class="col-md-12 orderHead" >
+                                <h5>Sipariş</h5>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top: 15px;">
+                            <div class="col-md-9">
+                                <div class="tab-content profile-tab" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="@_orderModel.OrderNumber" role="tabpanel" aria-labelledby="home-tab">
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Adres</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p>@_orderModel.Street,@_orderModel.State/@_orderModel.City (@_orderModel.ZipCode)</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Ülke</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p>@_orderModel.Country</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Sipariş Tarihi</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p>@_orderModel.Date.ToString("dd/MM/yyyy") Tarihinde @_orderModel.Date.ToString("HH:mm:ss") Saatinde Sipariş Verilmiştir</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Satın Alınan Kart Numarası</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p>@_orderModel.PaymentMethodPrefix **** **** @_orderModel.PaymentMethodSuffix</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Toplam Tutar</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p>@_orderModel.Total</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5">
+                                                <label>Sipariş Durumu</label>
+                                            </div>
+                                            <div class="col-md-7">
+                                                <p>@_orderModel.Status</p>
+                                            </div>
+                                        </div>
+                                        @if (_orderModel.Description != null)
+                                        {
+
+                                            <div class="row">
+                                                <div class="col-md-5">
+                                                    <label>Açıklama</label>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <p>@_orderModel.Description</p>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+
+                                </div>
+                            </div>
+                            @if (_orderModel.Status != "Gönderildi" && _orderModel.Status != "İptal Edildi")
+                            {
+                                <div class="col-md-3">
+                                    <input type="submit" class="profile-edit-btn" @onclick="()=>DeleteOrder(_orderModel.OrderNumber)" value="Siparişi İptal Et" />
+                                </div>
+                            }
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="tab-content profile-tab" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="@_orderModel.OrderNumber" role="tabpanel" aria-labelledby="home-tab">
+                                        @foreach (var orderItem in _orderModel.OrderItems)
+                                        {
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="col-md-2">
+                                                        <img src="assets/img/products/product-img-3.jpg" alt="">
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label>Ürün Adı</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <p>@orderItem.ProductName</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label>Ürün Adeti</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <p>@orderItem.Units</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <label>Ürünün Birim Fiyatı</label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <p>@orderItem.UnitPrice</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+    </div>
+    <div class="forAccountBackgroundPadding"></div>
+    <!-- End My Account -->
+</div>
+@code {
+    private bool isLoggedIn = false;
+    [Inject]
+    public IJSRuntime jsRuntime { get; set; }
+    [Inject]
+    StateManager stateManager { get; set; }
+    [Inject]
+    IIdentityService identityService { get; set; }
+    [Inject]
+    IOrderService orderService { get; set; }
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+
+    UserDTO _userModel { get; set; } = new UserDTO();
+    List<OrderStatus> _orderStatuses{ get; set; }= new List<OrderStatus>();
+    List<OrderDTO> _orderModels { get; set; } = new List<OrderDTO>();
+    string orderStatus;
+    private int selectedOption;
+
+    private void OptionSelected(ChangeEventArgs e)
+    {
+        selectedOption = Convert.ToInt32(e.Value);
+    }
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        isLoggedIn = identityService.IsLoggedIn;
+        if (!isLoggedIn)
+        {
+            navigationManager.NavigateTo($"login?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
+        }
+        _userModel = identityService.GetUserModel(identityService.GetUserToken());
+        _orderModels = await orderService.GetOrdersDetailByBuyerName(_userModel.Username,0);
+        SetOrderStatus(_orderModels);
+        await GetSearchValue();
+
+        stateManager.UpdateContent(this, "orderPage");
+    }
+    protected async override void OnInitialized()
+    {
+        await jsRuntime.InvokeVoidAsync("myFunction");
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await jsRuntime.InvokeVoidAsync("myFunction");
+        }
+    }
+    protected void SetOrderStatus(List<OrderDTO> orderDTOs)
+    {
+        foreach (var order in orderDTOs)
+        {
+            if (order.Status=="islemealinildi")
+            {
+                order.Status = "İşleme Alınıldı";
+            }
+            else if (order.Status == "dogrulamabekleniyor")
+            {
+                order.Status = "Doğrulama Bekleniyor";
+            }
+            else if (order.Status == "stokonaylandi")
+            {
+                order.Status = "Stok Onaylandı";
+            }
+            else if (order.Status == "odenildi")
+            {
+                order.Status = "Ödenildi";
+            }
+            else if (order.Status == "gonderildi")
+            {
+                order.Status = "Gönderildi";
+            }
+            else if (order.Status == "iptaledildi")
+            {
+                order.Status = "İptal Edildi";
+            }
+        }
+    }
+    protected async Task GetOrderByOrderStatus()
+    {
+        _orderModels = await orderService.GetOrdersDetailByBuyerName(_userModel.Username, selectedOption);
+        SetOrderStatus(_orderModels);
+        stateManager.UpdateContent(this, "orderPage");
+
+    }
+    protected async Task GetSearchValue()
+    {
+        _orderStatuses=await orderService.GetOrderStatuses();
+    }
+    private async void DeleteOrder(Guid OrderNumber)
+    {
+        _orderModels = await orderService.CancelOrderStatus(OrderNumber);
+        stateManager.UpdateContent(this, "orderPage");
+    }
+
+}

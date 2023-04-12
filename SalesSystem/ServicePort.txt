@@ -1,0 +1,11 @@
+
+
+ApiGateway            => "http://localhost:5000"
+BlazorWebApplication  => "http://localhost:5006"
+ 					  
+ProductService        => "http://localhost:5001"
+IdentityService       => "http://localhost:5002"
+BasketService         => "http://localhost:5003"
+OrderService          => "http://localhost:5004"
+PaymentService        => "http://localhost:5005"
+NotificationService   => Console Application

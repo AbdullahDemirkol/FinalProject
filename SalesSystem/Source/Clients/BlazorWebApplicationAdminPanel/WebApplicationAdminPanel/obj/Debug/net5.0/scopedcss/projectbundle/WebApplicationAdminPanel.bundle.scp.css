@@ -1,0 +1,305 @@
+@import '';
+
+/* /Pages/Login/LoginPage.razor.rz.scp.css */
+img[b-5fr3qckfb9] {
+    width: 100%;
+}
+
+.login[b-5fr3qckfb9] {
+    height: 1000px;
+    width: 100%;
+    background: radial-gradient(#653d84, #332042);
+    position: relative;
+}
+
+.login_box[b-5fr3qckfb9] {
+    width: 1050px;
+    height: 600px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 1px 4px 22px -8px #0004;
+    display: flex;
+    overflow: hidden;
+}
+
+    .login_box .left[b-5fr3qckfb9] {
+        width: 41%;
+        height: 100%;
+        padding: 25px 25px;
+    }
+
+    .login_box .right[b-5fr3qckfb9] {
+        width: 59%;
+        height: 100%
+    }
+
+.left .top_link a[b-5fr3qckfb9] {
+    color: #452A5A;
+    font-weight: 400;
+}
+
+.left .top_link[b-5fr3qckfb9] {
+    height: 20px
+}
+
+.left .contact[b-5fr3qckfb9] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    height: 100%;
+    width: 73%;
+    margin: auto;
+}
+
+.left h3[b-5fr3qckfb9] {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.left input[b-5fr3qckfb9] {
+    border: none;
+    width: 80%;
+    margin: 15px 0px;
+    border-bottom: 1px solid #4f30677d;
+    padding: 7px 9px;
+    width: 100%;
+    overflow: hidden;
+    background: transparent;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.left[b-5fr3qckfb9] {
+    background: linear-gradient(-45deg, #dcd7e0, #fff);
+}
+
+.submit[b-5fr3qckfb9] {
+    border: none;
+    padding: 15px 70px;
+    border-radius: 8px;
+    display: block;
+    margin: auto;
+    margin-top: 120px;
+    background: #583672;
+    color: #fff;
+    font-weight: bold;
+    -webkit-box-shadow: 0px 9px 15px -11px rgba(88,54,114,1);
+    -moz-box-shadow: 0px 9px 15px -11px rgba(88,54,114,1);
+    box-shadow: 0px 9px 15px -11px rgba(88,54,114,1);
+}
+.submit:hover[b-5fr3qckfb9]{
+    background-color:#332042;
+}
+
+
+
+.right[b-5fr3qckfb9] {
+    background: linear-gradient(212.38deg, rgba(242, 57, 127, 0.7) 0%, rgba(175, 70, 189, 0.71) 100%),url(https://static.seattletimes.com/wp-content/uploads/2019/01/web-typing-ergonomics-1020x680.jpg);
+    color: #fff;
+    position: relative;
+}
+
+    .right .right-text[b-5fr3qckfb9] {
+        height: 100%;
+        position: relative;
+        transform: translate(0%, 45%);
+    }
+
+.right-text h2[b-5fr3qckfb9] {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 500;
+}
+
+.right-text h5[b-5fr3qckfb9] {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 19px;
+    font-weight: 400;
+}
+
+.right .right-inductor[b-5fr3qckfb9] {
+    position: absolute;
+    width: 70px;
+    height: 7px;
+    background: #fff0;
+    left: 50%;
+    bottom: 70px;
+    transform: translate(-50%, 0%);
+}
+
+.top_link img[b-5fr3qckfb9] {
+    width: 28px;
+    padding-right: 7px;
+    margin-top: -3px;
+}
+/* /Pages/Login/Logout.razor.rz.scp.css */
+/* /Shared/MainLayout.razor.rz.scp.css */
+.page[b-vwa59klwtr] {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.main[b-vwa59klwtr] {
+    flex: 1;
+}
+
+.sidebar[b-vwa59klwtr] {
+    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+}
+
+.top-row[b-vwa59klwtr] {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #d6d5d5;
+    justify-content: flex-end;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+    .top-row  a[b-vwa59klwtr], .top-row .btn-link[b-vwa59klwtr] {
+        white-space: nowrap;
+        margin-left: 1.5rem;
+    }
+
+    .top-row a:first-child[b-vwa59klwtr] {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+.main-btn[b-vwa59klwtr] {
+    border: none;
+    padding: 8px 40px;
+    border-radius: 8px;
+    display: block;
+    /*background: #583672;*/
+    color: #fff;
+    font-weight: bold;
+    -webkit-box-shadow: 0px 9px 15px -11px rgba(88,54,114,1);
+    -moz-box-shadow: 0px 9px 15px -11px rgba(88,54,114,1);
+    box-shadow: 0px 9px 15px -11px rgba(88,54,114,1);
+    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    margin: 0 5px;
+}
+
+    .main-btn:hover[b-vwa59klwtr] {
+        /*background-color: #332042;*/
+        color: lightslategray;
+    }
+
+
+@media (max-width: 640.98px) {
+    .top-row:not(.auth)[b-vwa59klwtr] {
+        display: none;
+    }
+
+    .top-row.auth[b-vwa59klwtr] {
+        justify-content: space-between;
+    }
+
+    .top-row a[b-vwa59klwtr], .top-row .btn-link[b-vwa59klwtr] {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 641px) {
+    .page[b-vwa59klwtr] {
+        flex-direction: row;
+    }
+
+    .sidebar[b-vwa59klwtr] {
+        width: 250px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .top-row[b-vwa59klwtr] {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .main > div[b-vwa59klwtr] {
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+
+/* /Shared/NavMenu.razor.rz.scp.css */
+.navbar-toggler[b-u47eb9wp76] {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.top-row[b-u47eb9wp76] {
+    height: 3.5rem;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.navbar-brand[b-u47eb9wp76] {
+    font-size: 1.1rem;
+}
+
+.oi[b-u47eb9wp76] {
+    width: 2rem;
+    font-size: 1.1rem;
+    vertical-align: text-top;
+    top: -2px;
+}
+.nav-menu[b-u47eb9wp76] {
+    border-radius: 10px;
+}
+.nav-menu:hover[b-u47eb9wp76] {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.nav-item[b-u47eb9wp76] {
+    font-size: 0.9rem;
+    padding-bottom: 0.5rem;
+}
+
+    .nav-item:first-of-type[b-u47eb9wp76] {
+        padding-top: 1rem;
+    }
+
+    .nav-item:last-of-type[b-u47eb9wp76] {
+        padding-bottom: 1rem;
+    }
+
+    .nav-item a[b-u47eb9wp76] {
+        color: #d7d7d7;
+        border-radius: 4px;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        line-height: 3rem;
+    }
+
+.nav-item  a.active[b-u47eb9wp76] {
+    background-color: rgba(255,255,255,0.25);
+    color: white;
+}
+
+.nav-item a:hover[b-u47eb9wp76] {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+@media (min-width: 641px) {
+    .navbar-toggler[b-u47eb9wp76] {
+        display: none;
+    }
+
+    .collapse[b-u47eb9wp76] {
+        /* Never collapse the sidebar for wide screens */
+        display: block;
+    }
+}
