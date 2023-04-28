@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using ProductServiceApi.DataAccess;
 using ProductServiceApi.Entity.Concrete;
 using ProductServiceApi.Helper;
-using ProductServiceApi.Services.Concrete;
+using ProductServiceApi.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -130,6 +130,12 @@ namespace OrderServiceApi.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<string>("ApartmentNo")
+                        .HasColumnType("text");
+
+                    b.Property<string>("BuildingNo")
+                        .HasColumnType("text");
+
                     b.Property<Guid>("BuyerId")
                         .HasColumnType("uuid");
 
@@ -142,11 +148,14 @@ namespace OrderServiceApi.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp without time zone");
 
+                    b.Property<string>("District")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Neighbourhood")
+                        .HasColumnType("text");
+
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uuid");
-
-                    b.Property<string>("State")
-                        .HasColumnType("text");
 
                     b.Property<string>("Street")
                         .HasColumnType("text");

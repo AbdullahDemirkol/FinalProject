@@ -1,0 +1,222 @@
+﻿@page "/ProductDetail/{productId:int}"
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>See more Details</p>
+                    <h1>Ürün Detayı</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end breadcrumb section -->
+<!-- single product -->
+<div class="single-product mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="single-product-img">
+                    @if (productItem.Pictures != null)
+                    {
+                        <img src="@("http://localhost:5001/pics" + productItem.Pictures[0].ImagePath)" alt="">
+                    }
+                    else
+                    {
+                        <img src="assets/img/default-product.png" alt="">
+                    }
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="single-product-content">
+                    <h3>@productItem.Name</h3>
+                    <p>
+                        <strong>Kategori: </strong>@if (productItem.DownCategory != null)
+                        {
+                            @productItem.DownCategory.DownCategoryName
+                        }
+                    </p>
+                    <p>
+                        <strong>Marka: </strong>@if (productItem.Brand != null)
+                        {
+                            @productItem.Brand.BrandName
+                        }
+                    </p>
+                    <p>@productItem.Description</p>
+                    <p class="single-product-pricing">Fiyatı: @productItem.Price.ToString("N2") TL</p>
+                    <div class="single-product-form">
+                        @*<InputNumber @bind-Value="productCount"></InputNumber>*@
+                        <input type="number" placeholder="1" @oninput="(e)=>UpdateProductQuantity(e)">
+                        <a class="cart-btn" @onclick="()=>AddToCart(productItem,null)"> Sepete Ekle</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end single product -->
+<!-- more products -->
+<div class="more-products mb-150">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="section-title">
+                    <h3>@*<span class="orange-text">Related</span>*@ Aynı Kategoriye Ait Başka Ürünler</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            @if (similarPoductsItem.Count != 0)
+            {
+                @foreach (var similarPoductItem in similarPoductsItem)
+                {
+                    <div class="col-lg-4 col-md-6 text-center strawberry">
+                        <div class="single-product-item">
+                            <div class="product-image">
+                                @if (similarPoductItem.Pictures.Count != 0)
+                                {
+                                    <a href="#"><img src="@("http://localhost:5001/pics" + similarPoductItem.Pictures[0].ImagePath)" style="height:300px;" alt=""></a>
+                                }
+                                else
+                                {
+                                    <a href="#"><img src="assets/img/default-product.png" alt=""></a>
+                                }
+                            </div>
+                            <h3>@similarPoductItem.Name</h3>
+                            <h3>@similarPoductItem.Brand.BrandName</h3>
+                            <h3>@similarPoductItem.UpCategory.UpCategoryName</h3>
+                            <h3>@similarPoductItem.DownCategory.DownCategoryName</h3>
+
+                            <p class="product-price"><span>Fiyatı</span> @similarPoductItem.Price.ToString("N2") TL </p>
+                            <a class="cart-btn" @onclick="()=>GoDetailProduct(similarPoductItem.Id)" href="/ProductDetail/@similarPoductItem.Id">Ürünü İncele</a>
+                            <a class="cart-btn" @onclick="()=>AddToCart(similarPoductItem,1)">@*<i class="fas fa-shopping-cart"></i>*@ Sepete Ekle</a>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+<!-- end more products -->
+@if (showNotification)
+{
+    <div class="notification-container">
+        <Notification IsSuccess="@isSuccess" Message="@message" />
+    </div>
+}
+
+@code {
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+    [Inject]
+    StateManager stateManager { get; set; }
+    [Inject]
+    IProductService productService { get; set; }
+    [Inject]
+    IIdentityService identityService { get; set; }
+    [Inject]
+    public IBasketService basketService { get; set; }
+    [Parameter]
+    public int productId { get; set; }
+
+    private int productQuantity;
+
+    Product productItem = new Product();
+    List<Product> similarPoductsItem = new List<Product>();
+
+    bool isSuccess { get; set; }
+    string message { get; set; }
+    bool showNotification { get; set; } = false;
+
+    protected async override void OnInitialized()
+    {
+        await GetProduct();
+        await SimilarPoductItem();
+        stateManager.UpdateContent(this, "ProductDetail");
+    }
+    protected async Task GetProduct()
+    {
+        var listProduct = await productService.GetProductItem(productId);
+        productItem = listProduct.First();
+    }
+    protected async Task SimilarPoductItem()
+    {
+        var listProduct = await productService.GetProductItemByUpCategories(productItem.UpCategory, 0, 3);
+        similarPoductsItem = (List<Product>)listProduct.Data;
+    }
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
+        }
+    }
+    private async Task StateManager_StateChanged(ComponentBase component, string property)
+    {
+        if (property == "ProductDetail")
+        {
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+    protected async void GoDetailProduct(int productId)
+    {
+        this.productId = productId;
+        await GetProduct();
+        await SimilarPoductItem();
+        stateManager.UpdateContent(this, "ProductDetail");
+
+    }
+
+    private void UpdateProductQuantity(ChangeEventArgs e)
+    {
+        productQuantity = Convert.ToInt32(e.Value);
+    }
+    public async Task AddToCart(Product product, int? quantity)
+    {
+
+        if (!identityService.IsLoggedIn)
+        {
+            navigationManager.NavigateTo(navigationManager.BaseUri + "login?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
+            return;
+        }
+        (bool,int) addResult;
+        if (quantity == null)
+        {
+            var isAdded= await basketService.AddItemToBasket(product.Id, productQuantity);
+            addResult = (isAdded, productQuantity);
+        }
+        else
+        {
+            var isAdded = await basketService.AddItemToBasket(product.Id, 1);
+            addResult = (isAdded, 1);
+        }
+
+        showNotification = true;
+        if (addResult.Item1)
+        {
+            isSuccess = true;
+            message = $"Ürün başarıyla eklendi. Miktar: {addResult.Item2}";
+        }
+        else
+        {
+            isSuccess = false;
+            message = "Ürün ekleme işleminde hata oluştu!";
+        }
+        StateHasChanged();
+
+        // 2 saniye sonra bildirimi kaldır
+        await Task.Delay(2000).ContinueWith(t =>
+        {
+            isSuccess = false;
+            message = "";
+            showNotification = false;
+            StateHasChanged();
+        });
+
+
+    }
+}

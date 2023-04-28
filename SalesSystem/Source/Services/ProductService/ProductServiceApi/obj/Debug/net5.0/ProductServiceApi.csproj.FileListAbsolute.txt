@@ -66,3 +66,4 @@ C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Services\ProductService\Pro
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Services\ProductService\ProductServiceApi\obj\Debug\net5.0\ref\ProductServiceApi.dll
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Services\ProductService\ProductServiceApi\obj\Debug\net5.0\ProductServiceApi.pdb
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Services\ProductService\ProductServiceApi\obj\Debug\net5.0\ProductServiceApi.genruntimeconfig.cache
+C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Services\ProductService\ProductServiceApi\obj\Debug\net5.0\ProductServiceApi.csproj.AssemblyReference.cache

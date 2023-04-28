@@ -12,6 +12,7 @@ namespace WebApplicationAdminPanel.Business.Abstract
     public interface IOrderService
     {
         BasketDTO MapOrderToBasket(Order order);
+        Task<List<OrderDTO>> GetOrders(int orderStatusId);
         Task<List<OrderDTO>> GetOrdersDetailByBuyerName(string buyerName, int orderStatusId);
         Task<List<PaymentMethod>> GetPaymentMethodsDetailByBuyerName(string buyerName, int cardTypeId);
         Task<List<OrderDTO>> CancelOrderStatus(Guid orderNumber);

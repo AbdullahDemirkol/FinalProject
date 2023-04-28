@@ -50,7 +50,7 @@ namespace OrderServiceApi.DataAccess.Repositories.Concrete
             return await queryable.ToListAsync();
         }
 
-        public virtual Task<List<T>> Get(Expression<Func<T, bool>> filter = null, params Expression<Func<T, object>>[] includes)
+        public virtual Task<List<T>> Get( Expression<Func<T, bool>> filter = null, params Expression<Func<T, object>>[] includes)
         {
             return Get(filter, null, includes);
         }

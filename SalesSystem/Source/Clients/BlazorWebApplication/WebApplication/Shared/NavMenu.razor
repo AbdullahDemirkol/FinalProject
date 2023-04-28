@@ -7,7 +7,8 @@
                     <!-- logo -->
                     <div class="site-logo">
                         <a href="/">
-                            <img src="assets/img/logo.png" alt="">
+                            <img src="assets/img/favicon.png" alt="">
+                            <p style="color: #F28123; font-weight: 700;">E-Ticaret Websitesi</p>
                         </a>
                     </div>
                     <!-- logo -->
@@ -35,14 +36,14 @@
                             }
                             else
                             {
-                                @if (_userDto.Role == "admin")
+                                @if (_userDto.Role.Name == "admin")
                                 {
                                     <li>
                                         <a href="https://localhost:44350/" >Admin Panel</a>
                                     </li>
                                 }
                                 <li>
-                                    <a>@_userDto.FirstName @_userDto.LastName</a>
+                                    <a>@_userDto.Username</a>
                                     <ul class="sub-menu">
                                         <li><a href="/Account">Hesabım</a></li>
                                         <li><a href="/Orders">Siparişlerim</a></li>

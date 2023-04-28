@@ -1,0 +1,26 @@
+﻿<h3>BaseModal</h3>
+
+@code {
+    [Parameter]
+    public string Message { get; set; }
+    [Parameter]
+    public string OkText { get; set; }
+    [Parameter]
+    public string CancelText { get; set; }
+    [Parameter]
+    public string YesText { get; set; }
+    [Parameter]
+    public string NoText { get; set; }
+
+    [CascadingParameter]
+    BlazoredModalInstance modalInstance { get; set; }
+
+    protected void ConfirmClicked()
+    {
+        modalInstance.Close(ModalResult.Ok<string>(""));
+    }
+    protected void CancelClicked()
+    {
+        modalInstance.Close(ModalResult.Cancel());
+    }
+}

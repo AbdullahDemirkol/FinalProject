@@ -1,0 +1,95 @@
+﻿@inherits BaseModal
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <h3>Ürün Adı:</h3>
+                <label class="form-control">@product.Name</label>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <h3>Fiyatı:</h3>
+                <label class="form-control">@product.Price TL</label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        @{ var p = 1; }
+        @foreach (var picture in product.Pictures)
+        {
+            if (!string.IsNullOrEmpty(picture.ImagePath))
+            {
+                <div class="col-md-4">
+                    <div class="form-group" style="border: 1px solid black; border-radius: 15px; padding: 15px; width:300px">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h3>@p. Resim</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <img src="@("http://localhost:5001/pics" + picture.ImagePath)" style="height: 350px; width: inherit;" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            p++;
+        }
+
+        @for (int i = 0; i < 3 - product.Pictures.Count(); i++)
+        {
+            <div class="col-md-4">
+                <div class="form-group" style="border: 1px solid black; border-radius: 15px; padding: 15px; width: 300px ">
+                    <h3>@p. Resim</h3>
+                    <label>Yok</label>
+                </div>
+            </div>
+            p++;
+        }
+
+    </div>
+    <div class="row">
+        <div class="form-group col-md-12">
+            <h3>Açıklama</h3>
+            <label class="form-control">@product.Description</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <h3>Üst Kategori:</h3>
+                <label class="form-control">@product.UpCategory.UpCategoryName</label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <h3>Alt Kategori: </h3>
+                <label class="form-control">@product.DownCategory.DownCategoryName</label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <h3>Marka: </h3>
+                <label class="form-control"> @product.Brand.BrandName</label>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="d-flex">
+        <button class="btn btn-primary" style="padding: 5px; margin: 0 15px;" @onclick="@ConfirmClicked">@OkText</button>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public Product product { get; set; }
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        Message = parameters.GetValueOrDefault<string>("Message") ?? "No Message Found";
+        OkText = "Tamam";
+        return base.SetParametersAsync(parameters);
+    }
+}

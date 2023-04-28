@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Command.CommandHandler
 {
-    public class UpdatePaymentMethodCommandHandler : IRequestHandler<UpdatePaymentMethodCommand, (bool, string)>
+    public class UpdatePaymentMethodCommandHandler : IRequestHandler<UpdatePaymentMethodCommand, bool>
     {
         IPaymentMethodRepository _paymentMethodRepository;
         IBuyerRepository _buyerRepository;
@@ -21,14 +21,26 @@ namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Command.CommandHandl
             _buyerRepository = buyerRepository ?? throw new ArgumentNullException(nameof(buyerRepository));
         }
 
-        public async Task<(bool, string)> Handle(UpdatePaymentMethodCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(UpdatePaymentMethodCommand request, CancellationToken cancellationToken)
         {
-            var paymentMethod = await _paymentMethodRepository.GetByIdAsync(request.PaymentMethodId);
-            paymentMethod.Status = false;
-            _paymentMethodRepository.Update(paymentMethod);
-            await _paymentMethodRepository.UnitOfWork.SaveEntityAsync(cancellationToken);
-            var buyer= _buyerRepository.GetById(paymentMethod.BuyerId).Result.Name;
-            return (true, buyer);
+            try
+            {
+                var paymentMethod = await _paymentMethodRepository.GetByIdAsync(request.PaymentMethodId);
+                var buyers = _buyerRepository.GetSingleAsync(p => p.Name == request.BuyerName && p.Id == paymentMethod.BuyerId).Result.Name;
+                if (buyers != null)
+                {
+                    paymentMethod.Status = false;
+                    _paymentMethodRepository.Update(paymentMethod);
+                    await _paymentMethodRepository.UnitOfWork.SaveEntityAsync(cancellationToken);
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
         }
     }
 }

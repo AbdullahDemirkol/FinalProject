@@ -167,8 +167,50 @@ using WebApplication.Infrastructer;
 #line hidden
 #nullable disable
 #nullable restore
-#line 25 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 24 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using WebApplication.Pages.Modal;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 26 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using System.Web;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 27 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using System.IO;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 28 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using System.Text.Json;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 30 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using Blazored.Modal;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 31 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using Blazored.Modal.Services;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 33 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using System.Text.RegularExpressions;
 
 #line default
 #line hidden
@@ -182,7 +224,7 @@ using System.Web;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 102 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\Basket\Basket.razor"
+#line 101 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\Basket\Basket.razor"
        
     private bool isLoggedIn = false;
 
@@ -233,16 +275,27 @@ using System.Web;
     {
         navigationManager.NavigateTo("/CheckOut");
     }
-    async Task ReloadPage()
-    {
-        basketModel = await basketService.GetBasket();
-        stateManager.UpdateContent(this, "basketPage");
-    }
     async Task RemoveItemFromList(BasketItem item)
     {
         basketModel.BasketItems.Remove(item);
         basketModel = await basketService.UpdateBasket(basketModel);
         stateManager.UpdateCard(this);
+    }
+    private void UpdateProductQuantity(ChangeEventArgs e,BasketItem basketItem)
+    {
+        if (Convert.ToInt32(e.Value) > 0)
+        {
+            basketItem.Quantity = Convert.ToInt32(e.Value);
+        }
+        else
+        {
+            basketItem.Quantity = 1;
+        }
+    }
+    async Task ReloadPage()
+    {
+        basketModel = await basketService.UpdateBasket(basketModel);
+        stateManager.UpdateContent(this, "basketPage");
     }
 
 

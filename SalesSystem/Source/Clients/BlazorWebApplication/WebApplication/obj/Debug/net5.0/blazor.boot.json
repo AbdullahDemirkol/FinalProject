@@ -7,9 +7,8 @@
   "linkerEnabled": false,
   "resources": {
     "assembly": {
-      "BlazorComponentUtilities.dll": "sha256-9VqqASjMRw8LX9vNXRKXBE+XlDpUfTeuo4+CPgg1fQE=",
       "Blazored.LocalStorage.dll": "sha256-mfUPOnPJdVlqx5sfEyjLXvZojwvosT7IdwftBM2ekfA=",
-      "BlazorStrap.dll": "sha256-xdRi3a3cx0JVP9J2qnH0eXohW1WGyOmfftIX56IJIQI=",
+      "Blazored.Modal.dll": "sha256-v5hsrRFpgCTdRU0txjAJ2ZBWWsLEp0HGPd9rGOxEB7w=",
       "Microsoft.AspNetCore.Authorization.dll": "sha256-5QpvlVP++Gkc1dR8QwljPr2My0TdN\/zMkNik9vPVNxk=",
       "Microsoft.AspNetCore.Components.dll": "sha256-lIaWNwfsw4JmImsjOS8Y60om1ZDgL2CTkBB+RmJPCgk=",
       "Microsoft.AspNetCore.Components.Authorization.dll": "sha256-5apeA7T7v8KLvrMs41SJz4kPdAsLU+eJ+oJ1RbvvR70=",
@@ -215,11 +214,11 @@
       "mscorlib.dll": "sha256-pOPJrGSp+RVyYmvcT+PTaEq9fVhEFzvMs\/3Ue3S2j+A=",
       "netstandard.dll": "sha256-bY3Q1RCB\/lmUAo5AG5YDHBu5uD8OxCGAiJ+wukrs1pw=",
       "System.Private.CoreLib.dll": "sha256-25IZl0xgoqOBdkTlEjUBLmiiRGYCYI1BaFevKzE+EHk=",
-      "WebApplication.dll": "sha256-7VnMrefxlSi3JChXYpssEL\/rK+y\/KCl2MLV0KuzWP00="
+      "WebApplication.dll": "sha256-t4UWBPxegHwP+UUJpAtt7Hx9clZFmm\/2Ts8TACJ\/nOQ="
     },
     "lazyAssembly": null,
     "pdb": {
-      "WebApplication.pdb": "sha256-pk28Rj\/VJjog2XSmKqlq3QIq7MNoPShRyWpmIUJVEHo="
+      "WebApplication.pdb": "sha256-6WL9AnWCsuSapWLCaiihJTDlIMHdQUpI\/8CyCdgudH8="
     },
     "runtime": {
       "dotnet.timezones.blat": "sha256-Ek+C0V\/4GBnUGH1\/X20UjHhjyp7se2MX+2RHWSpKSDE=",

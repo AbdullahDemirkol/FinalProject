@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using OrderServiceApi.Entity.Concrete.Helper.Enum;
 using OrderServiceApi.IntegrationEvents.QueriesFeatures.Command.RequestCommandModel;
-using OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetOrderDetailById;
-using OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetOrderDetailById.Queries;
-using OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetOrderDetailById.RequestQueriesModel;
+using OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetMethods;
+using OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetMethods.Queries;
+using OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetMethods.RequestQueriesModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,21 +23,44 @@ namespace OrderServiceApi.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        [HttpPost("cancelOrderStatus")]
-        public async Task<IActionResult> SetOrderStatusIsCancelled([FromBody]Guid orderNumber)
+        [HttpPost("cancelOrderStatusByBuyer/{buyerName}")]
+        public async Task<IActionResult> SetOrderStatusIsCancelledByBuyerName([FromBody]Guid orderNumber,string buyerName)
         {
-            var (IsUpdate,order) = await _mediator.Send(new UpdateOrderStatusCommand(orderNumber,OrderStatus.IptalEdildi.Id));
-            if (IsUpdate== true)
+            try
             {
-                var result = await _mediator.Send(new GetOrdersByUserNameQuery(order.Buyer.Name,0));
+                var result= await _mediator.Send(new UpdateOrderStatusCommand(orderNumber, buyerName, OrderStatus.IptalEdildi.Id));
+                if (result)
+                {
+                    return Ok();
+                }
+                return BadRequest();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+        [HttpPost("cancelOrderStatus")]
+        public async Task<IActionResult> SetOrderStatusIsCancelled([FromBody] Guid orderNumber, int pageSize = 6, int pageIndex = 0)
+        {
+            var IsUpdate = await _mediator.Send(new UpdateOrderStatusCommand(orderNumber,"", OrderStatus.IptalEdildi.Id));
+            if (IsUpdate == true)
+            {
+                var result = await _mediator.Send(new GetOrdersQuery(0, pageSize, pageIndex));
                 return Ok(result);
             }
             return Ok();
         }
         [HttpGet("{buyerName}/OrderStatus/{orderStatusId:int}")]
-        public async Task<IActionResult> GetOrdersByBuyerName(string buyerName, int orderStatusId)
+        public async Task<IActionResult> GetOrdersByBuyerName(string buyerName, int orderStatusId, int pageSize = 6, int pageIndex = 0)
         {
-            var result = await _mediator.Send(new GetOrdersByUserNameQuery(buyerName, orderStatusId));
+            var result = await _mediator.Send(new GetOrdersByUserNameQuery(buyerName, orderStatusId, pageSize, pageIndex));
+            return Ok(result);
+        }
+        [HttpGet("orders/{orderStatusId:int}")]
+        public async Task<IActionResult> GetOrders(int orderStatusId, int pageSize = 6, int pageIndex = 0)
+        {
+            var result = await _mediator.Send(new GetOrdersQuery(orderStatusId, pageSize, pageIndex));
             return Ok(result);
         }
 

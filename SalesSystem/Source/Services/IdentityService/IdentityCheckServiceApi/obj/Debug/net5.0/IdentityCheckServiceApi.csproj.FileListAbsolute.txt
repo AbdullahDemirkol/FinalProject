@@ -42,3 +42,4 @@ C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Services\IdentityService\Id
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Services\IdentityService\IdentityCheckServiceApi\obj\Debug\net5.0\ref\IdentityCheckServiceApi.dll
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Services\IdentityService\IdentityCheckServiceApi\obj\Debug\net5.0\IdentityCheckServiceApi.pdb
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Services\IdentityService\IdentityCheckServiceApi\obj\Debug\net5.0\IdentityCheckServiceApi.genruntimeconfig.cache
+C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Services\IdentityService\IdentityCheckServiceApi\obj\Debug\net5.0\IdentityCheckServiceApi.csproj.AssemblyReference.cache

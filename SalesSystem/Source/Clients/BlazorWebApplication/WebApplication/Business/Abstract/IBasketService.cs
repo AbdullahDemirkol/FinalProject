@@ -11,7 +11,7 @@ namespace WebApplication.Business.Abstract
     {
         Task<CustomerBasket> GetBasket();
         Task<CustomerBasket> UpdateBasket(CustomerBasket basket);
-        Task AddItemToBasket(int productId);
+        Task<bool> AddItemToBasket(int productId,int quantity);
         Task CheckOut(BasketDTO basket);
 
     }

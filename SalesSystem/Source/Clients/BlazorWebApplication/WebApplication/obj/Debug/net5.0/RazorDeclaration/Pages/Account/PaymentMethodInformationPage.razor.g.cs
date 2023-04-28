@@ -167,8 +167,50 @@ using WebApplication.Infrastructer;
 #line hidden
 #nullable disable
 #nullable restore
-#line 25 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 24 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using WebApplication.Pages.Modal;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 26 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using System.Web;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 27 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using System.IO;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 28 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using System.Text.Json;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 30 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using Blazored.Modal;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 31 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using Blazored.Modal.Services;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 33 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using System.Text.RegularExpressions;
 
 #line default
 #line hidden
@@ -182,9 +224,11 @@ using System.Web;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 179 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\Account\PaymentMethodInformationPage.razor"
+#line 207 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\Account\PaymentMethodInformationPage.razor"
        
     private bool isLoggedIn = false;
+    [CascadingParameter]
+    IModalService Modal { get; set; }
     [Inject]
     public IJSRuntime jsRuntime { get; set; }
     [Inject]
@@ -197,16 +241,82 @@ using System.Web;
     NavigationManager navigationManager { get; set; }
 
     UserDTO _userModel { get; set; } = new UserDTO();
-    List<PaymentMethod> _paymentMethodModels { get; set; } = new List<PaymentMethod>();
+    PaginatedViewModel<PaymentMethod> _paymentMethodModels { get; set; } = new PaginatedViewModel<PaymentMethod>();
     List<CardType> _cardTypeModels { get; set; } = new List<CardType>();
-    private int selectedOption;
-    PaymentMethod _paymentMethod { get; set; } = new PaymentMethod();
+    int selectedOption = 0;
+    private int CurPage = 1;
+    private int CurCardType = 0;
+    PaymentMethod _paymentMethod = new PaymentMethod();
 
+    private async void Pagination(int page, int? cardType)
+    {
+        CurPage = page + 1;
+        if (cardType == 0)
+        {
+            await GetPaymentMethods(page, null);
+        }
+        else
+        {
+            await GetPaymentMethods(page, cardType);
+        }
+    }
+    protected async Task NextPage(int? cardType)
+    {
+        int MaxPage = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(_paymentMethodModels.Count) / 6));
+        if (CurPage < MaxPage)
+        {
+
+            CurPage++;
+            if (cardType == 0)
+            {
+                await GetPaymentMethods(CurPage - 1, null);
+            }
+            else
+            {
+                await GetPaymentMethods(CurPage - 1, cardType);
+            }
+        }
+    }
+    protected async Task PrevPage(int? cardType)
+    {
+        if (CurPage > 1)
+        {
+            CurPage--;
+            if (cardType == 0)
+            {
+                await GetPaymentMethods(CurPage - 1, null);
+            }
+            else
+            {
+                await GetPaymentMethods(CurPage - 1, cardType);
+            }
+        }
+    }
     private void OptionSelected(ChangeEventArgs e)
     {
         selectedOption = Convert.ToInt32(e.Value);
     }
+    protected void GetPaymentMethodByCardType()
+    {
+        CurCardType = selectedOption;
+        Pagination(0, CurCardType);
+    }
+    protected async Task GetPaymentMethods(int pageIndex, int? cardType)
+    {
+        if (cardType == null)
+        {
+            //_orderModels = await orderService.GetOrdersDetailByBuyerName(_userModel.Username, 0, pageIndex);
 
+            _paymentMethodModels = await orderService.GetPaymentMethodsDetailByBuyerName(_userModel.Username, 0, pageIndex);
+        }
+        else
+        {
+            _paymentMethodModels = await orderService.GetPaymentMethodsDetailByBuyerName(_userModel.Username, CurCardType, pageIndex);
+            //_orderModels = await orderService.GetOrdersDetailByBuyerName(_userModel.Username, CurCardType, pageIndex);
+        }
+        await GetSearchValue();
+        stateManager.UpdateContent(this, "paymentMethodPage");
+    }
     protected async override Task OnInitializedAsync()
     {
         isLoggedIn = identityService.IsLoggedIn;
@@ -215,10 +325,11 @@ using System.Web;
             navigationManager.NavigateTo($"login?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
         }
         _userModel = identityService.GetUserModel(identityService.GetUserToken());
-        _paymentMethodModels = await orderService.GetPaymentMethodsDetailByBuyerName(_userModel.Username, 0);
-        await GetSearchValue();
+        await GetPaymentMethods(0,null);
+        //_paymentMethodModels = await orderService.GetPaymentMethodsDetailByBuyerName(_userModel.Username, 0);
+        //await GetSearchValue();
 
-        stateManager.UpdateContent(this, "paymentMethodPage");
+        //stateManager.UpdateContent(this, "paymentMethodPage");
     }
     protected async override void OnInitialized()
     {
@@ -229,26 +340,121 @@ using System.Web;
         if (firstRender)
         {
             await jsRuntime.InvokeVoidAsync("myFunction");
+            stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
         }
     }
-    protected async Task GetPaymentMethodByCardType()
+    private async Task StateManager_StateChanged(ComponentBase component, string property)
     {
-        _paymentMethodModels = await orderService.GetPaymentMethodsDetailByBuyerName(_userModel.Username, selectedOption);
-        stateManager.UpdateContent(this, "orderPage");
+        if (property.Contains("paymentMethodPage"))
+        {
+            await InvokeAsync(StateHasChanged);
+        }
+
     }
+    //protected async Task GetPaymentMethodByCardType()
+    //{
+    //    _paymentMethodModels = await orderService.GetPaymentMethodsDetailByBuyerName(_userModel.Username, selectedOption);
+    //    stateManager.UpdateContent(this, "paymentMethodPage");
+    //}
     protected async Task GetSearchValue()
     {
         _cardTypeModels = await orderService.GetCardTypes();
     }
     protected async Task AddPaymentMethod()
     {
-        _paymentMethodModels = await orderService.AddPaymentMethod(_paymentMethod, _userModel.Username);
-        stateManager.UpdateContent(this, "orderPage");
+        ModalParameters modalParameters = new ModalParameters();
+        if (string.IsNullOrEmpty(_paymentMethod.CardNumber))
+        {
+            modalParameters.Add("Message", "Kart Numarası Alanı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (!Regex.IsMatch(_paymentMethod.CardNumber, @"^\d+$"))
+        {
+            modalParameters.Add("Message", "Kart Numarası Alanı Sadece Sayı İçermelidir.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (_paymentMethod.CardNumber.Length != 16)
+        {
+            modalParameters.Add("Message", "Kart Numarası Alanı 16 Haneden Oluşması Gereklidir.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(_paymentMethod.CardHolderName))
+        {
+
+            modalParameters.Add("Message", "Kart Üstündeki İsim ve Soyisim Boş Bırakılmamalıdır.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (!Regex.IsMatch(_paymentMethod.CardHolderName, @"\s{1,2}"))
+        {
+
+            modalParameters.Add("Message", "Kart Üstündeki İsim ve Soyisim'in içinde 1 boşluk bırakılmalıdır.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(_paymentMethod.CardExpirationShort))
+        {
+
+            modalParameters.Add("Message", "Kart Son Kullanma Tarihi Alanı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (_paymentMethod.CardExpirationShort.Length != 5 || _paymentMethod.CardExpirationShort[2] != '.' ||
+        !char.IsDigit(_paymentMethod.CardExpirationShort[0]) || !char.IsDigit(_paymentMethod.CardExpirationShort[1]) ||
+        !char.IsDigit(_paymentMethod.CardExpirationShort[3]) || !char.IsDigit(_paymentMethod.CardExpirationShort[4]))
+        {
+
+            modalParameters.Add("Message", "Kart Son Kullanma Tarihi MM.YY şeklinde olmalıdır. Örneğin 03.25 olmalıdır.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        var expirationMonth = Convert.ToInt32(_paymentMethod.CardExpirationShort.Substring(0, 2));
+        var expirationYear = Convert.ToInt32(_paymentMethod.CardExpirationShort.Substring(_paymentMethod.CardExpirationShort.Length - 2));
+        int timeNow = DateTime.Now.Year % 100;
+        if (0>expirationMonth || expirationMonth>12)
+        {
+            modalParameters.Add("Message", "Kart Son Kullanma Tarihindeki Aylar 1-12 Arasında Olmalıdır.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (expirationYear < timeNow)
+        {
+            modalParameters.Add("Message", "Kart Son Kullanma Tarihindeki Yıl Şimdiki Zamandan Büyük Olmalıdır.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(_paymentMethod.SecurityNumber))
+        {
+
+            modalParameters.Add("Message", "Kart Güvenlik Numarası Alanı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (!Regex.IsMatch(_paymentMethod.SecurityNumber, @"^\d+$") || _paymentMethod.SecurityNumber.Length != 3)
+        {
+            modalParameters.Add("Message", "Kart Güvenlik Numarası Alanı 3 Haneli Sayı İçermelidir.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        var result=await orderService.AddPaymentMethodByBuyerName(_paymentMethod, _userModel.Username);
+
+        modalParameters.Add("Message", result);
+        Modal.Show<ShowMessagePopup>("Bilgilendirme", modalParameters);
+
+        await GetPaymentMethods(0, CurCardType);
+        stateManager.UpdateContent(this, "paymentMethodPage");
     }
     private async void DeletePaymentMethod(Guid paymentMethodId)
     {
-        _paymentMethodModels = await orderService.CancelPaymentMethod(paymentMethodId);
-        stateManager.UpdateContent(this, "orderPage");
+        await orderService.CancelPaymentMethod(paymentMethodId,_userModel.Username);
+        CurPage = 1;
+        await GetPaymentMethods(0,CurCardType);
+        ModalParameters modalParameters = new ModalParameters();
+        modalParameters.Add("Message", "Ödeme Yöntemi Başarılı Bir Şekilde Silindi.");
+        Modal.Show<ShowMessagePopup>("Bilgilendirme", modalParameters);
     }
 
 

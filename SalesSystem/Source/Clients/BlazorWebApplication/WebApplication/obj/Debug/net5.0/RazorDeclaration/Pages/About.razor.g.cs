@@ -167,8 +167,50 @@ using WebApplication.Infrastructer;
 #line hidden
 #nullable disable
 #nullable restore
-#line 25 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 24 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using WebApplication.Pages.Modal;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 26 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using System.Web;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 27 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using System.IO;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 28 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using System.Text.Json;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 30 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using Blazored.Modal;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 31 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using Blazored.Modal.Services;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 33 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using System.Text.RegularExpressions;
 
 #line default
 #line hidden
@@ -182,60 +224,24 @@ using System.Web;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 236 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\About.razor"
+#line 108 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\About.razor"
        
 
     [Inject]
+    StateManager stateManager { get; set; }
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+    [Inject]
     public IJSRuntime jsRuntime { get; set; }
 
-    bool reloadPage { get; set; } = true;
-
-    protected override void OnInitialized()
-    {
-        //reloadPage = true;
-        //var jsInProcess = (IJSInProcessRuntime)JSRuntime;
-        //myScript = jsInProcess.Invoke<IJSObjectReference>("import", navigationManager.BaseUri + "assets/js/main.js");
-        //stateManager.UpdateBody(this, 0, 0, 0, 0);
-    }
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             await jsRuntime.InvokeVoidAsync("myFunction");
-            //myScript = await JSRuntime.InvokeAsync<IJSObjectReference>("import","assets/js/main.js");
         }
     }
-    //private async Task StateManager_StateChanged(ComponentBase component, string property)
-    //{
-    //    if (reloadPage)
-    //    {
-    //        reloadPage = false;
-    //        await InvokeAsync(StateHasChanged);
-    //    }
-    //    else
-    //    {
-    //        return;
-    //    }
-    //}
 
-    [Inject]
-    StateManager stateManager { get; set; }
-
-    [Inject]
-    NavigationManager navigationManager { get; set; }
-
-    //protected override void OnAfterRender(bool firstRender)
-    //{
-    //    if (firstRender)
-    //    {
-    //        stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
-    //    }
-    //}
-
-    //private async Task StateManager_StateChanged(ComponentBase component, string property)
-    //{
-    //    await InvokeAsync(StateHasChanged);
-    //}
 
 #line default
 #line hidden

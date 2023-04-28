@@ -27,13 +27,6 @@ using System.Net.Http.Json;
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\_Imports.razor"
-using Microsoft.AspNetCore.Components.Forms;
-
-#line default
-#line hidden
-#nullable disable
-#nullable restore
 #line 4 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\_Imports.razor"
 using Microsoft.AspNetCore.Components.Routing;
 
@@ -160,8 +153,64 @@ using WebApplicationAdminPanel.Infrastructer;
 #line hidden
 #nullable disable
 #nullable restore
+#line 23 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\_Imports.razor"
+using WebApplicationAdminPanel.Utilities;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 24 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\_Imports.razor"
+using WebApplicationAdminPanel.Pages.Modal;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 26 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\_Imports.razor"
 using System.Web;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 27 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\_Imports.razor"
+using System.IO;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 28 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\_Imports.razor"
+using Microsoft.AspNetCore.Http;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 29 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\_Imports.razor"
+using Microsoft.AspNetCore.Http.Internal;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 32 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\_Imports.razor"
+using Blazored.Modal;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 33 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\_Imports.razor"
+using Blazored.Modal.Services;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 2 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\Pages\Product\Products.razor"
+using Microsoft.AspNetCore.Components.Forms;
 
 #line default
 #line hidden
@@ -174,6 +223,161 @@ using System.Web;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 185 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\Pages\Product\Products.razor"
+       
+
+    [CascadingParameter]
+    IModalService Modal { get; set; }
+    [Inject]
+    StateManager stateManager { get; set; }
+    [Inject]
+    ModalManager modalManager { get; set; }
+    [Inject]
+    IProductService _productService { get; set; }
+    PaginatedViewModel<Product> _products = new PaginatedViewModel<Product>();
+    List<UpCategory> _upCategories = new List<UpCategory>();
+    List<DownCategory> _downCategories = new List<DownCategory>();
+    List<Brand> _brands = new List<Brand>();
+    Product newProduct = new Product();
+    List<IBrowserFile> formFiles = new List<IBrowserFile>();
+    private int CurPage = 1;
+    protected void Pagination(int page)
+    {
+        CurPage = page + 1;
+        GetProducts(page);
+    }
+    protected void NextPage()
+    {
+        int MaxPage = Convert.ToInt32(Math.Round(Convert.ToDouble(_products.Count / 3)) + 1);
+        if (CurPage < MaxPage)
+        {
+            CurPage++;
+            GetProducts(CurPage - 1);
+        }
+    }
+    protected void PrevPage()
+    {
+        if (CurPage > 1)
+        {
+            CurPage--;
+            GetProducts(CurPage - 1);
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        GetUpCategory();
+        GetDownCategory();
+        GetBrand();
+        GetProducts(0);
+
+    }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
+        }
+    }
+    protected async void GetProducts(int paginationNumber, int pageSize = 6)
+    {
+        _products = await _productService.GetProductsItem(paginationNumber, pageSize);
+        stateManager.UpdateContent(this, "productPage");
+    }
+    protected async void GetUpCategory()
+    {
+        _upCategories = await _productService.GetUpCategoryItems();
+    }
+
+    protected async void GetDownCategory()
+    {
+        _downCategories = await _productService.GetDownCategoryItems();
+    }
+
+    protected async void GetBrand()
+    {
+        _brands = await _productService.GetBrandItems();
+    }
+    private async Task StateManager_StateChanged(ComponentBase component, string property)
+    {
+        if (property == "productPage")
+        {
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+    private void OnPriceChanged(string value)
+    {
+        decimal.TryParse(value, out decimal price);
+        if (price != 0)
+        {
+            newProduct.Price = price;
+        }
+    }
+    private void HandleSelectedFile(InputFileChangeEventArgs e)
+    {
+        if (!formFiles.Contains(e.File) && formFiles.Count < 3)
+        {
+            formFiles.Add(e.File);
+        }
+    }
+    private async Task UpdateProduct(Product product)
+    {
+        var isUpdate = await modalManager.UpdateProductAsync("Ürün Güncelle", product, _brands, _upCategories, _downCategories);
+        if (isUpdate != null)
+        {
+            var result = await _productService.UpdateProductItem(isUpdate);
+            modalManager.ShowMessageAsync("Bilgilendirme", result, 2000);
+        }
+        GetProducts(CurPage - 1);
+    }
+    private void ShowProduct(Product product)
+    {
+        modalManager.ShowProductItem("Bilgilendirme",product);
+    }
+    protected void ClearNewProduct()
+    {
+        formFiles = new List<IBrowserFile>();
+        newProduct = new Product();
+    }
+    protected async void DeleteProduct(int id)
+    {
+        var result = await _productService.RemoveProductItem(id);
+        if (result.Contains("silindi"))
+        {
+            //pop-up gösterilicek
+            GetProducts(CurPage - 1);
+        }
+    }
+    protected async void AddNewProduct()
+    {
+        if (newProduct.UpCategoryId == 0)
+        {
+            newProduct.UpCategoryId = 1;
+        }
+        if (newProduct.DownCategoryId == 0)
+        {
+            newProduct.DownCategoryId = 1;
+        }
+        if (newProduct.BrandId == 0)
+        {
+            newProduct.BrandId = 1;
+        }
+        var result= await _productService.AddProductItem(newProduct, formFiles);
+        if (result== "Ürün Eklenildi.")
+        {
+            formFiles = new List<IBrowserFile>();
+            newProduct = new Product();
+            GetProducts(CurPage-1);
+            //pop-up gösterilicek
+        }
+
+
+    }
+
+#line default
+#line hidden
+#nullable disable
     }
 }
 #pragma warning restore 1591

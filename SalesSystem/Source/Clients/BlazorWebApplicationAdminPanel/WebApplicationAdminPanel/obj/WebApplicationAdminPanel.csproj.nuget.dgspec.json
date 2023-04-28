@@ -48,6 +48,10 @@
               "target": "Package",
               "version": "[4.2.0, )"
             },
+            "Blazored.Modal": {
+              "target": "Package",
+              "version": "[5.1.0, )"
+            },
             "Microsoft.AspNetCore.Components.Authorization": {
               "target": "Package",
               "version": "[5.0.17, )"
@@ -61,9 +65,29 @@
               "target": "Package",
               "version": "[5.0.14, )"
             },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
+            "Microsoft.AspNetCore.Http.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
+            "Microsoft.AspNetCore.Server.IIS": {
+              "target": "Package",
+              "version": "[2.2.6, )"
+            },
             "Microsoft.Extensions.Http": {
               "target": "Package",
               "version": "[6.0.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.2, )"
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",

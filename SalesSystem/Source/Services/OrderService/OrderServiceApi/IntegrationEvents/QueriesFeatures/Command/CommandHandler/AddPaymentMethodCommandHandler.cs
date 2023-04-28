@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Command.CommandHandler
 {
 
-    public class AddPaymentMethodCommandHandler : IRequestHandler<AddPaymentMethodCommand, (bool, string)>
+    public class AddPaymentMethodCommandHandler : IRequestHandler<AddPaymentMethodCommand, bool>
     {
         IPaymentMethodRepository _paymentMethodRepository;
         IBuyerRepository _buyerRepository;
@@ -22,31 +22,36 @@ namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Command.CommandHandl
             _buyerRepository = buyerRepository ?? throw new ArgumentNullException(nameof(buyerRepository));
         }
 
-        public async Task<(bool, string)> Handle(AddPaymentMethodCommand request, CancellationToken cancellationToken)
+        public async Task<bool> Handle(AddPaymentMethodCommand request, CancellationToken cancellationToken)
         {
-            bool responseInsert = false;
-            var newPaymentMethod = new PaymentMethod(request.PaymentMethod.Alias, request.PaymentMethod.CardNumber, request.PaymentMethod.SecurityNumber, request.PaymentMethod.CardHolderName, request.PaymentMethod.Expiration, request.PaymentMethod.CardTypeId);
-            var buyer = _buyerRepository.GetSingleAsync(p => p.Name == request.UserName,p=>p._paymentMethods).Result;
-            newPaymentMethod.CardTypeId = (newPaymentMethod.CardTypeId != 0) ? newPaymentMethod.CardTypeId : 1;
-
-            foreach (var paymentMethod in buyer._paymentMethods)
+            try
             {
-                bool equalPaymentMethod = newPaymentMethod.IsEqualPaymentMethod(paymentMethod.CardTypeId, paymentMethod.CardNumber, paymentMethod.CardHolderName, paymentMethod.Expiration);
-                if (equalPaymentMethod)
-                {
-                    return (responseInsert, buyer.Name);
-                }
-            }
-            newPaymentMethod.BuyerId = buyer.Id;
-            newPaymentMethod.Alias = $"Payment Method on {DateTime.UtcNow}";
-            newPaymentMethod.Status = true;
-            buyer._paymentMethods.Add(newPaymentMethod);
+                var newPaymentMethod = new PaymentMethod(request.PaymentMethod.Alias, request.PaymentMethod.CardNumber, request.PaymentMethod.SecurityNumber, request.PaymentMethod.CardHolderName, request.PaymentMethod.Expiration, request.PaymentMethod.CardTypeId);
+                var buyer = _buyerRepository.GetSingleAsync(p => p.Name == request.UserName, p => p._paymentMethods.Where(p=>p.Status==true)).Result;
+                newPaymentMethod.CardTypeId = (newPaymentMethod.CardTypeId != 0) ? newPaymentMethod.CardTypeId : 1;
 
-            await _paymentMethodRepository.AddAsync(newPaymentMethod);
-            await _buyerRepository.UnitOfWork.SaveEntityAsync(cancellationToken);
-            responseInsert = true;
-            
-            return (responseInsert, buyer.Name);
+                foreach (var paymentMethod in buyer._paymentMethods)
+                {
+                    bool equalPaymentMethod = newPaymentMethod.IsEqualPaymentMethod(paymentMethod.CardTypeId, paymentMethod.CardNumber, paymentMethod.CardHolderName, paymentMethod.Expiration);
+                    if (equalPaymentMethod)
+                    {
+                        return false;
+                    }
+                }
+                newPaymentMethod.BuyerId = buyer.Id;
+                newPaymentMethod.Alias = $"{DateTime.UtcNow} Tarihte Ekleme Yapıldı.";
+                newPaymentMethod.Status = true;
+                buyer._paymentMethods.Add(newPaymentMethod);
+
+                await _paymentMethodRepository.AddAsync(newPaymentMethod);
+                await _buyerRepository.UnitOfWork.SaveEntityAsync(cancellationToken);
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

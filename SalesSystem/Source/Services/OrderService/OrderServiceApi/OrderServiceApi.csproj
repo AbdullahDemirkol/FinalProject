@@ -33,7 +33,7 @@
   
   <ItemGroup>
     <Folder Include="IntegrationEvents\QueriesFeatures\Command\ResponseComandModel\" />
-    <Folder Include="IntegrationEvents\QueriesFeatures\Queries\GetOrderDetailById\ResponseQueriesModel\" />
+    <Folder Include="IntegrationEvents\QueriesFeatures\Queries\GetMethods\ResponseQueriesModel\" />
   </ItemGroup>
 
 </Project>

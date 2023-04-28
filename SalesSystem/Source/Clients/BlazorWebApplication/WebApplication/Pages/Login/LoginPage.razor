@@ -47,7 +47,7 @@
                     </div>
                     <div class="displayImg-text m-in">
                         <h1>Bir Hesabın Var Mı?</h1>
-                        <p>O Zaman Sadece Giriş Yap</p>
+                        <p>O Zaman Giriş Yap</p>
                     </div>
                     <div class="displayImg-btn">
                         <span class="m-up" >Kayıt Ol</span>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="form sign-up">
                     <h2>Kayıt Ol</h2>
-                    <EditForm Model="@registerRequest" OnValidSubmit="registerProcess">
+                    <EditForm Model="@registerRequest" OnValidSubmit="ValidateForm">
                         <DataAnnotationsValidator />
                         <div class="form-group">
                             <span>İsim</span>
@@ -72,7 +72,7 @@
                         </div>
                         <div class="form-group">
                             <span>Email Adresi</span>
-                            <input @bind-value="registerRequest.LastName" class="inputt" type="email" name="email" placeholder="Email">
+                            <input @bind-value="registerRequest.Email" class="inputt" type="email" name="email" placeholder="Email">
                         </div>
                         <div class="form-group">
                             <span>Telefon Numarası</span>
@@ -120,21 +120,23 @@
 
 
 @code {
+
+    [CascadingParameter]
+    IModalService Modal { get; set; }
+    [Inject]
+    StateManager stateManager { get; set; }
     [Inject]
     IIdentityService identityService { get; set; }
     [Inject]
     public IJSRuntime jsRuntime { get; set; }
-
     [Inject]
     NavigationManager navigationManager { get; set; }
 
     private LoginRequest loginRequest = new LoginRequest("", "");
     private UserDTO registerRequest = new UserDTO();
-
-
-    [Inject]
-    StateManager stateManager { get; set; }
     bool isLoggedIn { get; set; }
+
+
     protected override void OnInitialized()
     {
         isLoggedIn = identityService.IsLoggedIn;
@@ -169,17 +171,110 @@
             string retunUrl = collection.Get("returnUrl") ?? "/";
             navigationManager.NavigateTo(retunUrl);
         }
-    }
-    private async Task registerProcess()
-    {
-        var result = await identityService.Login(loginRequest.UserName, loginRequest.Password);
-        if (result)
+        else
         {
-            var collection = HttpUtility.ParseQueryString(new Uri(navigationManager.Uri).Query);
-            string retunUrl = collection.Get("returnUrl") ?? "/";
-            navigationManager.NavigateTo(retunUrl);
+            ModalParameters modalParameters = new ModalParameters();
+            modalParameters.Add("Message", "Kullanıcı Adı Yada Kullanıcı Şifresi Hatalı!");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
         }
     }
+    private async Task ValidateForm()
+    {
+        ModalParameters modalParameters = new ModalParameters();
+
+        if (string.IsNullOrEmpty(registerRequest.FirstName))
+        {
+            modalParameters.Add("Message", "İsim Alanı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (!Regex.IsMatch(registerRequest.FirstName, @"^[a-zA-Z]+$"))
+        {
+            modalParameters.Add("Message", "İsim Alanında Sadece Harfler Bulunmalıdır.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(registerRequest.LastName))
+        {
+            modalParameters.Add("Message", "Soyisim Alanı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (!Regex.IsMatch(registerRequest.LastName, @"^[a-zA-Z]+$"))
+        {
+            modalParameters.Add("Message", "Soyisim Alanında Sadece Harfler Bulunmalıdır.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(registerRequest.Username))
+        {
+            modalParameters.Add("Message", "Kullanıcı Adı Alanı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(registerRequest.Email))
+        {
+            modalParameters.Add("Message", "Email Adres Alanı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (!Regex.IsMatch(registerRequest.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+        {
+            modalParameters.Add("Message", "Email Adres Alanı Hatalı Girildi.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(registerRequest.Phone))
+        {
+            modalParameters.Add("Message", "Telefon Numarası Alanı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (registerRequest.Phone.Length != 11)
+        {
+            modalParameters.Add("Message", "Telefon Numarası Alanı 11 Birim Uzunluğunda Olması Gereklidir.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (!Regex.IsMatch(registerRequest.Phone, @"^[0-9]+$"))
+        {
+            modalParameters.Add("Message", "Telefon Numarası Alanı Rakamlardan Oluşması Gereklidir.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(registerRequest.Password))
+        {
+            modalParameters.Add("Message", "Şifre Alanı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+
+        var result = await identityService.Register(registerRequest);
+        if (result== "Kayıt işlemi başarılı bir şekilde gerçekleştirildi.")
+        {
+            loginRequest = new LoginRequest(registerRequest.Username, registerRequest.Password);
+            await loginProcess();
+        }
+        else
+        {
+            modalParameters.Add("Message", result);
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+        }
+
+
+        // Değer doluysa, formu göndermek için burada gerekli işlemleri yapabilirsiniz.
+    }
+    //private async Task registerProcess()
+    //{
+
+    //    var result = await identityService.Register(registerRequest);
+    //    //if (result)
+    //    //{
+    //    //    var collection = HttpUtility.ParseQueryString(new Uri(navigationManager.Uri).Query);
+    //    //    string retunUrl = collection.Get("returnUrl") ?? "/";
+    //    //    navigationManager.NavigateTo(retunUrl);
+    //    //}
+    //}
     //public async Task ToggleClass()
     //{
     //    await jsRuntime.InvokeAsync<object>("toggleDisplayImgClass");

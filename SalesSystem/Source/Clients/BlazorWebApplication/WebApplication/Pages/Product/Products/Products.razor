@@ -1,0 +1,344 @@
+﻿@page "/Product/"
+@*@page "/Product/UpCategory/{_upCategory:int}/DownCategory/{_downCategory:int}"*@
+
+@*<h3>Products @_upCategory / @_downCategory/ @_brand</h3>*@
+
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>E-Ticaret Websitesi</p>
+                    <h1>Ürünler</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end breadcrumb section -->
+<!-- products -->
+<div class="product-section mt-150 mb-150">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-filters">
+                    <ul>
+                        @if (CurUpCategory == null && CurDownCategory == null && CurBrand == null)
+                        {
+                            <li class="active" @onclick="()=>GetProductsAsync(page:0)">Tümü</li>
+                        }
+                        else
+                        {
+                            <li @onclick="()=>GetProductsAsync(page:0)">All</li>
+                        }
+                        @foreach (var upCategory in upCategories)
+                        {
+                            if (CurUpCategory == null)
+                            {
+                                <li @onclick="()=>GetProductsAsync(page:0,upCategory:upCategory)">@upCategory.UpCategoryName</li>
+                            }
+                            else
+                            {
+                                if (CurUpCategory.Id != upCategory.Id)
+                                {
+                                    <li @onclick="()=>GetProductsAsync(page:0,upCategory:upCategory)">@upCategory.UpCategoryName</li>
+                                }
+                                else
+                                {
+                                    <li class="active" @onclick="()=>GetProductsAsync(page:0,upCategory:upCategory)">@upCategory.UpCategoryName</li>
+                                }
+                            }
+                        }
+                        @foreach (var downCategory in downCategories)
+                        {
+
+                            if (CurDownCategory == null)
+                            {
+                                <li @onclick="()=>GetProductsAsync(page:0,downCategory: downCategory)">@downCategory.DownCategoryName</li>
+                            }
+                            else
+                            {
+                                if (CurDownCategory.Id != downCategory.Id)
+                                {
+                                    <li @onclick="()=>GetProductsAsync(page:0,downCategory: downCategory)">@downCategory.DownCategoryName</li>
+                                }
+                                else
+                                {
+                                    <li class="active" @onclick="()=>GetProductsAsync(page:0,downCategory: downCategory)">@downCategory.DownCategoryName</li>
+                                }
+                            }
+                        }
+                        @foreach (var brand in brands)
+                        {
+
+                            if (CurBrand == null)
+                            {
+                                <li @onclick="()=>GetProductsAsync(page:0,brand:brand)">@brand.BrandName</li>
+                            }
+                            else
+                            {
+                                if (CurBrand.Id != brand.Id)
+                                {
+                                    <li @onclick="()=>GetProductsAsync(page:0,brand:brand)">@brand.BrandName</li>
+                                }
+                                else
+                                {
+                                    <li class="active" @onclick="()=>GetProductsAsync(page:0,brand:brand)">@brand.BrandName</li>
+                                }
+                            }
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        @if (_products.Count() > 0)
+        {
+            <div class="row product-lists" style="height:auto;">
+                @foreach (var productItem in _products)
+                {
+                    <ProductView ProductItem="productItem" OnClick="()=>AddToCart(productItem)" />
+                    @*<WebApplication.Pages.Product.ProductView ProductItem="productItem" OnClick="()=>AddToCart(productItem)" />*@
+                }
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+
+                    <div class="pagination-wrap">
+                        <ul>
+
+                            @if (CurPage > 1)
+                            {
+                                @if (3 < Math.Ceiling(Convert.ToDouble(_productCount) / 6))
+                                {
+                                    <li><a @onclick="()=>PrevPage()">Önceki</a></li>
+                                }
+                                <li><a @onclick="()=>Pagination(CurPage-2)">@(CurPage-1)</a></li>
+                            }
+                            <li><a class="active" @onclick="()=>Pagination(CurPage-1)">@(CurPage)</a></li>
+                            @if (CurPage < Math.Ceiling(Convert.ToDouble(_productCount) / 6))
+                            {
+                                <li><a @onclick="()=>Pagination(CurPage)">@(CurPage+1)</a></li>
+                                @if (3 < Math.Ceiling(Convert.ToDouble(_productCount) / 6))
+                                {
+                                    <li><a @onclick="()=>NextPage()">Sonraki</a></li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="row product-lists">
+                <h4>
+                    Ürün Bulunamadı
+                </h4>
+            </div>
+        }
+
+    </div>
+    @if (showNotification)
+    {
+        <div class="notification-container">
+            <Notification IsSuccess="@isSuccess" Message="@message" />
+        </div>
+    }
+</div>
+<!-- end products -->
+
+
+@code {
+    [Inject]
+    public IJSRuntime jsRuntime { get; set; }
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+    [Inject]
+    StateManager stateManager { get; set; }
+    [Inject]
+    IProductService productService { get; set; }
+    [Inject]
+    IIdentityService identityService { get; set; }
+    [Inject]
+    public IBasketService basketService { get; set; }
+
+
+    List<UpCategory> upCategories = new List<UpCategory>();
+    List<DownCategory> downCategories = new List<DownCategory>();
+    List<Brand> brands = new List<Brand>();
+
+    private int CurPage = 1;
+    private DownCategory CurDownCategory = null;
+    private UpCategory CurUpCategory = null;
+    private Brand CurBrand = null;
+
+    bool isSuccess { get; set; }
+    string message { get; set; }
+    bool showNotification { get; set; } = false;
+
+
+    protected async override Task OnInitializedAsync()
+    {
+        //var jsInProcess = (IJSInProcessRuntime)JSRuntime;
+        //myScript = jsInProcess.Invoke<IJSObjectReference>("import", navigationManager.BaseUri + "assets/js/main.js");
+        //var uri = navigationManager.ToAbsoluteUri(navigationManager.Uri);
+        //var queryStrings = QueryHelpers.ParseQuery(uri.Query);
+        //if (queryStrings.TryGetValue("upCategory", out var upCategory))
+        //{
+        //    _upCategory = Convert.ToInt32(upCategory);
+        //}
+
+        //if (queryStrings.TryGetValue("downCategory", out var downCategory))
+        //{
+        //    _downCategory = Convert.ToInt32(downCategory);
+        //}
+
+        //if (queryStrings.TryGetValue("brand", out var brand))
+        //{
+        //    _brand = Convert.ToInt32(brand);
+        //}
+        //if (queryStrings.TryGetValue("reload", out var reload))
+        //{
+        //    _reload = Convert.ToInt32(reload);
+        //}
+
+        upCategories = await productService.GetUpCategoryItems();
+        downCategories = await productService.GetDownCategoryItems();
+        brands = await productService.GetBrandItems();
+        await GetProductsAsync(page: 0);
+    }
+
+    //protected async override Task OnAfterRenderAsync(bool firstRender)
+    //{
+    //    if (firstRender)
+    //    {
+    //        await jsRuntime.InvokeVoidAsync("myFunction");
+    //    }
+    //}
+    protected async override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await jsRuntime.InvokeVoidAsync("myFunction");
+            stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
+        }
+    }
+    //------------------------------------------------------------------------------------------------------------------------
+    IEnumerable<Product> _products { get; set; } = new List<Product>();
+    int _productCount { get; set; }
+
+    private async Task GetProductsAsync(int page, UpCategory upCategory = null, DownCategory downCategory = null, Brand brand = null)
+    {
+        CurUpCategory = null;
+        CurDownCategory = null;
+        CurBrand = null;
+        if (upCategory != null)
+        {
+            CurUpCategory = upCategory;
+            CurPage = 1;
+        }
+        if (downCategory != null)
+        {
+            CurDownCategory = downCategory;
+            CurPage = 1;
+        }
+        if (brand != null)
+        {
+            CurBrand = brand;
+            CurPage = 1;
+        }
+        var inComingProducts = await GetProductsDataAsync(page, CurUpCategory, CurDownCategory, CurBrand);
+
+        _products = inComingProducts.Data;
+        _productCount = inComingProducts.Count;
+        stateManager.UpdateContent(this, "ProductPage");
+
+    }
+    private async Task<PaginatedViewModel<Product>> GetProductsDataAsync(int page, UpCategory upCategory = null, DownCategory downCategory = null, Brand brand = null)
+    {
+
+        if (upCategory != null && downCategory == null && brand == null)
+        {
+            return await productService.GetProductItemByUpCategories(upCategory, page, null);
+        }
+        if (upCategory == null && downCategory != null && brand == null)
+        {
+            return await productService.GetProductItemByDownCategories(downCategory, page, null);
+        }
+        if (upCategory == null && downCategory == null && brand != null)
+        {
+            return await productService.GetProductItemByBrands(brand, page, null);
+        }
+        return await productService.GetProductsItem(page, null);
+    }
+    private async void Pagination(int page)
+    {
+        CurPage = page + 1;
+        await GetProductsAsync(page, CurUpCategory, CurDownCategory, CurBrand);
+    }
+    //------------------------------------------------------------------------------------------------------------------------
+    private async Task StateManager_StateChanged(ComponentBase component, string property)
+    {
+        if (property == "ProductPage")
+        {
+            await InvokeAsync(StateHasChanged);
+        }
+
+    }
+
+    public async Task AddToCart(Product product)
+    {
+        if (!identityService.IsLoggedIn)
+        {
+            navigationManager.NavigateTo($"login?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
+            return;
+        }
+        var addResult = await basketService.AddItemToBasket(product.Id, 1);
+
+        showNotification = true;
+        if (addResult)
+        {
+            isSuccess = true;
+            message = "Ürün başarıyla eklendi. Miktar: 1";
+        }
+        else
+        {
+            isSuccess = false;
+            message = "Ürün ekleme işleminde hata oluştu!";
+        }
+        stateManager.UpdateContent(this, "ProductPage");
+
+        // 2 saniye sonra bildirimi kaldır
+        await Task.Delay(2000).ContinueWith(t =>
+        {
+            isSuccess = false;
+            message = "";
+            showNotification = false;
+            stateManager.UpdateContent(this, "ProductPage");
+        });
+
+
+    }
+
+
+    protected async Task NextPage()
+    {
+        int MaxPage = Convert.ToInt32(Math.Round(Convert.ToDouble(_productCount / 6)) + 1);
+        if (CurPage < MaxPage)
+        {
+
+            CurPage++;
+            await GetProductsAsync(CurPage - 1);
+        }
+    }
+    protected async Task PrevPage()
+    {
+        if (CurPage > 1)
+        {
+            CurPage--;
+            await GetProductsAsync(CurPage - 1);
+        }
+    }
+}

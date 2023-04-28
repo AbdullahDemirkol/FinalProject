@@ -19,32 +19,51 @@ namespace WebApplication.Business.Concrete
         {
             _httpClient = httpClient;
         }
-        public async Task<PaginatedViewModel<Product>> GetProductItem(int paginationNumber)
+        public async Task<PaginatedViewModel<Product>> GetProductsItem(int paginationNumber,int? pageSize)
         {
-            var products = await _httpClient.GetResponseAsync<PaginatedViewModel<Product>>($"/product/products?pageIndeX={paginationNumber}");
+            var query = $"/product/products?pageIndeX={paginationNumber}";
+            if (pageSize!=null)
+            {
+                query += $"&pageSize={pageSize}";
+            }
+            var products = await _httpClient.GetResponseAsync<PaginatedViewModel<Product>>(query);
             return products;
         }
+        public async Task<List<Product>> GetProductItem(int productId)
+        {
+            var product = await _httpClient.GetResponseAsync<List<Product>>($"/product/products?ids={productId}");
+            return product;
+        }
 
-        public async Task<PaginatedViewModel<Product>> GetProductItemByUpCategories(UpCategory upCategory, int paginationNumber)
+        public async Task<PaginatedViewModel<Product>> GetProductItemByUpCategories(UpCategory upCategory, int paginationNumber, int? pageSize)
         {
             var productQuery = $"/product/products/upCategoryId/{upCategory.Id}?pageIndex={paginationNumber}";
-
+            if (pageSize.HasValue)
+            {
+                productQuery += "&pageSize=" + pageSize;
+            }
             var products = await _httpClient.GetResponseAsync<PaginatedViewModel<Product>>(productQuery);
 
             return products;
         }
-        public async Task<PaginatedViewModel<Product>> GetProductItemByDownCategories(DownCategory downCategory, int paginationNumber)
+        public async Task<PaginatedViewModel<Product>> GetProductItemByDownCategories(DownCategory downCategory, int paginationNumber,int? pageSize)
         {
             var productQuery = $"/product/products/downCategoryId/{downCategory.Id}?pageIndex={paginationNumber}";
-
+            if (pageSize.HasValue)
+            {
+                productQuery += "&pageSize=" + pageSize;
+            }
             var products = await _httpClient.GetResponseAsync<PaginatedViewModel<Product>>(productQuery);
 
             return products;
         }
-        public async Task<PaginatedViewModel<Product>> GetProductItemByBrands(Brand brand, int paginationNumber)
+        public async Task<PaginatedViewModel<Product>> GetProductItemByBrands(Brand brand, int paginationNumber, int? pageSize)
         {
             var productQuery = $"/product/products/BrandId/{brand.Id}?pageIndex={paginationNumber}";
-
+            if (pageSize.HasValue)
+            {
+                productQuery += "&pageSize=" + pageSize;
+            }
             var products = await _httpClient.GetResponseAsync<PaginatedViewModel<Product>>(productQuery);
 
             return products;
@@ -57,7 +76,8 @@ namespace WebApplication.Business.Concrete
         }
         public async Task<List<DownCategory>> GetDownCategoryItems()
         {
-            List<DownCategory> downCategories = await _httpClient.GetResponseAsync<List<DownCategory>>("/DownCategory/downCategories");
+            var query = "/DownCategory/downCategories";
+            List<DownCategory> downCategories = await _httpClient.GetResponseAsync<List<DownCategory>>(query);
             return downCategories;
         }
         public async Task<List<Brand>> GetBrandItems()
@@ -65,5 +85,6 @@ namespace WebApplication.Business.Concrete
             List<Brand> brands = await _httpClient.GetResponseAsync<List<Brand>>("/brand/brands");
             return brands;
         }
+
     }
 }

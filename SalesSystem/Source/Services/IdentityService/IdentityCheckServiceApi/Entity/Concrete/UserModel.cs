@@ -22,7 +22,7 @@ namespace IdentityCheckServiceApi.Entity.Concrete
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        [Required]
+        public string ProfileImagePath { get; set; }
         public Role Role { get; set; }
         [Required]
         public bool Status { get; set; }

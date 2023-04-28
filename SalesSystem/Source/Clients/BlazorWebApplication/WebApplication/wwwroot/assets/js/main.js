@@ -1,7 +1,18 @@
 window.myFunction = function () {
     (function ($) {
-        console.log("12");
         "use strict";
+
+        function formatInputValue(input) {
+            var inputValue = input.value;
+            // Girilen deðeri sadece sayýlar ve nokta karakteri içerecek þekilde filtrele
+            var filteredValue = inputValue.replace(/[^\d.]/g, '');
+            // Son iki karakteri al
+            var lastTwoChars = filteredValue.slice(-2);
+            // "mm.YY" formatýna uygun hale getir
+            var formattedValue = lastTwoChars.padStart(4, '0').replace(/(\d{2})(\d{2})/, '$1.$2');
+            // Input alanýna formatlanmýþ deðeri yazdýr
+            input.value = formattedValue;
+        }
 
         $(document).ready(function ($) {
 
@@ -54,28 +65,28 @@ window.myFunction = function () {
                 }
             });
 
-            // logo carousel
-            $(".logo-carousel-inner").owlCarousel({
-                items: 4,
-                loop: true,
-                autoplay: true,
-                margin: 30,
-                responsive: {
-                    0: {
-                        items: 1,
-                        nav: false
-                    },
-                    600: {
-                        items: 3,
-                        nav: false
-                    },
-                    1000: {
-                        items: 4,
-                        nav: false,
-                        loop: true
-                    }
-                }
-            });
+            //// logo carousel
+            //$(".logo-carousel-inner").owlCarousel({
+            //    items: 4,
+            //    loop: true,
+            //    autoplay: true,
+            //    margin: 30,
+            //    responsive: {
+            //        0: {
+            //            items: 1,
+            //            nav: false
+            //        },
+            //        600: {
+            //            items: 3,
+            //            nav: false
+            //        },
+            //        1000: {
+            //            items: 4,
+            //            nav: false,
+            //            loop: true
+            //        }
+            //    }
+            //});
 
             // count down
             if ($('.time-countdown').length) {

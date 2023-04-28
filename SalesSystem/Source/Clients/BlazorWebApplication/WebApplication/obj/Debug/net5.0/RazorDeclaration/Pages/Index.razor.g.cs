@@ -167,8 +167,50 @@ using WebApplication.Infrastructer;
 #line hidden
 #nullable disable
 #nullable restore
-#line 25 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 24 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using WebApplication.Pages.Modal;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 26 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using System.Web;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 27 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using System.IO;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 28 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using System.Text.Json;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 30 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using Blazored.Modal;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 31 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using Blazored.Modal.Services;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 33 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using System.Text.RegularExpressions;
 
 #line default
 #line hidden
@@ -183,7 +225,7 @@ using System.Web;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 354 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\Index.razor"
+#line 114 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\Index.razor"
       
     [Inject]
     public IJSRuntime jsRuntime { get; set; }
@@ -191,23 +233,78 @@ using System.Web;
     NavigationManager navigationManager { get; set; }
     [Inject]
     StateManager stateManager { get; set; }
+    [Inject]
+    IProductService productService { get; set; }
+    [Inject]
+    IIdentityService identityService { get; set; }
+    [Inject]
+    public IBasketService basketService { get; set; }
+    IEnumerable<Entity.Concrete.Product.Product> _products=new List<Entity.Concrete.Product.Product>() ;
+    int _productCount { get; set; }
 
+    bool isSuccess { get; set; }
+    string message { get; set; }
+    bool showNotification { get; set; } = false;
 
     protected async override void OnInitialized()
     {
-        await jsRuntime.InvokeVoidAsync("myFunction");
-        //reloadPage = true;
-        //jSObjectReference = await jsRuntime.InvokeAsync<IJSObjectReference>("import", navigationManager.BaseUri + "assets/js/main.js");
-        //stateManager.UpdateBody(this, 0, 0, 0, 0);
+        await GetProducts();
+    }
+    protected async Task GetProducts()
+    {
+        var inComingProducts = await productService.GetProductsItem(0, 3);
+        _products = inComingProducts.Data;
+        _productCount = inComingProducts.Count;
+        stateManager.UpdateContent(this, "HomePage");
     }
     protected async override void OnAfterRender(bool firstRender)
     {
-        //jSObjectReference = await jsRuntime.InvokeAsync<IJSObjectReference>("import", navigationManager.BaseUri + "assets/js/main.js");
         if (firstRender)
         {
             await jsRuntime.InvokeVoidAsync("myFunction");
-            //stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
+            stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
         }
+    }
+    private async Task StateManager_StateChanged(ComponentBase component, string property)
+    {
+        if (property == "HomePage")
+        {
+            await InvokeAsync(StateHasChanged);
+        }
+
+    }
+    public async Task AddToCart(Entity.Concrete.Product.Product product)
+    {
+        if (!identityService.IsLoggedIn)
+        {
+            navigationManager.NavigateTo($"login?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
+            return;
+        }
+        var addResult = await basketService.AddItemToBasket(product.Id, 1);
+
+        showNotification = true;
+        if (addResult)
+        {
+            isSuccess = true;
+            message = "Ürün başarıyla eklendi. Miktar: 1";
+        }
+        else
+        {
+            isSuccess = false;
+            message = "Ürün ekleme işleminde hata oluştu!";
+        }
+        stateManager.UpdateContent(this, "HomePage");
+
+        // 2 saniye sonra bildirimi kaldır
+        await Task.Delay(2000).ContinueWith(t =>
+        {
+            isSuccess = false;
+            message = "";
+            showNotification = false;
+            stateManager.UpdateContent(this, "HomePage");
+        });
+
+
     }
     //private async Task StateManager_StateChanged(ComponentBase component, string property)
     //{

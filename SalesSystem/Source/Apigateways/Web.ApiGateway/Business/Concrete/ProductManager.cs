@@ -26,9 +26,8 @@ namespace Web.ApiGateway.Business.Concrete
             var query = "product/products/" + productId;
             var response = await client.GetResponseAsync<ProductItem>(query);
 
-            var query2 = "picture/pictures/" + productId;
-            List<Picture> picturePaths = await client.GetResponseAsync<List<Picture>>(query2);
-            response.PicturePath = picturePaths.First().ImagePath;
+            //var query2 = "picture/pictures/" + productId;
+            //List<Picture> picturePaths = await client.GetResponseAsync<List<Picture>>(query2);
 
             return response;
         }

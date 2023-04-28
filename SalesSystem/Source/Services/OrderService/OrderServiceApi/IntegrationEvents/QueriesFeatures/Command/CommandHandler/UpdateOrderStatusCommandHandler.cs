@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Command.CommandHandler
 {
-    public class UpdateOrderStatusCommandHandler : IRequestHandler<UpdateOrderStatusCommand, (bool,Order)>
+    public class UpdateOrderStatusCommandHandler : IRequestHandler<UpdateOrderStatusCommand, bool>
     {
         IOrderRepository _orderRepository;
 
@@ -22,13 +22,17 @@ namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Command.CommandHandl
             _orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
         }
 
-        public async Task<(bool,Order)> Handle(UpdateOrderStatusCommand request, CancellationToken cancellationToken)
-        { 
-            var order = await _orderRepository.GetByIdAsync(request.OrderNumber,p=>p.OrderStatus,p=>p.Buyer);
-            order.SetOrderStatus(request.OrderStatusId);
-            _orderRepository.Update(order);
-            await _orderRepository.UnitOfWork.SaveEntityAsync(cancellationToken);
-            return (true,order);
+        public async Task<bool> Handle(UpdateOrderStatusCommand request, CancellationToken cancellationToken)
+        {
+            var order = await _orderRepository.GetByIdAsync(request.OrderNumber, p => p.OrderStatus, p => p.Buyer);
+            if (order.Buyer.Name==request.BuyerName)
+            {
+                order.SetOrderStatus(request.OrderStatusId);
+                _orderRepository.Update(order);
+                await _orderRepository.UnitOfWork.SaveEntityAsync(cancellationToken);
+                return true;
+            }
+            return false;
         }
     }
 }

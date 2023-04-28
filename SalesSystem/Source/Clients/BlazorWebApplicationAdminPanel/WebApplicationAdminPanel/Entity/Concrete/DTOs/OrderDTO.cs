@@ -26,5 +26,14 @@ namespace WebApplicationAdminPanel.Entity.Concrete.DTOs
         public string BuyerName { get; set; }
         public string PaymentMethodPrefix { get; set; }
         public string PaymentMethodSuffix { get; set; }
+        public int OrderItemCount()
+        {
+            var orderCount = 0;
+            foreach (var orderItem in OrderItems)
+            {
+                orderCount += orderItem.Units;
+            }
+            return orderCount;
+        }
     }
 }

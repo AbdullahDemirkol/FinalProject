@@ -25,6 +25,13 @@ namespace WebApplicationAdminPanel.Business.Concrete
             this.identityService = identityService;
             this.logger = logger;
         }
+
+        public async Task<List<OrderDTO>> GetOrders(int orderStatusId)
+        {
+            var query = "order/orders/"+ orderStatusId;
+            var orders = await apiClient.GetResponseAsync<List<OrderDTO>>(query);
+            return orders;
+        }
         public async Task<List<OrderDTO>> GetOrdersDetailByBuyerName(string buyerName,int orderStatusId)
         {
 

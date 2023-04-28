@@ -33,7 +33,7 @@ namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Command.CommandHandl
 
                 var _orderRepository = scopedServices.GetRequiredService<IOrderRepository>();
 
-                var address = new Address(request.Street, request.City, request.State, request.Country, request.ZipCode);
+                var address = new Address(request.Neighbourhood, request.Street, request.BuildingNo,request.ApartmentNo,request.District, request.City, request.Country, request.ZipCode);
                 Order dbOrder = new Order(request, address/*, null*/);
                 foreach (var orderItem in request.OrderItems.ToList())
                 {

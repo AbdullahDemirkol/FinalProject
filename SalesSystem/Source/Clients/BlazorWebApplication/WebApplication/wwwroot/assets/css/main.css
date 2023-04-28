@@ -682,9 +682,9 @@ nav.main-menu ul ul.sub-menu li a {
   font-weight: 600;
 }
 
-nav.main-menu ul li.current-list-item > a {
+/*nav.main-menu ul li.current-list-item > a {
   color: #F28123;
-}
+}*/
 
 nav.main-menu li:hover > a {
   color: #F28123;
@@ -2747,4 +2747,8 @@ table.order-details tbody td {
   display: table-cell;
   vertical-align: middle;
   width: 100%;
-}
+}/* -----------------------------------------------------------------------------
+
+# Notification
+
+----------------------------------------------------------------------------- */.notification-container {    position: fixed;    bottom: 10px; /* alt kenardan 10px uzaklýkta */    left: 10px; /* sol kenardan 10px uzaklýkta */    z-index: 9999; /* Diðer içeriklerin üzerinde görüntülenmesi için yüksek z-index deðeri */}.notification {    padding: 10px;    border-radius: 5px;    font-size: 16px;    color: #fff;    width: 300px;    text-align:center;}.success {    background-color: #4CAF50;}.notification.error {    background-color: #F44336;}

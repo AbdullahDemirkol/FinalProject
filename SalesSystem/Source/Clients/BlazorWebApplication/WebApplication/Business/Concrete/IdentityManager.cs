@@ -14,6 +14,8 @@ using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using WebApplication.Entity.Concrete.DTOs;
+using Microsoft.AspNetCore.Components.Forms;
+using System.IO;
 
 namespace WebApplication.Business.Concrete
 {
@@ -89,7 +91,7 @@ namespace WebApplication.Business.Concrete
                 userModel.LastName = securityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value.Split(' ')[1];
                 userModel.Email = securityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
                 userModel.Phone = securityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.MobilePhone)?.Value;
-                userModel.Role = securityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
+                userModel.Role.Name = securityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role)?.Value;
                 return userModel;
             }
             catch (Exception)
@@ -99,7 +101,49 @@ namespace WebApplication.Business.Concrete
             }
         }
 
+        public async Task<string> Register(UserDTO userDTO)
+        {
+            var response = await _httpClient.PostGetStringResponseAsync<UserDTO>("Auth/Register", userDTO);
+            return response;
+        }
+        private async Task<byte[]> GetFileBytesAsync(IBrowserFile formFile)
+        {
+            try
+            {
+                var buffer = new byte[16 * 1024]; // 16KB'lık bir buffer tanımlıyoruz.
+                using (var ms = new MemoryStream())
+                {
+                    var stream = formFile.OpenReadStream();
+                    int read;
+                    while ((read = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                    {
+                        await ms.WriteAsync(buffer, 0, read);
+                    }
+                    return ms.ToArray();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public async Task<bool> ChangePicture(IBrowserFile pictureFiles, string userName)
+        {
+            if (pictureFiles != null && pictureFiles.Size > 0)
+            {
+                byte[] byteArrayPicture = await GetFileBytesAsync(pictureFiles);
+                var query = "Auth/ChangePicture/" + userName;
+                var result= await _httpClient.PostGetResponseAsync<bool ,byte[]>(query, byteArrayPicture);
+                return result;
+            }
+            return false;
 
-       
+        }
+        public async Task<string> GetPicture(string userName) 
+        {
+            var query = "Auth/GetPicture/" + userName;
+            var result = await _httpClient.GetStringAsync(query);
+            return result;
+        }
     }
 }

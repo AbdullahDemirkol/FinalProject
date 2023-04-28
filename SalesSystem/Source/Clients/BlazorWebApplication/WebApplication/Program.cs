@@ -1,4 +1,5 @@
 using Blazored.LocalStorage;
+using Blazored.Modal;
 //using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -35,7 +36,7 @@ namespace WebApplication
             builder.Services.AddTransient<IBasketService, BasketManager>();
             builder.Services.AddTransient<IOrderService, OrderManager>();
             builder.Services.AddSingleton<StateManager>();
-
+            builder.Services.AddBlazoredModal();
             builder.Services.AddScoped<AuthTokenHandler>();
             //builder.Services.AddSingleton<HttpClientDelegatingHandler>();
 

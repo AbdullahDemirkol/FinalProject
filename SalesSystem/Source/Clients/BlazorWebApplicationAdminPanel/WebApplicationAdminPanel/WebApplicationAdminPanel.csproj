@@ -5,17 +5,137 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\assets\bootstrap\css\bootstrap-grid.css.map" />
+    <Content Remove="wwwroot\assets\bootstrap\css\bootstrap-grid.min.css.map" />
+    <Content Remove="wwwroot\assets\bootstrap\css\bootstrap-reboot.css.map" />
+    <Content Remove="wwwroot\assets\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <Content Remove="wwwroot\assets\bootstrap\css\bootstrap.css.map" />
+    <Content Remove="wwwroot\assets\bootstrap\css\bootstrap.min.css.map" />
+    <Content Remove="wwwroot\assets\bootstrap\js\bootstrap.bundle.js" />
+    <Content Remove="wwwroot\assets\bootstrap\js\bootstrap.bundle.js.map" />
+    <Content Remove="wwwroot\assets\bootstrap\js\bootstrap.bundle.min.js" />
+    <Content Remove="wwwroot\assets\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <Content Remove="wwwroot\assets\bootstrap\js\bootstrap.js" />
+    <Content Remove="wwwroot\assets\bootstrap\js\bootstrap.js.map" />
+    <Content Remove="wwwroot\assets\bootstrap\js\bootstrap.min.js" />
+    <Content Remove="wwwroot\assets\bootstrap\js\bootstrap.min.js.map" />
+    <Content Remove="wwwroot\assets\css\scss\base\_mixins.scss" />
+    <Content Remove="wwwroot\assets\css\scss\base\_typography.scss" />
+    <Content Remove="wwwroot\assets\css\scss\base\_variables.scss" />
+    <Content Remove="wwwroot\assets\css\scss\common\_common.scss" />
+    <Content Remove="wwwroot\assets\css\scss\common\_footer.scss" />
+    <Content Remove="wwwroot\assets\css\scss\common\_header.scss" />
+    <Content Remove="wwwroot\assets\css\scss\common\_hover.scss" />
+    <Content Remove="wwwroot\assets\css\scss\main.scss" />
+    <Content Remove="wwwroot\assets\css\scss\pages\_404.scss" />
+    <Content Remove="wwwroot\assets\css\scss\pages\_about.scss" />
+    <Content Remove="wwwroot\assets\css\scss\pages\_contact.scss" />
+    <Content Remove="wwwroot\assets\css\scss\pages\_shop.scss" />
+    <Content Remove="wwwroot\assets\css\scss\prepros-6.config" />
+    <Content Remove="wwwroot\assets\css\scss\sections\_about.scss" />
+    <Content Remove="wwwroot\assets\css\scss\sections\_cart-banner.scss" />
+    <Content Remove="wwwroot\assets\css\scss\sections\_hero.scss" />
+    <Content Remove="wwwroot\assets\css\scss\sections\_list.scss" />
+    <Content Remove="wwwroot\assets\css\scss\sections\_news.scss" />
+    <Content Remove="wwwroot\assets\css\scss\sections\_shop-banner.scss" />
+    <Content Remove="wwwroot\assets\css\scss\sections\_testimonials.scss" />
+    <Content Remove="wwwroot\assets\js\form-validate.js" />
+    <Content Remove="wwwroot\assets\js\jquery-1-11-3.min.js" />
+    <Content Remove="wwwroot\assets\js\jquery.countdown.js" />
+    <Content Remove="wwwroot\assets\js\jquery.isotope-3-0-6.min.js" />
+    <Content Remove="wwwroot\assets\js\jquery.magnific-popup.min.js" />
+    <Content Remove="wwwroot\assets\js\jquery.meanmenu.min.js" />
+    <Content Remove="wwwroot\assets\js\login.js" />
+    <Content Remove="wwwroot\assets\js\main.js" />
+    <Content Remove="wwwroot\assets\js\owl.carousel.min.js" />
+    <Content Remove="wwwroot\assets\js\sticker.js" />
+    <Content Remove="wwwroot\assets\js\waypoints.js" />
+    <Content Remove="wwwroot\assets\webfonts\fa-brands-400.eot_" />
+    <Content Remove="wwwroot\assets\webfonts\fa-brands-400.svg" />
+    <Content Remove="wwwroot\assets\webfonts\fa-brands-400.woff2" />
+    <Content Remove="wwwroot\assets\webfonts\fa-regular-400.eot_" />
+    <Content Remove="wwwroot\assets\webfonts\fa-regular-400.svg" />
+    <Content Remove="wwwroot\assets\webfonts\fa-regular-400.woff2" />
+    <Content Remove="wwwroot\assets\webfonts\fa-solid-900.eot_" />
+    <Content Remove="wwwroot\assets\webfonts\fa-solid-900.svg" />
+    <Content Remove="wwwroot\assets\webfonts\fa-solid-900.woff2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazored.Modal" Version="5.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
     <PackageReference Include="Blazored.LocalStorage" Version="4.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="5.0.17" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.14" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.14" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.IIS" Version="2.2.6" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.25.1" />
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Entity\Abstract\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\bootstrap\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\assets\bootstrap\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\assets\bootstrap\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\assets\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\assets\bootstrap\css\bootstrap.css.map" />
+    <None Include="wwwroot\assets\bootstrap\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\assets\bootstrap\js\bootstrap.bundle.js" />
+    <None Include="wwwroot\assets\bootstrap\js\bootstrap.bundle.js.map" />
+    <None Include="wwwroot\assets\bootstrap\js\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\assets\bootstrap\js\bootstrap.bundle.min.js.map" />
+    <None Include="wwwroot\assets\bootstrap\js\bootstrap.js" />
+    <None Include="wwwroot\assets\bootstrap\js\bootstrap.js.map" />
+    <None Include="wwwroot\assets\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\assets\bootstrap\js\bootstrap.min.js.map" />
+    <None Include="wwwroot\assets\css\scss\base\_mixins.scss" />
+    <None Include="wwwroot\assets\css\scss\base\_typography.scss" />
+    <None Include="wwwroot\assets\css\scss\base\_variables.scss" />
+    <None Include="wwwroot\assets\css\scss\common\_common.scss" />
+    <None Include="wwwroot\assets\css\scss\common\_footer.scss" />
+    <None Include="wwwroot\assets\css\scss\common\_header.scss" />
+    <None Include="wwwroot\assets\css\scss\common\_hover.scss" />
+    <None Include="wwwroot\assets\css\scss\main.scss" />
+    <None Include="wwwroot\assets\css\scss\pages\_404.scss" />
+    <None Include="wwwroot\assets\css\scss\pages\_about.scss" />
+    <None Include="wwwroot\assets\css\scss\pages\_contact.scss" />
+    <None Include="wwwroot\assets\css\scss\pages\_shop.scss" />
+    <None Include="wwwroot\assets\css\scss\prepros-6.config" />
+    <None Include="wwwroot\assets\css\scss\sections\_about.scss" />
+    <None Include="wwwroot\assets\css\scss\sections\_cart-banner.scss" />
+    <None Include="wwwroot\assets\css\scss\sections\_hero.scss" />
+    <None Include="wwwroot\assets\css\scss\sections\_list.scss" />
+    <None Include="wwwroot\assets\css\scss\sections\_news.scss" />
+    <None Include="wwwroot\assets\css\scss\sections\_shop-banner.scss" />
+    <None Include="wwwroot\assets\css\scss\sections\_testimonials.scss" />
+    <None Include="wwwroot\assets\js\form-validate.js" />
+    <None Include="wwwroot\assets\js\jquery-1-11-3.min.js" />
+    <None Include="wwwroot\assets\js\jquery.countdown.js" />
+    <None Include="wwwroot\assets\js\jquery.isotope-3-0-6.min.js" />
+    <None Include="wwwroot\assets\js\jquery.magnific-popup.min.js" />
+    <None Include="wwwroot\assets\js\jquery.meanmenu.min.js" />
+    <None Include="wwwroot\assets\js\login.js" />
+    <None Include="wwwroot\assets\js\main.js" />
+    <None Include="wwwroot\assets\js\owl.carousel.min.js" />
+    <None Include="wwwroot\assets\js\sticker.js" />
+    <None Include="wwwroot\assets\js\waypoints.js" />
+    <None Include="wwwroot\assets\webfonts\fa-brands-400.eot_" />
+    <None Include="wwwroot\assets\webfonts\fa-brands-400.svg" />
+    <None Include="wwwroot\assets\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\assets\webfonts\fa-regular-400.eot_" />
+    <None Include="wwwroot\assets\webfonts\fa-regular-400.svg" />
+    <None Include="wwwroot\assets\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\assets\webfonts\fa-solid-900.eot_" />
+    <None Include="wwwroot\assets\webfonts\fa-solid-900.svg" />
+    <None Include="wwwroot\assets\webfonts\fa-solid-900.woff2" />
   </ItemGroup>
 
 </Project>

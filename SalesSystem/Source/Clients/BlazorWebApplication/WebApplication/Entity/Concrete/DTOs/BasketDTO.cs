@@ -8,11 +8,14 @@ namespace WebApplication.Entity.Concrete
 {
     public class BasketDTO
     {
-        public BasketDTO(string city, string street, string state, string country, string zipCode, string cardNumber, string cardHolderName, string cardExpirationSort, DateTime cardExpiration, string cardSecurityNumber, int cardTypeId, string buyerName)
+        public BasketDTO(string city, string street,string neighbourhood, string buildingNo, string apartmentNo, string district, string country, string zipCode, string cardNumber, string cardHolderName, string cardExpirationSort, DateTime cardExpiration, string cardSecurityNumber, int cardTypeId, string buyerName)
         {
-            City = city;
+            Neighbourhood = neighbourhood;
             Street = street;
-            State = state;
+            BuildingNo = buildingNo;
+            ApartmentNo = apartmentNo;
+            City = city;
+            District = district;
             Country = country;
             ZipCode = zipCode;
             CardNumber = cardNumber;
@@ -29,11 +32,19 @@ namespace WebApplication.Entity.Concrete
         }
 
         [Required]
-        public string City { get; set; }
+        public string Neighbourhood { get; set; }
         [Required]
         public string Street { get; set; }
         [Required]
-        public string State { get; set; }
+        public string BuildingNo { get; set; }
+        [Required]
+        public string ApartmentNo { get; set; }
+        [Required]
+        public string Floor { get; set; }
+        [Required]
+        public string City { get; set; }
+        [Required]
+        public string District { get; set; }
         [Required]
         public string Country { get; set; }
         public string ZipCode { get; set; }

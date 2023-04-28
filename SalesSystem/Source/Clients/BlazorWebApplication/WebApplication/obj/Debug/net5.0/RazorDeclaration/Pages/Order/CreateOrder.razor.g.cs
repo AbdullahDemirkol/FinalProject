@@ -167,8 +167,50 @@ using WebApplication.Infrastructer;
 #line hidden
 #nullable disable
 #nullable restore
-#line 25 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 24 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using WebApplication.Pages.Modal;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 26 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using System.Web;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 27 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using System.IO;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 28 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using System.Text.Json;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 30 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using Blazored.Modal;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 31 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using Blazored.Modal.Services;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 33 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using System.Text.RegularExpressions;
 
 #line default
 #line hidden
@@ -189,10 +231,12 @@ using System.ComponentModel.DataAnnotations;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 180 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\Order\CreateOrder.razor"
+#line 221 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\Order\CreateOrder.razor"
        
     private bool isLoggedIn = false;
 
+    [CascadingParameter]
+    IModalService Modal { get; set; }
     [Inject]
     IIdentityService identityService { get; set; }
 
@@ -207,7 +251,9 @@ using System.ComponentModel.DataAnnotations;
     [Inject]
     public IJSRuntime jsRuntime { get; set; }
     CustomerBasket _customerBasket { get; set; } = new CustomerBasket();
-    List<PaymentMethod> _paymentMethods = new List<PaymentMethod>();
+    PaginatedViewModel<PaymentMethod> _paymentMethods = new PaginatedViewModel<PaymentMethod>();
+
+
     protected async override Task OnInitializedAsync()
     {
         isLoggedIn = identityService.IsLoggedIn;
@@ -217,7 +263,8 @@ using System.ComponentModel.DataAnnotations;
         }
 
         _customerBasket = await basketService.GetBasket();
-        _paymentMethods = await orderService.GetPaymentMethodsDetailByBuyerName(identityService.GetUsername(),0);
+        _paymentMethods = await orderService.GetPaymentMethodsDetailByBuyerName(identityService.GetUsername(),0, 0);
+
         await jsRuntime.InvokeVoidAsync("myFunction");
     }
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -225,14 +272,23 @@ using System.ComponentModel.DataAnnotations;
         if (firstRender)
         {
             await jsRuntime.InvokeVoidAsync("myFunction");
-            //myScript = await JSRuntime.InvokeAsync<IJSObjectReference>("import","assets/js/main.js");
+            stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
         }
+    }
+
+    private async Task StateManager_StateChanged(ComponentBase component, string property)
+    {
+        if (property.Contains("createOrderPage"))
+        {
+            await InvokeAsync(StateHasChanged);
+        }
+
     }
     Order orderModel = new Order()
     {
-        Address = new Address("", "", "", "", "34532"),
+        Address = new Address("", "", "", "","","","",""),
         Buyer = new Buyer(new PaymentMethod("", "", "", "", 0)),
-        Description = "Test Desc"
+        Description = "Description"
     };
 
     async Task OnValidSubmit()
@@ -243,7 +299,10 @@ using System.ComponentModel.DataAnnotations;
         {
             City = orderModel.Address.City,
             Street = orderModel.Address.Street,
-            State = orderModel.Address.State,
+            Neighbourhood = orderModel.Address.Neighbourhood,
+            BuildingNo = orderModel.Address.BuildingNo,
+            ApartmentNo = orderModel.Address.ApartmentNo,
+            District = orderModel.Address.District,
             Country = orderModel.Address.Country,
             ZipCode = orderModel.Address.ZipCode,
             CardNumber = orderModel.Buyer.PaymentMethod.CardNumber,
@@ -263,24 +322,125 @@ using System.ComponentModel.DataAnnotations;
         orderModel.Buyer.PaymentMethod = paymentMethod;
         orderModel.Buyer.PaymentMethod.CardExpirationShort = paymentMethod.CardExpirationShort.Replace(".", "/");
     }
-
     //-----------------------------------------------------------------------------------
     //private string myValue;
-
-    private void ValidateForm()
+    private async Task ValidateForm()
     {
-        if (string.IsNullOrEmpty(orderModel.Buyer.PaymentMethod.CardNumber))
+        ModalParameters modalParameters = new ModalParameters();
+
+        if (string.IsNullOrEmpty(orderModel.Address.Neighbourhood))
         {
-            // Hata mesajını göstermek için bir yöntem kullanabilirsiniz.
-            Console.WriteLine("Değer boş olamaz.");
-            // Formun gönderilmesini engellemek için return kullanabilirsiniz.
+            modalParameters.Add("Message", "Mahalle Adı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(orderModel.Address.Street))
+        {
+            modalParameters.Add("Message", "Sokak Adı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(orderModel.Address.BuildingNo))
+        {
+            modalParameters.Add("Message", "Apartman Numarası Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (!Regex.IsMatch(orderModel.Address.BuildingNo, @"^\d+$"))
+        {
+            modalParameters.Add("Message", "Apartman Numarası Sadece Sayılardan Oluşmalı.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(orderModel.Address.ApartmentNo))
+        {
+            modalParameters.Add("Message", "Daire Numarası Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
             return;
         }
 
+        if (!Regex.IsMatch(orderModel.Address.ApartmentNo, @"^\d+$"))
+        {
+            modalParameters.Add("Message", "Daire Numarası Sadece Sayılardan Oluşmalı.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(orderModel.Address.ZipCode) || orderModel.Address.ZipCode.Length != 5)
+        {
+            modalParameters.Add("Message", "Posta Kodu 5 Haneli Olması Gereklidir.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(orderModel.Address.City))
+        {
+            modalParameters.Add("Message", "İl Adı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(orderModel.Address.District))
+        {
+            modalParameters.Add("Message", "İlçe Adı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(orderModel.Address.Country))
+        {
+            modalParameters.Add("Message", "Ülke Adı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(orderModel.Buyer.PaymentMethod.CardNumber))
+        {
+            modalParameters.Add("Message", "Kart Numarası Alanı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+
+        if (!Regex.IsMatch(orderModel.Buyer.PaymentMethod.CardNumber, @"^\d+$"))
+        {
+            modalParameters.Add("Message", "Kart Numarası Alanı Sadece Sayı İçermelidir.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (orderModel.Buyer.PaymentMethod.CardNumber.Length != 16)
+        {
+            modalParameters.Add("Message", "Kart Numarası Alanı 16 Haneden Oluşması Gereklidir.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(orderModel.Buyer.PaymentMethod.CardHolderName))
+        {
+
+            modalParameters.Add("Message", "Kart Üstündeki İsim ve Soyisim Boş Bırakılmamalıdır.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (!Regex.IsMatch(orderModel.Buyer.PaymentMethod.CardHolderName, @"\s{1,2}"))
+        {
+
+            modalParameters.Add("Message", "Kart Üstündeki İsim ve Soyisim'in içinde 1 boşluk bırakılmalıdır.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (orderModel.Buyer.PaymentMethod.CardExpirationShort.Length != 5 || orderModel.Buyer.PaymentMethod.CardExpirationShort[2] != '.' ||
+            !char.IsDigit(orderModel.Buyer.PaymentMethod.CardExpirationShort[0]) || !char.IsDigit(orderModel.Buyer.PaymentMethod.CardExpirationShort[1]) ||
+            !char.IsDigit(orderModel.Buyer.PaymentMethod.CardExpirationShort[3]) || !char.IsDigit(orderModel.Buyer.PaymentMethod.CardExpirationShort[4]))
+        {
+
+            modalParameters.Add("Message", "Kart Son Kullanma Tarihi MM.YY şeklinde olmalıdır. Örneğin 11.25 olmalıdır.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (!Regex.IsMatch(orderModel.Buyer.PaymentMethod.SecurityNumber, @"^\d+$") || orderModel.Buyer.PaymentMethod.SecurityNumber.Length != 3)
+        {
+            modalParameters.Add("Message", "Kart Güvenlik Numarası Alanı 3 Haneli Sayı İçermelidir.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        await OnValidSubmit();
+
         // Değer doluysa, formu göndermek için burada gerekli işlemleri yapabilirsiniz.
     }
-
-
 
 #line default
 #line hidden

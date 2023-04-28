@@ -18,8 +18,6 @@ namespace WebApplicationAdminPanel.Entity.Concrete.Product
         public DownCategory DownCategory { get; set; }
         public int BrandId { get; set; }
         public Brand Brand { get; set; }
-        public int AvailableStock { get; set; }
-        public bool OnRecorder { get; set; }
         public Product()
         {
 

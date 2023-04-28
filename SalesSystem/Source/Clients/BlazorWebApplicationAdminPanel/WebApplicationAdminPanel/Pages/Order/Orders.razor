@@ -1,0 +1,361 @@
+﻿@page "/orders"
+@using Microsoft.AspNetCore.Components.Forms
+<!--main content start-->
+<section id="main-content">
+    <section class="wrapper">
+        <!-- page start-->
+        <div class="row">
+            <div class="col-md-12">
+                @*<button type="button" @onclick="@ClearNewUser" class="btn float-right btn-success" data-toggle="modal" data-target="#addUserModal">Yeni Kullanıcı Ekle<i class="fa-thin fa-plus"></i></button>*@
+                <!--<div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Ürün Ekle</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>-->
+                @*<EditForm Model="@newProduct" OnValidSubmit="@AddNewProduct">
+                    </EditForm>*@
+                <!--<form @onsubmit="@AddNewProduct" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>Ürün Adı</label>
+                            <input type="text" @bind-value="newProduct.Name" name="productName" required />-->
+                @*<InputText @bind-Value="newProduct.Name" class="form-control" />*@
+                @*<ValidationMessage For="@(()=>newProduct.Name)" />*@
+                <!--</div>
+                                    <div class="form-group">
+                                        <label>Fiyatı</label>
+                                        <input type="text" class="form-control" @bind-Value="@newProduct.Price" @bind-Value:event="oninput" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>İlk Resim</label>
+                                        <InputFile OnChange="(e)=>HandleSelectedFile(e)" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>İkinci Resim</label>
+                                        <InputFile OnChange="(e)=>HandleSelectedFile(e)" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Üçüncü Resim</label>
+                                        <InputFile OnChange="(e)=>HandleSelectedFile(e)" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Açıklama</label>
+                                        <input type="text" class="form-control" @bind-value="newProduct.Description" name="productDescription" required />
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Üst Kategori</label>
+                                        <select @bind="newProduct.UpCategoryId">
+                                            @foreach (var upCategory in _upCategories)
+                                            {
+                                                <option value="@upCategory.Id">@upCategory.UpCategoryName</option>
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Alt Kategori</label>
+                                        <select @bind="newProduct.DownCategoryId">
+                                            @foreach (var downCategory in _downCategories)
+                                            {
+                                                <option value="@downCategory.Id">@downCategory.DownCategoryName</option>
+                                            }
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Markalar</label>
+                                        <select @bind="newProduct.BrandId">
+                                            @foreach (var brand in _brands)
+                                            {
+                                                <option value="@brand.Id">@brand.BrandName</option>
+                                            }
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                                    <button type="submit" class="btn btn-success">Ürün Ekle</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <h2><strong>Sipariş Listesi</strong></h2>
+                    </header>
+                    @if (_orders != null)
+                    {
+                        <table class="table table-striped table-advance table-hover text-center">
+                            <thead>
+                                <tr>
+                                    <th>Sipariş Numarası</th>
+                                    <th>Alıcı</th>
+                                    <th>Sipariş Tarihi</th>
+                                    <th>Ürün Adeti Sayısı</th>
+                                    <th>Sipariş Yapılan Kart </th>
+                                    <th>Sipariş Edilen Ülke</th>
+                                    <th>Sipariş Tutarı</th>
+                                    <th>Siparişin Açıklaması</th>
+                                    <th>Siparişin Durumu</th>
+                                    <th>Güncelle / Sil</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var order in _orders)
+                                {
+                                <tr>
+                                    <td><a href="#">@order.OrderNumber</a></td>
+                                    <td><a href="#">@order.BuyerName</a></td>
+                                    <td><a href="#">@order.Date</a></td>
+                                    <td><a href="#">@order.OrderItemCount()</a></td>
+                                    <td><a href="#">@order.PaymentMethodPrefix **** **** @order.PaymentMethodSuffix</a></td>
+                                    @*<td><a href="#">@order.Street</a></td>
+        <td><a href="#">@order.State</a></td>
+        <td><a href="#">@order.City</a></td>
+        <td><a href="#">@order.ZipCode</a></td>*@
+                                    <td><a href="#">@order.Country</a></td>
+                                    <td><a href="#">@order.Total</a></td>
+                                    <td><a href="#">@order.Description</a></td>
+                                    <td><a href="#">@order.Status</a></td>
+                                    <td>
+                                        <button class="btn btn-primary btn-xs">Güncelle<i class="fa-thin fa-pen"></i></button>
+                                        @if (order.Status != "Gönderildi" && order.Status!= "Tamamlanıldı" && order.Status != "İptal Edildi")
+                                        {
+                                            <button class="btn btn-danger btn-xs" @onclick="()=>DeleteOrder(order.OrderNumber)">Sil<i class="fa-thin fa-trash-can"></i></button>
+
+                                        }
+                                    </td>
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <h4>Siparişler Bulunamadı</h4>
+                    }
+                </section>
+            </div>
+        </div>
+        <!-- page end-->
+    </section>
+</section>
+<!--main content end-->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Recipient:</label>
+                        <input type="text" class="form-control" id="recipient-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Message:</label>
+                        <textarea class="form-control" id="message-text"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Send message</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Inject]
+    StateManager stateManager { get; set; }
+    [Inject]
+    IOrderService _orderService { get; set; }
+    List<OrderDTO> _orders = new List<OrderDTO>();
+    List<OrderStatus> _orderStatuses { get; set; } = new List<OrderStatus>();
+    //List<UpCategory> _upCategories = new List<UpCategory>();
+    //List<DownCategory> _downCategories = new List<DownCategory>();
+    //List<Brand> _brands = new List<Brand>();
+    //Product newProduct = new Product();
+    //List<IBrowserFile> formFiles = new List<IBrowserFile>();
+
+    protected async override void OnInitialized()
+    {
+        //GetUpCategory();
+        //GetDownCategory();
+        //GetBrand();
+        await GetOrders(0);
+        await GetSearchValue();
+        stateManager.UpdateContent(this, "orderListPage");
+
+    }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
+        }
+    }
+    private async Task StateManager_StateChanged(ComponentBase component, string property)
+    {
+        if (property == "orderListPage")
+        {
+            await InvokeAsync(StateHasChanged);
+        }
+
+    }
+    protected async Task GetOrders(int orderStatusId)
+    {
+        _orders = await _orderService.GetOrders(orderStatusId);
+        SetOrderStatus(_orders);
+    }
+    protected async Task GetSearchValue()
+    {
+        _orderStatuses = await _orderService.GetOrderStatuses();
+    }
+    private async void DeleteOrder(Guid OrderNumber)
+    {
+        _orders = await _orderService.CancelOrderStatus(OrderNumber);
+        SetOrderStatus(_orders);
+        stateManager.UpdateContent(this, "orderListPage");
+    }
+    protected void SetOrderStatus(List<OrderDTO> orderDTOs)
+    {
+        foreach (var order in orderDTOs)
+        {
+            if (order.Status == "islemealinildi")
+            {
+                order.Status = "İşleme Alınıldı";
+            }
+            else if (order.Status == "dogrulamabekleniyor")
+            {
+                order.Status = "Doğrulama Bekleniyor";
+            }
+            else if (order.Status == "stokonaylandi")
+            {
+                order.Status = "Stok Onaylandı";
+            }
+            else if (order.Status == "odenildi")
+            {
+                order.Status = "Ödenildi";
+            }
+            else if (order.Status == "gonderildi")
+            {
+                order.Status = "Gönderildi";
+            }
+            else if (order.Status == "tamamlanildi")
+            {
+                order.Status = "Tamamlanıldı";
+            }
+            else if (order.Status == "iptaledildi")
+            {
+                order.Status = "İptal Edildi";
+            }
+        }
+    }
+    //protected async void DeleteUser(int userId)
+    //{
+    //    var isSuccess = await _identityService.RemoveUser(userId);
+    //    if (isSuccess)
+    //    {
+    //        //pop-up gösterilicek
+    //        GetOrders();
+    //    }
+    //    else
+    //    {
+    //        //pop-up gösterilicek
+    //    }
+    //}
+    //protected async void GetUpCategory()
+    //{
+    //    _upCategories = await _productService.GetUpCategoryItems();
+    //}
+
+    //protected async void GetDownCategory()
+    //{
+    //    _downCategories = await _productService.GetDownCategoryItems();
+    //}
+
+    //protected async void GetBrand()
+    //{
+    //    _brands = await _productService.GetBrandItems();
+    //}
+    //private void OnPriceChanged(string value)
+    //{
+    //    decimal.TryParse(value, out decimal price);
+    //    if (price != 0)
+    //    {
+    //        newProduct.Price = price;
+    //    }
+    //}
+    //private void HandleSelectedFile(InputFileChangeEventArgs e)
+    //{
+    //    if (!formFiles.Contains(e.File) && formFiles.Count < 3)
+    //    {
+    //        formFiles.Add(e.File);
+    //    }
+    //}
+    //private async Task<IFormFile> ConvertToIFormFile(IBrowserFile file)
+    //{
+    //    using var ms = new MemoryStream();
+    //    await file.OpenReadStream().CopyToAsync(ms);
+
+    //    var convertedFile = new FormFile(
+    //        baseStream: ms,
+    //        baseStreamOffset: 0,
+    //        length: ms.Length,
+    //        name: file.Name,
+    //        fileName: file.Name)
+    //    {
+    //        Headers = new HeaderDictionary(),
+    //        ContentType = file.ContentType
+    //    };
+
+    //    return convertedFile;
+    //}
+    //protected void ClearNewUser()
+    //{
+    //    formFiles = new List<IBrowserFile>();
+    //    //newUser = new User();
+    //}
+    //protected async void AddNewProduct()
+    //{
+    //    if (newProduct.UpCategoryId == 0)
+    //    {
+    //        newProduct.UpCategoryId = 1;
+    //    }
+    //    if (newProduct.DownCategoryId == 0)
+    //    {
+    //        newProduct.DownCategoryId = 1;
+    //    }
+    //    if (newProduct.BrandId == 0)
+    //    {
+    //        newProduct.BrandId = 1;
+    //    }
+    //    var result = await _productService.AddProductItem(newProduct, formFiles);
+    //    if (result == "Ürün Eklenildi.")
+    //    {
+    //        formFiles = new List<IBrowserFile>();
+    //        newProduct = new Product();
+    //        //GetProducts();
+    //        //pop-up gösterilicek
+    //    }
+
+
+    //}
+}

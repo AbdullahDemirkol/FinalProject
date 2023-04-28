@@ -15,10 +15,32 @@ namespace WebApplicationAdminPanel.Extensions.ClientHttp
             var httpRes = await client.PostAsJsonAsync(url, value);
             if (httpRes.IsSuccessStatusCode)
             {
-                return await httpRes.Content.ReadFromJsonAsync<TResult>();
+                var result= await httpRes.Content.ReadFromJsonAsync<TResult>();
+                return result;
             }
             return default;
         }
+        public async static Task<string> PostGetStringResponseAsync<TValue>(this HttpClient client, string url, TValue value)
+        {
+            var httpRes = await client.PostAsJsonAsync(url, value);
+            if (httpRes.IsSuccessStatusCode)
+            {
+                var result = await httpRes.Content.ReadAsStringAsync();
+                return result;
+            }
+            return default;
+        }
+        public async static Task<string> RemoveAsync(this HttpClient client, string url)
+        {
+            var httpRes = await client.DeleteAsync(url);
+            if (httpRes.IsSuccessStatusCode)
+            {
+                var result = await httpRes.Content.ReadAsStringAsync();
+                return result;
+            }
+            return default;
+        }
+
         public async static Task PostAsync<TValue>(this HttpClient client, string url, TValue value)
         {
             await client.PostAsJsonAsync(url, value);

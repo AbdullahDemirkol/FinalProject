@@ -14,8 +14,11 @@ namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Command.RequestComma
 
         public string UserName { get; set; }
         public string City { get; set; }
+        public string Neighbourhood { get; set; }
         public string Street { get; set; }
-        public string State { get; set; }
+        public string BuildingNo { get; set; }
+        public string ApartmentNo { get; set; }
+        public string District { get; set; }
         public string Country { get; set; }
         public string ZipCode { get; set; }
         public string CardNumber { get; set; }
@@ -35,8 +38,11 @@ namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Command.RequestComma
             _orderItems = customerBasket.BasketItems.Select(p => new OrderItem(p.ProductId, p.ProductName, p.PictureUrl, p.UnitPrice, p.Quantity)).ToList();
             UserName = basketCardInformationItem.BuyerName;
             City = basketCardInformationItem.City;
+            Neighbourhood = basketCardInformationItem.Neighbourhood;
             Street = basketCardInformationItem.Street;
-            State = basketCardInformationItem.State;
+            BuildingNo = basketCardInformationItem.BuildingNo;
+            ApartmentNo = basketCardInformationItem.ApartmentNo;
+            District = basketCardInformationItem.District;
             Country = basketCardInformationItem.Country;
             ZipCode = basketCardInformationItem.ZipCode;
             CardNumber = basketCardInformationItem.CardNumber;

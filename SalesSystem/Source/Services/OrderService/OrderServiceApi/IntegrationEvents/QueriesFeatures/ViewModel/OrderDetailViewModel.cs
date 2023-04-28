@@ -1,4 +1,5 @@
-﻿using OrderServiceApi.Entity.Concrete.Buyer;
+﻿using OrderServiceApi.Entity.Abstract;
+using OrderServiceApi.Entity.Concrete.Buyer;
 using OrderServiceApi.Entity.Concrete.Order;
 using System;
 using System.Collections.Generic;
@@ -13,8 +14,11 @@ namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.ViewModel
         public DateTime Date { get; init; }
         public string Status { get; set; }
         public string Description { get; init; }
-        public string State { get; init; }
+        public string Neighbourhood { get; init; }
         public string Street { get; init; }
+        public string BuildingNo { get; set; }
+        public string ApartmentNo { get; set; }
+        public string District { get; init; }
         public string City { get; init; }
         public string ZipCode { get; init; }
         public string Country { get; init; }

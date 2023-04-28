@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Command.RequestCommandModel
 {
-    public class AddPaymentMethodCommand: IRequest<(bool, string)>
+    public class AddPaymentMethodCommand: IRequest<bool>
     {
         public PaymentMethod PaymentMethod { get; set; }
         public string UserName { get; set; }

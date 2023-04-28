@@ -167,8 +167,50 @@ using WebApplication.Infrastructer;
 #line hidden
 #nullable disable
 #nullable restore
-#line 25 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 24 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using WebApplication.Pages.Modal;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 26 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using System.Web;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 27 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using System.IO;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 28 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using System.Text.Json;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 30 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using Blazored.Modal;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 31 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using Blazored.Modal.Services;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
+#line 33 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+using System.Text.RegularExpressions;
 
 #line default
 #line hidden
@@ -182,9 +224,11 @@ using System.Web;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 185 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\Account\OrderInformationPage.razor"
+#line 212 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\Account\OrderInformationPage.razor"
        
     private bool isLoggedIn = false;
+    [CascadingParameter]
+    IModalService Modal { get; set; }
     [Inject]
     public IJSRuntime jsRuntime { get; set; }
     [Inject]
@@ -198,13 +242,63 @@ using System.Web;
 
     UserDTO _userModel { get; set; } = new UserDTO();
     List<OrderStatus> _orderStatuses{ get; set; }= new List<OrderStatus>();
-    List<OrderDTO> _orderModels { get; set; } = new List<OrderDTO>();
-    string orderStatus;
-    private int selectedOption;
+    PaginatedViewModel<OrderDTO> _orderModels { get; set; } = new PaginatedViewModel<OrderDTO>();
+    int selectedOption = 0;
+    private int CurPage = 1;
+    private int CurOrderStatus=0;
+    private async void Pagination(int page,int? orderStatus)
+    {
+        CurPage = page + 1;
+        if (orderStatus==0)
+        {
+            await GetOrders(page, null);
+        }
+        else
+        {
+            await GetOrders(page, orderStatus);
+        }
+        var pık = Math.Round(Convert.ToDouble(_orderModels.Count / 6));
+    }
+    protected async Task NextPage(int? orderStatus)
+    {
+        int MaxPage = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(_orderModels.Count) / 6));
+        if (CurPage < MaxPage)
+        {
 
+            CurPage++;
+            if (orderStatus == 0)
+            {
+                await GetOrders(CurPage - 1, null);
+            }
+            else
+            {
+                await GetOrders(CurPage - 1, orderStatus);
+            }
+        }
+    }
+    protected async Task PrevPage(int? orderStatus)
+    {
+        if (CurPage > 1)
+        {
+            CurPage--;
+            if (orderStatus == 0)
+            {
+                await GetOrders(CurPage - 1, null);
+            }
+            else
+            {
+                await GetOrders(CurPage - 1, orderStatus);
+            }
+        }
+    }
     private void OptionSelected(ChangeEventArgs e)
     {
         selectedOption = Convert.ToInt32(e.Value);
+    }
+    protected void GetOrderByOrderStatus()
+    {
+        CurOrderStatus = selectedOption;
+        Pagination(0, CurOrderStatus);
     }
 
 
@@ -216,11 +310,7 @@ using System.Web;
             navigationManager.NavigateTo($"login?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
         }
         _userModel = identityService.GetUserModel(identityService.GetUserToken());
-        _orderModels = await orderService.GetOrdersDetailByBuyerName(_userModel.Username,0);
-        SetOrderStatus(_orderModels);
-        await GetSearchValue();
-
-        stateManager.UpdateContent(this, "orderPage");
+        await GetOrders(0,null);
     }
     protected async override void OnInitialized()
     {
@@ -231,7 +321,32 @@ using System.Web;
         if (firstRender)
         {
             await jsRuntime.InvokeVoidAsync("myFunction");
+
+            stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
         }
+    }
+    private async Task StateManager_StateChanged(ComponentBase component, string property)
+    {
+        if (property.Contains("orderPage"))
+        {
+            await InvokeAsync(StateHasChanged);
+        }
+
+    }
+    protected async Task GetOrders(int pageIndex,int? orderStatus)
+    {
+        if (orderStatus==null)
+        {
+            _orderModels = await orderService.GetOrdersDetailByBuyerName(_userModel.Username, 0, pageIndex);
+
+        }
+        else
+        {
+            _orderModels = await orderService.GetOrdersDetailByBuyerName(_userModel.Username, CurOrderStatus, pageIndex);
+        }
+        SetOrderStatus((List<OrderDTO>)_orderModels.Data);
+        await GetSearchValue();
+        stateManager.UpdateContent(this, "orderPage");
     }
     protected void SetOrderStatus(List<OrderDTO> orderDTOs)
     {
@@ -257,18 +372,15 @@ using System.Web;
             {
                 order.Status = "Gönderildi";
             }
+            else if (order.Status == "tamamlanildi")
+            {
+                order.Status = "Tamamlanıldı";
+            }
             else if (order.Status == "iptaledildi")
             {
                 order.Status = "İptal Edildi";
             }
         }
-    }
-    protected async Task GetOrderByOrderStatus()
-    {
-        _orderModels = await orderService.GetOrdersDetailByBuyerName(_userModel.Username, selectedOption);
-        SetOrderStatus(_orderModels);
-        stateManager.UpdateContent(this, "orderPage");
-
     }
     protected async Task GetSearchValue()
     {
@@ -276,8 +388,12 @@ using System.Web;
     }
     private async void DeleteOrder(Guid OrderNumber)
     {
-        _orderModels = await orderService.CancelOrderStatus(OrderNumber);
-        stateManager.UpdateContent(this, "orderPage");
+        await orderService.CancelOrderStatus(OrderNumber, _userModel.Username);
+        CurPage = 1;
+        await GetOrders(0,CurOrderStatus);
+        ModalParameters modalParameters = new ModalParameters();
+        modalParameters.Add("Message", "Sipariş İptal Edildi.");
+        Modal.Show<ShowMessagePopup>("Bilgilendirme", modalParameters);
     }
 
 

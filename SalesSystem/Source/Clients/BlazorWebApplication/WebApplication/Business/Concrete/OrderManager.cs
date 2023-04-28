@@ -9,6 +9,7 @@ using WebApplication.Entity.Concrete;
 using WebApplication.Entity.Concrete.Basket.Buyer;
 using WebApplication.Entity.Concrete.Basket.Order;
 using WebApplication.Entity.Concrete.DTOs;
+using WebApplication.Entity.Concrete.Helper;
 using WebApplication.Extensions.ClientHttp;
 
 namespace WebApplication.Business.Concrete
@@ -25,38 +26,36 @@ namespace WebApplication.Business.Concrete
             this.identityService = identityService;
             this.logger = logger;
         }
-        public async Task<List<OrderDTO>> GetOrdersDetailByBuyerName(string buyerName,int orderStatusId)
+        public async Task<PaginatedViewModel<OrderDTO>> GetOrdersDetailByBuyerName(string buyerName,int orderStatusId,int pageIndex=0)
         {
 
-            var query = "order/" + buyerName+ "/OrderStatus/" + orderStatusId;
-            var orders = await apiClient.GetResponseAsync<List<OrderDTO>>(query);
+            var query = "order/" + buyerName+ "/OrderStatus/" + orderStatusId+"?pageIndex="+pageIndex;
+            var orders = await apiClient.GetResponseAsync<PaginatedViewModel<OrderDTO>>(query);
             return orders;
         }
-        public async Task<List<PaymentMethod>> GetPaymentMethodsDetailByBuyerName(string buyerName, int cardTypeId)
+        public async Task<PaginatedViewModel<PaymentMethod>> GetPaymentMethodsDetailByBuyerName(string buyerName, int cardTypeId,int pageIndex=0)
         {
-            var query = "paymentMethod/" + buyerName + "/CardType/" + cardTypeId;
-            var paymentMethods = await apiClient.GetResponseAsync<List<PaymentMethod>>(query);
+            var query = "paymentMethod/" + buyerName + "/CardType/" + cardTypeId + "?pageIndex=" + pageIndex;
+            var paymentMethods = await apiClient.GetResponseAsync<PaginatedViewModel<PaymentMethod>>(query);
             return paymentMethods;
         }
-        public async Task<List<OrderDTO>> CancelOrderStatus(Guid orderNumber)
+        public async Task CancelOrderStatus(Guid orderNumber, string buyerName)
         {
 
-            var query = "order/cancelOrderStatus";
-            var orders = await apiClient.PostGetResponseAsync<List<OrderDTO>, Guid>(query, orderNumber);
-            return orders;
+            var query = "order/cancelOrderStatusByBuyer/"+ buyerName;
+            await apiClient.PostAsync<Guid>(query, orderNumber);
         }
-        public async Task<List<PaymentMethod>> CancelPaymentMethod(Guid paymentMethodId)
+        public async Task CancelPaymentMethod(Guid paymentMethodId,string buyerName)
         {
-            var query = "paymentMethod/cancelPaymentMethod";
-            var paymentMethods = await apiClient.PostGetResponseAsync<List<PaymentMethod>, Guid>(query, paymentMethodId);
-            return paymentMethods;
+            var query = "paymentMethod/cancelPaymentMethodByBuyer/"+ buyerName;
+            await apiClient.PostAsync<Guid>(query, paymentMethodId);
         }
-        public async Task<List<PaymentMethod>> AddPaymentMethod(PaymentMethod paymentMethod,string userName)
+        public async Task<string> AddPaymentMethodByBuyerName(PaymentMethod paymentMethod,string userName)
         {
             paymentMethod.CardExpirationApiFormat();
             var query = "paymentMethod/addPaymentMethod/"+userName;
-            var paymentMethods = await apiClient.PostGetResponseAsync<List<PaymentMethod>, PaymentMethod>(query,paymentMethod );
-            return paymentMethods;
+            var result = await apiClient.PostGetStringResponseAsync<PaymentMethod>(query,paymentMethod );
+            return result; 
         }
         public async Task<List<OrderStatus>> GetOrderStatuses()
         {
@@ -84,6 +83,10 @@ namespace WebApplication.Business.Concrete
                 {
                     orderStatus.Name = "Gönderildi";
                 }
+                else if (orderStatus.Name == "tamamlanildi")
+                {
+                    orderStatus.Name = "Tamamlanıldı";
+                }
                 else if (orderStatus.Name == "iptaledildi")
                 {
                     orderStatus.Name = "İptal Edildi";
@@ -103,25 +106,6 @@ namespace WebApplication.Business.Concrete
                 }
             }
             return cardTypes;
-        }
-        public BasketDTO MapOrderToBasket(Order order)
-        {
-            order.Buyer.PaymentMethod.CardExpirationApiFormat();
-            var basketDto = new BasketDTO()
-            {
-                City = order.Address.City,
-                Street = order.Address.Street,
-                State = order.Address.State,
-                Country = order.Address.Country,
-                ZipCode = order.Address.ZipCode,
-                CardNumber = order.Buyer.PaymentMethod.CardNumber,
-                CardHolderName = order.Buyer.PaymentMethod.CardHolderName,
-                CardExpiration = order.Buyer.PaymentMethod.Expiration,
-                CardSecurityNumber = order.Buyer.PaymentMethod.SecurityNumber,
-                CardTypeId = order.Buyer.PaymentMethod.CardTypeId,
-                BuyerName = order.Buyer.Name
-            };
-            return basketDto;
         }
 
     }

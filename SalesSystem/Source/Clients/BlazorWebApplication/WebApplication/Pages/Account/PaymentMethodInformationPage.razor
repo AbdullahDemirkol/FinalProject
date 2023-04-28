@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
-                    <p>We sale fresh fruits</p>
+                    <p>E-Ticaret Websitesi</p>
                     <h1>Ödeme Yöntemlerim</h1>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                     <h6>
                         @_userModel.FirstName @_userModel.LastName
                     </h6>
-                    <p class="proile-rating">Toplam Ödeme Yöntemi Adeti : <span>@_paymentMethodModels.Count()</span></p>
+                    <p class="proile-rating">Toplam Ödeme Yöntemi Adeti : <span>@_paymentMethodModels.Count</span></p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -53,10 +53,10 @@
                 </div>
             </div>
         </div>
-        @if (_paymentMethodModels != null)
+        @if (_paymentMethodModels.Count != 0)
         {
 
-            @foreach (var _paymentMethodModel in _paymentMethodModels)
+            @foreach (var _paymentMethodModel in  _paymentMethodModels.Data)
             {
                 <div class="paymentMethodCard">
                     <div class="row" style="margin-right: -5px;">
@@ -120,6 +120,33 @@
 
                 </div>
             }
+            <div class="row">
+                <div class="col-lg-12 text-center">
+
+                    <div class="pagination-wrap">
+                        <ul>
+
+                            @if (CurPage > 1)
+                            {
+                                @if (3 < Math.Ceiling(Convert.ToDouble(_paymentMethodModels.Count) / 6))
+                                {
+                                    <li><a @onclick="()=>PrevPage(CurCardType)">Önceki</a></li>
+                                }
+                                <li><a @onclick="()=>Pagination(CurPage-2,CurCardType)">@(CurPage-1)</a></li>
+                            }
+                            <li><a class="active" @onclick="()=>Pagination(CurPage-1,CurCardType)">@(CurPage)</a></li>
+                            @if (CurPage < Math.Ceiling(Convert.ToDouble(_paymentMethodModels.Count) / 6))
+                            {
+                                <li><a @onclick="()=>Pagination(CurPage,CurCardType)">@(CurPage+1)</a></li>
+                                @if (3 < Math.Ceiling(Convert.ToDouble(_paymentMethodModels.Count) / 6))
+                                {
+                                    <li><a @onclick="()=>NextPage(CurCardType)">Sonraki</a></li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
         }
 
 
@@ -127,7 +154,7 @@
     <div class="forAccountBackgroundPadding"></div>
     <!-- End My Account -->
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -141,22 +168,23 @@
                         <form>
                             <div class="form-group">
                                 <label class="col-form-label">Kart Numarası:</label>
-                                <InputText @bind-Value="_paymentMethod.CardNumber" class="form-control" />
+                                <InputText @bind-Value="_paymentMethod.CardNumber" placeholder="0000000000000000 (16 Hane ve Rakamlardan Oluşmalı)" class="form-control" />
                                 <ValidationMessage For="@(()=>_paymentMethod.CardNumber)" />
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">Kart Üstündeki İsim:</label>
-                                <InputText @bind-Value="_paymentMethod.CardHolderName" class="form-control" />
+                                <InputText @bind-Value="_paymentMethod.CardHolderName" placeholder="İsim Soyisim" class="form-control" />
                                 <ValidationMessage For="@(()=>_paymentMethod.CardHolderName)" />
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">Kartın Son Kullanma Tarihi:</label>
-                                <InputText @bind-Value="_paymentMethod.CardExpirationShort" class="form-control" />
-                                <ValidationMessage For="@(()=>_paymentMethod.CardExpirationShort)" />
+                                <label for="CardExpirationShort">Card Expiration (MM/YY)</label>
+                                <InputText @bind-Value="_paymentMethod.CardExpirationShort" placeholder="00.00" class="form-control" />
+                                @*<ValidationMessage For="@(()=>_paymentMethod.CardExpirationShort)" />*@
                             </div>
                             <div class="form-group">
                                 <label class="col-form-label">Kartın Güvenlik Numarası</label>
-                                <InputText @bind-Value="_paymentMethod.SecurityNumber" class="form-control" />
+                                <InputText @bind-Value="_paymentMethod.SecurityNumber" placeholder="000 (3 Hane ve Rakamlardan Oluşmalı)" class="form-control" />
                                 <ValidationMessage For="@(()=>_paymentMethod.SecurityNumber)" />
                             </div>
                         </form>
@@ -167,7 +195,7 @@
                                 <input type="button" class="profile-edit-btn" data-dismiss="modal" value="Kapat" />
                             </div>
                             <div class="col-md-6">
-                                <a href="/PaymentMethods"><input type="submit" class="profile-edit-btn"@onclick="()=>AddPaymentMethod()"  data-dismiss="modal" value="Ekle" /></a>
+                                <a href="/PaymentMethods"><input type="submit" class="profile-edit-btn" @onclick="()=>AddPaymentMethod()" data-dismiss="modal" value="Ekle" /></a>
                             </div>
                         </div>
                     </div>
@@ -178,6 +206,8 @@
 </div>
 @code {
     private bool isLoggedIn = false;
+    [CascadingParameter]
+    IModalService Modal { get; set; }
     [Inject]
     public IJSRuntime jsRuntime { get; set; }
     [Inject]
@@ -190,16 +220,82 @@
     NavigationManager navigationManager { get; set; }
 
     UserDTO _userModel { get; set; } = new UserDTO();
-    List<PaymentMethod> _paymentMethodModels { get; set; } = new List<PaymentMethod>();
+    PaginatedViewModel<PaymentMethod> _paymentMethodModels { get; set; } = new PaginatedViewModel<PaymentMethod>();
     List<CardType> _cardTypeModels { get; set; } = new List<CardType>();
-    private int selectedOption;
-    PaymentMethod _paymentMethod { get; set; } = new PaymentMethod();
+    int selectedOption = 0;
+    private int CurPage = 1;
+    private int CurCardType = 0;
+    PaymentMethod _paymentMethod = new PaymentMethod();
 
+    private async void Pagination(int page, int? cardType)
+    {
+        CurPage = page + 1;
+        if (cardType == 0)
+        {
+            await GetPaymentMethods(page, null);
+        }
+        else
+        {
+            await GetPaymentMethods(page, cardType);
+        }
+    }
+    protected async Task NextPage(int? cardType)
+    {
+        int MaxPage = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(_paymentMethodModels.Count) / 6));
+        if (CurPage < MaxPage)
+        {
+
+            CurPage++;
+            if (cardType == 0)
+            {
+                await GetPaymentMethods(CurPage - 1, null);
+            }
+            else
+            {
+                await GetPaymentMethods(CurPage - 1, cardType);
+            }
+        }
+    }
+    protected async Task PrevPage(int? cardType)
+    {
+        if (CurPage > 1)
+        {
+            CurPage--;
+            if (cardType == 0)
+            {
+                await GetPaymentMethods(CurPage - 1, null);
+            }
+            else
+            {
+                await GetPaymentMethods(CurPage - 1, cardType);
+            }
+        }
+    }
     private void OptionSelected(ChangeEventArgs e)
     {
         selectedOption = Convert.ToInt32(e.Value);
     }
+    protected void GetPaymentMethodByCardType()
+    {
+        CurCardType = selectedOption;
+        Pagination(0, CurCardType);
+    }
+    protected async Task GetPaymentMethods(int pageIndex, int? cardType)
+    {
+        if (cardType == null)
+        {
+            //_orderModels = await orderService.GetOrdersDetailByBuyerName(_userModel.Username, 0, pageIndex);
 
+            _paymentMethodModels = await orderService.GetPaymentMethodsDetailByBuyerName(_userModel.Username, 0, pageIndex);
+        }
+        else
+        {
+            _paymentMethodModels = await orderService.GetPaymentMethodsDetailByBuyerName(_userModel.Username, CurCardType, pageIndex);
+            //_orderModels = await orderService.GetOrdersDetailByBuyerName(_userModel.Username, CurCardType, pageIndex);
+        }
+        await GetSearchValue();
+        stateManager.UpdateContent(this, "paymentMethodPage");
+    }
     protected async override Task OnInitializedAsync()
     {
         isLoggedIn = identityService.IsLoggedIn;
@@ -208,10 +304,11 @@
             navigationManager.NavigateTo($"login?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
         }
         _userModel = identityService.GetUserModel(identityService.GetUserToken());
-        _paymentMethodModels = await orderService.GetPaymentMethodsDetailByBuyerName(_userModel.Username, 0);
-        await GetSearchValue();
+        await GetPaymentMethods(0,null);
+        //_paymentMethodModels = await orderService.GetPaymentMethodsDetailByBuyerName(_userModel.Username, 0);
+        //await GetSearchValue();
 
-        stateManager.UpdateContent(this, "paymentMethodPage");
+        //stateManager.UpdateContent(this, "paymentMethodPage");
     }
     protected async override void OnInitialized()
     {
@@ -222,26 +319,121 @@
         if (firstRender)
         {
             await jsRuntime.InvokeVoidAsync("myFunction");
+            stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
         }
     }
-    protected async Task GetPaymentMethodByCardType()
+    private async Task StateManager_StateChanged(ComponentBase component, string property)
     {
-        _paymentMethodModels = await orderService.GetPaymentMethodsDetailByBuyerName(_userModel.Username, selectedOption);
-        stateManager.UpdateContent(this, "orderPage");
+        if (property.Contains("paymentMethodPage"))
+        {
+            await InvokeAsync(StateHasChanged);
+        }
+
     }
+    //protected async Task GetPaymentMethodByCardType()
+    //{
+    //    _paymentMethodModels = await orderService.GetPaymentMethodsDetailByBuyerName(_userModel.Username, selectedOption);
+    //    stateManager.UpdateContent(this, "paymentMethodPage");
+    //}
     protected async Task GetSearchValue()
     {
         _cardTypeModels = await orderService.GetCardTypes();
     }
     protected async Task AddPaymentMethod()
     {
-        _paymentMethodModels = await orderService.AddPaymentMethod(_paymentMethod, _userModel.Username);
-        stateManager.UpdateContent(this, "orderPage");
+        ModalParameters modalParameters = new ModalParameters();
+        if (string.IsNullOrEmpty(_paymentMethod.CardNumber))
+        {
+            modalParameters.Add("Message", "Kart Numarası Alanı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (!Regex.IsMatch(_paymentMethod.CardNumber, @"^\d+$"))
+        {
+            modalParameters.Add("Message", "Kart Numarası Alanı Sadece Sayı İçermelidir.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (_paymentMethod.CardNumber.Length != 16)
+        {
+            modalParameters.Add("Message", "Kart Numarası Alanı 16 Haneden Oluşması Gereklidir.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(_paymentMethod.CardHolderName))
+        {
+
+            modalParameters.Add("Message", "Kart Üstündeki İsim ve Soyisim Boş Bırakılmamalıdır.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (!Regex.IsMatch(_paymentMethod.CardHolderName, @"\s{1,2}"))
+        {
+
+            modalParameters.Add("Message", "Kart Üstündeki İsim ve Soyisim'in içinde 1 boşluk bırakılmalıdır.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(_paymentMethod.CardExpirationShort))
+        {
+
+            modalParameters.Add("Message", "Kart Son Kullanma Tarihi Alanı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (_paymentMethod.CardExpirationShort.Length != 5 || _paymentMethod.CardExpirationShort[2] != '.' ||
+        !char.IsDigit(_paymentMethod.CardExpirationShort[0]) || !char.IsDigit(_paymentMethod.CardExpirationShort[1]) ||
+        !char.IsDigit(_paymentMethod.CardExpirationShort[3]) || !char.IsDigit(_paymentMethod.CardExpirationShort[4]))
+        {
+
+            modalParameters.Add("Message", "Kart Son Kullanma Tarihi MM.YY şeklinde olmalıdır. Örneğin 03.25 olmalıdır.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        var expirationMonth = Convert.ToInt32(_paymentMethod.CardExpirationShort.Substring(0, 2));
+        var expirationYear = Convert.ToInt32(_paymentMethod.CardExpirationShort.Substring(_paymentMethod.CardExpirationShort.Length - 2));
+        int timeNow = DateTime.Now.Year % 100;
+        if (0>expirationMonth || expirationMonth>12)
+        {
+            modalParameters.Add("Message", "Kart Son Kullanma Tarihindeki Aylar 1-12 Arasında Olmalıdır.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (expirationYear < timeNow)
+        {
+            modalParameters.Add("Message", "Kart Son Kullanma Tarihindeki Yıl Şimdiki Zamandan Büyük Olmalıdır.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(_paymentMethod.SecurityNumber))
+        {
+
+            modalParameters.Add("Message", "Kart Güvenlik Numarası Alanı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (!Regex.IsMatch(_paymentMethod.SecurityNumber, @"^\d+$") || _paymentMethod.SecurityNumber.Length != 3)
+        {
+            modalParameters.Add("Message", "Kart Güvenlik Numarası Alanı 3 Haneli Sayı İçermelidir.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        var result=await orderService.AddPaymentMethodByBuyerName(_paymentMethod, _userModel.Username);
+
+        modalParameters.Add("Message", result);
+        Modal.Show<ShowMessagePopup>("Bilgilendirme", modalParameters);
+
+        await GetPaymentMethods(0, CurCardType);
+        stateManager.UpdateContent(this, "paymentMethodPage");
     }
     private async void DeletePaymentMethod(Guid paymentMethodId)
     {
-        _paymentMethodModels = await orderService.CancelPaymentMethod(paymentMethodId);
-        stateManager.UpdateContent(this, "orderPage");
+        await orderService.CancelPaymentMethod(paymentMethodId,_userModel.Username);
+        CurPage = 1;
+        await GetPaymentMethods(0,CurCardType);
+        ModalParameters modalParameters = new ModalParameters();
+        modalParameters.Add("Message", "Ödeme Yöntemi Başarılı Bir Şekilde Silindi.");
+        Modal.Show<ShowMessagePopup>("Bilgilendirme", modalParameters);
     }
 
 }

@@ -40,12 +40,11 @@
                                     {
 
                                         <tr class="table-body-row">
-                                            @{ string pictureUrl = "http://localhost:5001/pics" + basketItem.PictureUrl;}
-                                            <td class="product-remove"><a href="#" @onclick="@(async()=>await RemoveItemFromList(basketItem))"><i class="far fa-window-close"></i></a></td>
-                                            <td class="product-image"><img src="assets/img/products/product-img-3.jpg" alt=""></td>
+                                            <td class="product-remove"><a @onclick="@(async()=>await RemoveItemFromList(basketItem))"><i class="far fa-window-close"></i></a></td>
+                                            <td class="product-image"><img src="@("http://localhost:5001/pics" + basketItem.PictureUrl)" alt=""></td>
                                             <td class="product-name">@basketItem.ProductName</td>
                                             <td class="product-price">@basketItem.UnitPrice.ToString("N2") TL</td>
-                                            <td class="product-quantity"><input type="number" placeholder="0"></td>
+                                            <td class="product-quantity"><input type="number" placeholder="@basketItem.Quantity" value="@basketItem.Quantity" @oninput= "(e)=>UpdateProductQuantity(e,basketItem)"></td>
                                             <td class="product-total">@basketItem.Quantity</td>
                                         </tr>
                                     }
@@ -80,10 +79,10 @@
                             </tbody>
                         </table>
                         <div class="cart-buttons">
-                            <a href="" @onclick="(()=>ReloadPage())" class="boxed-btn">Sepeti Yenile</a>
+                            <a @onclick="(()=>ReloadPage())" class="boxed-btn">Sepeti Yenile</a>
                             @if (basketModel.BasketItems.Count > 0)
                             {
-                                <a href="" class="boxed-btn black" @onclick="@(()=>CheckOut())">Check Out</a>
+                                <a class="boxed-btn black" @onclick="@(()=>CheckOut())">Check Out</a>
                             }
                         </div>
                     </div>
@@ -149,16 +148,27 @@ else
     {
         navigationManager.NavigateTo("/CheckOut");
     }
-    async Task ReloadPage()
-    {
-        basketModel = await basketService.GetBasket();
-        stateManager.UpdateContent(this, "basketPage");
-    }
     async Task RemoveItemFromList(BasketItem item)
     {
         basketModel.BasketItems.Remove(item);
         basketModel = await basketService.UpdateBasket(basketModel);
         stateManager.UpdateCard(this);
+    }
+    private void UpdateProductQuantity(ChangeEventArgs e,BasketItem basketItem)
+    {
+        if (Convert.ToInt32(e.Value) > 0)
+        {
+            basketItem.Quantity = Convert.ToInt32(e.Value);
+        }
+        else
+        {
+            basketItem.Quantity = 1;
+        }
+    }
+    async Task ReloadPage()
+    {
+        basketModel = await basketService.UpdateBasket(basketModel);
+        stateManager.UpdateContent(this, "basketPage");
     }
 
 }

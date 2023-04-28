@@ -23,36 +23,43 @@ namespace Web.ApiGateway.Controllers
 
         [HttpPost]
         [Route("addBasketItem")]
-        public async Task<ActionResult> AddBasketItemAsync([FromBody]AddBasketItemRequest request)
+        public async Task<ActionResult<string>> AddBasketItemAsync([FromBody]AddBasketItemRequest request)
         {
 
-            if (request is null || request.Quantity == 0)
+            try
             {
-                return BadRequest("Miktar Hatalı");
-            }
-            var item = await _productService.GetProductItemAsync(request.ProductItemId);
-            var currentBasket = await _basketService.GetById(request.BasketId);
-            var product = currentBasket.BasketItems.SingleOrDefault(p => p.ProductId == item.Id);
 
-            if (product != null)
-            {
-                product.Quantity += request.Quantity;
-            }
-            else
-            {
-                currentBasket.BasketItems.Add(new BasketItem()
+                if (request is null || request.Quantity == 0)
                 {
-                    UnitPrice = item.Price,
-                    PictureUrl = item.PicturePath,
-                    ProductId = item.Id,
-                    Quantity = request.Quantity,
-                    Id = Guid.NewGuid().ToString(),
-                    ProductName = item.Name
-                });
-            }
-            await _basketService.UpdateAsync(currentBasket);
+                    return BadRequest("Miktar Hatalı");
+                }
+                var item = await _productService.GetProductItemAsync(request.ProductItemId);
+                var currentBasket = await _basketService.GetById(request.BasketId);
+                var product = currentBasket.BasketItems.SingleOrDefault(p => p.ProductId == item.Id);
 
-            return Ok();
+                if (product != null)
+                {
+                    product.Quantity += request.Quantity;
+                }
+                else
+                {
+                    currentBasket.BasketItems.Add(new BasketItem()
+                    {
+                        UnitPrice = item.Price,
+                        PictureUrl = item.Pictures.First().ImagePath,
+                        ProductId = item.Id,
+                        Quantity = request.Quantity,
+                        Id = Guid.NewGuid().ToString(),
+                        ProductName = item.Name
+                    });
+                }
+                await _basketService.UpdateAsync(currentBasket);
+                return Ok(true);
+            }
+            catch (Exception)
+            {
+                return BadRequest(false);
+            }
 
         }
     }

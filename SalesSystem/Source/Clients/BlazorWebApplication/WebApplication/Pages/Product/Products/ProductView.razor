@@ -1,0 +1,45 @@
+﻿<div class="col-lg-4 col-md-6 text-center">
+    <div class="single-product-item">
+        <div class="product-image">
+            @if (ProductItem.Pictures.Count != 0)
+            {
+                <a href="#"><img src="@("http://localhost:5001/pics" + ProductItem.Pictures[0].ImagePath)" style="height:300px;" alt=""></a>
+            }
+            else
+            {
+                <a href="#"><img src="assets/img/default-product.png" alt=""></a>
+            }
+        </div>
+        <h3>@ProductItem.Name</h3>
+        <h3>@ProductItem.Brand.BrandName</h3>
+        <h3>@ProductItem.UpCategory.UpCategoryName</h3>
+        <h3>@ProductItem.DownCategory.DownCategoryName</h3>
+
+        <p class="product-price"><span>Fiyatı</span> @ProductItem.Price.ToString("N2") TL </p>
+        <a class="cart-btn" href="/ProductDetail/@ProductItem.Id">Ürünü İncele</a>
+        <a class="cart-btn" onclick="@OnClick">@*<i class="fas fa-shopping-cart"></i>*@ Sepete Ekle</a>
+    </div>
+</div>
+
+
+@code {
+
+    [Parameter]
+    public Product ProductItem { get; set; }
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnClick { get; set; }
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+    [Inject]
+    IJSRuntime jsRuntime { get; set; }
+
+    @*private async void GoToProductDetail(Product product)
+        {
+            @using Newtonsoft.Json
+            var json = JsonConvert.SerializeObject(product);
+            await jsRuntime.InvokeVoidAsync("localStorage.setItem", "product", json);
+            navigationManager.NavigateTo("/ProductDetail"+);
+
+        }*@
+
+}

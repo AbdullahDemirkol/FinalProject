@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,7 @@ using ProductServiceApi.Configuration;
 using ProductServiceApi.Controllers;
 using ProductServiceApi.DataAccess;
 using ProductServiceApi.Entity.Concrete.Helper;
-using ProductServiceApi.Services.Concrete;
+using ProductServiceApi.Utilities;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -44,7 +45,10 @@ namespace ProductServiceApi
             //-----------------------------------------------------------------
 
             services.AddDbContext<ProductContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-
+            //services.Configure<FormOptions>(options =>
+            //{
+            //    options.MultipartBodyLengthLimit = long.MaxValue;
+            //});
             services.ConfigurationServiceInConsul(Configuration);
         }
 

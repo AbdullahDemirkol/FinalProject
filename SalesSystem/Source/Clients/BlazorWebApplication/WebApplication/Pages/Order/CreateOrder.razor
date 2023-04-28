@@ -1,5 +1,7 @@
 ﻿@page "/CheckOut"
 @using System.ComponentModel.DataAnnotations;
+
+
 <!-- breadcrumb-section -->
 <div class="breadcrumb-section breadcrumb-bg">
     <div class="container">
@@ -30,30 +32,65 @@
                                         </button>
                                     </h5>
                                 </div>
-
+                               
                                 <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                     <div class="card-body">
                                         <section class="esh-orders_new-section">
                                             <div class="row">
-                                                <div class="col-md-12">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Mahalle</label>
+                                                        <InputText @bind-Value="orderModel.Address.Neighbourhood" placeholder="Mahalle" class="form-control" />
+                                                        <ValidationMessage For="@(()=>orderModel.Address.Neighbourhood)" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Adres</label>
-                                                        <InputText @bind-Value="orderModel.Address.Street" class="form-control" />
+                                                        <InputText @bind-Value="orderModel.Address.Street" placeholder="Sokak" class="form-control" />
                                                         <ValidationMessage For="@(()=>orderModel.Address.Street)" />
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-3">
                                                     <div class="form-group">
-                                                        <label>İl</label>
-                                                        <InputText @bind-Value="orderModel.Address.City" class="form-control" />
-                                                        <ValidationMessage For="@(()=>orderModel.Address.City)" />
+                                                        <label>Bina No</label>
+                                                        <InputText @bind-Value="orderModel.Address.BuildingNo" placeholder="Bina No" class="form-control" />
+                                                        <ValidationMessage For="@(()=>orderModel.Address.BuildingNo)" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Daire No</label>
+                                                        <InputText @bind-Value="orderModel.Address.ApartmentNo" placeholder="Daire No" class="form-control" />
+                                                        <ValidationMessage For="@(()=>orderModel.Address.ApartmentNo)" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
+                                                        <label>Posta Kodu</label>
+                                                        <InputText @bind-Value="orderModel.Address.ZipCode" placeholder="Posta Kodu" class="form-control" />
+                                                        <ValidationMessage For="@(()=>orderModel.Address.ZipCode)" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>İl</label>
+                                                        <InputText @bind-Value="orderModel.Address.City" placeholder="İl" class="form-control" />
+                                                        <ValidationMessage For="@(()=>orderModel.Address.City)" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
                                                         <label>İlçe</label>
-                                                        <InputText @bind-Value="orderModel.Address.State" class="form-control" />
-                                                        <ValidationMessage For="@(()=>orderModel.Address.State)" />
+                                                        <InputText @bind-Value="orderModel.Address.District" placeholder="İlçe" class="form-control" />
+                                                        <ValidationMessage For="@(()=>orderModel.Address.District)" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Ülke</label>
+                                                        <InputText @bind-Value="orderModel.Address.Country" placeholder="Ülke" class="form-control" />
+                                                        <ValidationMessage For="@(()=>orderModel.Address.Country)" />
                                                     </div>
                                                 </div>
                                             </div>
@@ -71,56 +108,60 @@
                                     </h5>
                                 </div>
                                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-                                    
+
                                     <div class="card-body">
 
                                         <section class="esh-orders_new-section">
-                                            <h4 class="esh-orders_new-title">Kayıtlı Ödeme Yöntemleri</h4>
-                                            <div class="row">
-                                                @foreach (var _paymentMethod in _paymentMethods)
-                                                {
-                                                    <div class="col-md-5 paymentColOption" @onclick="()=>SetPaymentMethod(_paymentMethod)">
-                                                        <div class="card paymentCardOption">
-                                                            <div class="card-body">
-                                                                <h3 class="writing">@_paymentMethod.CardHolderName</h3>
-                                                                <div class="row">
-                                                                    <h5 class="col-md-6 writing">**@_paymentMethod.SecurityNumber.Substring(_paymentMethod.SecurityNumber.Length - 1)</h5>
-                                                                    <h5 class="col-md-6 writing">@_paymentMethod.CardExpirationShortFormat().Replace(".", "/")</h5>
-                                                                </div>
+                                            @if (_paymentMethods.Count != 0)
+                                            {
+                                                <h4 class="esh-orders_new-title">Kayıtlı Ödeme Yöntemleri</h4>
+                                                <div class="row">
+                                                    @foreach (var _paymentMethod in _paymentMethods.Data)
+                                                    {
+                                                        <div class="col-md-5 paymentColOption" @onclick="()=>SetPaymentMethod(_paymentMethod)">
+                                                            <div class="card paymentCardOption">
+                                                                <div class="card-body">
+                                                                    <h3 class="writing">@_paymentMethod.CardHolderName</h3>
+                                                                    <div class="row">
+                                                                        <h5 class="col-md-6 writing">**@_paymentMethod.SecurityNumber.Substring(_paymentMethod.SecurityNumber.Length - 1)</h5>
+                                                                        <h5 class="col-md-6 writing">@_paymentMethod.CardExpirationShortFormat().Replace(".", "/")</h5>
+                                                                    </div>
 
-                                                                <h4 class="writing">@_paymentMethod.CardNumber.Substring(0, 4) **** **** @_paymentMethod.CardNumber.Substring(_paymentMethod.CardNumber.Length - 4)</h4>
+                                                                    <h4 class="writing">@_paymentMethod.CardNumber.Substring(0, 4) **** **** @_paymentMethod.CardNumber.Substring(_paymentMethod.CardNumber.Length - 4)</h4>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                }
-                                            </div>
+                                                    }
+                                                </div>
+                                            }
                                             <h4 class="esh-orders_new-title" style=" margin-top: 40px;">Ödeme Yöntemi</h4>
                                             <div class="row">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Kart Numarası</label>
-                                                        <InputText @bind-Value="orderModel.Buyer.PaymentMethod.CardNumber" class="form-control" />
+                                                        <InputText @bind-Value="orderModel.Buyer.PaymentMethod.CardNumber" placeholder="Kart Numarası" class="form-control" />
                                                         <ValidationMessage For="@(()=>orderModel.Buyer.PaymentMethod.CardNumber)" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Kart Üstündeki İsim</label>
-                                                        <InputText @bind-Value="orderModel.Buyer.PaymentMethod.CardHolderName" class="form-control" />
+                                                        <InputText @bind-Value="orderModel.Buyer.PaymentMethod.CardHolderName" placeholder="Kart Üstündeki İsim" class="form-control" />
                                                         <ValidationMessage For="@(()=>orderModel.Buyer.PaymentMethod.CardHolderName)" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Kartın Son Kullanma Tarihi</label>
-                                                        <InputText @bind-Value="orderModel.Buyer.PaymentMethod.CardExpirationShort" class="form-control" />
+                                                        <InputText @bind-Value="orderModel.Buyer.PaymentMethod.CardExpirationShort" placeholder="Kartın Son Kullanma Tarihi" class="form-control" />
                                                         <ValidationMessage For="@(()=>orderModel.Buyer.PaymentMethod.CardExpirationShort)" />
+
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Kartın Güvenlik Numarası</label>
-                                                        <InputText @bind-Value="orderModel.Buyer.PaymentMethod.SecurityNumber" class="form-control" />
+                                                        <InputText @bind-Value="orderModel.Buyer.PaymentMethod.SecurityNumber" placeholder="Kartın Güvenlik Numarası" class="form-control" />
                                                         <ValidationMessage For="@(()=>orderModel.Buyer.PaymentMethod.SecurityNumber)" />
                                                     </div>
                                                 </div>
@@ -180,6 +221,8 @@
 @code {
     private bool isLoggedIn = false;
 
+    [CascadingParameter]
+    IModalService Modal { get; set; }
     [Inject]
     IIdentityService identityService { get; set; }
 
@@ -194,7 +237,9 @@
     [Inject]
     public IJSRuntime jsRuntime { get; set; }
     CustomerBasket _customerBasket { get; set; } = new CustomerBasket();
-    List<PaymentMethod> _paymentMethods = new List<PaymentMethod>();
+    PaginatedViewModel<PaymentMethod> _paymentMethods = new PaginatedViewModel<PaymentMethod>();
+
+
     protected async override Task OnInitializedAsync()
     {
         isLoggedIn = identityService.IsLoggedIn;
@@ -204,7 +249,8 @@
         }
 
         _customerBasket = await basketService.GetBasket();
-        _paymentMethods = await orderService.GetPaymentMethodsDetailByBuyerName(identityService.GetUsername(),0);
+        _paymentMethods = await orderService.GetPaymentMethodsDetailByBuyerName(identityService.GetUsername(),0, 0);
+
         await jsRuntime.InvokeVoidAsync("myFunction");
     }
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -212,14 +258,23 @@
         if (firstRender)
         {
             await jsRuntime.InvokeVoidAsync("myFunction");
-            //myScript = await JSRuntime.InvokeAsync<IJSObjectReference>("import","assets/js/main.js");
+            stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
         }
+    }
+
+    private async Task StateManager_StateChanged(ComponentBase component, string property)
+    {
+        if (property.Contains("createOrderPage"))
+        {
+            await InvokeAsync(StateHasChanged);
+        }
+
     }
     Order orderModel = new Order()
     {
-        Address = new Address("", "", "", "", "34532"),
+        Address = new Address("", "", "", "","","","",""),
         Buyer = new Buyer(new PaymentMethod("", "", "", "", 0)),
-        Description = "Test Desc"
+        Description = "Description"
     };
 
     async Task OnValidSubmit()
@@ -230,7 +285,10 @@
         {
             City = orderModel.Address.City,
             Street = orderModel.Address.Street,
-            State = orderModel.Address.State,
+            Neighbourhood = orderModel.Address.Neighbourhood,
+            BuildingNo = orderModel.Address.BuildingNo,
+            ApartmentNo = orderModel.Address.ApartmentNo,
+            District = orderModel.Address.District,
             Country = orderModel.Address.Country,
             ZipCode = orderModel.Address.ZipCode,
             CardNumber = orderModel.Buyer.PaymentMethod.CardNumber,
@@ -250,22 +308,123 @@
         orderModel.Buyer.PaymentMethod = paymentMethod;
         orderModel.Buyer.PaymentMethod.CardExpirationShort = paymentMethod.CardExpirationShort.Replace(".", "/");
     }
-
     //-----------------------------------------------------------------------------------
     //private string myValue;
-
-    private void ValidateForm()
+    private async Task ValidateForm()
     {
-        if (string.IsNullOrEmpty(orderModel.Buyer.PaymentMethod.CardNumber))
+        ModalParameters modalParameters = new ModalParameters();
+
+        if (string.IsNullOrEmpty(orderModel.Address.Neighbourhood))
         {
-            // Hata mesajını göstermek için bir yöntem kullanabilirsiniz.
-            Console.WriteLine("Değer boş olamaz.");
-            // Formun gönderilmesini engellemek için return kullanabilirsiniz.
+            modalParameters.Add("Message", "Mahalle Adı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(orderModel.Address.Street))
+        {
+            modalParameters.Add("Message", "Sokak Adı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(orderModel.Address.BuildingNo))
+        {
+            modalParameters.Add("Message", "Apartman Numarası Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (!Regex.IsMatch(orderModel.Address.BuildingNo, @"^\d+$"))
+        {
+            modalParameters.Add("Message", "Apartman Numarası Sadece Sayılardan Oluşmalı.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(orderModel.Address.ApartmentNo))
+        {
+            modalParameters.Add("Message", "Daire Numarası Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
             return;
         }
 
+        if (!Regex.IsMatch(orderModel.Address.ApartmentNo, @"^\d+$"))
+        {
+            modalParameters.Add("Message", "Daire Numarası Sadece Sayılardan Oluşmalı.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(orderModel.Address.ZipCode) || orderModel.Address.ZipCode.Length != 5)
+        {
+            modalParameters.Add("Message", "Posta Kodu 5 Haneli Olması Gereklidir.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(orderModel.Address.City))
+        {
+            modalParameters.Add("Message", "İl Adı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(orderModel.Address.District))
+        {
+            modalParameters.Add("Message", "İlçe Adı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(orderModel.Address.Country))
+        {
+            modalParameters.Add("Message", "Ülke Adı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(orderModel.Buyer.PaymentMethod.CardNumber))
+        {
+            modalParameters.Add("Message", "Kart Numarası Alanı Boş Bırakılamaz.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+
+        if (!Regex.IsMatch(orderModel.Buyer.PaymentMethod.CardNumber, @"^\d+$"))
+        {
+            modalParameters.Add("Message", "Kart Numarası Alanı Sadece Sayı İçermelidir.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (orderModel.Buyer.PaymentMethod.CardNumber.Length != 16)
+        {
+            modalParameters.Add("Message", "Kart Numarası Alanı 16 Haneden Oluşması Gereklidir.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (string.IsNullOrEmpty(orderModel.Buyer.PaymentMethod.CardHolderName))
+        {
+
+            modalParameters.Add("Message", "Kart Üstündeki İsim ve Soyisim Boş Bırakılmamalıdır.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (!Regex.IsMatch(orderModel.Buyer.PaymentMethod.CardHolderName, @"\s{1,2}"))
+        {
+
+            modalParameters.Add("Message", "Kart Üstündeki İsim ve Soyisim'in içinde 1 boşluk bırakılmalıdır.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (orderModel.Buyer.PaymentMethod.CardExpirationShort.Length != 5 || orderModel.Buyer.PaymentMethod.CardExpirationShort[2] != '.' ||
+            !char.IsDigit(orderModel.Buyer.PaymentMethod.CardExpirationShort[0]) || !char.IsDigit(orderModel.Buyer.PaymentMethod.CardExpirationShort[1]) ||
+            !char.IsDigit(orderModel.Buyer.PaymentMethod.CardExpirationShort[3]) || !char.IsDigit(orderModel.Buyer.PaymentMethod.CardExpirationShort[4]))
+        {
+
+            modalParameters.Add("Message", "Kart Son Kullanma Tarihi MM.YY şeklinde olmalıdır. Örneğin 11.25 olmalıdır.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        if (!Regex.IsMatch(orderModel.Buyer.PaymentMethod.SecurityNumber, @"^\d+$") || orderModel.Buyer.PaymentMethod.SecurityNumber.Length != 3)
+        {
+            modalParameters.Add("Message", "Kart Güvenlik Numarası Alanı 3 Haneli Sayı İçermelidir.");
+            Modal.Show<ShowMessagePopup>("Hata Mesajı", modalParameters);
+            return;
+        }
+        await OnValidSubmit();
+
         // Değer doluysa, formu göndermek için burada gerekli işlemleri yapabilirsiniz.
     }
-
-
 }

@@ -8,13 +8,15 @@ using System.Threading.Tasks;
 
 namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Command.RequestCommandModel
 {
-    public class UpdateOrderStatusCommand : IRequest<(bool,Order)>
+    public class UpdateOrderStatusCommand : IRequest<bool>
     {
         public Guid OrderNumber { get; set; }
+        public string BuyerName { get; set; }
         public int OrderStatusId { get; set; }
-        public UpdateOrderStatusCommand(Guid orderNumber,int orderStatusId)
+        public UpdateOrderStatusCommand(Guid orderNumber,string buyerName,int orderStatusId)
         {
             OrderNumber = orderNumber;
+            BuyerName = buyerName;
             OrderStatusId = orderStatusId;
         }
     }

@@ -1,0 +1,201 @@
+﻿@inherits BaseModal
+<form  enctype="multipart/form-data">
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Ürün Adı</label>
+                    <input type="text" class="form-control" @bind-value="product.Name" name="productName" required />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Fiyatı</label>
+                    <input type="text" class="form-control" @bind-Value="@product.Price" @bind-Value:event="oninput" required />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @{ var p = 1; }
+            @foreach (var picture in product.Pictures)
+            {
+                if (!string.IsNullOrEmpty(picture.ImagePath))
+                {
+                    <div class="col-md-4">
+                        <div class="form-group" style="border: 1px solid black; border-radius: 15px; padding: 15px;">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>@p. Resim</label>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <button class="btn btn-danger" style="border-radius:10px;" @onclick="()=>DeletePictureClicked(picture.ImagePath,product.Id)">Resimi sil</button>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <img src="@("http://localhost:5001/pics" + picture.ImagePath)" style="height: 400px; width: inherit;" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                p++;
+            }
+
+            @for (int i = 0; i < 3 - product.Pictures.Count(); i++)
+            {
+                <div class="col-md-4">
+                    <div class="form-group" style="border: 1px solid black; border-radius: 15px; padding: 15px;">
+                        <label>@p. Resim</label>
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <InputFile OnChange="(e)=>HandleSelectedFile(e)" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                p++;
+            }
+
+        </div>
+        <div class="row">
+            <div class="form-group col-md-12">
+                <label>Açıklama</label>
+                <input type="text" class="form-control" @bind-value="product.Description" name="productDescription" required />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Üst Kategori: </label>
+                    <select @bind="product.UpCategoryId">
+                        @foreach (var upCategory in upCategories)
+                        {
+                            if (product.UpCategoryId == upCategory.Id)
+                            {
+                                <option value="@upCategory.Id" selected>@upCategory.UpCategoryName</option>
+                            }
+                            else
+                            {
+                                <option value="@upCategory.Id">@upCategory.UpCategoryName</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Alt Kategori: </label>
+                    <select @bind="product.DownCategoryId">
+                        @foreach (var downCategory in downCategories)
+                        {
+                            if (product.DownCategoryId == downCategory.Id)
+                            {
+                                <option value="@downCategory.Id" selected>@downCategory.DownCategoryName</option>
+                            }
+                            else
+                            {
+                                <option value="@downCategory.Id">@downCategory.DownCategoryName</option>
+                            }
+                        }
+                    </select>
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Markalar: </label>
+                    <select @bind="product.BrandId">
+                        @foreach (var brand in brands)
+                        {
+                            if (product.BrandId == brand.Id)
+                            {
+                                <option value="@brand.Id" selected>@brand.BrandName</option>
+                            }
+                            else
+                            {
+                                <option value="@brand.Id">@brand.BrandName</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="d-flex">
+            <button class="btn btn-primary" style="padding: 5px; margin: 0 15px;" @onclick="()=>UpdateClicked(product,productFileImages)">@YesText</button>
+            <button class="btn btn-danger" style="padding: 5px; margin: 0 15px;" @onclick="@CancelClicked">@CancelText</button>
+        </div>
+    </div>
+</form>
+
+
+@code {
+    [Parameter]
+    public Product product { get; set; }
+    [Parameter]
+    public List<Brand> brands { get; set; }
+    [Parameter]
+    public List<UpCategory> upCategories{ get; set; }
+    [Parameter]
+    public List<DownCategory> downCategories { get; set; }
+    [Inject]
+    IProductService _productService { get; set; }
+    List<byte[]> productFileImages = new List<byte[]>();
+
+    public int pictureCount = 3;
+
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        Message = parameters.GetValueOrDefault<string>("Message") ?? "No Message Found";
+        YesText = "Güncelle";
+        CancelText = "Kapat";
+        return base.SetParametersAsync(parameters);
+    }
+    protected override void OnInitialized()
+    {
+        pictureCount = pictureCount - product.Pictures.Count();
+        base.OnInitialized();
+    }
+    private async Task HandleSelectedFile(InputFileChangeEventArgs e)
+    {
+        try
+        {
+            if (productFileImages.Count < pictureCount)
+            {
+                var productFileImage = await GetFileBytesAsync(e.File);
+                productFileImages.Add(productFileImage);
+            }
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
+    }
+    private async Task<byte[]> GetFileBytesAsync(IBrowserFile formFile)
+    {
+        try
+        {
+            var buffer = new byte[16 * 1024]; // 16KB'lık bir buffer tanımlıyoruz.
+            using (var ms = new MemoryStream())
+            {
+                var stream = formFile.OpenReadStream();
+                int read;
+                while ((read = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                {
+                    await ms.WriteAsync(buffer, 0, read);
+                }
+                return ms.ToArray();
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+   
+
+
+}

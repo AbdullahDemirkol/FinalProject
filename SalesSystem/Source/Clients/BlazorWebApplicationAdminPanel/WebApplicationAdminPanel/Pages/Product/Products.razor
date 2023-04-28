@@ -1,210 +1,334 @@
 ﻿@page "/products"
+@using Microsoft.AspNetCore.Components.Forms
+<!--main content start-->
+<section id="main-content">
+    <section class="wrapper">
+        <!-- page start-->
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" @onclick="@ClearNewProduct" class="btn float-right btn-success" data-toggle="modal" data-target="#addProductModal">Yeni Ürün Ekle<i class="fa-thin fa-plus"></i></button>
+                <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Ürün Ekle</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>                           
+                            <form @onsubmit="@AddNewProduct" enctype="multipart/form-data">
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Ürün Adı</label>
+                                                <input type="text" class="form-control"  @bind-value="newProduct.Name" name="productName" required />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Fiyatı</label>
+                                                <input type="text" class="form-control" @bind-Value="@newProduct.Price" @bind-Value:event="oninput" required />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        @{int p = 0; }
+                                        @for (int i = 0; i < 3; i++)
+                                        {
+                                            <div class="col-md-4">
+                                                <div class="form-group" style="border: 1px solid black; border-radius: 15px; padding: 15px;">
+                                                    <label>@p. Resim</label>
+                                                    <div class="row text-center">
+                                                        <div class="col-md-12">
+                                                            <InputFile OnChange="(e) => HandleSelectedFile(e)" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            p++;
+                                        }
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <label>Açıklama</label>
+                                            <input type="text" class="form-control" @bind-value="newProduct.Description" name="productDescription" required />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Üst Kategori: </label>
+                                                <select @bind="newProduct.UpCategoryId">
+                                                    @foreach (var upCategory in _upCategories)
+                                                    {
+                                                        <option value="@upCategory.Id">@upCategory.UpCategoryName</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Alt Kategori: </label>
+                                                <select @bind="newProduct.DownCategoryId">
+                                                    @foreach (var downCategory in _downCategories)
+                                                    {
+                                                        <option value="@downCategory.Id">@downCategory.DownCategoryName</option>
+                                                    }
+                                                </select>
+                                            </div>
 
-<div class="container d-flex justify-content-center mt-50 mb-50">
-
-    <div class="row">
-        <div class="col-md-10">
-
-            <div class="card card-body">
-                <div class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
-                    <div class="mr-2 mb-3 mb-lg-0">
-
-                        <img src="https://i.imgur.com/5Aqgz7o.jpg" width="150" height="150" alt="">
-
-                    </div>
-
-                    <div class="media-body">
-                        <h6 class="media-title font-weight-semibold">
-                            <a href="#" data-abc="true">Apple iPhone XR (Red, 128 GB)</a>
-                        </h6>
-
-                        <ul class="list-inline list-inline-dotted mb-3 mb-lg-2">
-                            <li class="list-inline-item"><a href="#" class="text-muted" data-abc="true">Phones</a></li>
-                            <li class="list-inline-item"><a href="#" class="text-muted" data-abc="true">Mobiles</a></li>
-                        </ul>
-
-                        <p class="mb-3">128 GB ROM | 15.49 cm (6.1 inch) Display 12MP Rear Camera | 7MP Front Camera A12 Bionic Chip Processor | Gorilla Glass with high quality display </p>
-
-                        <ul class="list-inline list-inline-dotted mb-0">
-                            <li class="list-inline-item">All items from <a href="#" data-abc="true">Mobile point</a></li>
-                            <li class="list-inline-item">Add to <a href="#" data-abc="true">wishlist</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="mt-3 mt-lg-0 ml-lg-3 text-center">
-                        <h3 class="mb-0 font-weight-semibold">$459.99</h3>
-
-                        <div>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label>Markalar: </label>
+                                                <select @bind="newProduct.BrandId">
+                                                    @foreach (var brand in _brands)
+                                                    {
+                                                        <option value="@brand.Id">@brand.BrandName</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                                    <button type="submit" class="btn btn-success">Ürün Ekle</button>
+                                </div>
+                            </form>
                         </div>
-
-                        <div class="text-muted">1985 reviews</div>
-
-                        <button type="button" class="btn btn-warning mt-4 text-white"><i class="icon-cart-add mr-2"></i> Add to cart</button>
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-            <div class="card card-body mt-3">
-                <div class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
-                    <div class="mr-2 mb-3 mb-lg-0">
-
-                        <img src="https://i.imgur.com/Aj0L4Wa.jpg" width="150" height="150" alt="">
-
-                    </div>
-
-                    <div class="media-body">
-                        <h6 class="media-title font-weight-semibold">
-                            <a href="#" data-abc="true">Apple iPhone XS Max (Gold, 64 GB)</a>
-                        </h6>
-
-                        <ul class="list-inline list-inline-dotted mb-3 mb-lg-2">
-                            <li class="list-inline-item"><a href="#" class="text-muted" data-abc="true">Phones</a></li>
-                            <li class="list-inline-item"><a href="#" class="text-muted" data-abc="true">Mobiles</a></li>
-                        </ul>
-
-                        <p class="mb-3">256 GB ROM | 15.49 cm (6.1 inch) Display 12MP Rear Camera | 15MP Front Camera A12 Bionic Chip Processor | Gorilla Glass with high quality display </p>
-
-                        <ul class="list-inline list-inline-dotted mb-0">
-                            <li class="list-inline-item">All items from <a href="#" data-abc="true">Mobile junction</a></li>
-                            <li class="list-inline-item">Add to <a href="#" data-abc="true">wishlist</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="mt-3 mt-lg-0 ml-lg-3 text-center">
-                        <h3 class="mb-0 font-weight-semibold">$612.99</h3>
-
-                        <div>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-
-                        </div>
-
-                        <div class="text-muted">2349 reviews</div>
-
-                        <button type="button" class="btn btn-warning mt-4 text-white"><i class="icon-cart-add mr-2"></i> Add to cart</button>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-
-            <div class="card card-body mt-3">
-                <div class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
-                    <div class="mr-2 mb-3 mb-lg-0">
-
-                        <img src="https://i.imgur.com/5Aqgz7o.jpg" width="150" height="150" alt="">
-
-                    </div>
-
-                    <div class="media-body">
-                        <h6 class="media-title font-weight-semibold">
-                            <a href="#" data-abc="true">Apple iPhone XR (Red, 128 GB)</a>
-                        </h6>
-
-                        <ul class="list-inline list-inline-dotted mb-3 mb-lg-2">
-                            <li class="list-inline-item"><a href="#" class="text-muted" data-abc="true">Phones</a></li>
-                            <li class="list-inline-item"><a href="#" class="text-muted" data-abc="true">Mobiles</a></li>
-                        </ul>
-
-                        <p class="mb-3">128 GB ROM | 15.49 cm (6.1 inch) Display 12MP Rear Camera | 7MP Front Camera A12 Bionic Chip Processor | Gorilla Glass with high quality display </p>
-
-                        <ul class="list-inline list-inline-dotted mb-0">
-                            <li class="list-inline-item">All items from <a href="#" data-abc="true">Mobile point</a></li>
-                            <li class="list-inline-item">Add to <a href="#" data-abc="true">wishlist</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="mt-3 mt-lg-0 ml-lg-3 text-center">
-                        <h3 class="mb-0 font-weight-semibold">$459.99</h3>
-
-                        <div>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-
-                        </div>
-
-                        <div class="text-muted">1985 reviews</div>
-
-                        <button type="button" class="btn btn-warning mt-4 text-white"><i class="icon-cart-add mr-2"></i> Add to cart</button>
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="card card-body mt-3">
-                <div class="media align-items-center align-items-lg-start text-center text-lg-left flex-column flex-lg-row">
-                    <div class="mr-2 mb-3 mb-lg-0">
-
-                        <img src="https://i.imgur.com/Aj0L4Wa.jpg" width="150" height="150" alt="">
-
-                    </div>
-
-                    <div class="media-body">
-                        <h6 class="media-title font-weight-semibold">
-                            <a href="#" data-abc="true">Apple iPhone XS Max (Gold, 64 GB)</a>
-                        </h6>
-
-                        <ul class="list-inline list-inline-dotted mb-3 mb-lg-2">
-                            <li class="list-inline-item"><a href="#" class="text-muted" data-abc="true">Phones</a></li>
-                            <li class="list-inline-item"><a href="#" class="text-muted" data-abc="true">Mobiles</a></li>
-                        </ul>
-
-                        <p class="mb-3">256 GB ROM | 15.49 cm (6.1 inch) Display 12MP Rear Camera | 15MP Front Camera A12 Bionic Chip Processor | Gorilla Glass with high quality display </p>
-
-                        <ul class="list-inline list-inline-dotted mb-0">
-                            <li class="list-inline-item">All items from <a href="#" data-abc="true">Mobile junction</a></li>
-                            <li class="list-inline-item">Add to <a href="#" data-abc="true">wishlist</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="mt-3 mt-lg-0 ml-lg-3 text-center">
-                        <h3 class="mb-0 font-weight-semibold">$612.99</h3>
-
-                        <div>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-
-                        </div>
-
-                        <div class="text-muted">2349 reviews</div>
-
-                        <button type="button" class="btn btn-warning mt-4 text-white"><i class="icon-cart-add mr-2"></i> Add to cart</button>
-                    </div>
-                </div>
-            </div>
-
-
-
-
         </div>
-    </div>
-</div>
-<h3>Products</h3>
+        <div class="row">
+            <div class="col-lg-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        <h2><strong>Ürün Listesi</strong></h2>
+                    </header>
+                    @if (_products.Data != null)
+                    {
+                        <table class="table table-striped table-advance table-hover text-center">
+                            <thead>
+                                <tr>
+                                    <th>Ürün Adı</th>
+                                    <th>Üst Kategori</th>
+                                    <th>Alt Kategori</th>
+                                    <th>Marka</th>
+                                    <th>Fiyatı</th>
+                                    <th>Ürün Açıklaması</th>
+                                    <th>Ürün Statüsü</th>
+                                    <th>Güncelle / Sil</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var product in _products.Data)
+                                {
+                                <tr>
+                                    <td @onclick="()=>ShowProduct(product)">@product.Name</td>
+                                    <td @onclick="()=>ShowProduct(product)">@product.UpCategory.UpCategoryName</td>
+                                    <td @onclick="()=>ShowProduct(product)">@product.DownCategory.DownCategoryName</td>
+                                    <td @onclick="()=>ShowProduct(product)">@product.Brand.BrandName</td>
+                                    <td @onclick="()=>ShowProduct(product)">@product.Price TL</td>
+                                    <td @onclick="()=>ShowProduct(product)">@product.Description.Substring(0, Math.Min(product.Description.Length, 50))</td>
+                                    <td @onclick="()=>ShowProduct(product)"><span class="label label-info label-mini">Ürün Statüsü Eklenicek</span></td>
+                                    <td>
+                                        <button class="btn btn-primary btn-xs" @onclick="() => UpdateProduct(product)">Güncelle<i class="fa-thin fa-pen"></i></button>
+                                        <button class="btn btn-danger btn-xs" @onclick="() => DeleteProduct(product.Id)">Sil<i class="fa-thin fa-trash-can"></i></button>
+                                    </td>
+
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="pagination">
+                                    @if (CurPage > 1)
+                                    {
+                                        @if (3 < Math.Ceiling(Convert.ToDouble(_products.Count) / 5))
+                                        {
+
+                                            <a @onclick="() => PrevPage()">Önceki</a>
+                                        }
+                                        <a @onclick="() => Pagination(CurPage - 2)">@(CurPage - 1)</a>
+                                    }
+                                    <a class="active" @onclick="() => Pagination(CurPage - 1)">@(CurPage)</a>
+                                    @if (CurPage < Math.Ceiling(Convert.ToDouble(_products.Count) / 5))
+                                    {
+                                        <a @onclick="() => Pagination(CurPage)">@(CurPage + 1)</a>
+                                        @if (3 < Math.Ceiling(Convert.ToDouble(_products.Count) / 5))
+                                        {
+                                            <a @onclick="() => NextPage()">Sonraki</a>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                    else
+                    {
+                        <h4>Ürün Bulunamadı</h4>
+                    }
+                </section>
+            </div>
+        </div>
+        <!-- page end-->
+    </section>
+</section>
+<!--main content end-->
+
 
 @code {
 
+    [CascadingParameter]
+    IModalService Modal { get; set; }
+    [Inject]
+    StateManager stateManager { get; set; }
+    [Inject]
+    ModalManager modalManager { get; set; }
+    [Inject]
+    IProductService _productService { get; set; }
+    PaginatedViewModel<Product> _products = new PaginatedViewModel<Product>();
+    List<UpCategory> _upCategories = new List<UpCategory>();
+    List<DownCategory> _downCategories = new List<DownCategory>();
+    List<Brand> _brands = new List<Brand>();
+    Product newProduct = new Product();
+    List<IBrowserFile> formFiles = new List<IBrowserFile>();
+    private int CurPage = 1;
+    protected void Pagination(int page)
+    {
+        CurPage = page + 1;
+        GetProducts(page);
+    }
+    protected void NextPage()
+    {
+        int MaxPage = Convert.ToInt32(Math.Round(Convert.ToDouble(_products.Count / 3)) + 1);
+        if (CurPage < MaxPage)
+        {
+            CurPage++;
+            GetProducts(CurPage - 1);
+        }
+    }
+    protected void PrevPage()
+    {
+        if (CurPage > 1)
+        {
+            CurPage--;
+            GetProducts(CurPage - 1);
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        GetUpCategory();
+        GetDownCategory();
+        GetBrand();
+        GetProducts(0);
+
+    }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
+        }
+    }
+    protected async void GetProducts(int paginationNumber, int pageSize = 6)
+    {
+        _products = await _productService.GetProductsItem(paginationNumber, pageSize);
+        stateManager.UpdateContent(this, "productPage");
+    }
+    protected async void GetUpCategory()
+    {
+        _upCategories = await _productService.GetUpCategoryItems();
+    }
+
+    protected async void GetDownCategory()
+    {
+        _downCategories = await _productService.GetDownCategoryItems();
+    }
+
+    protected async void GetBrand()
+    {
+        _brands = await _productService.GetBrandItems();
+    }
+    private async Task StateManager_StateChanged(ComponentBase component, string property)
+    {
+        if (property == "productPage")
+        {
+            await InvokeAsync(StateHasChanged);
+        }
+    }
+    private void OnPriceChanged(string value)
+    {
+        decimal.TryParse(value, out decimal price);
+        if (price != 0)
+        {
+            newProduct.Price = price;
+        }
+    }
+    private void HandleSelectedFile(InputFileChangeEventArgs e)
+    {
+        if (!formFiles.Contains(e.File) && formFiles.Count < 3)
+        {
+            formFiles.Add(e.File);
+        }
+    }
+    private async Task UpdateProduct(Product product)
+    {
+        var isUpdate = await modalManager.UpdateProductAsync("Ürün Güncelle", product, _brands, _upCategories, _downCategories);
+        if (isUpdate != null)
+        {
+            var result = await _productService.UpdateProductItem(isUpdate);
+            modalManager.ShowMessageAsync("Bilgilendirme", result, 2000);
+        }
+        GetProducts(CurPage - 1);
+    }
+    private void ShowProduct(Product product)
+    {
+        modalManager.ShowProductItem("Bilgilendirme",product);
+    }
+    protected void ClearNewProduct()
+    {
+        formFiles = new List<IBrowserFile>();
+        newProduct = new Product();
+    }
+    protected async void DeleteProduct(int id)
+    {
+        var result = await _productService.RemoveProductItem(id);
+        if (result.Contains("silindi"))
+        {
+            //pop-up gösterilicek
+            GetProducts(CurPage - 1);
+        }
+    }
+    protected async void AddNewProduct()
+    {
+        if (newProduct.UpCategoryId == 0)
+        {
+            newProduct.UpCategoryId = 1;
+        }
+        if (newProduct.DownCategoryId == 0)
+        {
+            newProduct.DownCategoryId = 1;
+        }
+        if (newProduct.BrandId == 0)
+        {
+            newProduct.BrandId = 1;
+        }
+        var result= await _productService.AddProductItem(newProduct, formFiles);
+        if (result== "Ürün Eklenildi.")
+        {
+            formFiles = new List<IBrowserFile>();
+            newProduct = new Product();
+            GetProducts(CurPage-1);
+            //pop-up gösterilicek
+        }
+
+
+    }
 }

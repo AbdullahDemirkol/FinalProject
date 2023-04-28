@@ -9,7 +9,7 @@
     overflow: hidden;
     position: relative;
     width: 900px;
-    height: 550px;
+    height: 700px;
     background: #c9def0;
     box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30), 0 15px 12px rgba(0, 0, 0, 0.22);
     border-radius: 15px;
@@ -160,7 +160,7 @@ label {
     left: 0;
     top: 50px;
     width: 100%;
-    padding: 0 20px;
+    padding: 50% 20px;
     text-align: center;
     color: #fff;
     -webkit-transition: -webkit-transform 1.2s ease-in-out;
@@ -186,7 +186,7 @@ label {
 
 
 .sign-in {
-    padding-top: 65px;
+    padding-top: 20%;
     -webkit-transition-timing-function: ease-out;
     transition-timing-function: ease-out;
 }
@@ -206,7 +206,7 @@ label {
     position: relative;
     width: 100px;
     height: 36px;
-    margin: 0 auto;
+    margin: 20% auto;
     background: transparent;
     color: #fff;
     text-transform: uppercase;
@@ -269,7 +269,7 @@ label {
     transform: translate3d(0, 0, 0);
 }
 .breadcrumb-section {
-    padding: 4% 0;
+    padding: 60px 0;
 }
 .forLoginBackground{
     padding-top:7%;

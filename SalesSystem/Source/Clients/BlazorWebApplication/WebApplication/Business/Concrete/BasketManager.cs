@@ -24,15 +24,16 @@ namespace WebApplication.Business.Concrete
             this.logger = logger;
         }
 
-        public async Task AddItemToBasket(int productId)
+        public async Task<bool> AddItemToBasket(int productId,int quantity)
         {
             var model = new BasketItemRequest
             {
                 ProductItemId = productId,
-                Quantity = 1,
+                Quantity = quantity,
                 BasketId = identityService.GetUsername()
             };
-            await apiClient.PostAsync("basket/addBasketItem", model);
+            var result = await apiClient.PostGetResponseAsync<bool,BasketItemRequest>("basket/addBasketItem", model);
+            return result;
         }
 
         public Task CheckOut(BasketDTO basket)

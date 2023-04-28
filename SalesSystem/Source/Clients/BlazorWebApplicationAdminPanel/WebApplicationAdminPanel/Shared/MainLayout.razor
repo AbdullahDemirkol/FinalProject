@@ -32,7 +32,6 @@ else {
     StateManager stateManager { get; set; }
     [Inject]
     NavigationManager navigationManager { get; set; }
-    bool logout = false;
     protected override Task OnInitializedAsync()
     {
         isLoggedIn = _identityService.IsLoggedIn;

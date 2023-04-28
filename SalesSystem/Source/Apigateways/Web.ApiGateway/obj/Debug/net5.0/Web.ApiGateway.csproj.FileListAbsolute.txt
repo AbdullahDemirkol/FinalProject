@@ -37,3 +37,4 @@ C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Apigateways\Web.ApiGateway\
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\ref\Web.ApiGateway.dll
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.pdb
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.genruntimeconfig.cache
+C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.csproj.AssemblyReference.cache

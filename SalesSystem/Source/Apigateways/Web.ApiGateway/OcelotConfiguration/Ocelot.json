@@ -70,7 +70,7 @@
 
 
       "UpstreamPathTemplate": "/auth/{everything}",
-      "UpstreamHttpMethod": [ "Post" ],
+      "UpstreamHttpMethod": [ "Post","Get","Put","Delete" ],
       "UpStreamScheme": "http"
     },
     //Basket Service

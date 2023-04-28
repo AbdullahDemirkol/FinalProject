@@ -15,6 +15,7 @@ using WebApplicationAdminPanel.Extensions.ClientHttp;
 using WebApplicationAdminPanel.Utilities;
 using WebApplicationAdminPanel.Entity.Concrete.DTOs;
 using Microsoft.AspNetCore.Components;
+using WebApplicationAdminPanel.Entity.Concrete.Helper;
 
 namespace WebApplicationAdminPanel.Business.Concrete
 {
@@ -100,8 +101,29 @@ namespace WebApplicationAdminPanel.Business.Concrete
                 return null;
             }
         }
+        public async Task<PaginatedViewModel<UserDTO>> GetUsers(int pageIndex=0,int pageSize=6)
+        {
+            var query =$"auth/users?pageIndex={pageIndex}&pageSize={pageSize}";
+            var user = await _httpClient.GetResponseAsync<PaginatedViewModel<UserDTO>>(query);
+            return user;
+        }
+        public async Task<bool> RemoveUser(int userId)
+        {
+            var query = $"auth/SetUserStatus/{userId}";
+            var result= await _httpClient.PostGetStringResponseAsync<bool>(query,false);
+            return result == "İşleminiz Başarılı" ? true : false ;
+        }
 
-
-       
+        public async Task<List<Role>> GetRoles()
+        {
+            var role = await _httpClient.GetResponseAsync<List<Role>>("auth/roles");
+            return role;
+        }
+        public async Task<bool> AddUser(AddUserModel addUserModel,int roleId)
+        {
+            var query = $"auth/AddUser/{roleId}";
+            var isAddedUser = await _httpClient.PostGetResponseAsync<bool, AddUserModel>(query, addUserModel);
+            return isAddedUser;
+        }
     }
 }
