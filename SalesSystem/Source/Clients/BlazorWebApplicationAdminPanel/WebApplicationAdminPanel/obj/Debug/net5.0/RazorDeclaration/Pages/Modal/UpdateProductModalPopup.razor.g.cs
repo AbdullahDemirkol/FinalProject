@@ -202,6 +202,13 @@ using Microsoft.AspNetCore.Http.Internal;
 #line hidden
 #nullable disable
 #nullable restore
+#line 30 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\_Imports.razor"
+using System.Text.Json;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 32 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\_Imports.razor"
 using Blazored.Modal;
 
@@ -235,7 +242,7 @@ using Blazored.Modal.Services;
     public List<DownCategory> downCategories { get; set; }
     [Inject]
     IProductService _productService { get; set; }
-    List<byte[]> productFileImages = new List<byte[]>();
+    ProductDTO productDto = new ProductDTO();
 
     public int pictureCount = 3;
 
@@ -248,6 +255,8 @@ using Blazored.Modal.Services;
     }
     protected override void OnInitialized()
     {
+        productDto.Product = product;
+        productDto.ProductImageFiles = new List<byte[]>();
         pictureCount = pictureCount - product.Pictures.Count();
         base.OnInitialized();
     }
@@ -255,10 +264,10 @@ using Blazored.Modal.Services;
     {
         try
         {
-            if (productFileImages.Count < pictureCount)
+            if ( productDto.ProductImageFiles.Count < pictureCount)
             {
                 var productFileImage = await GetFileBytesAsync(e.File);
-                productFileImages.Add(productFileImage);
+                productDto.ProductImageFiles.Add(productFileImage);
             }
         }
         catch (Exception)
@@ -288,7 +297,7 @@ using Blazored.Modal.Services;
             throw;
         }
     }
-   
+
 
 
 

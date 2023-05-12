@@ -148,7 +148,7 @@
                                 <div class="pagination">
                                     @if (CurPage > 1)
                                     {
-                                        @if (3 < Math.Ceiling(Convert.ToDouble(_products.Count) / 5))
+                                        @if (3 < Math.Ceiling(Convert.ToDouble(_products.Count) / 6))
                                         {
 
                                             <a @onclick="() => PrevPage()">Önceki</a>
@@ -156,10 +156,10 @@
                                         <a @onclick="() => Pagination(CurPage - 2)">@(CurPage - 1)</a>
                                     }
                                     <a class="active" @onclick="() => Pagination(CurPage - 1)">@(CurPage)</a>
-                                    @if (CurPage < Math.Ceiling(Convert.ToDouble(_products.Count) / 5))
+                                    @if (CurPage < Math.Ceiling(Convert.ToDouble(_products.Count) / 6))
                                     {
                                         <a @onclick="() => Pagination(CurPage)">@(CurPage + 1)</a>
-                                        @if (3 < Math.Ceiling(Convert.ToDouble(_products.Count) / 5))
+                                        @if (3 < Math.Ceiling(Convert.ToDouble(_products.Count) / 6))
                                         {
                                             <a @onclick="() => NextPage()">Sonraki</a>
                                         }

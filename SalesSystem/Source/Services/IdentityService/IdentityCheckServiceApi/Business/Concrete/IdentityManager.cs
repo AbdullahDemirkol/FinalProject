@@ -191,7 +191,6 @@ namespace IdentityCheckServiceApi.Business.Concrete
                     return await Task.FromResult(true);
                 }
             }
-
             return await Task.FromResult(false);
         }
 
@@ -207,7 +206,7 @@ namespace IdentityCheckServiceApi.Business.Concrete
             return roles;
         }
 
-        public async Task<bool> AddUser(AddUserModel addUserModel, int roleId)
+        public async Task<bool> AddUser(UserModelDTO addUserModel, int roleId)
         {
             addUserModel.UserModel.Role = _identityCheckContext.Roles.FirstOrDefault(p => p.Id == roleId);
             addUserModel.UserModel.Phone = String.Format("{0:(000) 000 00 00}", Convert.ToInt64(addUserModel.UserModel.Phone));
@@ -226,6 +225,57 @@ namespace IdentityCheckServiceApi.Business.Concrete
 
             }
             return await Task.FromResult(false);
+        }
+
+        public async Task<bool> UpdateUser(UserModelDTO updateUser,string newPas)
+        {
+            try
+            {
+
+                updateUser.UserModel.Phone = String.Format("{0:(000) 000 00 00}", Convert.ToInt64(updateUser.UserModel.Phone));
+                //var user = _identityCheckContext.Users.FirstOrDefault(p => p.Id == updateUser.UserModel.Id);
+
+                var registeredUser = _identityCheckContext.Users.
+                    Where(p => (p.Username == updateUser.UserModel.Username || p.Email == updateUser.UserModel.Email || p.Phone == updateUser.UserModel.Phone) && p.Status == true).ToList();
+                if (registeredUser.Count>1)
+                {
+                    return await Task.FromResult(false);
+                }
+                UserModel user = await _identityCheckContext.Users.FindAsync(updateUser.UserModel.Id);
+                if (updateUser.ProfilePicture != null)
+                {
+                    var stream = new MemoryStream(updateUser.ProfilePicture);
+                    var formFile = new FormFile(stream, 0, updateUser.ProfilePicture.Length, "file", "file.jpg");
+                    var result = PictureManagement.Update(formFile, user.ProfileImagePath);
+                    if (result == "Dosya bulunamadı." || result == "Yanlış dosya tipi.")
+                    {
+                        return await Task.FromResult(false);
+                    }
+                    updateUser.UserModel.ProfileImagePath = result;
+                }
+                user.FirstName = updateUser.UserModel.FirstName;
+                user.LastName = updateUser.UserModel.LastName;
+                user.Email = updateUser.UserModel.Email;
+                user.Phone = updateUser.UserModel.Phone;
+                user.ProfileImagePath = updateUser.UserModel.ProfileImagePath;
+                user.Role = updateUser.UserModel.Role;
+                user.Status = updateUser.UserModel.Status;
+                user.Username = updateUser.UserModel.Username;
+                if (newPas != "null")
+                {
+                    user.Password = HashingHelper.SHA512(newPas);
+                }
+                //user = updateUser.UserModel;
+                _identityCheckContext.Users.Update(user);
+                _identityCheckContext.SaveChanges();
+                return await Task.FromResult(true);
+            }
+            catch (Exception e)
+            {
+                var p = e.Message;
+                return await Task.FromResult(false);
+            }
+
         }
     }
 }

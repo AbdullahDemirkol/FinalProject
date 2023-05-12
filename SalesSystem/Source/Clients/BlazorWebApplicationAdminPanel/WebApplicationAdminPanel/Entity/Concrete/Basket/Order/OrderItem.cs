@@ -9,9 +9,13 @@ namespace WebApplicationAdminPanel.Entity.Concrete.Basket.Order
     {
         public int ProductId { get; set; }
         public string ProductName { get; set; }
-        public string PicturePath { get; set; }
+        public string PictureUrl { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal Discount { get; set; }
         public int Units { get; set; }
+        public decimal Total()
+        {
+            return UnitPrice * Units;
+        }
     }
 }

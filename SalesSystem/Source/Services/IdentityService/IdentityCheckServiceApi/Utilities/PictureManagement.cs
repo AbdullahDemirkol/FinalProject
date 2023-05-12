@@ -21,7 +21,15 @@ namespace IdentityCheckServiceApi.Utilities
             userModel.ProfileImagePath = imageMessage;
 
             return "Kullanıcı Resimi Eklenildi.";
-
+        }
+        public static string Update(IFormFile file, string profileImagePath)
+        {
+            var imageMessage = FileHelper.AddPicture(file, profileImagePath);
+            if (imageMessage == "Dosya bulunamadı." || imageMessage == "Yanlış dosya tipi.")
+            {
+                return imageMessage;
+            }
+            return imageMessage;
         }
 
         public static string Remove(string userName, IdentityCheckContext identityContext)

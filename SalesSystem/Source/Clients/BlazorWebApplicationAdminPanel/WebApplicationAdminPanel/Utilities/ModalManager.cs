@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using WebApplicationAdminPanel.Business.Abstract;
 using WebApplicationAdminPanel.Entity.Concrete.DTOs;
 using WebApplicationAdminPanel.Entity.Concrete.Product;
+using WebApplicationAdminPanel.Entity.Concrete.User;
 using WebApplicationAdminPanel.Pages.Modal;
 
 namespace WebApplicationAdminPanel.Utilities
@@ -81,12 +82,48 @@ namespace WebApplicationAdminPanel.Utilities
             }
             return null;
         }
+        public async Task<(UserDTO, bool, string)> UpdateUserAsync(string title, UserDTO user, List<Role> roles)
+        {
+            ModalParameters modalParameters = new ModalParameters();
+            modalParameters.Add("user", user);
+            modalParameters.Add("roles", roles);
+
+            var modalRef = _modalService.Show<UpdateUserModalPopup>(title, modalParameters);
+            var modalResult = await modalRef.Result;
+
+            if (!modalResult.Cancelled)
+            {
+                try
+                {
+                    if (modalResult.Data is bool reloadUser)
+                    {
+                        return (user, !reloadUser, null);
+                    }
+                    else
+                    {
+                        var (userDto, newPas) = ((UserDTO, string))modalResult.Data;
+                        return (userDto, true, newPas);
+                    }
+                }
+                catch (Exception)
+                {
+                    return (null, false, null);
+                }
+            }
+            return (null, false, null);
+        }
 
         public void ShowProductItem(string title,Product product)
         {
             ModalParameters modalParameters = new ModalParameters();
             modalParameters.Add("product", product);
             _modalService.Show<ShowProductItem>(title,modalParameters);
+        }
+        public void ShowUserItem(string title, User user)
+        {
+            ModalParameters modalParameters = new ModalParameters();
+            modalParameters.Add("user", user);
+            _modalService.Show<ShowUserItem>(title, modalParameters);
         }
     }
 }

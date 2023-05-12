@@ -9,3 +9,4 @@ C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\BuildingBlocks\EventBus\Eve
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.Base\obj\Debug\net5.0\EventBus.Base.dll
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.Base\obj\Debug\net5.0\ref\EventBus.Base.dll
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.Base\obj\Debug\net5.0\EventBus.Base.pdb
+C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.Base\obj\Debug\net5.0\EventBus.Base.csproj.AssemblyReference.cache

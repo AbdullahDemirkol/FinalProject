@@ -1,0 +1,199 @@
+﻿@page "/orderItem/{order}"
+@if (orderDto != null)
+{
+    <div class="col-md-12">
+        <div class="row">
+            <h3 onclick="history.back();" class="back-button"> &lt;</h3>
+            <button style="right:0;position: absolute;" class="main-btn" @onclick="OrderUpdate">@updateText</button>
+        </div>
+    </div>
+    <div style="padding-top: 15px;">
+        <div style="display: flex; flex-direction: row;">
+            <div class="col-md-2">
+                <h4>Sipariş Numarası:</h4>
+            </div>
+            <div>
+                <h4>@orderDto.OrderNumber</h4>
+            </div>
+        </div>
+
+        <div style="display: flex; flex-direction: row;">
+            <div class="col-md-2">
+                <h4>Sipariş Tarihi:</h4>
+            </div>
+            <div>
+                <h4>@orderDto.Date</h4>
+            </div>
+        </div>
+        <div style="display: flex; flex-direction: row;">
+            <div class="col-md-2">
+                <h4>Alıcı:</h4>
+            </div>
+            <div>
+                <h4>@orderDto.BuyerName</h4>
+            </div>
+        </div>
+        <div style="display: flex; flex-direction: row;">
+            <div class="col-md-2">
+                <h4>Sipariş Adresi:</h4>
+            </div>
+            <div>
+                <h4>@orderDto.Neighbourhood Mah. @orderDto.Street Sok. No:@orderDto.BuildingNo/D:@orderDto.ApartmentNo  @orderDto.District/@orderDto.City</h4>
+            </div>
+        </div>
+        <div style="display: flex; flex-direction: row;">
+            <div class="col-md-2">
+                <h4>Posta Kodu:</h4>
+            </div>
+            <div>
+                <h4>@orderDto.ZipCode</h4>
+            </div>
+        </div>
+        <div style="display: flex; flex-direction: row;">
+            @if (updateMode)
+            {
+                <div class="col-md-2">
+                    <h4>Sipariş Durumu: Update Mod Açık</h4>
+                </div>
+                <div>
+                    <select id="StatusSelect" class="statusSelect" @onchange="OptionSelected">
+                        @foreach (var _orderStatus in _orderStatuses)
+                        {
+                            if (orderDto.Status != _orderStatus.Name)
+                            {
+                                <option value="@_orderStatus.Id">@_orderStatus.Name</option>
+                            }
+                            else
+                            {
+                                <option value="@_orderStatus.Id" selected>@_orderStatus.Name</option>
+                            }
+                        }
+                    </select>
+                </div>
+            }
+            else
+            {
+                <div class="col-md-2">
+                    <h4>Sipariş Durumu: Update Mod kapalı</h4>
+                </div>
+                <div>
+                    <h4>@orderDto.Status</h4>
+                </div>
+            }
+        </div>
+        <div style="display: flex; flex-direction: row;">
+            <div class="col-md-2">
+                <h4>Ödeme Yöntemi:</h4>
+            </div>
+            <div>
+                <h4>@($"{orderDto.PaymentMethodPrefix}-****-****-{orderDto.PaymentMethodSuffix}")</h4>
+            </div>
+        </div>
+        <div class="col-md-12" style="padding-top:15px">
+            <div class="row">
+                <h2>Sipariş Ürünleri </h2><h2 style="right:0;position: absolute;">Toplam: @orderDto.Total.ToString("c")</h2>
+            </div>
+        </div>
+        <h4 class="text-right"></h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Ürün Resimi</th>
+                    <th>Ürün Adı</th>
+                    <th>Ürün Fiyatı</th>
+                    <th>Adet</th>
+                    <th>Toplam Fiyat</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var orderItem in orderDto.OrderItems)
+                {
+                    <tr style="vertical-align: middle;">
+                        @if (orderItem.PictureUrl != null)
+                        {
+                            <td class="product-image"><img src="@("http://localhost:5001/pics" + orderItem.PictureUrl)" style="height: auto; width: 150px;" alt=""></td>
+                        }
+                        else
+                        {
+                            <td class="product-image"><img src="assets/img/default-product.png" style="height: auto; width: 150px;" alt=""></td>
+                        }
+                        <td>@orderItem.ProductName</td>
+                        <td>@orderItem.UnitPrice.ToString("c")</td>
+                        <td>@orderItem.Units</td>
+                        <td>@orderItem.Total().ToString("c")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <hr />
+    </div>
+}
+else
+{
+    <h3>Sipariş Bulunamadı.</h3>
+}
+
+@code {
+    [Parameter]
+    public string Order { get; set; }
+
+    [Inject]
+    StateManager stateManager { get; set; }
+
+    [Inject]
+    IOrderService orderService { get; set; }
+
+    List<OrderStatus> _orderStatuses { get; set; } = new List<OrderStatus>();
+    bool updateMode = false;
+    string updateText = "Sipariş Durumu Değiştir";
+    private OrderDTO orderDto;
+    int selectedOption;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
+        }
+    }
+    private async Task StateManager_StateChanged(ComponentBase component, string property)
+    {
+        if (property == "orderItemPage")
+        {
+            await InvokeAsync(StateHasChanged);
+        }
+
+    }
+    protected override async Task OnInitializedAsync()
+    {
+        if (!string.IsNullOrEmpty(Order))
+        {
+            string jsonParameter = Uri.UnescapeDataString(Order);
+            orderDto = JsonSerializer.Deserialize<OrderDTO>(jsonParameter);
+        }
+        _orderStatuses = await orderService.GetOrderStatuses();
+        await Task.CompletedTask;
+    }
+    public void OrderUpdate()
+    {
+        if (updateMode)
+        {
+            orderService.SetOrderStatus(orderDto,selectedOption);
+            orderDto.Status = _orderStatuses.FirstOrDefault(p => p.Id == selectedOption).Name;
+            updateMode = false;
+            updateText = "Sipariş Durumu Değiştir";
+        }
+        else
+        {
+            updateMode = true;
+            updateText = "Siparişi Güncelle";
+        }
+        stateManager.UpdateContent(this, "orderItemPage");
+    }
+    private void OptionSelected(ChangeEventArgs e)
+    {
+        //setOrderStatus /{ statusId}/ buyerName /{ buyerName}
+        selectedOption = Convert.ToInt32(e.Value);
+    }
+}
+

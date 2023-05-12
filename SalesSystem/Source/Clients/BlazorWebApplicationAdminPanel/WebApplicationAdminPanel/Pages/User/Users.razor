@@ -6,12 +6,12 @@
         <!-- page start-->
         <div class="row">
             <div class="col-md-12">
-                <button type="button" class="btn float-right btn-success" data-toggle="modal" data-target="#addUserModal">Yeni Ürün Ekle<i class="fa-thin fa-plus"></i></button>
+                <button type="button" class="btn float-right btn-success" data-toggle="modal" data-target="#addUserModal">Yeni Kullanıcı Ekle<i class="fa-thin fa-plus"></i></button>
                 <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="addUserModalLabel">Ürün Ekle</h5>
+                                <h5 class="modal-title" id="addUserModalLabel">Kullanıcı Ekle</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -108,7 +108,7 @@
             <div class="col-lg-12">
                 <section class="panel">
                     <header class="panel-heading">
-                        <h2><strong>Sipariş Listesi</strong></h2>
+                        <h2><strong>Kullanıcı Listesi</strong></h2>
                     </header>
                     @if (_users.Count != 0)
                     {
@@ -128,26 +128,26 @@
                             <tbody>
                                 @foreach (var user in _users.Data)
                                 {
-                                    <tr>
-                                        <td><a href="#">@user.FirstName</a></td>
-                                        <td><a href="#">@user.LastName</a></td>
-                                        <td><a href="#">@user.Username</a></td>
-                                        <td><a href="#">@user.Email</a></td>
-                                        <td><a href="#">@user.Phone</a></td>
-                                        <td><a href="#">@user.Role.Name</a></td>
-                                        @if (user.Status)
-                                        {
-                                            <td><a href="#">Aktif</a></td>
-                                        }
-                                        else
-                                        {
-                                            <td><a href="#">Pasif</a></td>
-                                        }
-                                        <td>
-                                            <button class="btn btn-primary btn-xs">Güncelle<i class="fa-thin fa-pen"></i></button>
-                                            <button class="btn btn-danger btn-xs" @onclick="()=>DeleteUser(user.Id)">Sil<i class="fa-thin fa-trash-can"></i></button>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td @onclick="()=>ShowUser(user)">@user.FirstName</td>
+                                    <td @onclick="()=>ShowUser(user)">@user.LastName</td>
+                                    <td @onclick="()=>ShowUser(user)">@user.Username</td>
+                                    <td @onclick="()=>ShowUser(user)">@user.Email</td>
+                                    <td @onclick="()=>ShowUser(user)">@user.Phone</td>
+                                    <td @onclick="()=>ShowUser(user)">@user.Role.Name</td>
+                                    @if (user.Status)
+                                    {
+                                        <td @onclick="()=>ShowUser(user)">Aktif</td>
+                                    }
+                                    else
+                                    {
+                                        <td @onclick="()=>ShowUser(user)">Pasif</td>
+                                    }
+                                    <td>
+                                        <button class="btn btn-primary btn-xs" @onclick="() => UpdateUser(user)">Güncelle<i class="fa-thin fa-pen"></i></button>
+                                        <button class="btn btn-danger btn-xs" @onclick="()=>DeleteUser(user.Id)">Sil<i class="fa-thin fa-trash-can"></i></button>
+                                    </td>
+                                </tr>
                                 }
                             </tbody>
                         </table>
@@ -156,7 +156,7 @@
                                 <div class="pagination">
                                     @if (CurPage > 1)
                                     {
-                                        @if (3 < Math.Ceiling(Convert.ToDouble(_users.Count) / 5))
+                                        @if (3 < Math.Ceiling(Convert.ToDouble(_users.Count) / 6))
                                         {
 
                                             <a @onclick="() => PrevPage()">Önceki</a>
@@ -164,10 +164,10 @@
                                         <a @onclick="() => Pagination(CurPage - 2)">@(CurPage - 1)</a>
                                     }
                                     <a class="active" @onclick="() => Pagination(CurPage - 1)">@(CurPage)</a>
-                                    @if (CurPage < Math.Ceiling(Convert.ToDouble(_users.Count) / 5))
+                                    @if (CurPage < Math.Ceiling(Convert.ToDouble(_users.Count) / 6))
                                     {
                                         <a @onclick="() => Pagination(CurPage)">@(CurPage + 1)</a>
-                                        @if (3 < Math.Ceiling(Convert.ToDouble(_users.Count) / 5))
+                                        @if (3 < Math.Ceiling(Convert.ToDouble(_users.Count) / 6))
                                         {
                                             <a @onclick="() => NextPage()">Sonraki</a>
                                         }
@@ -190,18 +190,21 @@
 
 
 @code {
-        [Inject]
-        StateManager stateManager { get; set; }
-        [Inject]
-        IIdentityService _identityService { get; set; }
-        PaginatedViewModel<UserDTO> _users = new PaginatedViewModel<UserDTO>();
-        //List<UpCategory> _upCategories = new List<UpCategory>();
-        //List<DownCategory> _downCategories = new List<DownCategory>();
-        //List<Brand> _brands = new List<Brand>();
-        //Product newProduct = new Product();
-        List<Role> _roles = new List<Role>();
-        AddUserModel newUser = new AddUserModel() { UserModel=new UserDTO() };
-        int role = 1;
+    [Inject]
+    StateManager stateManager { get; set; }
+    [Inject]
+    IIdentityService _identityService { get; set; }
+    [Inject]
+    ModalManager modalManager { get; set; }
+
+    PaginatedViewModel<User> _users = new PaginatedViewModel<User>();
+    //List<UpCategory> _upCategories = new List<UpCategory>();
+    //List<DownCategory> _downCategories = new List<DownCategory>();
+    //List<Brand> _brands = new List<Brand>();
+    //Product newProduct = new Product();
+    List<Role> _roles = new List<Role>();
+    UserDTO newUser = new UserDTO() { UserModel=new User() };
+    int role = 1;
 
     private int CurPage = 1;
     protected void Pagination(int page)
@@ -255,6 +258,24 @@
         _users = await _identityService.GetUsers(pageIndex, pageSize);
         stateManager.UpdateContent(this, "userListPage");
     }
+    private async Task UpdateUser(User user)
+    {
+        var (updateUser, isUpdate, newPas) = await modalManager.UpdateUserAsync("Kullanıcı Güncelle", new UserDTO { UserModel = user, ProfilePicture = null }, _roles);
+        if (updateUser != null)
+        {
+            if (isUpdate)
+            {
+                await _identityService.UpdateUser(updateUser, newPas);
+            }
+        }
+        GetUsers(CurPage - 1);
+        //if (isUpdate != null)
+        //{
+        //    var result = await _productService.UpdateUserItem(isUpdate);
+        //    modalManager.ShowMessageAsync("Bilgilendirme", result, 2000);
+        //}
+        //GetProducts(CurPage - 1);
+    }
     protected async void DeleteUser(int userId)
     {
         var isSuccess = await _identityService.RemoveUser(userId);
@@ -267,6 +288,11 @@
         {
             //pop-up gösterilicek
         }
+    }
+
+    private void ShowUser(User user)
+    {
+        modalManager.ShowUserItem("Bilgilendirme", user);
     }
     //private void OnPriceChanged(string value)
     //{
@@ -337,7 +363,7 @@
         if (result)
         {
             //newUserPictureFiles =new ;
-            newUser = new AddUserModel() {UserModel=new UserDTO()};
+            newUser = new UserDTO() {UserModel=new User()};
             GetUsers(CurPage-1);
             //pop-up gösterilicek
         }

@@ -1,0 +1,90 @@
+﻿@inherits BaseModal
+<div class="modal-body">
+    <div class="modal-body" style="width: 700px;">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Kullanıcı Adı</label>
+                    <label class="form-control">@user.Username</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Email Adresi</label>
+                    <label class="form-control">@user.Email</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>İsim</label>
+                    <label class="form-control">@user.FirstName</label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Soyisim</label>
+                    <label class="form-control">@user.LastName</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        </div>
+        <div class="row">
+            <div class="col-md-6" style="padding: 0;">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Telefon Numarası</label>
+                        <label class="form-control">@user.Phone</label>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Rolü: </label>
+                        <label class="form-control">@user.Role.Name</label>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Statü: </label>
+                        <label class="form-control">@user.Status</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group" style="border: 1px solid black; border-radius: 15px; padding: 15px;">
+                    <h3>Profil Resim</h3>
+
+                    @if (string.IsNullOrEmpty(user.ProfileImagePath))
+                    {
+                        <label>Yok</label>
+                    }
+                    else
+                    {
+                        <div class="col-md-12" style="height: 250px; width: 450px;">
+                            <img style="width:fit-content; height: inherit" src="@("http://localhost:5002/pics" + user.ProfileImagePath)" />
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="d-flex">
+        <button class="btn btn-primary" style="padding: 5px; margin: 0 15px;" @onclick="@ConfirmClicked">@OkText</button>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public User user { get; set; }
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        Message = parameters.GetValueOrDefault<string>("Message") ?? "No Message Found";
+        OkText = "Tamam";
+        return base.SetParametersAsync(parameters);
+    }
+}

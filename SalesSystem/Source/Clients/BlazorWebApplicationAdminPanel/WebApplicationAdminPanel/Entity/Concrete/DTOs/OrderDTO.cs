@@ -16,8 +16,11 @@ namespace WebApplicationAdminPanel.Entity.Concrete.DTOs
         public DateTime Date { get; init; }
         public string Status { get; set; }
         public string Description { get; init; }
-        public string State { get; init; }
+        public string Neighbourhood { get; init; }
         public string Street { get; init; }
+        public string BuildingNo { get; init; }
+        public string ApartmentNo { get; init; }
+        public string District { get; set; }
         public string City { get; init; }
         public string ZipCode { get; init; }
         public string Country { get; init; }

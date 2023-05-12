@@ -3,6 +3,7 @@ using OrderServiceApi.DataAccess.Repositories.Abstract;
 using OrderServiceApi.Entity.Concrete.Order;
 using OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetMethods.RequestQueriesModel;
 using OrderServiceApi.IntegrationEvents.QueriesFeatures.ViewModel;
+using OrderServiceApi.Entity.Concrete.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetMethods.QueryHandlers
 {
 
-    public class GetOrdersQueryHandler : IRequestHandler<GetOrdersQuery, List<OrderDetailViewModel>>
+    public class GetOrdersQueryHandler : IRequestHandler<GetOrdersQuery, PaginatedViewModel<OrderDetailViewModel>>
     {
         IOrderRepository _orderRepository;
         IPaymentMethodRepository _paymentMethodRepository;
@@ -23,7 +24,7 @@ namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetMethods.Q
             _paymentMethodRepository = paymentMethodRepository ?? throw new ArgumentNullException(nameof(paymentMethodRepository));
         }
 
-        public async Task<List<OrderDetailViewModel>> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
+        public async Task<PaginatedViewModel<OrderDetailViewModel>> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
         {
             List<Order> orders = new List<Order>();
             if (request.OrderStatusId == 0)
@@ -34,6 +35,8 @@ namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetMethods.Q
             {
                 orders = await _orderRepository.Get(p => p.OrderStatus.Id == request.OrderStatusId, orderBy: i => i.OrderByDescending(p => p.OrderDate), i => i.OrderItems, p => p.OrderStatus, p => p.Address, p => p.Buyer);
             }
+            int orderListCount = orders.Count();
+            orders = orders.Skip(request.PageSize * request.PageIndex).Take(request.PageSize).ToList();
             List<OrderDetailViewModel> orderDetailViewModels = new List<OrderDetailViewModel>();
             foreach (var order in orders)
             {
@@ -58,9 +61,10 @@ namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetMethods.Q
                     PaymentMethodPrefix = paymentMethodCardNumber.Substring(0, 4),
                     PaymentMethodSuffix = paymentMethodCardNumber.Substring(paymentMethodCardNumber.Length - 4)
                 };
-                orderDetailViewModels.Add(orderDetailViewModel);
+                 orderDetailViewModels.Add(orderDetailViewModel);
             }
-            return orderDetailViewModels;
+            PaginatedViewModel<OrderDetailViewModel> models = new PaginatedViewModel<OrderDetailViewModel>(request.PageIndex,request.PageSize,orderListCount, orderDetailViewModels);
+            return models;
         }
     }
 }

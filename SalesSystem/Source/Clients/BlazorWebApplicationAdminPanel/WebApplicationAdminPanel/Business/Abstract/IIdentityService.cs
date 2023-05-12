@@ -17,11 +17,12 @@ namespace WebApplicationAdminPanel.Business.Abstract
         bool IsLoggedIn { get; }
         Task<bool> Login(string userName, string password);
         void Logout();
-        UserDTO GetUserModel(string token);
-        Task<PaginatedViewModel<UserDTO>> GetUsers(int pageSize , int pageIndex );
+        User GetUserModel(string token);
+        Task<PaginatedViewModel<User>> GetUsers(int pageSize , int pageIndex);
         Task<bool> RemoveUser(int userId);
         Task<List<Role>> GetRoles();
-        Task<bool> AddUser(AddUserModel addUserModel, int roleId);
+        Task<bool> AddUser(UserDTO addUserModel, int roleId);
+        Task<bool> UpdateUser(UserDTO updateUserModel,string newPas);
 
     }
 }

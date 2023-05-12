@@ -195,6 +195,13 @@ using Microsoft.AspNetCore.Http.Internal;
 #line hidden
 #nullable disable
 #nullable restore
+#line 30 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\_Imports.razor"
+using System.Text.Json;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 32 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\_Imports.razor"
 using Blazored.Modal;
 
@@ -226,18 +233,21 @@ using Microsoft.AspNetCore.Components.Forms;
 #nullable restore
 #line 192 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\Pages\User\Users.razor"
        
-        [Inject]
-        StateManager stateManager { get; set; }
-        [Inject]
-        IIdentityService _identityService { get; set; }
-        PaginatedViewModel<UserDTO> _users = new PaginatedViewModel<UserDTO>();
-        //List<UpCategory> _upCategories = new List<UpCategory>();
-        //List<DownCategory> _downCategories = new List<DownCategory>();
-        //List<Brand> _brands = new List<Brand>();
-        //Product newProduct = new Product();
-        List<Role> _roles = new List<Role>();
-        AddUserModel newUser = new AddUserModel() { UserModel=new UserDTO() };
-        int role = 1;
+    [Inject]
+    StateManager stateManager { get; set; }
+    [Inject]
+    IIdentityService _identityService { get; set; }
+    [Inject]
+    ModalManager modalManager { get; set; }
+
+    PaginatedViewModel<User> _users = new PaginatedViewModel<User>();
+    //List<UpCategory> _upCategories = new List<UpCategory>();
+    //List<DownCategory> _downCategories = new List<DownCategory>();
+    //List<Brand> _brands = new List<Brand>();
+    //Product newProduct = new Product();
+    List<Role> _roles = new List<Role>();
+    UserDTO newUser = new UserDTO() { UserModel=new User() };
+    int role = 1;
 
     private int CurPage = 1;
     protected void Pagination(int page)
@@ -291,6 +301,24 @@ using Microsoft.AspNetCore.Components.Forms;
         _users = await _identityService.GetUsers(pageIndex, pageSize);
         stateManager.UpdateContent(this, "userListPage");
     }
+    private async Task UpdateUser(User user)
+    {
+        var (updateUser, isUpdate, newPas) = await modalManager.UpdateUserAsync("Kullanıcı Güncelle", new UserDTO { UserModel = user, ProfilePicture = null }, _roles);
+        if (updateUser != null)
+        {
+            if (isUpdate)
+            {
+                await _identityService.UpdateUser(updateUser, newPas);
+            }
+        }
+        GetUsers(CurPage - 1);
+        //if (isUpdate != null)
+        //{
+        //    var result = await _productService.UpdateUserItem(isUpdate);
+        //    modalManager.ShowMessageAsync("Bilgilendirme", result, 2000);
+        //}
+        //GetProducts(CurPage - 1);
+    }
     protected async void DeleteUser(int userId)
     {
         var isSuccess = await _identityService.RemoveUser(userId);
@@ -303,6 +331,11 @@ using Microsoft.AspNetCore.Components.Forms;
         {
             //pop-up gösterilicek
         }
+    }
+
+    private void ShowUser(User user)
+    {
+        modalManager.ShowUserItem("Bilgilendirme", user);
     }
     //private void OnPriceChanged(string value)
     //{
@@ -373,7 +406,7 @@ using Microsoft.AspNetCore.Components.Forms;
         if (result)
         {
             //newUserPictureFiles =new ;
-            newUser = new AddUserModel() {UserModel=new UserDTO()};
+            newUser = new UserDTO() {UserModel=new User()};
             GetUsers(CurPage-1);
             //pop-up gösterilicek
         }

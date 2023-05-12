@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using OrderServiceApi.Entity.Concrete.Buyer;
-using ProductServiceApi.Entity.Concrete.Helper;
+using OrderServiceApi.Entity.Concrete.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -202,6 +202,13 @@ using Microsoft.AspNetCore.Http.Internal;
 #line hidden
 #nullable disable
 #nullable restore
+#line 30 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\_Imports.razor"
+using System.Text.Json;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 32 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\_Imports.razor"
 using Blazored.Modal;
 
@@ -247,20 +254,34 @@ using Blazored.Modal.Services;
     {
         modalInstance.Close(ModalResult.Cancel());
     }
-    protected void UpdateClicked(Product product,List<byte[]> productPictureFiles)
+    protected void UpdateProductClicked(ProductDTO productDTO)
     {
-
-        ProductDTO productDTO = new ProductDTO()
-        {
-            Product = product,
-            ProductImageFiles = productPictureFiles
-        };
         modalInstance.Close(ModalResult.Ok<ProductDTO>(productDTO));
     }
-    protected void DeletePictureClicked(string picturePath, int productId)
+    protected void DeletePictureClicked(string picturePath, int id)
     {
-        modalInstance.Close(ModalResult.Ok<(string,int)>((picturePath,productId)));
+        modalInstance.Close(ModalResult.Ok<(string, int)>((picturePath, id)));
     }
+    protected void CancelUser(bool isDeletePicture)
+    {
+        if (isDeletePicture)
+        {
+            modalInstance.Close(ModalResult.Ok<bool>(isDeletePicture));
+        }
+        else
+        {
+            CancelClicked();
+        }
+    }
+    protected void UpdateUserClicked(UserDTO updateUserModel, string newPas)
+    {
+        if (!string.IsNullOrEmpty(newPas))
+        {
+            updateUserModel.UserModel.Password = newPas;
+        }
+        modalInstance.Close(ModalResult.Ok<(UserDTO, string)>((updateUserModel, newPas)));
+    }
+
 
 #line default
 #line hidden

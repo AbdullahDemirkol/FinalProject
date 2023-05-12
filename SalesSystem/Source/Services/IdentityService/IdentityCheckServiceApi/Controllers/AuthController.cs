@@ -79,10 +79,21 @@ namespace IdentityCheckServiceApi.Controllers
             var result = await _identityService.GetRoles();
             return Ok(result);
         }
-        [HttpPost("AddUser/{roleId}")]
-        public async Task<bool> AddUser([FromBody]AddUserModel addUserModel, int roleId)
+        [HttpPost("AddUser/{roleId:int}")]
+        public async Task<bool> AddUser([FromBody]UserModelDTO addUserModel, int roleId)
         {
             var result = await _identityService.AddUser(addUserModel,roleId);
+            if (result)
+            {
+                return true; 
+            }
+            return false;
+        }
+        [HttpPost("UpdateUser/{newPas}")]
+        ///{newPas:string}
+        public async Task<bool> UpdateUser([FromBody]UserModelDTO updateUserModel, string newPas)
+        {
+            var result = await _identityService.UpdateUser(updateUserModel,newPas);
             if (result)
             {
                 return true;

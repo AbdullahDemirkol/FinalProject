@@ -9,6 +9,7 @@ using WebApplicationAdminPanel.Entity.Concrete;
 using WebApplicationAdminPanel.Entity.Concrete.Basket.Buyer;
 using WebApplicationAdminPanel.Entity.Concrete.Basket.Order;
 using WebApplicationAdminPanel.Entity.Concrete.DTOs;
+using WebApplicationAdminPanel.Entity.Concrete.Helper;
 using WebApplicationAdminPanel.Extensions.ClientHttp;
 
 namespace WebApplicationAdminPanel.Business.Concrete
@@ -26,44 +27,16 @@ namespace WebApplicationAdminPanel.Business.Concrete
             this.logger = logger;
         }
 
-        public async Task<List<OrderDTO>> GetOrders(int orderStatusId)
+        public async void SetOrderStatus(OrderDTO orderDTO, int statusId)
         {
-            var query = "order/orders/"+ orderStatusId;
-            var orders = await apiClient.GetResponseAsync<List<OrderDTO>>(query);
+            var query = $"order/setOrderStatus/{statusId}/buyerName/{orderDTO.BuyerName}";
+            await apiClient.PostAsync<Guid>(query, orderDTO.OrderNumber);
+        }
+        public async Task<PaginatedViewModel<OrderDTO>> GetOrders(int orderStatusId, int pageIndex, int pageSize=6)
+        {
+            var query = $"order/orders/{orderStatusId}?pageIndex={pageIndex}&pageSize={pageSize}";
+            var orders = await apiClient.GetResponseAsync<PaginatedViewModel<OrderDTO>>(query);
             return orders;
-        }
-        public async Task<List<OrderDTO>> GetOrdersDetailByBuyerName(string buyerName,int orderStatusId)
-        {
-
-            var query = "order/" + buyerName+ "/OrderStatus/" + orderStatusId;
-            var orders = await apiClient.GetResponseAsync<List<OrderDTO>>(query);
-            return orders;
-        }
-        public async Task<List<PaymentMethod>> GetPaymentMethodsDetailByBuyerName(string buyerName, int cardTypeId)
-        {
-            var query = "paymentMethod/" + buyerName + "/CardType/" + cardTypeId;
-            var paymentMethods = await apiClient.GetResponseAsync<List<PaymentMethod>>(query);
-            return paymentMethods;
-        }
-        public async Task<List<OrderDTO>> CancelOrderStatus(Guid orderNumber)
-        {
-
-            var query = "order/cancelOrderStatus";
-            var orders = await apiClient.PostGetResponseAsync<List<OrderDTO>, Guid>(query, orderNumber);
-            return orders;
-        }
-        public async Task<List<PaymentMethod>> CancelPaymentMethod(Guid paymentMethodId)
-        {
-            var query = "paymentMethod/cancelPaymentMethod";
-            var paymentMethods = await apiClient.PostGetResponseAsync<List<PaymentMethod>, Guid>(query, paymentMethodId);
-            return paymentMethods;
-        }
-        public async Task<List<PaymentMethod>> AddPaymentMethod(PaymentMethod paymentMethod,string userName)
-        {
-            paymentMethod.CardExpirationApiFormat();
-            var query = "paymentMethod/addPaymentMethod/"+userName;
-            var paymentMethods = await apiClient.PostGetResponseAsync<List<PaymentMethod>, PaymentMethod>(query,paymentMethod );
-            return paymentMethods;
         }
         public async Task<List<OrderStatus>> GetOrderStatuses()
         {
@@ -98,38 +71,5 @@ namespace WebApplicationAdminPanel.Business.Concrete
             }
             return orderStatuses;
         }
-        public async Task<List<CardType>> GetCardTypes()
-        {
-            var query = "paymentMethod/cardTypes";
-            var cardTypes = await apiClient.GetResponseAsync<List<CardType>>(query);
-            foreach (var cardType in cardTypes)
-            {
-                if (cardType.Name == "MasterCard")
-                {
-                    cardType.Name = "Master Card";
-                }
-            }
-            return cardTypes;
-        }
-        public BasketDTO MapOrderToBasket(Order order)
-        {
-            order.Buyer.PaymentMethod.CardExpirationApiFormat();
-            var basketDto = new BasketDTO()
-            {
-                City = order.Address.City,
-                Street = order.Address.Street,
-                State = order.Address.State,
-                Country = order.Address.Country,
-                ZipCode = order.Address.ZipCode,
-                CardNumber = order.Buyer.PaymentMethod.CardNumber,
-                CardHolderName = order.Buyer.PaymentMethod.CardHolderName,
-                CardExpiration = order.Buyer.PaymentMethod.Expiration,
-                CardSecurityNumber = order.Buyer.PaymentMethod.SecurityNumber,
-                CardTypeId = order.Buyer.PaymentMethod.CardTypeId,
-                BuyerName = order.Buyer.Name
-            };
-            return basketDto;
-        }
-
     }
 }

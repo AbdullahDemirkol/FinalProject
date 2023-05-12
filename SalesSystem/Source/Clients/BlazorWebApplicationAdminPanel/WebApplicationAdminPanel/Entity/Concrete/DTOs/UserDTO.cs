@@ -2,25 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WebApplicationAdminPanel.Entity.Concrete.User;
+using WebApplicationAdminPanel.Entity.Concrete.DTOs;
 
 namespace WebApplicationAdminPanel.Entity.Concrete.DTOs
 {
     public class UserDTO
     {
-        public UserDTO()
-        {
-
-        }
-        public int Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string PicturePath { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-        public Role Role { get; set; }
-        public bool Status { get; set; }
+        public User.User UserModel { get; set; }
+        public byte[] ProfilePicture { get; set; }
     }
 }

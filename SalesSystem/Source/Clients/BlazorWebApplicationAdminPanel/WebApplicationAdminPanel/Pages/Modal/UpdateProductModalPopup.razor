@@ -5,19 +5,19 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Ürün Adı</label>
-                    <input type="text" class="form-control" @bind-value="product.Name" name="productName" required />
+                    <input type="text" class="form-control" @bind-value="productDto.Product.Name" name="productName" required />
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Fiyatı</label>
-                    <input type="text" class="form-control" @bind-Value="@product.Price" @bind-Value:event="oninput" required />
+                    <input type="text" class="form-control" @bind-Value="@productDto.Product.Price" @bind-Value:event="oninput" required />
                 </div>
             </div>
         </div>
         <div class="row">
             @{ var p = 1; }
-            @foreach (var picture in product.Pictures)
+            @foreach (var picture in productDto.Product.Pictures)
             {
                 if (!string.IsNullOrEmpty(picture.ImagePath))
                 {
@@ -28,7 +28,7 @@
                                     <label>@p. Resim</label>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <button class="btn btn-danger" style="border-radius:10px;" @onclick="()=>DeletePictureClicked(picture.ImagePath,product.Id)">Resimi sil</button>
+                                    <button class="btn btn-danger" style="border-radius: 10px; margin-bottom: 10px;" @onclick="()=>DeletePictureClicked(picture.ImagePath,productDto.Product.Id)">Resimi sil</button>
                                 </div>
                             </div>
                             <div class="row">
@@ -42,7 +42,7 @@
                 p++;
             }
 
-            @for (int i = 0; i < 3 - product.Pictures.Count(); i++)
+            @for (int i = 0; i < 3 - productDto.Product.Pictures.Count(); i++)
             {
                 <div class="col-md-4">
                     <div class="form-group" style="border: 1px solid black; border-radius: 15px; padding: 15px;">
@@ -61,17 +61,17 @@
         <div class="row">
             <div class="form-group col-md-12">
                 <label>Açıklama</label>
-                <input type="text" class="form-control" @bind-value="product.Description" name="productDescription" required />
+                <input type="text" class="form-control" @bind-value="productDto.Product.Description" required />
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Üst Kategori: </label>
-                    <select @bind="product.UpCategoryId">
+                    <select @bind="productDto.Product.UpCategoryId">
                         @foreach (var upCategory in upCategories)
                         {
-                            if (product.UpCategoryId == upCategory.Id)
+                            if (productDto.Product.UpCategoryId == upCategory.Id)
                             {
                                 <option value="@upCategory.Id" selected>@upCategory.UpCategoryName</option>
                             }
@@ -86,10 +86,10 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Alt Kategori: </label>
-                    <select @bind="product.DownCategoryId">
+                    <select @bind="productDto.Product.DownCategoryId">
                         @foreach (var downCategory in downCategories)
                         {
-                            if (product.DownCategoryId == downCategory.Id)
+                            if (productDto.Product.DownCategoryId == downCategory.Id)
                             {
                                 <option value="@downCategory.Id" selected>@downCategory.DownCategoryName</option>
                             }
@@ -105,10 +105,10 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Markalar: </label>
-                    <select @bind="product.BrandId">
+                    <select @bind="productDto.Product.BrandId">
                         @foreach (var brand in brands)
                         {
-                            if (product.BrandId == brand.Id)
+                            if (productDto.Product.BrandId == brand.Id)
                             {
                                 <option value="@brand.Id" selected>@brand.BrandName</option>
                             }
@@ -124,7 +124,7 @@
     </div>
     <div class="row justify-content-center">
         <div class="d-flex">
-            <button class="btn btn-primary" style="padding: 5px; margin: 0 15px;" @onclick="()=>UpdateClicked(product,productFileImages)">@YesText</button>
+            <button class="btn btn-primary" style="padding: 5px; margin: 0 15px;" @onclick="()=>UpdateProductClicked(productDto)">@YesText</button>
             <button class="btn btn-danger" style="padding: 5px; margin: 0 15px;" @onclick="@CancelClicked">@CancelText</button>
         </div>
     </div>
@@ -142,7 +142,7 @@
     public List<DownCategory> downCategories { get; set; }
     [Inject]
     IProductService _productService { get; set; }
-    List<byte[]> productFileImages = new List<byte[]>();
+    ProductDTO productDto = new ProductDTO();
 
     public int pictureCount = 3;
 
@@ -155,6 +155,8 @@
     }
     protected override void OnInitialized()
     {
+        productDto.Product = product;
+        productDto.ProductImageFiles = new List<byte[]>();
         pictureCount = pictureCount - product.Pictures.Count();
         base.OnInitialized();
     }
@@ -162,10 +164,10 @@
     {
         try
         {
-            if (productFileImages.Count < pictureCount)
+            if ( productDto.ProductImageFiles.Count < pictureCount)
             {
                 var productFileImage = await GetFileBytesAsync(e.File);
-                productFileImages.Add(productFileImage);
+                productDto.ProductImageFiles.Add(productFileImage);
             }
         }
         catch (Exception)
@@ -195,7 +197,7 @@
             throw;
         }
     }
-   
+
 
 
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProductServiceApi.Entity.Concrete.Helper
+namespace OrderServiceApi.Entity.Concrete.Helper
 {
     public class PaginatedViewModel<TEntity> where TEntity : class, new()
     {

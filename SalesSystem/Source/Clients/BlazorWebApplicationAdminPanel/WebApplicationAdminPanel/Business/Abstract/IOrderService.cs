@@ -6,19 +6,14 @@ using WebApplicationAdminPanel.Entity.Concrete;
 using WebApplicationAdminPanel.Entity.Concrete.Basket.Buyer;
 using WebApplicationAdminPanel.Entity.Concrete.Basket.Order;
 using WebApplicationAdminPanel.Entity.Concrete.DTOs;
+using WebApplicationAdminPanel.Entity.Concrete.Helper;
 
 namespace WebApplicationAdminPanel.Business.Abstract
 {
     public interface IOrderService
     {
-        BasketDTO MapOrderToBasket(Order order);
-        Task<List<OrderDTO>> GetOrders(int orderStatusId);
-        Task<List<OrderDTO>> GetOrdersDetailByBuyerName(string buyerName, int orderStatusId);
-        Task<List<PaymentMethod>> GetPaymentMethodsDetailByBuyerName(string buyerName, int cardTypeId);
-        Task<List<OrderDTO>> CancelOrderStatus(Guid orderNumber);
-        Task<List<PaymentMethod>> CancelPaymentMethod(Guid paymentMethodId);
-        Task<List<PaymentMethod>> AddPaymentMethod(PaymentMethod paymentMethod, string userName);
+        Task<PaginatedViewModel<OrderDTO>> GetOrders(int orderStatusId, int pageIndex, int pageSize=6);
         Task<List<OrderStatus>> GetOrderStatuses();
-        Task<List<CardType>> GetCardTypes();
+        void SetOrderStatus(OrderDTO orderDTO,int statusId);
     }
 }

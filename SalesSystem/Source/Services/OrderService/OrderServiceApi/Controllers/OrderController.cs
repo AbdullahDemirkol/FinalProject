@@ -22,7 +22,23 @@ namespace OrderServiceApi.Controllers
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
-
+        [HttpPost("setOrderStatus/{statusId}/buyerName/{buyerName}")]
+        public async Task<IActionResult> SetOrderStatus([FromBody] Guid orderNumber, string buyerName,int statusId)
+        {
+            try
+            {
+                var result = await _mediator.Send(new UpdateOrderStatusCommand(orderNumber, buyerName, OrderStatus.FromId(statusId).Id));
+                if (result)
+                {
+                    return Ok();
+                }
+                return BadRequest();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
         [HttpPost("cancelOrderStatusByBuyer/{buyerName}")]
         public async Task<IActionResult> SetOrderStatusIsCancelledByBuyerName([FromBody]Guid orderNumber,string buyerName)
         {

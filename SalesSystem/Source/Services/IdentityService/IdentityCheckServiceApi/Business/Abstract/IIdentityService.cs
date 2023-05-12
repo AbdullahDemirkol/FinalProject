@@ -19,6 +19,7 @@ namespace IdentityCheckServiceApi.Business.Abstract
         Task<bool> ChangeProfilePicture(byte[] userProfilePicture, string userName);
         string GetProfilePicture(string userName);
         Task<List<Role>> GetRoles(); 
-        Task<bool> AddUser(AddUserModel addUserModel, int roleId);
+        Task<bool> AddUser(UserModelDTO addUserModel, int roleId);
+        Task<bool> UpdateUser(UserModelDTO updateUserModel,string newPas);
     }
 }

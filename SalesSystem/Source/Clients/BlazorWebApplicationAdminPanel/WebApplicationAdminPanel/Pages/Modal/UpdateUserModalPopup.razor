@@ -1,0 +1,211 @@
+﻿@inherits BaseModal
+<form enctype="multipart/form-data">
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Kullanıcı Adı</label>
+                    <input type="text" class="form-control" @bind-value="user.UserModel.Username" placeholder="Kullanıcı Adı" required />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Şifre</label>
+                    <input type="password" class="form-control" value="" @onchange="SetPassword" placeholder="Şifre" required />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>İsim</label>
+                    <input type="text" class="form-control" @bind-value="user.UserModel.FirstName" placeholder="İsim" required />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Soyisim</label>
+                    <input type="text" class="form-control" @bind-value="user.UserModel.LastName" placeholder="Soyisim" required />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+        </div>
+        <div class="row">
+            <div class="col-md-6" style="padding: 0;">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Email Adresi</label>
+                        <input type="email" class="form-control" @bind-value="user.UserModel.Email" placeholder="email@hotmail.com" required />
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Telefon Numarası</label>
+                        <input type="tel" class="form-control" @bind-value="user.UserModel.Phone" placeholder="00000000000" required />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Rolü: </label>
+                        <select @onchange="(e)=>HandleSelectedOption(e)">
+                            @foreach (var role in roles)
+                            {
+                                if (user.UserModel.Role.Id == role.Id)
+                                {
+                                    <option value="@role.Id" selected>@role.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@role.Id">@role.Name</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Statü: </label>
+                        <select @onchange="(e)=>HandleSelectedStatus(e)">
+                            @if (user.UserModel.Status == true)
+                            {
+                                <option value="true" selected>Aktif</option>
+                                <option value="false">Pasif</option>
+                            }
+                            else
+                            {
+                                <option value="true">Aktif</option>
+                                <option value="false" selected>Pasif</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group" style="border: 1px solid black; border-radius: 15px; padding: 15px;">
+                    @if (string.IsNullOrEmpty(user.UserModel.ProfileImagePath))
+                    {
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Profil Resimi</label>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-md-12">
+                                <InputFile OnChange="(e) => HandleSelectedFile(e)" />
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Profil Resimi</label>
+                            </div>
+                            <div class="col-md-6 text-right">
+                                <button class="btn btn-danger" style="margin-bottom: 10px;" @onclick="DeletePicture">Resimi Sil</button>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <div class="col-md-12" style="height: 250px; width: 450px;">
+                                <img style="width:fit-content; height: inherit" src="@("http://localhost:5002/pics" + user.UserModel.ProfileImagePath)" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" @onclick="()=>CancelUser(isDeletePicture)">Kapat</button>
+        
+        <button type="submit" class="btn btn-success" @onclick="()=>UpdateUserClicked(user,newPassword)">Kullanıcıyı Güncelle</button>
+    </div>
+</form>
+@code {
+    [Parameter]
+    public UserDTO user { get; set; }
+    [Parameter]
+    public List<Role> roles { get; set; }
+    [Inject]
+    StateManager stateManager { get; set; }
+    bool isDeletePicture = false;
+    string newPassword =string.Empty;
+
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        Message = parameters.GetValueOrDefault<string>("Message") ?? "No Message Found";
+        YesText = "Güncelle";
+        CancelText = "Kapat";
+        return base.SetParametersAsync(parameters);
+    }
+    protected override void OnInitialized()
+    {
+        if (user != null)
+        {
+            user.UserModel.Phone = '0' + user.UserModel.Phone.Replace(" ", "").Replace("(", "").Replace(")", "");
+        }
+    }
+    protected void DeletePicture()
+    {
+        user.UserModel.ProfileImagePath = "";
+        stateManager.UpdateContent(this, "userPage");
+        isDeletePicture = true;
+    }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
+        }
+    }
+    private async Task StateManager_StateChanged(ComponentBase component, string property)
+    {
+        if (property == "userPage")
+        {
+            await InvokeAsync(StateHasChanged);
+        }
+
+    }
+    private void HandleSelectedOption(ChangeEventArgs e)
+    {
+        int roleId=Convert.ToInt32(e.Value);
+        user.UserModel.Role = roles.FirstOrDefault(p => p.Id == roleId);
+    }
+
+    private void HandleSelectedStatus(ChangeEventArgs e)
+    {
+        var userStatus = Convert.ToBoolean(e.Value);
+        user.UserModel.Status = userStatus;
+    }
+    private void SetPassword(ChangeEventArgs e)
+    {
+        newPassword = e.Value.ToString();
+    }
+    private async void HandleSelectedFile(InputFileChangeEventArgs e)
+    {
+        user.ProfilePicture = await GetFileBytesAsync(e.File);
+    }
+    private async Task<byte[]> GetFileBytesAsync(IBrowserFile formFile)
+    {
+        try
+        {
+            var buffer = new byte[16 * 1024]; // 16KB'lık bir buffer tanımlıyoruz.
+            using (var ms = new MemoryStream())
+            {
+                var stream = formFile.OpenReadStream();
+                int read;
+                while ((read = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                {
+                    await ms.WriteAsync(buffer, 0, read);
+                }
+                return ms.ToArray();
+            }
+        }
+        catch (Exception)
+        {
+            throw;
+        }
+    }
+}

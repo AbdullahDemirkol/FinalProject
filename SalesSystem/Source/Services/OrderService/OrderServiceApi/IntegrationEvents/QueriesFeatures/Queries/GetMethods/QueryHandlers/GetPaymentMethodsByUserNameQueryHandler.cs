@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using OrderServiceApi.DataAccess.Repositories.Abstract;
 using OrderServiceApi.Entity.Concrete.Buyer;
+using OrderServiceApi.Entity.Concrete.Helper;
 using OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetMethods.RequestQueriesModel;
-using ProductServiceApi.Entity.Concrete.Helper;
 using System;
 using System.Collections.Generic;
 using System.Linq;

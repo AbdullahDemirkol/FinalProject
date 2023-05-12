@@ -31,8 +31,6 @@ namespace WebApplicationAdminPanel.Business.Concrete
             _syncLocalStorageService = syncLocalStorageService;
             _authStateProvider = authStateProvider;
         }
-
-
         public async Task<bool> Login(string userName, string password)
         {
             var request = new LoginRequest(userName, password);
@@ -81,13 +79,13 @@ namespace WebApplicationAdminPanel.Business.Concrete
             var expiration = _syncLocalStorageService.GetExpiration();
             return expiration;
         }
-        public UserDTO GetUserModel(string token)
+        public User GetUserModel(string token)
         {
             try
             {
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var securityToken = (JwtSecurityToken)tokenHandler.ReadToken(token);
-                UserDTO userModel = new UserDTO();
+                User userModel = new User();
                 userModel.Username = securityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
                 userModel.FirstName = securityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value.Split(' ')[0];
                 userModel.LastName = securityToken.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value.Split(' ')[1];
@@ -101,10 +99,10 @@ namespace WebApplicationAdminPanel.Business.Concrete
                 return null;
             }
         }
-        public async Task<PaginatedViewModel<UserDTO>> GetUsers(int pageIndex=0,int pageSize=6)
+        public async Task<PaginatedViewModel<User>> GetUsers(int pageIndex=0,int pageSize=6)
         {
             var query =$"auth/users?pageIndex={pageIndex}&pageSize={pageSize}";
-            var user = await _httpClient.GetResponseAsync<PaginatedViewModel<UserDTO>>(query);
+            var user = await _httpClient.GetResponseAsync<PaginatedViewModel<User>>(query);
             return user;
         }
         public async Task<bool> RemoveUser(int userId)
@@ -119,11 +117,25 @@ namespace WebApplicationAdminPanel.Business.Concrete
             var role = await _httpClient.GetResponseAsync<List<Role>>("auth/roles");
             return role;
         }
-        public async Task<bool> AddUser(AddUserModel addUserModel,int roleId)
+        public async Task<bool> AddUser(UserDTO addUserModel,int roleId)
         {
             var query = $"auth/AddUser/{roleId}";
-            var isAddedUser = await _httpClient.PostGetResponseAsync<bool, AddUserModel>(query, addUserModel);
+            var isAddedUser = await _httpClient.PostGetResponseAsync<bool, UserDTO>(query, addUserModel);
             return isAddedUser;
+        }
+        public async Task<bool> UpdateUser(UserDTO updateUserModel, string newPas)
+        {
+            var query = $"auth/UpdateUser/";
+            if (!string.IsNullOrEmpty(newPas))
+            {
+                query += newPas;
+            }
+            else
+            {
+                query += "null";
+            }
+            var isUpdatedUser = await _httpClient.PostGetResponseAsync<bool, UserDTO>(query, updateUserModel);
+            return isUpdatedUser;
         }
     }
 }

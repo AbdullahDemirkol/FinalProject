@@ -27,6 +27,13 @@ using System.Net.Http.Json;
 #line hidden
 #nullable disable
 #nullable restore
+#line 3 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\_Imports.razor"
+using Microsoft.AspNetCore.Components.Forms;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 4 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\_Imports.razor"
 using Microsoft.AspNetCore.Components.Routing;
 
@@ -195,6 +202,13 @@ using Microsoft.AspNetCore.Http.Internal;
 #line hidden
 #nullable disable
 #nullable restore
+#line 30 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\_Imports.razor"
+using System.Text.Json;
+
+#line default
+#line hidden
+#nullable disable
+#nullable restore
 #line 32 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\_Imports.razor"
 using Blazored.Modal;
 
@@ -208,13 +222,6 @@ using Blazored.Modal.Services;
 #line default
 #line hidden
 #nullable disable
-#nullable restore
-#line 2 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\Pages\Order\Orders.razor"
-using Microsoft.AspNetCore.Components.Forms;
-
-#line default
-#line hidden
-#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/orders")]
     public partial class Orders : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -224,29 +231,45 @@ using Microsoft.AspNetCore.Components.Forms;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 184 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\Pages\Order\Orders.razor"
+#line 101 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\Pages\Order\Orders.razor"
        
     [Inject]
     StateManager stateManager { get; set; }
     [Inject]
     IOrderService _orderService { get; set; }
-    List<OrderDTO> _orders = new List<OrderDTO>();
-    List<OrderStatus> _orderStatuses { get; set; } = new List<OrderStatus>();
-    //List<UpCategory> _upCategories = new List<UpCategory>();
-    //List<DownCategory> _downCategories = new List<DownCategory>();
-    //List<Brand> _brands = new List<Brand>();
-    //Product newProduct = new Product();
-    //List<IBrowserFile> formFiles = new List<IBrowserFile>();
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+
+    PaginatedViewModel<OrderDTO> _orders = new PaginatedViewModel<OrderDTO>();
+
+    private int CurPage = 1;
+    protected async void Pagination(int page)
+    {
+        CurPage = page + 1;
+        await GetOrders(0,page);
+    }
+    protected async void NextPage()
+    {
+        int MaxPage = Convert.ToInt32(Math.Round(Convert.ToDouble(_orders.Count / 3)) + 1);
+        if (CurPage < MaxPage)
+        {
+            CurPage++;
+            await GetOrders(0, CurPage - 1);
+        }
+    }
+    protected async void PrevPage()
+    {
+        if (CurPage > 1)
+        {
+            CurPage--;
+            await GetOrders(0,CurPage - 1);
+        }
+    }
 
     protected async override void OnInitialized()
     {
-        //GetUpCategory();
-        //GetDownCategory();
-        //GetBrand();
-        await GetOrders(0);
-        await GetSearchValue();
+        await GetOrders(0,0);
         stateManager.UpdateContent(this, "orderListPage");
-
     }
     protected override void OnAfterRender(bool firstRender)
     {
@@ -263,24 +286,17 @@ using Microsoft.AspNetCore.Components.Forms;
         }
 
     }
-    protected async Task GetOrders(int orderStatusId)
+
+
+    protected async Task GetOrders(int orderStatusId,int pageIndex,int pageSize=6)
     {
-        _orders = await _orderService.GetOrders(orderStatusId);
-        SetOrderStatus(_orders);
-    }
-    protected async Task GetSearchValue()
-    {
-        _orderStatuses = await _orderService.GetOrderStatuses();
-    }
-    private async void DeleteOrder(Guid OrderNumber)
-    {
-        _orders = await _orderService.CancelOrderStatus(OrderNumber);
+        _orders = await _orderService.GetOrders(orderStatusId, pageIndex);
         SetOrderStatus(_orders);
         stateManager.UpdateContent(this, "orderListPage");
     }
-    protected void SetOrderStatus(List<OrderDTO> orderDTOs)
+    protected void SetOrderStatus(PaginatedViewModel<OrderDTO> orderDTOs)
     {
-        foreach (var order in orderDTOs)
+        foreach (var order in orderDTOs.Data)
         {
             if (order.Status == "islemealinildi")
             {
@@ -312,96 +328,12 @@ using Microsoft.AspNetCore.Components.Forms;
             }
         }
     }
-    //protected async void DeleteUser(int userId)
-    //{
-    //    var isSuccess = await _identityService.RemoveUser(userId);
-    //    if (isSuccess)
-    //    {
-    //        //pop-up gösterilicek
-    //        GetOrders();
-    //    }
-    //    else
-    //    {
-    //        //pop-up gösterilicek
-    //    }
-    //}
-    //protected async void GetUpCategory()
-    //{
-    //    _upCategories = await _productService.GetUpCategoryItems();
-    //}
-
-    //protected async void GetDownCategory()
-    //{
-    //    _downCategories = await _productService.GetDownCategoryItems();
-    //}
-
-    //protected async void GetBrand()
-    //{
-    //    _brands = await _productService.GetBrandItems();
-    //}
-    //private void OnPriceChanged(string value)
-    //{
-    //    decimal.TryParse(value, out decimal price);
-    //    if (price != 0)
-    //    {
-    //        newProduct.Price = price;
-    //    }
-    //}
-    //private void HandleSelectedFile(InputFileChangeEventArgs e)
-    //{
-    //    if (!formFiles.Contains(e.File) && formFiles.Count < 3)
-    //    {
-    //        formFiles.Add(e.File);
-    //    }
-    //}
-    //private async Task<IFormFile> ConvertToIFormFile(IBrowserFile file)
-    //{
-    //    using var ms = new MemoryStream();
-    //    await file.OpenReadStream().CopyToAsync(ms);
-
-    //    var convertedFile = new FormFile(
-    //        baseStream: ms,
-    //        baseStreamOffset: 0,
-    //        length: ms.Length,
-    //        name: file.Name,
-    //        fileName: file.Name)
-    //    {
-    //        Headers = new HeaderDictionary(),
-    //        ContentType = file.ContentType
-    //    };
-
-    //    return convertedFile;
-    //}
-    //protected void ClearNewUser()
-    //{
-    //    formFiles = new List<IBrowserFile>();
-    //    //newUser = new User();
-    //}
-    //protected async void AddNewProduct()
-    //{
-    //    if (newProduct.UpCategoryId == 0)
-    //    {
-    //        newProduct.UpCategoryId = 1;
-    //    }
-    //    if (newProduct.DownCategoryId == 0)
-    //    {
-    //        newProduct.DownCategoryId = 1;
-    //    }
-    //    if (newProduct.BrandId == 0)
-    //    {
-    //        newProduct.BrandId = 1;
-    //    }
-    //    var result = await _productService.AddProductItem(newProduct, formFiles);
-    //    if (result == "Ürün Eklenildi.")
-    //    {
-    //        formFiles = new List<IBrowserFile>();
-    //        newProduct = new Product();
-    //        //GetProducts();
-    //        //pop-up gösterilicek
-    //    }
-
-
-    //}
+    public void ShowOrder(OrderDTO order)
+    {
+        string jsonParameter = JsonSerializer.Serialize(order);
+        Uri uri = navigationManager.ToAbsoluteUri($"orderItem/{Uri.EscapeDataString(jsonParameter)}");
+        navigationManager.NavigateTo(uri.ToString());
+    }
 
 #line default
 #line hidden
