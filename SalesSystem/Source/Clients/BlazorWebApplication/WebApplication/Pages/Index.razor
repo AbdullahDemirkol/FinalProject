@@ -131,13 +131,33 @@
     string message { get; set; }
     bool showNotification { get; set; } = false;
 
+    public void AccessControl()
+    {
+        bool isLoggedIn = identityService.IsLoggedIn;
+        if (isLoggedIn)
+        {
+            var stringDate = identityService.GetUserExpiration();
+            DateTime loggedTime = DateTime.Parse(stringDate);
+            DateTime nowDateTime = DateTime.Now;
+
+            TimeSpan timeDifference = loggedTime - nowDateTime;
+
+            if (timeDifference.TotalMinutes < -5)
+            {
+                identityService.Logout();
+                stateManager.LoginChanged(this);
+                //navigationManager.NavigateTo($"logout?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
+            }
+        }
+    }
     protected async override void OnInitialized()
     {
+        AccessControl();
         await GetProducts();
     }
     protected async Task GetProducts()
     {
-        var inComingProducts = await productService.GetProductsItem(0, 3);
+        var inComingProducts = await productService.GetProductsItem(0,0,0,0, 3);
         _products = inComingProducts.Data;
         _productCount = inComingProducts.Count;
         stateManager.UpdateContent(this, "HomePage");

@@ -1,13 +1,14 @@
-﻿<div class="col-lg-4 col-md-6 text-center">
+﻿
+<div class="col-lg-4 col-md-6 text-center">
     <div class="single-product-item">
         <div class="product-image">
             @if (ProductItem.Pictures.Count != 0)
             {
-                <a href="#"><img src="@("http://localhost:5001/pics" + ProductItem.Pictures[0].ImagePath)" style="height:300px;" alt=""></a>
+                <a href="/ProductDetail/@ProductItem.Id"><img src="@("http://localhost:5001/pics" + ProductItem.Pictures[0].ImagePath)" style="height:300px;" alt=""></a>
             }
             else
             {
-                <a href="#"><img src="assets/img/default-product.png" alt=""></a>
+                <a href="/ProductDetail/@ProductItem.Id"><img src="assets/img/default-product.png" style="width: 261px;height: 300px;" alt=""></a>
             }
         </div>
         <h3>@ProductItem.Name</h3>
@@ -32,14 +33,8 @@
     NavigationManager navigationManager { get; set; }
     [Inject]
     IJSRuntime jsRuntime { get; set; }
+    
 
-    @*private async void GoToProductDetail(Product product)
-        {
-            @using Newtonsoft.Json
-            var json = JsonConvert.SerializeObject(product);
-            await jsRuntime.InvokeVoidAsync("localStorage.setItem", "product", json);
-            navigationManager.NavigateTo("/ProductDetail"+);
 
-        }*@
 
 }

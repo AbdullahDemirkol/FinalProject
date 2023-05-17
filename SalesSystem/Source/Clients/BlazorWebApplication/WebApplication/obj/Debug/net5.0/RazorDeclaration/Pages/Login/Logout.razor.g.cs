@@ -226,17 +226,23 @@ using System.Web;
 #nullable restore
 #line 8 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\Login\Logout.razor"
        
+
     [Inject]
     IIdentityService identityService { get; set; }
 
     [Inject]
     NavigationManager navigationManager { get; set; }
 
+    [Inject]
+    StateManager stateManager{ get; set; }
 
     protected override void OnInitialized()
     {
         identityService.Logout();
+        //var collection = HttpUtility.ParseQueryString(new Uri(navigationManager.Uri).Query);
+        //string retunUrl = collection.Get("returnUrl") ?? "/";
         navigationManager.NavigateTo(navigationManager.BaseUri);
+        stateManager.LoginChanged(this);
     }
 
 #line default

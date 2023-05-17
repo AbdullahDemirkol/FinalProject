@@ -223,7 +223,7 @@ using System.Text.RegularExpressions;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 25 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\Product\Products\ProductView.razor"
+#line 26 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\Product\Products\ProductView.razor"
        
 
     [Parameter]
@@ -234,8 +234,10 @@ using System.Text.RegularExpressions;
     NavigationManager navigationManager { get; set; }
     [Inject]
     IJSRuntime jsRuntime { get; set; }
-
     
+
+
+
 
 #line default
 #line hidden

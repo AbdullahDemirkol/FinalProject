@@ -3,8 +3,7 @@
     <span>@Message</span>
 </div>
 
-@*<style>
-    /* Bildirim container'ı için stil */
+<style>
     .notification-container {
         position: fixed;
         bottom: 10px; /* alt kenardan 10px uzaklıkta */
@@ -12,25 +11,23 @@
         z-index: 9999; /* Diğer içeriklerin üzerinde görüntülenmesi için yüksek z-index değeri */
     }
 
-    /* Bildirim bileşeni için stil */
     .notification {
         padding: 10px;
         border-radius: 5px;
         font-size: 16px;
         color: #fff;
-        width: 200px; /* Bildirim genişliğini isteğe bağlı olarak ayarlayabilirsiniz */
+        width: 300px;
+        text-align: center;
     }
 
-        /* Başarılı bildirim stil */
-        .notification.success {
-            background-color: #4CAF50;
-        }
+    .success {
+        background-color: #4CAF50;
+    }
 
-        /* Başarısız bildirim stil */
-        .notification.error {
-            background-color: #F44336;
-        }
-</style>*@
+    .notification.error {
+        background-color: purple;
+    }
+</style>
 @code {
     [Parameter]
     public string Message { get; set; }

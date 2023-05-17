@@ -105,8 +105,11 @@
     IOrderService _orderService { get; set; }
     [Inject]
     NavigationManager navigationManager { get; set; }
+    [Inject]
+    IIdentityService _identityService { get; set; }
 
     PaginatedViewModel<OrderDTO> _orders = new PaginatedViewModel<OrderDTO>();
+    bool isLoggedIn = false;
 
     private int CurPage = 1;
     protected async void Pagination(int page)
@@ -132,8 +135,27 @@
         }
     }
 
+
+    public void AccessControl()
+    {
+        isLoggedIn = _identityService.IsLoggedIn;
+        if (isLoggedIn)
+        {
+            var stringDate = _identityService.GetUserExpiration();
+            DateTime loggedTime = DateTime.Parse(stringDate);
+            DateTime nowDateTime = DateTime.Now;
+
+            TimeSpan timeDifference = loggedTime - nowDateTime;
+
+            if (timeDifference.TotalMinutes < -5)
+            {
+                navigationManager.NavigateTo($"logout");
+            }
+        }
+    }
     protected async override void OnInitialized()
     {
+        AccessControl();
         await GetOrders(0,0);
         stateManager.UpdateContent(this, "orderListPage");
     }

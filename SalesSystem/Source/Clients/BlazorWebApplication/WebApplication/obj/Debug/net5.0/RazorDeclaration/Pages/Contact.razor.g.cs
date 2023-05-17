@@ -228,6 +228,35 @@ using System.Text.RegularExpressions;
        
     [Inject]
     public IJSRuntime jsRuntime { get; set; }
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+    [Inject]
+    StateManager stateManager { get; set; }
+    [Inject]
+    IIdentityService identityService { get; set; }
+    public void AccessControl()
+    {
+        bool isLoggedIn = identityService.IsLoggedIn;
+        if (isLoggedIn)
+        {
+            var stringDate = identityService.GetUserExpiration();
+            DateTime loggedTime = DateTime.Parse(stringDate);
+            DateTime nowDateTime = DateTime.Now;
+
+            TimeSpan timeDifference = loggedTime - nowDateTime;
+
+            if (timeDifference.TotalMinutes < -5)
+            {
+                identityService.Logout();
+                stateManager.LoginChanged(this);
+                //navigationManager.NavigateTo($"logout?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
+            }
+        }
+    }
+    protected override void OnInitialized()
+    {
+        AccessControl();
+    }
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)

@@ -857,7 +857,7 @@ a.mobile-show {
 .footer-area {
   background-color: #051922;
   color: #fff;
-  padding: 150px 0;
+  padding: 100px 0;
 }
 
 h2.widget-title {
@@ -2295,7 +2295,7 @@ ul.social-link-team li a {
   top: 2px;
 }
 
-.contact-form-box p {
+.contact-form-box>div>p {
   line-height: 1.8;
   opacity: 0.8;
 }

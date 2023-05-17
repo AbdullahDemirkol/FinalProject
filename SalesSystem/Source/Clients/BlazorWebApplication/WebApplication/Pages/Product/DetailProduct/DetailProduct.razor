@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-lg-8 offset-lg-2 text-center">
                 <div class="breadcrumb-text">
-                    <p>See more Details</p>
+                    <p>E-Ticaret Websitesi</p>
                     <h1>Ürün Detayı</h1>
                 </div>
             </div>
@@ -21,7 +21,14 @@
                 <div class="single-product-img">
                     @if (productItem.Pictures != null)
                     {
-                        <img src="@("http://localhost:5001/pics" + productItem.Pictures[0].ImagePath)" alt="">
+                        @if (productItem.Pictures.Count() > 0)
+                        {
+                            <img src="@("http://localhost:5001/pics" + productItem.Pictures[0].ImagePath)" alt="">
+                        }
+                        else
+                        {
+                            <img src="assets/img/default-product.png" alt="">
+                        }
                     }
                     else
                     {
@@ -78,11 +85,13 @@
                             <div class="product-image">
                                 @if (similarPoductItem.Pictures.Count != 0)
                                 {
-                                    <a href="#"><img src="@("http://localhost:5001/pics" + similarPoductItem.Pictures[0].ImagePath)" style="height:300px;" alt=""></a>
+                                    <a @onclick="()=>GoDetailProduct(similarPoductItem.Id)"><img src="@("http://localhost:5001/pics" + similarPoductItem.Pictures[0].ImagePath)" style="height:300px;" alt=""></a>
                                 }
                                 else
                                 {
-                                    <a href="#"><img src="assets/img/default-product.png" alt=""></a>
+                                    //href = "/ProductDetail/@similarPoductItem.Id"
+                                    @*@onclick= "()=>GoDetailProduct(similarPoductItem.Id)"*@
+                                    <a @onclick="()=>GoDetailProduct(similarPoductItem.Id)"><img src="assets/img/default-product.png" style="width: 261px;height: 300px;" alt=""></a>
                                 }
                             </div>
                             <h3>@similarPoductItem.Name</h3>
@@ -91,8 +100,10 @@
                             <h3>@similarPoductItem.DownCategory.DownCategoryName</h3>
 
                             <p class="product-price"><span>Fiyatı</span> @similarPoductItem.Price.ToString("N2") TL </p>
-                            <a class="cart-btn" @onclick="()=>GoDetailProduct(similarPoductItem.Id)" href="/ProductDetail/@similarPoductItem.Id">Ürünü İncele</a>
+                            <a class="cart-btn" @onclick="()=>GoDetailProduct(similarPoductItem.Id)">Ürünü İncele</a>
                             <a class="cart-btn" @onclick="()=>AddToCart(similarPoductItem,1)">@*<i class="fas fa-shopping-cart"></i>*@ Sepete Ekle</a>
+                            @*@onclick="()=>GoDetailProduct(similarPoductItem.Id)" href="/ProductDetail/@similarPoductItem.Id"*@
+                            @*href="/ProductDetail/@similarPoductItem.Id"*@
                         </div>
                     </div>
                 }
@@ -131,12 +142,36 @@
     string message { get; set; }
     bool showNotification { get; set; } = false;
 
-    protected async override void OnInitialized()
+    public void AccessControl()
     {
+        bool isLoggedIn = identityService.IsLoggedIn;
+        if (isLoggedIn)
+        {
+            var stringDate = identityService.GetUserExpiration();
+            DateTime loggedTime = DateTime.Parse(stringDate);
+            DateTime nowDateTime = DateTime.Now;
+
+            TimeSpan timeDifference = loggedTime - nowDateTime;
+
+            if (timeDifference.TotalMinutes < -5)
+            {
+                identityService.Logout();
+                stateManager.LoginChanged(this);
+                //navigationManager.NavigateTo($"logout?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
+            }
+        }
+    }
+    protected async override Task OnInitializedAsync()
+    {
+        AccessControl();
         await GetProduct();
         await SimilarPoductItem();
         stateManager.UpdateContent(this, "ProductDetail");
     }
+    //protected async override void OnInitialized()
+    //{
+    //    //Task.Delay(2000);
+    //}
     protected async Task GetProduct()
     {
         var listProduct = await productService.GetProductItem(productId);
@@ -144,8 +179,8 @@
     }
     protected async Task SimilarPoductItem()
     {
-        var listProduct = await productService.GetProductItemByUpCategories(productItem.UpCategory, 0, 3);
-        similarPoductsItem = (List<Product>)listProduct.Data;
+        var listProduct = await productService.GetSimilarProductsItem(productItem.Id);
+        similarPoductsItem = listProduct;
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -167,8 +202,8 @@
         this.productId = productId;
         await GetProduct();
         await SimilarPoductItem();
+        navigationManager.NavigateTo("/ProductDetail/" + productId);
         stateManager.UpdateContent(this, "ProductDetail");
-
     }
 
     private void UpdateProductQuantity(ChangeEventArgs e)
@@ -180,7 +215,7 @@
 
         if (!identityService.IsLoggedIn)
         {
-            navigationManager.NavigateTo(navigationManager.BaseUri + "login?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
+            navigationManager.NavigateTo(navigationManager.BaseUri + $"login?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
             return;
         }
         (bool,int) addResult;

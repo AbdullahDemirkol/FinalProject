@@ -441,7 +441,6 @@ C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicatio
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\obj\Debug\net5.0\RazorDeclaration\App.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\obj\Debug\net5.0\RazorDeclaration\Pages\About.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\obj\Debug\net5.0\RazorDeclaration\Pages\Basket\Basket.razor.g.cs
-C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\obj\Debug\net5.0\RazorDeclaration\Pages\Basket\BasketPage.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\obj\Debug\net5.0\RazorDeclaration\Pages\Index.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\obj\Debug\net5.0\RazorDeclaration\Pages\Login\Logout.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\obj\Debug\net5.0\RazorDeclaration\Pages\Order\CreateOrder.razor.g.cs
@@ -460,7 +459,6 @@ C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicatio
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\obj\Debug\net5.0\Razor\App.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\obj\Debug\net5.0\Razor\Pages\About.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\obj\Debug\net5.0\Razor\Pages\Basket\Basket.razor.g.cs
-C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\obj\Debug\net5.0\Razor\Pages\Basket\BasketPage.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\obj\Debug\net5.0\Razor\Pages\Index.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\obj\Debug\net5.0\Razor\Pages\Login\Logout.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\obj\Debug\net5.0\Razor\Pages\Order\CreateOrder.razor.g.cs
@@ -724,3 +722,4 @@ C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicatio
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\obj\Debug\net5.0\RazorDeclaration\Pages\Modal\Notification.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\obj\Debug\net5.0\Razor\Pages\Modal\Notification.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\obj\Debug\net5.0\WebApplication.csproj.AssemblyReference.cache
+C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\obj\Debug\net5.0\scopedcss\Pages\Product\Products\Products.razor.rz.scp.css

@@ -301,10 +301,27 @@ using System.Text.RegularExpressions;
         Pagination(0, CurOrderStatus);
     }
 
-
-    protected async override Task OnInitializedAsync()
+    public void AccessControl()
     {
         isLoggedIn = identityService.IsLoggedIn;
+        if (isLoggedIn)
+        {
+            var stringDate = identityService.GetUserExpiration();
+            DateTime loggedTime = DateTime.Parse(stringDate);
+            DateTime nowDateTime = DateTime.Now;
+
+            TimeSpan timeDifference = loggedTime - nowDateTime;
+
+            if (timeDifference.TotalMinutes < -5)
+            {
+                identityService.Logout();
+                isLoggedIn = identityService.IsLoggedIn;
+            }
+        }
+    }
+    protected async override Task OnInitializedAsync()
+    {
+        AccessControl();
         if (!isLoggedIn)
         {
             navigationManager.NavigateTo($"login?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);

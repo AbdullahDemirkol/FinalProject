@@ -224,7 +224,7 @@ using System.Text.RegularExpressions;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 111 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\Product\DetailProduct\DetailProduct.razor"
+#line 122 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\Product\DetailProduct\DetailProduct.razor"
        
     [Inject]
     NavigationManager navigationManager { get; set; }
@@ -248,12 +248,36 @@ using System.Text.RegularExpressions;
     string message { get; set; }
     bool showNotification { get; set; } = false;
 
-    protected async override void OnInitialized()
+    public void AccessControl()
     {
+        bool isLoggedIn = identityService.IsLoggedIn;
+        if (isLoggedIn)
+        {
+            var stringDate = identityService.GetUserExpiration();
+            DateTime loggedTime = DateTime.Parse(stringDate);
+            DateTime nowDateTime = DateTime.Now;
+
+            TimeSpan timeDifference = loggedTime - nowDateTime;
+
+            if (timeDifference.TotalMinutes < -5)
+            {
+                identityService.Logout();
+                stateManager.LoginChanged(this);
+                //navigationManager.NavigateTo($"logout?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
+            }
+        }
+    }
+    protected async override Task OnInitializedAsync()
+    {
+        AccessControl();
         await GetProduct();
         await SimilarPoductItem();
         stateManager.UpdateContent(this, "ProductDetail");
     }
+    //protected async override void OnInitialized()
+    //{
+    //    //Task.Delay(2000);
+    //}
     protected async Task GetProduct()
     {
         var listProduct = await productService.GetProductItem(productId);
@@ -261,8 +285,8 @@ using System.Text.RegularExpressions;
     }
     protected async Task SimilarPoductItem()
     {
-        var listProduct = await productService.GetProductItemByUpCategories(productItem.UpCategory, 0, 3);
-        similarPoductsItem = (List<Product>)listProduct.Data;
+        var listProduct = await productService.GetSimilarProductsItem(productItem.Id);
+        similarPoductsItem = listProduct;
     }
 
     protected override void OnAfterRender(bool firstRender)
@@ -284,8 +308,8 @@ using System.Text.RegularExpressions;
         this.productId = productId;
         await GetProduct();
         await SimilarPoductItem();
+        navigationManager.NavigateTo("/ProductDetail/" + productId);
         stateManager.UpdateContent(this, "ProductDetail");
-
     }
 
     private void UpdateProductQuantity(ChangeEventArgs e)
@@ -297,7 +321,7 @@ using System.Text.RegularExpressions;
 
         if (!identityService.IsLoggedIn)
         {
-            navigationManager.NavigateTo(navigationManager.BaseUri + "login?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
+            navigationManager.NavigateTo(navigationManager.BaseUri + $"login?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
             return;
         }
         (bool,int) addResult;

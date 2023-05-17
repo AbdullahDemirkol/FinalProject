@@ -28,7 +28,7 @@ namespace ProductServiceApi.Controllers
 
         [HttpGet]
         [Route("products")]
-        public async Task<IActionResult> ProductAsync(int pageSize = 6, int pageIndex = 0, string ids = null)
+        public async Task<IActionResult> ProductAsync(int upCategoryId, int downCategoryId, int brandId, int pageSize = 6, int pageIndex = 0, string ids = null)
         {
             if (!string.IsNullOrEmpty(ids))
             {
@@ -39,9 +39,16 @@ namespace ProductServiceApi.Controllers
                 }
                 return Ok(products);
             }
-            var totalProductCount = await _productContext.Products.LongCountAsync();
+            var productQuery = _productContext.Products
+                    .Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Include(p => p.Pictures)
+                    .Where(p => upCategoryId != 0 ? p.UpCategoryId == upCategoryId : true)
+                    .Where(p => downCategoryId != 0 ? p.DownCategoryId == downCategoryId : true)
+                    .Where(p => brandId != 0 ? p.BrandId == brandId : true);
+            
+            var totalProductCount = await productQuery.LongCountAsync();
 
-            var productsOnPage = await _productContext.Products.Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Include(p=>p.Pictures).OrderBy(p => p.Name).Skip(pageSize * pageIndex).Take(pageSize).ToListAsync();
+            var productsOnPage = await productQuery.OrderBy(p => p.Name).Skip(pageSize * pageIndex).Take(pageSize).ToListAsync();
+
 
             var model = new PaginatedViewModel<Product>(pageIndex, pageSize, (int)totalProductCount, productsOnPage);
 
@@ -205,6 +212,31 @@ namespace ProductServiceApi.Controllers
             return Ok(model);
         }
 
+        [HttpGet]
+        [Route("getSimilarProducts")]
+        public async Task<IActionResult> SimilarProducts(int productId)
+        {
+            var product = _productContext.Products.FirstOrDefault(p => p.Id == productId);
+            var similarProducts = await _productContext.Products.Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Include(p => p.Pictures).Where(p => p.UpCategoryId == product.UpCategoryId).ToListAsync();
+            similarProducts.Remove(product); 
+
+            Random random = new Random();
+            List<Product> selectedSimilarProducts = new List<Product>();
+
+            if (similarProducts.Count>3)
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    int randomIndex = random.Next(similarProducts.Count);
+                    var selectedSimilarProduct = similarProducts[randomIndex];
+                    selectedSimilarProducts.Add(selectedSimilarProduct);
+                    similarProducts.Remove(selectedSimilarProduct);
+                }
+                return Ok(selectedSimilarProducts);
+            }
+            return Ok(similarProducts);
+
+        }
 
 
         //----------------------------------------------------------------------------------------------------------

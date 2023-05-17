@@ -254,18 +254,40 @@ using System.ComponentModel.DataAnnotations;
     PaginatedViewModel<PaymentMethod> _paymentMethods = new PaginatedViewModel<PaymentMethod>();
 
 
-    protected async override Task OnInitializedAsync()
+    public void AccessControl()
     {
         isLoggedIn = identityService.IsLoggedIn;
+        if (isLoggedIn)
+        {
+            var stringDate = identityService.GetUserExpiration();
+            DateTime loggedTime = DateTime.Parse(stringDate);
+            DateTime nowDateTime = DateTime.Now;
+
+            TimeSpan timeDifference = loggedTime - nowDateTime;
+
+            if (timeDifference.TotalMinutes < -5)
+            {
+                identityService.Logout();
+                isLoggedIn = identityService.IsLoggedIn;
+                //stateManager.LoginChanged(this);
+                //navigationManager.NavigateTo($"logout?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
+            }
+        }
+    }
+    protected async override Task OnInitializedAsync()
+    {
+        AccessControl();
         if (!isLoggedIn)
         {
             navigationManager.NavigateTo($"login?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
         }
+        else
+        {
 
-        _customerBasket = await basketService.GetBasket();
-        _paymentMethods = await orderService.GetPaymentMethodsDetailByBuyerName(identityService.GetUsername(),0, 0);
-
-        await jsRuntime.InvokeVoidAsync("myFunction");
+            _customerBasket = await basketService.GetBasket();
+            _paymentMethods = await orderService.GetPaymentMethodsDetailByBuyerName(identityService.GetUsername(), 0, 0);
+            await jsRuntime.InvokeVoidAsync("myFunction");
+        }
     }
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

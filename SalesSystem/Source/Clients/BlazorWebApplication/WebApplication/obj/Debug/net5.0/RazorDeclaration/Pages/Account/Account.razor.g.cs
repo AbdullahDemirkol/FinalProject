@@ -247,10 +247,28 @@ using System.Text.RegularExpressions;
     PaginatedViewModel<PaymentMethod> _paymentMethodModels { get; set; } = new PaginatedViewModel<PaymentMethod>();
 
     IBrowserFile pictureFiles;
-
-    protected override void OnInitialized()
+    
+    public void AccessControl()
     {
         isLoggedIn = identityService.IsLoggedIn;
+        if (isLoggedIn)
+        {
+            var stringDate = identityService.GetUserExpiration();
+            DateTime loggedTime = DateTime.Parse(stringDate);
+            DateTime nowDateTime = DateTime.Now;
+
+            TimeSpan timeDifference = loggedTime - nowDateTime;
+
+            if (timeDifference.TotalMinutes < -5)
+            {
+                identityService.Logout();
+                isLoggedIn = identityService.IsLoggedIn;
+            }
+        }
+    }
+    protected override void OnInitialized()
+    {
+        AccessControl();
         if (!isLoggedIn)
         {
             navigationManager.NavigateTo($"login?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);

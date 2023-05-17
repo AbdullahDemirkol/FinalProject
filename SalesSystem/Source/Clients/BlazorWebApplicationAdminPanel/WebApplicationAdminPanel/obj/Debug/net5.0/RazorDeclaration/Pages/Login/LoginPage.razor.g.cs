@@ -230,7 +230,7 @@ using Blazored.Modal.Services;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 22 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\Pages\Login\LoginPage.razor"
+#line 34 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\Pages\Login\LoginPage.razor"
        
     [Inject]
     private IIdentityService _identityService { get; set; }
@@ -239,16 +239,43 @@ using Blazored.Modal.Services;
     StateManager stateManager { get; set; }
     [Inject]
     NavigationManager navigationManager { get; set; }
+
+    bool isSuccess { get; set; }
+    string message { get; set; }
+    bool showNotification { get; set; } = false;
+
     private async Task loginProcess()
     {
         var result = await _identityService.Login(loginRequest.UserName, loginRequest.Password);
         if (result)
         {
-            //stateManager.LoginChanged(this);
-            var collection = HttpUtility.ParseQueryString(new Uri(navigationManager.Uri).Query);
-            string retunUrl = collection.Get("returnUrl") ?? "/";
-            navigationManager.NavigateTo(retunUrl);
+            LoginNotification(result, "Giriş Başarılı. Lütfen Bekleyiniz.");
+            await Task.Delay(2000);
+            //var collection = HttpUtility.ParseQueryString(new Uri(navigationManager.Uri).Query);
+            //string retunUrl = collection.Get("returnUrl") ?? "/";
+            navigationManager.NavigateTo("/");
         }
+        else
+        {
+            LoginNotification(result, "Giriş Başarısız.");
+        }
+    }
+    private async void LoginNotification(bool success,string message)
+    {
+        isSuccess = success ;
+        this.message = message;
+        showNotification = true;
+        await InvokeAsync(StateHasChanged);
+        //stateManager.UpdateContent(this, "LoginPage");
+
+        await Task.Delay(2000).ContinueWith(t =>
+        {
+            isSuccess = false;
+            message = "";
+            showNotification = false;
+            InvokeAsync(StateHasChanged);
+            //stateManager.UpdateContent(this, "LoginPage");
+        });
     }
 
 

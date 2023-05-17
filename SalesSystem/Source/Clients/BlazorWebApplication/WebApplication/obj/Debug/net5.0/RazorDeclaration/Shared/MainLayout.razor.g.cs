@@ -222,6 +222,46 @@ using System.Text.RegularExpressions;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 9 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Shared\MainLayout.razor"
+       
+
+    //[Inject]
+    //NavigationManager navigationManager { get; set; }
+    //[Inject]
+    //IProductService productService { get; set; }
+    //[Inject]
+    //IIdentityService identityService { get; set; }
+    //[Inject]
+    //StateManager stateManager { get; set; }
+
+    //private bool isLoggedIn = false;
+
+    //public void AccessControl()
+    //{
+    //    isLoggedIn = identityService.IsLoggedIn;
+    //    if (isLoggedIn)
+    //    {
+    //        var stringDate = identityService.GetUserExpiration();
+    //        DateTime loggedTime = DateTime.Parse(stringDate);
+    //        DateTime nowDateTime = DateTime.Now;
+
+    //        TimeSpan timeDifference = loggedTime - nowDateTime;
+
+    //        if (timeDifference.TotalMinutes < 9)
+    //        {
+    //            navigationManager.NavigateTo($"logout?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
+    //        }
+    //    }
+    //}
+    //protected override void OnInitialized()
+    //{
+    //    AccessControl();
+    //}
+
+#line default
+#line hidden
+#nullable disable
     }
 }
 #pragma warning restore 1591

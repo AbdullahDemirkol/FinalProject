@@ -12,7 +12,6 @@
                 <button class="main-btn" @onclick="GoUserPanel">Kullanıcı Paneli</button>
                 <button class="main-btn" @onclick="GoLogoutPage">Logout</button>
 
-                @*<a href="http://blazor.net" target="_blank" class="ml-md-auto">Logout</a>*@
             </div>
 
             <div class="content px-4">
@@ -21,7 +20,8 @@
         </div>
     </div>
 }
-else { 
+else 
+{ 
    <WebApplicationAdminPanel.Pages.Login.LoginPage></WebApplicationAdminPanel.Pages.Login.LoginPage>
 }
 @code{
@@ -32,28 +32,15 @@ else {
     StateManager stateManager { get; set; }
     [Inject]
     NavigationManager navigationManager { get; set; }
-    protected override Task OnInitializedAsync()
-    {
-        isLoggedIn = _identityService.IsLoggedIn;
-        return base.OnInitializedAsync();
-    }
     protected override void OnInitialized()
     {
         isLoggedIn = _identityService.IsLoggedIn;
     }
     protected override void OnAfterRender(bool firstRender)
     {
-        isLoggedIn = _identityService.IsLoggedIn;
         if (firstRender)
         {
             stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
-        }
-        var collection = HttpUtility.ParseQueryString(new Uri(navigationManager.Uri).Query);
-        string retunUrl = collection.Get("logout") ?? "/";
-        if (retunUrl=="true")
-        {
-            stateManager.LoginChanged(this);
-            navigationManager.NavigateTo(navigationManager.BaseUri);
         }
     }
 
@@ -61,6 +48,7 @@ else {
     {
         if (property== "login")
         {
+            isLoggedIn = _identityService.IsLoggedIn;
             await InvokeAsync(StateHasChanged);
         }
     }
@@ -70,6 +58,6 @@ else {
     }
     private void GoUserPanel()
     {
-        navigationManager.NavigateTo("https://localhost:44345/");
+        navigationManager.NavigateTo(navigationManager.BaseUri);
     }
 }

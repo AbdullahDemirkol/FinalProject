@@ -6,6 +6,41 @@
 </div>
 <Footer />
 
+@code{ 
+
+    //[Inject]
+    //NavigationManager navigationManager { get; set; }
+    //[Inject]
+    //IProductService productService { get; set; }
+    //[Inject]
+    //IIdentityService identityService { get; set; }
+    //[Inject]
+    //StateManager stateManager { get; set; }
+
+    //private bool isLoggedIn = false;
+
+    //public void AccessControl()
+    //{
+    //    isLoggedIn = identityService.IsLoggedIn;
+    //    if (isLoggedIn)
+    //    {
+    //        var stringDate = identityService.GetUserExpiration();
+    //        DateTime loggedTime = DateTime.Parse(stringDate);
+    //        DateTime nowDateTime = DateTime.Now;
+
+    //        TimeSpan timeDifference = loggedTime - nowDateTime;
+
+    //        if (timeDifference.TotalMinutes < 9)
+    //        {
+    //            navigationManager.NavigateTo($"logout?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
+    //        }
+    //    }
+    //}
+    //protected override void OnInitialized()
+    //{
+    //    AccessControl();
+    //}
+}
 <!--<div class="page">-->
 @*<nav class="navbar navbar-expand-lg navbar-light bg-light">
         <NavMenu />

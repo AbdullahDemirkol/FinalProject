@@ -239,15 +239,14 @@ using Microsoft.AspNetCore.Components.Forms;
     IIdentityService _identityService { get; set; }
     [Inject]
     ModalManager modalManager { get; set; }
+    [Inject]
+    NavigationManager navigationManager { get; set; }
 
     PaginatedViewModel<User> _users = new PaginatedViewModel<User>();
-    //List<UpCategory> _upCategories = new List<UpCategory>();
-    //List<DownCategory> _downCategories = new List<DownCategory>();
-    //List<Brand> _brands = new List<Brand>();
-    //Product newProduct = new Product();
     List<Role> _roles = new List<Role>();
     UserDTO newUser = new UserDTO() { UserModel=new User() };
     int role = 1;
+    bool isLoggedIn = false;
 
     private int CurPage = 1;
     protected void Pagination(int page)
@@ -272,8 +271,28 @@ using Microsoft.AspNetCore.Components.Forms;
             GetUsers(CurPage - 1);
         }
     }
+
+    public void AccessControl()
+    {
+        isLoggedIn = _identityService.IsLoggedIn;
+        if (isLoggedIn)
+        {
+            var stringDate = _identityService.GetUserExpiration();
+            DateTime loggedTime = DateTime.Parse(stringDate);
+            DateTime nowDateTime = DateTime.Now;
+
+            TimeSpan timeDifference = loggedTime - nowDateTime;
+
+            if (timeDifference.TotalMinutes < -5)
+            {
+                navigationManager.NavigateTo($"logout");
+            }
+        }
+    }
+
     protected async override Task OnInitializedAsync()
     {
+        AccessControl();
         await GetRoles();
         GetUsers(0, 6);
     }

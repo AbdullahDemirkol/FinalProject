@@ -1,7 +1,6 @@
 window.myFunction = function () {
     (function ($) {
         "use strict";
-
         function formatInputValue(input) {
             var inputValue = input.value;
             // Girilen deðeri sadece sayýlar ve nokta karakteri içerecek þekilde filtrele

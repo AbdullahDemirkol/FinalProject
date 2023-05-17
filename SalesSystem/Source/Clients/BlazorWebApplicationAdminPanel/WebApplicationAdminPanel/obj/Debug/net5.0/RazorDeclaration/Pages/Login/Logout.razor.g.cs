@@ -242,11 +242,11 @@ using Blazored.Modal.Services;
     [Inject]
     StateManager stateManager { get; set; }
 
-
     protected override void OnInitialized()
     {
         identityService.Logout();
-        navigationManager.NavigateTo(navigationManager.BaseUri+"?logout=true");
+        stateManager.UpdateContent(this, "login");
+        navigationManager.NavigateTo(navigationManager.BaseUri);
     }
 
 #line default

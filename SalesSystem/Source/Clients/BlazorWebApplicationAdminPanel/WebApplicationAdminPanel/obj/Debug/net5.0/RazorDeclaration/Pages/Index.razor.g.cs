@@ -230,6 +230,45 @@ using Blazored.Modal.Services;
         {
         }
         #pragma warning restore 1998
+#nullable restore
+#line 3 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\Pages\Index.razor"
+       
+
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+    [Inject]
+    IIdentityService _identityService { get; set; }
+    bool isLoggedIn = false;
+
+    public void AccessControl()
+    {
+        isLoggedIn = _identityService.IsLoggedIn;
+        if (isLoggedIn)
+        {
+            var stringDate = _identityService.GetUserExpiration();
+            DateTime loggedTime = DateTime.Parse(stringDate);
+            DateTime nowDateTime = DateTime.Now;
+
+            TimeSpan timeDifference = loggedTime - nowDateTime;
+
+            if (timeDifference.TotalMinutes < -5)
+            {
+                navigationManager.NavigateTo($"logout");
+            }
+        }
+    }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        AccessControl();
+    }
+    protected override void OnInitialized()
+    {
+        AccessControl();
+    }
+
+#line default
+#line hidden
+#nullable disable
     }
 }
 #pragma warning restore 1591

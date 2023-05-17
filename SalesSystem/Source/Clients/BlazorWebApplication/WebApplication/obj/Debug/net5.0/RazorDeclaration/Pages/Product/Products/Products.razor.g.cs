@@ -224,7 +224,7 @@ using System.Text.RegularExpressions;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 153 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\Product\Products\Products.razor"
+#line 237 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\Product\Products\Products.razor"
        
     [Inject]
     public IJSRuntime jsRuntime { get; set; }
@@ -245,14 +245,37 @@ using System.Text.RegularExpressions;
     List<Brand> brands = new List<Brand>();
 
     private int CurPage = 1;
-    private DownCategory CurDownCategory = null;
-    private UpCategory CurUpCategory = null;
-    private Brand CurBrand = null;
+    private int CurDownCategoryId = 0;
+    private int CurUpCategoryId = 0;
+    private int CurBrandId = 0;
 
     bool isSuccess { get; set; }
     string message { get; set; }
     bool showNotification { get; set; } = false;
 
+    int selectedUpCategoryId;
+    int selectedDownCategoryId;
+    int selectedBrandId;
+
+    public void AccessControl()
+    {
+        bool isLoggedIn = identityService.IsLoggedIn;
+        if (isLoggedIn)
+        {
+            var stringDate = identityService.GetUserExpiration();
+            DateTime loggedTime = DateTime.Parse(stringDate);
+            DateTime nowDateTime = DateTime.Now;
+
+            TimeSpan timeDifference = loggedTime - nowDateTime;
+
+            if (timeDifference.TotalMinutes < -5)
+            {
+                identityService.Logout();
+                stateManager.LoginChanged(this);
+                //navigationManager.NavigateTo($"logout?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
+            }
+        }
+    }
 
     protected async override Task OnInitializedAsync()
     {
@@ -279,10 +302,11 @@ using System.Text.RegularExpressions;
         //    _reload = Convert.ToInt32(reload);
         //}
 
+        AccessControl();
         upCategories = await productService.GetUpCategoryItems();
         downCategories = await productService.GetDownCategoryItems();
         brands = await productService.GetBrandItems();
-        await GetProductsAsync(page: 0);
+        await GetProductsDataAsync(CurPage-1, CurUpCategoryId, CurDownCategoryId, CurBrandId);
     }
 
     //protected async override Task OnAfterRenderAsync(bool firstRender)
@@ -304,54 +328,72 @@ using System.Text.RegularExpressions;
     IEnumerable<Product> _products { get; set; } = new List<Product>();
     int _productCount { get; set; }
 
-    private async Task GetProductsAsync(int page, UpCategory upCategory = null, DownCategory downCategory = null, Brand brand = null)
+    //private async Task GetProductsAsync(int page, UpCategory upCategory = null, DownCategory downCategory = null, Brand brand = null)
+    //{
+    //    CurUpCategory = null;
+    //    CurDownCategory = null;
+    //    CurBrand = null;
+    //    if (upCategory != null)
+    //    {
+    //        CurUpCategory = upCategory;
+    //        CurPage = 1;
+    //    }
+    //    if (downCategory != null)
+    //    {
+    //        CurDownCategory = downCategory;
+    //        CurPage = 1;
+    //    }
+    //    if (brand != null)
+    //    {
+    //        CurBrand = brand;
+    //        CurPage = 1;
+    //    }
+    //    var inComingProducts = await GetProductsDataAsync(page, CurUpCategory, CurDownCategory, CurBrand);
+
+    //    _products = inComingProducts.Data;
+    //    _productCount = inComingProducts.Count;
+    //    stateManager.UpdateContent(this, "ProductPage");
+
+    //}
+    private async void FilterProduct()
     {
-        CurUpCategory = null;
-        CurDownCategory = null;
-        CurBrand = null;
-        if (upCategory != null)
-        {
-            CurUpCategory = upCategory;
-            CurPage = 1;
-        }
-        if (downCategory != null)
-        {
-            CurDownCategory = downCategory;
-            CurPage = 1;
-        }
-        if (brand != null)
-        {
-            CurBrand = brand;
-            CurPage = 1;
-        }
-        var inComingProducts = await GetProductsDataAsync(page, CurUpCategory, CurDownCategory, CurBrand);
+        CurUpCategoryId = selectedUpCategoryId;
+        CurDownCategoryId = selectedDownCategoryId;
+        CurBrandId = selectedBrandId;
+        await GetProductsDataAsync(0, CurUpCategoryId, CurDownCategoryId, CurBrandId);
+    }
+    private async Task GetProductsDataAsync(int page,int upCategoryId,int downCategoryId,int brandId)
+    {
+        var inComingProducts = await productService.GetProductsItem(page, upCategoryId, downCategoryId, brandId, null);
 
         _products = inComingProducts.Data;
         _productCount = inComingProducts.Count;
         stateManager.UpdateContent(this, "ProductPage");
-
+        //return await productService.GetProductsItem(page, upCategoryId, downCategoryId, brandId,null);
     }
-    private async Task<PaginatedViewModel<Product>> GetProductsDataAsync(int page, UpCategory upCategory = null, DownCategory downCategory = null, Brand brand = null)
-    {
+    //private async Task<PaginatedViewModel<Product>> GetProductsDataAsync(int page, UpCategory upCategory = null, DownCategory downCategory = null, Brand brand = null)
+    //{
 
-        if (upCategory != null && downCategory == null && brand == null)
-        {
-            return await productService.GetProductItemByUpCategories(upCategory, page, null);
-        }
-        if (upCategory == null && downCategory != null && brand == null)
-        {
-            return await productService.GetProductItemByDownCategories(downCategory, page, null);
-        }
-        if (upCategory == null && downCategory == null && brand != null)
-        {
-            return await productService.GetProductItemByBrands(brand, page, null);
-        }
-        return await productService.GetProductsItem(page, null);
-    }
+    //    if (upCategory != null && downCategory == null && brand == null)
+    //    {
+    //        return await productService.GetProductItemByUpCategories(upCategory, page, null);
+    //    }
+    //    if (upCategory == null && downCategory != null && brand == null)
+    //    {
+    //        return await productService.GetProductItemByDownCategories(downCategory, page, null);
+    //    }
+    //    if (upCategory == null && downCategory == null && brand != null)
+    //    {
+    //        return await productService.GetProductItemByBrands(brand, page, null);
+    //    }
+    //    return await productService.GetProductsItem(page, null);
+    //}
     private async void Pagination(int page)
     {
         CurPage = page + 1;
-        await GetProductsAsync(page, CurUpCategory, CurDownCategory, CurBrand);
+        await GetProductsDataAsync(page, CurUpCategoryId, CurDownCategoryId, CurBrandId);
+
+        //await GetProductsAsync(page, CurUpCategory, CurDownCategory, CurBrand);
     }
     //------------------------------------------------------------------------------------------------------------------------
     private async Task StateManager_StateChanged(ComponentBase component, string property)
@@ -405,7 +447,7 @@ using System.Text.RegularExpressions;
         {
 
             CurPage++;
-            await GetProductsAsync(CurPage - 1);
+            await GetProductsDataAsync(CurPage - 1,CurUpCategoryId,CurDownCategoryId,CurBrandId);
         }
     }
     protected async Task PrevPage()
@@ -413,8 +455,25 @@ using System.Text.RegularExpressions;
         if (CurPage > 1)
         {
             CurPage--;
-            await GetProductsAsync(CurPage - 1);
+            await GetProductsDataAsync(CurPage - 1, CurUpCategoryId, CurDownCategoryId, CurBrandId);
         }
+    }
+    private void OptionUpCategorySelected(ChangeEventArgs e)
+    {
+        selectedUpCategoryId = Convert.ToInt32(e.Value);
+        selectedDownCategoryId = 0;
+    }
+    private void OptionDownCategorySelected(ChangeEventArgs e)
+    {
+        selectedDownCategoryId = Convert.ToInt32(e.Value);
+        if (selectedDownCategoryId!=0)
+        {
+            selectedUpCategoryId = downCategories.FirstOrDefault(p => p.Id == selectedDownCategoryId).UpCategoryId;
+        }
+    }
+    private void OptionBrandSelected(ChangeEventArgs e)
+    {
+        selectedBrandId = Convert.ToInt32(e.Value);
     }
 
 #line default

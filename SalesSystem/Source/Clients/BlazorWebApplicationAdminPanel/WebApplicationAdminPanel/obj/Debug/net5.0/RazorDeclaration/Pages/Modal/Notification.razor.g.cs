@@ -230,7 +230,7 @@ using Blazored.Modal.Services;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 34 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\Pages\Modal\Notification.razor"
+#line 31 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\Pages\Modal\Notification.razor"
        
     [Parameter]
     public string Message { get; set; }

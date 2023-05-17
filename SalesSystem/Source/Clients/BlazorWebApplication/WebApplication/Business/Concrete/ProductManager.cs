@@ -19,9 +19,9 @@ namespace WebApplication.Business.Concrete
         {
             _httpClient = httpClient;
         }
-        public async Task<PaginatedViewModel<Product>> GetProductsItem(int paginationNumber,int? pageSize)
+        public async Task<PaginatedViewModel<Product>> GetProductsItem(int paginationNumber, int upCategoryId, int downCategoryId, int brandId, int? pageSize)
         {
-            var query = $"/product/products?pageIndeX={paginationNumber}";
+            var query = $"/product/products?upCategoryId={upCategoryId}&downCategoryId={downCategoryId}&brandId={brandId}&pageIndeX={paginationNumber}";
             if (pageSize!=null)
             {
                 query += $"&pageSize={pageSize}";
@@ -35,6 +35,11 @@ namespace WebApplication.Business.Concrete
             return product;
         }
 
+        public async Task<List<Product>> GetSimilarProductsItem(int productId)
+        {
+            var product = await _httpClient.GetResponseAsync<List<Product>>($"/product/getSimilarProducts?productId={productId}");
+            return product;
+        }
         public async Task<PaginatedViewModel<Product>> GetProductItemByUpCategories(UpCategory upCategory, int paginationNumber, int? pageSize)
         {
             var productQuery = $"/product/products/upCategoryId/{upCategory.Id}?pageIndex={paginationNumber}";

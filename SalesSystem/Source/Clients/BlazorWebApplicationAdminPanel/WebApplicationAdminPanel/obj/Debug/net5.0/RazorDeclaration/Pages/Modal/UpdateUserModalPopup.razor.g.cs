@@ -238,8 +238,14 @@ using Blazored.Modal.Services;
     public List<Role> roles { get; set; }
     [Inject]
     StateManager stateManager { get; set; }
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+    [Inject]
+    IIdentityService _identityService { get; set; }
+
     bool isDeletePicture = false;
     string newPassword =string.Empty;
+    bool isLoggedIn = false;
 
     public override Task SetParametersAsync(ParameterView parameters)
     {
@@ -248,18 +254,31 @@ using Blazored.Modal.Services;
         CancelText = "Kapat";
         return base.SetParametersAsync(parameters);
     }
+
+    public void AccessControl()
+    {
+        isLoggedIn = _identityService.IsLoggedIn;
+        if (isLoggedIn)
+        {
+            var stringDate = _identityService.GetUserExpiration();
+            DateTime loggedTime = DateTime.Parse(stringDate);
+            DateTime nowDateTime = DateTime.Now;
+
+            TimeSpan timeDifference = loggedTime - nowDateTime;
+
+            if (timeDifference.TotalMinutes < -5)
+            {
+                navigationManager.NavigateTo($"logout");
+            }
+        }
+    }
     protected override void OnInitialized()
     {
+        AccessControl();
         if (user != null)
         {
             user.UserModel.Phone = '0' + user.UserModel.Phone.Replace(" ", "").Replace("(", "").Replace(")", "");
         }
-    }
-    protected void DeletePicture()
-    {
-        user.UserModel.ProfileImagePath = "";
-        stateManager.UpdateContent(this, "userPage");
-        isDeletePicture = true;
     }
     protected override void OnAfterRender(bool firstRender)
     {
@@ -267,6 +286,13 @@ using Blazored.Modal.Services;
         {
             stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
         }
+    }
+
+    protected void DeletePicture()
+    {
+        user.UserModel.ProfileImagePath = "";
+        stateManager.UpdateContent(this, "userPage");
+        isDeletePicture = true;
     }
     private async Task StateManager_StateChanged(ComponentBase component, string property)
     {
@@ -276,20 +302,16 @@ using Blazored.Modal.Services;
         }
 
     }
+
     private void HandleSelectedOption(ChangeEventArgs e)
     {
         int roleId=Convert.ToInt32(e.Value);
         user.UserModel.Role = roles.FirstOrDefault(p => p.Id == roleId);
     }
-
     private void HandleSelectedStatus(ChangeEventArgs e)
     {
         var userStatus = Convert.ToBoolean(e.Value);
         user.UserModel.Status = userStatus;
-    }
-    private void SetPassword(ChangeEventArgs e)
-    {
-        newPassword = e.Value.ToString();
     }
     private async void HandleSelectedFile(InputFileChangeEventArgs e)
     {
@@ -315,6 +337,10 @@ using Blazored.Modal.Services;
         {
             throw;
         }
+    }
+    private void SetPassword(ChangeEventArgs e)
+    {
+        newPassword = e.Value.ToString();
     }
 
 #line default

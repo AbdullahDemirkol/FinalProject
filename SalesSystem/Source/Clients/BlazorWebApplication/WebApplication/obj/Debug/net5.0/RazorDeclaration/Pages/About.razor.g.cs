@@ -224,7 +224,7 @@ using System.Text.RegularExpressions;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 108 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\About.razor"
+#line 115 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\About.razor"
        
 
     [Inject]

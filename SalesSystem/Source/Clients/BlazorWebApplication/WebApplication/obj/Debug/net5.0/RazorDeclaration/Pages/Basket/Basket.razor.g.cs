@@ -224,7 +224,7 @@ using System.Text.RegularExpressions;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 101 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\Basket\Basket.razor"
+#line 109 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\Basket\Basket.razor"
        
     private bool isLoggedIn = false;
 
@@ -240,17 +240,35 @@ using System.Text.RegularExpressions;
     NavigationManager navigationManager { get; set; }
     [Inject]
     public IJSRuntime jsRuntime { get; set; }
-    protected async override Task OnInitializedAsync()
+    public void AccessControl()
     {
         isLoggedIn = identityService.IsLoggedIn;
         if (isLoggedIn)
         {
-            basketModel = await basketService.GetBasket();
+            var stringDate = identityService.GetUserExpiration();
+            DateTime loggedTime = DateTime.Parse(stringDate);
+            DateTime nowDateTime = DateTime.Now;
+
+            TimeSpan timeDifference = loggedTime - nowDateTime;
+
+            if (timeDifference.TotalMinutes < -5)
+            {
+                identityService.Logout();
+                isLoggedIn = identityService.IsLoggedIn;
+            }
         }
-        else
+    }
+    protected async override Task OnInitializedAsync()
+    {
+        AccessControl();
+        if (!isLoggedIn)
         {
             await jsRuntime.InvokeVoidAsync("myFunction");
             navigationManager.NavigateTo($"login?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
+        }
+        else
+        {
+            basketModel = await basketService.GetBasket();
         }
     }
 
@@ -259,17 +277,8 @@ using System.Text.RegularExpressions;
         if (firstRender)
         {
             await jsRuntime.InvokeVoidAsync("myFunction");
-            //stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
         }
     }
-    //private async Task StateManager_StateChanged(ComponentBase component, string property)
-    //{
-    //    if (property.Contains("basketPage"))
-    //    {
-    //        await InvokeAsync(StateHasChanged);
-    //    }
-
-    //}
 
     void CheckOut()
     {

@@ -43,15 +43,29 @@ namespace Web.ApiGateway.Controllers
                 }
                 else
                 {
-                    currentBasket.BasketItems.Add(new BasketItem()
+                    if (item.Pictures.Count()>0)
                     {
-                        UnitPrice = item.Price,
-                        PictureUrl = item.Pictures.First().ImagePath,
-                        ProductId = item.Id,
-                        Quantity = request.Quantity,
-                        Id = Guid.NewGuid().ToString(),
-                        ProductName = item.Name
-                    });
+                        currentBasket.BasketItems.Add(new BasketItem()
+                        {
+                            UnitPrice = item.Price,
+                            PictureUrl = item.Pictures.First().ImagePath,
+                            ProductId = item.Id,
+                            Quantity = request.Quantity,
+                            Id = Guid.NewGuid().ToString(),
+                            ProductName = item.Name
+                        });
+                    }
+                    else
+                    {
+                        currentBasket.BasketItems.Add(new BasketItem()
+                        {
+                            UnitPrice = item.Price,
+                            ProductId = item.Id,
+                            Quantity = request.Quantity,
+                            Id = Guid.NewGuid().ToString(),
+                            ProductName = item.Name
+                        });
+                    }
                 }
                 await _basketService.UpdateAsync(currentBasket);
                 return Ok(true);

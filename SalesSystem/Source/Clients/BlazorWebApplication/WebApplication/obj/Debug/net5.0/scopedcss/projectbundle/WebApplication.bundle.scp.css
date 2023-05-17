@@ -700,6 +700,40 @@ label[b-bsrg8ir03a] {
 .paymentCardOption:hover  h5[b-hkett3y23e] {
     color: #fff;
 }
+/* /Pages/Product/Products/Products.razor.rz.scp.css */
+select[b-k5jp4mv3hq] {
+    padding: 16px 20px;
+    -moz-appearance: none;
+    /*border: none;*/
+    border-radius: 4px;
+    /*color: white;*/
+    font-weight: 700;
+    /*background-color: #F28123;*/
+    width: 100%;
+}
+.product-filter[b-k5jp4mv3hq] {
+    font-weight: 700;
+    font-size: 18px;
+}
+.search-button-div[b-k5jp4mv3hq] {
+    display: flex;
+    align-items: flex-end;
+}
+.search-button[b-k5jp4mv3hq] {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 18px;
+    background-color: #F28123;
+    color: #fff;
+    width: 100%;
+    padding: 8px 20px;
+    border-radius: 25px;
+    border: #F28123;
+}
+.search-button:hover[b-k5jp4mv3hq] {
+    background-color: #051922;
+    color: #F28123;
+}
 /* /Shared/MainLayout.razor.rz.scp.css */
 /*.page {
     position: relative;

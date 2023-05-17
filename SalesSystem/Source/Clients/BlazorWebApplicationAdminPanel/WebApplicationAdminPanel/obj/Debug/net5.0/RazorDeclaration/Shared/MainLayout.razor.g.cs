@@ -239,28 +239,15 @@ using Blazored.Modal.Services;
     StateManager stateManager { get; set; }
     [Inject]
     NavigationManager navigationManager { get; set; }
-    protected override Task OnInitializedAsync()
-    {
-        isLoggedIn = _identityService.IsLoggedIn;
-        return base.OnInitializedAsync();
-    }
     protected override void OnInitialized()
     {
         isLoggedIn = _identityService.IsLoggedIn;
     }
     protected override void OnAfterRender(bool firstRender)
     {
-        isLoggedIn = _identityService.IsLoggedIn;
         if (firstRender)
         {
             stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
-        }
-        var collection = HttpUtility.ParseQueryString(new Uri(navigationManager.Uri).Query);
-        string retunUrl = collection.Get("logout") ?? "/";
-        if (retunUrl=="true")
-        {
-            stateManager.LoginChanged(this);
-            navigationManager.NavigateTo(navigationManager.BaseUri);
         }
     }
 
@@ -268,6 +255,7 @@ using Blazored.Modal.Services;
     {
         if (property== "login")
         {
+            isLoggedIn = _identityService.IsLoggedIn;
             await InvokeAsync(StateHasChanged);
         }
     }
@@ -277,7 +265,7 @@ using Blazored.Modal.Services;
     }
     private void GoUserPanel()
     {
-        navigationManager.NavigateTo("https://localhost:44345/");
+        navigationManager.NavigateTo(navigationManager.BaseUri);
     }
 
 #line default

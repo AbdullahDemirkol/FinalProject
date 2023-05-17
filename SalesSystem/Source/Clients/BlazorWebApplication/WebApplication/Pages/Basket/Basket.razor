@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2 text-center">
                     <div class="breadcrumb-text">
-                        <p>Fresh and Organic</p>
+                        <p>E-Ticaret Websitesi</p>
                         <h1>Sepet</h1>
                     </div>
                 </div>
@@ -41,7 +41,16 @@
 
                                         <tr class="table-body-row">
                                             <td class="product-remove"><a @onclick="@(async()=>await RemoveItemFromList(basketItem))"><i class="far fa-window-close"></i></a></td>
-                                            <td class="product-image"><img src="@("http://localhost:5001/pics" + basketItem.PictureUrl)" alt=""></td>
+                                            <td class="product-image">
+                                                @if (basketItem.PictureUrl!=null)
+                                                {
+                                                    <img src="@("http://localhost:5001/pics" + basketItem.PictureUrl)" alt="">
+                                                }
+                                                else
+                                                {
+                                                    <img src="assets/img/default-product.png" alt="">
+                                                }
+                                            </td>
                                             <td class="product-name">@basketItem.ProductName</td>
                                             <td class="product-price">@basketItem.UnitPrice.ToString("N2") TL</td>
                                             <td class="product-quantity"><input type="number" placeholder="@basketItem.Quantity" value="@basketItem.Quantity" @oninput= "(e)=>UpdateProductQuantity(e,basketItem)"></td>
@@ -95,7 +104,6 @@
 }
 else
 {
-
     <p>giriş başarısız</p>
 }
 @code {
@@ -113,17 +121,35 @@ else
     NavigationManager navigationManager { get; set; }
     [Inject]
     public IJSRuntime jsRuntime { get; set; }
-    protected async override Task OnInitializedAsync()
+    public void AccessControl()
     {
         isLoggedIn = identityService.IsLoggedIn;
         if (isLoggedIn)
         {
-            basketModel = await basketService.GetBasket();
+            var stringDate = identityService.GetUserExpiration();
+            DateTime loggedTime = DateTime.Parse(stringDate);
+            DateTime nowDateTime = DateTime.Now;
+
+            TimeSpan timeDifference = loggedTime - nowDateTime;
+
+            if (timeDifference.TotalMinutes < -5)
+            {
+                identityService.Logout();
+                isLoggedIn = identityService.IsLoggedIn;
+            }
         }
-        else
+    }
+    protected async override Task OnInitializedAsync()
+    {
+        AccessControl();
+        if (!isLoggedIn)
         {
             await jsRuntime.InvokeVoidAsync("myFunction");
             navigationManager.NavigateTo($"login?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}", true);
+        }
+        else
+        {
+            basketModel = await basketService.GetBasket();
         }
     }
 
@@ -132,17 +158,8 @@ else
         if (firstRender)
         {
             await jsRuntime.InvokeVoidAsync("myFunction");
-            //stateManager.StateChanged += async (source, property) => await StateManager_StateChanged(source, property);
         }
     }
-    //private async Task StateManager_StateChanged(ComponentBase component, string property)
-    //{
-    //    if (property.Contains("basketPage"))
-    //    {
-    //        await InvokeAsync(StateHasChanged);
-    //    }
-
-    //}
 
     void CheckOut()
     {

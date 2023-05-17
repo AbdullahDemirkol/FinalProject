@@ -805,7 +805,7 @@ a.mobile-show {
   color: #fff;
 }
 
-.search-bar-tablecell input::-ms-input-placeholder {
+.search-bar-tablecell input:-ms-input-placeholder {
   color: #fff;
 }
 
@@ -2747,4 +2747,4 @@ table.order-details tbody td {
   display: table-cell;
   vertical-align: middle;
   width: 100%;
-}
+}

@@ -238,15 +238,19 @@ using Blazored.Modal.Services;
 
     [Inject]
     StateManager stateManager { get; set; }
-
     [Inject]
     IOrderService orderService { get; set; }
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+    [Inject]
+    IIdentityService _identityService { get; set; }
 
     List<OrderStatus> _orderStatuses { get; set; } = new List<OrderStatus>();
     bool updateMode = false;
     string updateText = "Sipariş Durumu Değiştir";
     private OrderDTO orderDto;
     int selectedOption;
+    bool isLoggedIn = false;
 
     protected override void OnAfterRender(bool firstRender)
     {
@@ -263,8 +267,27 @@ using Blazored.Modal.Services;
         }
 
     }
+
+    public void AccessControl()
+    {
+        isLoggedIn = _identityService.IsLoggedIn;
+        if (isLoggedIn)
+        {
+            var stringDate = _identityService.GetUserExpiration();
+            DateTime loggedTime = DateTime.Parse(stringDate);
+            DateTime nowDateTime = DateTime.Now;
+
+            TimeSpan timeDifference = loggedTime - nowDateTime;
+
+            if (timeDifference.TotalMinutes < -5)
+            {
+                navigationManager.NavigateTo($"logout");
+            }
+        }
+    }
     protected override async Task OnInitializedAsync()
     {
+        AccessControl();
         if (!string.IsNullOrEmpty(Order))
         {
             string jsonParameter = Uri.UnescapeDataString(Order);

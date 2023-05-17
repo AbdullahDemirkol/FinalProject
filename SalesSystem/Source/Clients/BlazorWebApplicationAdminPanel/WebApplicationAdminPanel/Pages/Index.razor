@@ -1,7 +1,36 @@
 ﻿@page "/"
+<h1>ADMIN PANEL</h1>
+@code {
 
-<h1>Hello, world!</h1>
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+    [Inject]
+    IIdentityService _identityService { get; set; }
+    bool isLoggedIn = false;
 
-Welcome to your new app.
+    public void AccessControl()
+    {
+        isLoggedIn = _identityService.IsLoggedIn;
+        if (isLoggedIn)
+        {
+            var stringDate = _identityService.GetUserExpiration();
+            DateTime loggedTime = DateTime.Parse(stringDate);
+            DateTime nowDateTime = DateTime.Now;
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+            TimeSpan timeDifference = loggedTime - nowDateTime;
+
+            if (timeDifference.TotalMinutes < -5)
+            {
+                navigationManager.NavigateTo($"logout");
+            }
+        }
+    }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        AccessControl();
+    }
+    protected override void OnInitialized()
+    {
+        AccessControl();
+    }
+}

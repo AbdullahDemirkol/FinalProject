@@ -242,7 +242,13 @@ using Blazored.Modal.Services;
     public List<DownCategory> downCategories { get; set; }
     [Inject]
     IProductService _productService { get; set; }
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+    [Inject]
+    IIdentityService _identityService { get; set; }
+
     ProductDTO productDto = new ProductDTO();
+    bool isLoggedIn = false;
 
     public int pictureCount = 3;
 
@@ -253,13 +259,33 @@ using Blazored.Modal.Services;
         CancelText = "Kapat";
         return base.SetParametersAsync(parameters);
     }
+
+    public void AccessControl()
+    {
+        isLoggedIn = _identityService.IsLoggedIn;
+        if (isLoggedIn)
+        {
+            var stringDate = _identityService.GetUserExpiration();
+            DateTime loggedTime = DateTime.Parse(stringDate);
+            DateTime nowDateTime = DateTime.Now;
+
+            TimeSpan timeDifference = loggedTime - nowDateTime;
+
+            if (timeDifference.TotalMinutes < -5)
+            {
+                navigationManager.NavigateTo($"logout");
+            }
+        }
+    }
     protected override void OnInitialized()
     {
+        AccessControl();
         productDto.Product = product;
         productDto.ProductImageFiles = new List<byte[]>();
         pictureCount = pictureCount - product.Pictures.Count();
         base.OnInitialized();
     }
+
     private async Task HandleSelectedFile(InputFileChangeEventArgs e)
     {
         try

@@ -192,6 +192,10 @@
     ModalManager modalManager { get; set; }
     [Inject]
     IProductService _productService { get; set; }
+    [Inject]
+    IIdentityService _identityService { get; set; }
+    [Inject]
+    NavigationManager navigationManager { get; set; }
     PaginatedViewModel<Product> _products = new PaginatedViewModel<Product>();
     List<UpCategory> _upCategories = new List<UpCategory>();
     List<DownCategory> _downCategories = new List<DownCategory>();
@@ -199,6 +203,7 @@
     Product newProduct = new Product();
     List<IBrowserFile> formFiles = new List<IBrowserFile>();
     private int CurPage = 1;
+    bool isLoggedIn = false;
     protected void Pagination(int page)
     {
         CurPage = page + 1;
@@ -221,9 +226,26 @@
             GetProducts(CurPage - 1);
         }
     }
+    public void AccessControl()
+    {
+        isLoggedIn = _identityService.IsLoggedIn;
+        if (isLoggedIn)
+        {
+            var stringDate = _identityService.GetUserExpiration();
+            DateTime loggedTime = DateTime.Parse(stringDate);
+            DateTime nowDateTime = DateTime.Now; 
 
+            TimeSpan timeDifference = loggedTime - nowDateTime;
+
+            if (timeDifference.TotalMinutes < -5)
+            {
+                navigationManager.NavigateTo($"logout");
+            }
+        }
+    }
     protected override void OnInitialized()
     {
+        AccessControl();
         GetUpCategory();
         GetDownCategory();
         GetBrand();

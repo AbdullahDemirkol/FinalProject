@@ -265,7 +265,6 @@ using System.Text.RegularExpressions;
     //{
     //    //jSObjectReference = await jsRuntime.InvokeAsync<IJSObjectReference>("import", navigationManager.BaseUri + "assets/js/login.js");
     //    //await InvokeAsync(StateHasChanged);
-
     //}
     private async Task loginProcess()
     {

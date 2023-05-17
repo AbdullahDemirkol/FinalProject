@@ -403,9 +403,6 @@ C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicatio
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\WebApplicationAdminPanel.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\WebApplicationAdminPanel.RazorComponent.input.cache
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\RazorDeclaration\App.razor.g.cs
-C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\RazorDeclaration\Pages\Counter.razor.g.cs
-C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\RazorDeclaration\Pages\FetchData.razor.g.cs
-C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\RazorDeclaration\Pages\Index.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\RazorDeclaration\Shared\SurveyPrompt.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\RazorDeclaration\_Imports.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\RazorDeclaration\Shared\MainLayout.razor.g.cs
@@ -416,9 +413,6 @@ C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicatio
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\WebApplicationAdminPanel.TagHelpers.output.cache
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\WebApplicationAdminPanel.RazorCoreGenerate.cache
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\Razor\App.razor.g.cs
-C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\Razor\Pages\Counter.razor.g.cs
-C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\Razor\Pages\FetchData.razor.g.cs
-C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\Razor\Pages\Index.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\Razor\Shared\SurveyPrompt.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\Razor\_Imports.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\Razor\Shared\MainLayout.razor.g.cs
@@ -729,8 +723,10 @@ C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicatio
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\Razor\Pages\Modal\UpdateUserModalPopup.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\RazorDeclaration\Pages\Modal\ShowUserItem.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\Razor\Pages\Modal\ShowUserItem.razor.g.cs
-C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\WebApplicationAdminPanel.csproj.AssemblyReference.cache
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\scopedcss\Pages\Order\Orders.razor.rz.scp.css
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\RazorDeclaration\Pages\OrderItem\OrderItemPage.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\Razor\Pages\OrderItem\OrderItemPage.razor.g.cs
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\scopedcss\Pages\OrderItem\OrderItemPage.razor.rz.scp.css
+C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\RazorDeclaration\Pages\Index.razor.g.cs
+C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\Razor\Pages\Index.razor.g.cs
+C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\obj\Debug\net5.0\WebApplicationAdminPanel.csproj.AssemblyReference.cache

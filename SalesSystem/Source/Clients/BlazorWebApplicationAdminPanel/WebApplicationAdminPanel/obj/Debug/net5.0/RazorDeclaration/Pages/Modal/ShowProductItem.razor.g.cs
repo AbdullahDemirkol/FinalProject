@@ -234,11 +234,40 @@ using Blazored.Modal.Services;
        
     [Parameter]
     public Product product { get; set; }
+    [Inject]
+    NavigationManager navigationManager { get; set; }
+    [Inject]
+    IIdentityService _identityService { get; set; }
+
+    bool isLoggedIn = false;
+
     public override Task SetParametersAsync(ParameterView parameters)
     {
         Message = parameters.GetValueOrDefault<string>("Message") ?? "No Message Found";
         OkText = "Tamam";
         return base.SetParametersAsync(parameters);
+    }
+
+    public void AccessControl()
+    {
+        isLoggedIn = _identityService.IsLoggedIn;
+        if (isLoggedIn)
+        {
+            var stringDate = _identityService.GetUserExpiration();
+            DateTime loggedTime = DateTime.Parse(stringDate);
+            DateTime nowDateTime = DateTime.Now;
+
+            TimeSpan timeDifference = loggedTime - nowDateTime;
+
+            if (timeDifference.TotalMinutes < -5)
+            {
+                navigationManager.NavigateTo($"logout");
+            }
+        }
+    }
+    protected override void OnInitialized()
+    {
+        AccessControl();
     }
 
 #line default
