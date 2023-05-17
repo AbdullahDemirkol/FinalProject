@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "78WNWeEIX3OGoJjA+Neq9mzkKzUZ9WK035AjiIFZNZoG5VIEn58lpSWL+pWEI5K8sBpnxgHctlV/PFO7MVSTPQ==",
+  "dgSpecHash": "iTOJQ1c826U9AtODo3mtJic5SzPonckwLXl3j85Qwlq/P60woKbQhuuDY4XrNEvtOxWV8yDDFDRYyvSzZl9+YQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\Bitirme\\SalesSystem\\Source\\Services\\ProductService\\ProductServiceApi\\ProductServiceApi.csproj",
+  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\Yeni klasör (4)\\FinalProject\\SalesSystem\\Source\\Services\\ProductService\\ProductServiceApi\\ProductServiceApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Abdullah\\.nuget\\packages\\consul\\1.6.10.7\\consul.1.6.10.7.nupkg.sha512",
     "C:\\Users\\Abdullah\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

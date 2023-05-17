@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Y+DcXXalqWcRhHg/JihHJepXlPBxy0DRWrGbqZNp2qEqyANOHexeUZ6J5AaXZmWREhHEJUuy0VUZR54CRk3u9g==",
+  "dgSpecHash": "+IuxlSxhvbxUOSh52EdhdZUxqokZkbyVyb1CONqYdcLz/MNhCqGFutJ8qWuGd9tvSkd7au7BFTDkJUQDSaOe4w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\Bitirme\\SalesSystem\\Source\\BuildingBlocks\\EventBus\\EventBus.RabbitMQ\\EventBus.RabbitMQ.csproj",
+  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\Yeni klasör (4)\\FinalProject\\SalesSystem\\Source\\BuildingBlocks\\EventBus\\EventBus.RabbitMQ\\EventBus.RabbitMQ.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Abdullah\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\Abdullah\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.2\\microsoft.extensions.logging.abstractions.6.0.2.nupkg.sha512",

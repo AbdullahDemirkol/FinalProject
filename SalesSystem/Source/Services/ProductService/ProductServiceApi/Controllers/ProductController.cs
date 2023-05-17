@@ -67,6 +67,47 @@ namespace ProductServiceApi.Controllers
             var products = await _productContext.Products.Include(p=>p.Pictures).Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Where(p => idsToSelect.Contains(p.Id)).ToListAsync();
             return products;
         }
+        [HttpGet]
+        [Route("products/Search")]
+        public IActionResult SearchProductAsync(string searchText, int pageIndex = 0, int pageSize = 6)
+        {
+            if (searchText!=null)
+            {
+                if (!string.IsNullOrEmpty(searchText))
+                {
+                    var productQuery = _productContext.Products
+                            .Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Include(p => p.Pictures)
+                            .Where(p => p.Name.ToLower().Contains(searchText.ToLower())).ToList();
+                    var totalProductCount = productQuery.LongCount();
+
+                    var productsOnPage = productQuery.OrderBy(p => p.Name).Skip(pageSize * pageIndex).Take(pageSize).ToList();
+
+
+                    var model = new PaginatedViewModel<Product>(pageIndex, pageSize, (int)totalProductCount, productsOnPage);
+                    return Ok(model);
+                }
+            }
+            return Ok();
+            //if (productQuery.Count!=0)
+            //{
+            //    foreach (var item in productQuery)
+            //    {
+            //        var name = item.Name; 
+            //        if (item != null && item.Name != null )
+            //        {
+            //            // item.Name içinde searchText değeri bulunuyor
+            //            // İlgili işlemleri burada yapabilirsiniz
+            //        }
+            //        var sad=name.ToString().IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0;
+            //        if (sad)
+            //        {
+
+            //        }
+            //    }
+            //    var pasd = productQuery.Where(p => p.Name.Contains(searchText)).ToList();
+            //}
+
+        }
 
 
         [HttpGet]

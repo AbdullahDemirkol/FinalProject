@@ -13,209 +13,210 @@ namespace WebApplication.Pages.Product.Products
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Components;
 #nullable restore
-#line 1 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 1 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using System.Net.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 2 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 2 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using System.Net.Http.Json;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 3 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using Microsoft.AspNetCore.Components.Forms;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 4 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using Microsoft.AspNetCore.Components.Routing;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 5 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 5 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 6 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 6 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 7 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 7 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using Microsoft.AspNetCore.Components.WebAssembly.Http;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 8 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 8 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using Microsoft.AspNetCore.WebUtilities;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 9 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 9 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using Microsoft.JSInterop;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 10 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 10 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using WebApplication;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 11 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 11 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using WebApplication.Shared;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 13 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 13 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using WebApplication.Business.Concrete;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 14 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 14 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using WebApplication.Business.Abstract;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 15 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 15 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using WebApplication.Entity.Concrete;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 16 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 16 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using WebApplication.Entity.Concrete.User;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 17 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 17 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using WebApplication.Entity.Concrete.Product;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 18 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 18 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using WebApplication.Entity.Concrete.Helper;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 19 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 19 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using WebApplication.Entity.Concrete.Basket;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 20 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 20 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using WebApplication.Entity.Concrete.Basket.Order;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 21 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 21 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using WebApplication.Entity.Concrete.Basket.Buyer;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 22 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 22 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using WebApplication.Entity.Concrete.DTOs;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 23 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 23 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using WebApplication.Infrastructer;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 24 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 24 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using WebApplication.Pages.Modal;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 26 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 26 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using System.Web;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 27 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 27 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using System.IO;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 28 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 28 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using System.Text.Json;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 30 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 30 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using Blazored.Modal;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 31 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 31 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using Blazored.Modal.Services;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 33 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
+#line 33 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\_Imports.razor"
 using System.Text.RegularExpressions;
 
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/Product/")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/Product")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/Product/{search}")]
     public partial class Products : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -224,8 +225,10 @@ using System.Text.RegularExpressions;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 237 "C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\Product\Products\Products.razor"
+#line 239 "C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Clients\BlazorWebApplication\WebApplication\Pages\Product\Products\Products.razor"
        
+    [Parameter]
+    public string search { get; set; } = string.Empty;
     [Inject]
     public IJSRuntime jsRuntime { get; set; }
     [Inject]
@@ -256,6 +259,8 @@ using System.Text.RegularExpressions;
     int selectedUpCategoryId;
     int selectedDownCategoryId;
     int selectedBrandId;
+
+    bool changeSearch = false;
 
     public void AccessControl()
     {
@@ -306,7 +311,14 @@ using System.Text.RegularExpressions;
         upCategories = await productService.GetUpCategoryItems();
         downCategories = await productService.GetDownCategoryItems();
         brands = await productService.GetBrandItems();
-        await GetProductsDataAsync(CurPage-1, CurUpCategoryId, CurDownCategoryId, CurBrandId);
+        if (!string.IsNullOrEmpty(search))
+        {
+            SearchProducts(CurPage - 1);
+        }
+        else
+        {
+            await GetProductsDataAsync(CurPage - 1, CurUpCategoryId, CurDownCategoryId, CurBrandId);
+        }
     }
 
     //protected async override Task OnAfterRenderAsync(bool firstRender)
@@ -361,8 +373,21 @@ using System.Text.RegularExpressions;
         CurDownCategoryId = selectedDownCategoryId;
         CurBrandId = selectedBrandId;
         await GetProductsDataAsync(0, CurUpCategoryId, CurDownCategoryId, CurBrandId);
+        if (!string.IsNullOrEmpty(search))
+        {
+            search = string.Empty;
+            CurPage = 1;
+        }
+        navigationManager.NavigateTo("/Product");
     }
-    private async Task GetProductsDataAsync(int page,int upCategoryId,int downCategoryId,int brandId)
+    private async void SearchProducts(int page)
+    {
+        var inComingProducts = await productService.GetSearchProductsItem(page, search);
+        _products = inComingProducts.Data;
+        _productCount = inComingProducts.Count;
+        stateManager.UpdateContent(this, "ProductPage");
+    }
+    private async Task GetProductsDataAsync(int page, int upCategoryId, int downCategoryId, int brandId)
     {
         var inComingProducts = await productService.GetProductsItem(page, upCategoryId, downCategoryId, brandId, null);
 
@@ -391,7 +416,19 @@ using System.Text.RegularExpressions;
     private async void Pagination(int page)
     {
         CurPage = page + 1;
-        await GetProductsDataAsync(page, CurUpCategoryId, CurDownCategoryId, CurBrandId);
+        if (changeSearch)
+        {
+            CurPage = 1;
+            changeSearch = false;
+        }
+        if (!string.IsNullOrEmpty(search))
+        {
+            SearchProducts(page);
+        }
+        else
+        {
+            await GetProductsDataAsync(page, CurUpCategoryId, CurDownCategoryId, CurBrandId);
+        }
 
         //await GetProductsAsync(page, CurUpCategory, CurDownCategory, CurBrand);
     }
@@ -447,7 +484,7 @@ using System.Text.RegularExpressions;
         {
 
             CurPage++;
-            await GetProductsDataAsync(CurPage - 1,CurUpCategoryId,CurDownCategoryId,CurBrandId);
+            await GetProductsDataAsync(CurPage - 1, CurUpCategoryId, CurDownCategoryId, CurBrandId);
         }
     }
     protected async Task PrevPage()
@@ -466,7 +503,7 @@ using System.Text.RegularExpressions;
     private void OptionDownCategorySelected(ChangeEventArgs e)
     {
         selectedDownCategoryId = Convert.ToInt32(e.Value);
-        if (selectedDownCategoryId!=0)
+        if (selectedDownCategoryId != 0)
         {
             selectedUpCategoryId = downCategories.FirstOrDefault(p => p.Id == selectedDownCategoryId).UpCategoryId;
         }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+QHEDRKJ+ezX5eSoqH+rZW1MIKdYBwf2GUDZ8XA+CeXWtW8qskGUnahLlvsT2eOPUfoKseYj1hESqqjvwPCdBQ==",
+  "dgSpecHash": "WuXVbbhNsEydE2Dq3qRTmIvXGR0ORzwaBsuR+2tq7f1K1pS1MmzePaDh2NRn18pRtt97tcSXIwJ3wmbpjEfKhw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\Bitirme\\SalesSystem\\Source\\Services\\BasketService\\BasketServiceApi\\BasketServiceApi.csproj",
+  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\Yeni klasör (4)\\FinalProject\\SalesSystem\\Source\\Services\\BasketService\\BasketServiceApi\\BasketServiceApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Abdullah\\.nuget\\packages\\consul\\1.6.10.7\\consul.1.6.10.7.nupkg.sha512",
     "C:\\Users\\Abdullah\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\5.0.17\\microsoft.aspnetcore.authentication.jwtbearer.5.0.17.nupkg.sha512",

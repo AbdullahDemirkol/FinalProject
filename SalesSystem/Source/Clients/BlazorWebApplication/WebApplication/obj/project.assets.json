@@ -9570,11 +9570,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Abdullah\\Desktop\\Bitirme\\SalesSystem\\Source\\Clients\\BlazorWebApplication\\WebApplication\\WebApplication.csproj",
+      "projectUniqueName": "C:\\Users\\Abdullah\\Desktop\\Yeni klasör (4)\\FinalProject\\SalesSystem\\Source\\Clients\\BlazorWebApplication\\WebApplication\\WebApplication.csproj",
       "projectName": "WebApplication",
-      "projectPath": "C:\\Users\\Abdullah\\Desktop\\Bitirme\\SalesSystem\\Source\\Clients\\BlazorWebApplication\\WebApplication\\WebApplication.csproj",
+      "projectPath": "C:\\Users\\Abdullah\\Desktop\\Yeni klasör (4)\\FinalProject\\SalesSystem\\Source\\Clients\\BlazorWebApplication\\WebApplication\\WebApplication.csproj",
       "packagesPath": "C:\\Users\\Abdullah\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Abdullah\\Desktop\\Bitirme\\SalesSystem\\Source\\Clients\\BlazorWebApplication\\WebApplication\\obj\\",
+      "outputPath": "C:\\Users\\Abdullah\\Desktop\\Yeni klasör (4)\\FinalProject\\SalesSystem\\Source\\Clients\\BlazorWebApplication\\WebApplication\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

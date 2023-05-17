@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "5MMTkY7J/2vBZM8ripavb7I/c8qZa3ddhK49eeApDBvML5N5KDuDmt6CfoqYuB0PNp0GcDH6xliAEtPt4VWqEg==",
+  "dgSpecHash": "a5g8ZWY34brZsf69n42kTAmVb0+7wP7afzqXkolwBfJK3aYE050hQ/EL5b+QsoBKmGGFFDrYsvLmgkEqdLTaPA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\Bitirme\\SalesSystem\\Source\\Services\\IdentityService\\IdentityCheckServiceApi\\IdentityCheckServiceApi.csproj",
+  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\Yeni klasör (4)\\FinalProject\\SalesSystem\\Source\\Services\\IdentityService\\IdentityCheckServiceApi\\IdentityCheckServiceApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Abdullah\\.nuget\\packages\\consul\\1.6.10.7\\consul.1.6.10.7.nupkg.sha512",
     "C:\\Users\\Abdullah\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

@@ -10,3 +10,15 @@ C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\BuildingBlocks\EventBus\Eve
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.Base\obj\Debug\net5.0\ref\EventBus.Base.dll
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.Base\obj\Debug\net5.0\EventBus.Base.pdb
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.Base\obj\Debug\net5.0\EventBus.Base.csproj.AssemblyReference.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.Base\bin\Debug\net5.0\EventBus.Base.deps.json
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.Base\bin\Debug\net5.0\EventBus.Base.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.Base\bin\Debug\net5.0\ref\EventBus.Base.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.Base\bin\Debug\net5.0\EventBus.Base.pdb
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.Base\obj\Debug\net5.0\EventBus.Base.csproj.AssemblyReference.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.Base\obj\Debug\net5.0\EventBus.Base.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.Base\obj\Debug\net5.0\EventBus.Base.AssemblyInfoInputs.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.Base\obj\Debug\net5.0\EventBus.Base.AssemblyInfo.cs
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.Base\obj\Debug\net5.0\EventBus.Base.csproj.CoreCompileInputs.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.Base\obj\Debug\net5.0\EventBus.Base.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.Base\obj\Debug\net5.0\ref\EventBus.Base.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.Base\obj\Debug\net5.0\EventBus.Base.pdb

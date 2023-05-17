@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "dI1el7vjfgJCujhBHD42weZq76Tg0CXNvoQztBGZO1YqabpRk7iyduOV/J0VMhkRlzV9B1m5dWKtq7skz2uFRw==",
+  "dgSpecHash": "FYm4zV00Pcl1KyiHjvVXbEX5wW/qxI00Ln52hBr1kVWHdXuLs3aZTb26IBTwSxznBl7LQHnzy6qDF/jZx903iw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\Bitirme\\SalesSystem\\Source\\Services\\OrderService\\OrderServiceApi\\OrderServiceApi.csproj",
+  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\Yeni klasör (4)\\FinalProject\\SalesSystem\\Source\\Services\\OrderService\\OrderServiceApi\\OrderServiceApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Abdullah\\.nuget\\packages\\consul\\1.6.10.7\\consul.1.6.10.7.nupkg.sha512",
     "C:\\Users\\Abdullah\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

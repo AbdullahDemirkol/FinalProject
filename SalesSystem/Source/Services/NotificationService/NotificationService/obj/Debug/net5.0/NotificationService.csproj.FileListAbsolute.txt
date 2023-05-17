@@ -37,3 +37,42 @@ C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Services\NotificationServic
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Services\NotificationService\NotificationService\obj\Debug\net5.0\ref\NotificationService.dll
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Services\NotificationService\NotificationService\obj\Debug\net5.0\NotificationService.pdb
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Services\NotificationService\NotificationService\obj\Debug\net5.0\NotificationService.genruntimeconfig.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\NotificationService.exe
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\NotificationService.deps.json
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\NotificationService.runtimeconfig.json
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\NotificationService.runtimeconfig.dev.json
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\NotificationService.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\ref\NotificationService.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\NotificationService.pdb
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\Microsoft.Extensions.Configuration.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\Microsoft.Extensions.Logging.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\Microsoft.Extensions.Logging.Configuration.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\Microsoft.Extensions.Logging.Console.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\Microsoft.Extensions.Options.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\Microsoft.Extensions.Options.ConfigurationExtensions.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\Microsoft.Extensions.Primitives.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\Polly.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\RabbitMQ.Client.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\EventBus.Base.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\EventBus.RabbitMQ.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\EventBus.Redirect.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\EventBus.Base.pdb
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\EventBus.Redirect.pdb
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\bin\Debug\net5.0\EventBus.RabbitMQ.pdb
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\obj\Debug\net5.0\NotificationService.csproj.AssemblyReference.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\obj\Debug\net5.0\NotificationService.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\obj\Debug\net5.0\NotificationService.AssemblyInfoInputs.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\obj\Debug\net5.0\NotificationService.AssemblyInfo.cs
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\obj\Debug\net5.0\NotificationService.csproj.CoreCompileInputs.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\obj\Debug\net5.0\NotificationService.csproj.CopyComplete
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\obj\Debug\net5.0\NotificationService.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\obj\Debug\net5.0\ref\NotificationService.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\obj\Debug\net5.0\NotificationService.pdb
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\obj\Debug\net5.0\NotificationService.genruntimeconfig.cache

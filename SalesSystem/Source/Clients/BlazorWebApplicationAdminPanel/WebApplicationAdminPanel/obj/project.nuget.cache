@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pfU7/+Rh29ipIem1RjDM/Gfm32Nbffa2pJUYo9PaoR/9Z3NROD3AIjMmQw8TiWfssX5avB00XV9HqRICOrYV0A==",
+  "dgSpecHash": "SZ5/5uKanLJZAeBpxY0a+aRwPB3MecbT4MIPkSBZq4L6SFhLTwbTHPVR8euZQ0/ibfsrDfgVjxMCMVTBeXAadQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\Bitirme\\SalesSystem\\Source\\Clients\\BlazorWebApplicationAdminPanel\\WebApplicationAdminPanel\\WebApplicationAdminPanel.csproj",
+  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\Yeni klasör (4)\\FinalProject\\SalesSystem\\Source\\Clients\\BlazorWebApplicationAdminPanel\\WebApplicationAdminPanel\\WebApplicationAdminPanel.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Abdullah\\.nuget\\packages\\blazored.localstorage\\4.2.0\\blazored.localstorage.4.2.0.nupkg.sha512",
     "C:\\Users\\Abdullah\\.nuget\\packages\\blazored.modal\\5.1.0\\blazored.modal.5.1.0.nupkg.sha512",

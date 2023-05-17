@@ -10,6 +10,7 @@ namespace WebApplication.Business.Abstract
     public interface IProductService
     {
         Task<PaginatedViewModel<Product>> GetProductsItem(int paginationNumber, int upCategoryId, int downCategoryId, int brandId, int? pageSize);
+        Task<PaginatedViewModel<Product>> GetSearchProductsItem(int paginationNumber, string searchText);
         //Task<PaginatedViewModel<Product>> GetProductItem(string productId);
         Task<List<Product>> GetProductItem(int productId);
         Task<List<Product>> GetSimilarProductsItem(int productId);

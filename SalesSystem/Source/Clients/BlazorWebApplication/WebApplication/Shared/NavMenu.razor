@@ -96,9 +96,9 @@
                 <span class="close-btn"><i class="fas fa-window-close"></i></span>
                 <div class="search-bar">
                     <div class="search-bar-tablecell">
-                        <h3>Search For:</h3>
-                        <input type="text" placeholder="Keywords">
-                        <button type="submit">Search <i class="fas fa-search"></i></button>
+                        <h3>Arama:</h3>
+                        <input type="text" @bind="searchText" placeholder="Ürün Adı">
+                        <button type="submit" class="close-btn" @onclick="SearchProduct">Ara <i class="fas fa-search"></i></button>
                     </div>
                 </div>
             </div>
@@ -139,6 +139,7 @@ IIdentityService identityService { get; set; }
 [Inject]
 StateManager stateManager { get; set; }
 private bool isLoggedIn = false;
+private string searchText = string.Empty;
 
 List<UpCategory> upCategories = new List<UpCategory>();
 UserDTO _userDto { get; set; }
@@ -194,6 +195,11 @@ private void GoLogoutPage()
 private void CheckBasket()
 {
     stateManager.UpdateCard(this);
+}
+protected void SearchProduct()
+{
+    navigationManager.NavigateTo($"/product/{searchText}");
+    searchText = string.Empty;
 }
 
 }

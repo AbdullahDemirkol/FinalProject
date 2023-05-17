@@ -29,6 +29,12 @@ namespace WebApplication.Business.Concrete
             var products = await _httpClient.GetResponseAsync<PaginatedViewModel<Product>>(query);
             return products;
         }
+        public async Task<PaginatedViewModel<Product>> GetSearchProductsItem(int paginationNumber, string searchText)
+        {
+            var query = $"/product/products/Search?pageIndeX={paginationNumber}&searchText={searchText}";
+            var products = await _httpClient.GetResponseAsync<PaginatedViewModel<Product>>(query);
+            return products;
+        }
         public async Task<List<Product>> GetProductItem(int productId)
         {
             var product = await _httpClient.GetResponseAsync<List<Product>>($"/product/products?ids={productId}");

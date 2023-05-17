@@ -131,7 +131,7 @@ namespace ProductServiceApi.Extensions.Migration.MigrationSeeds
                     Name="Ray-Ban RB 3025 002",
                     Description="Mükkemmel bir gözlük",
                     Price=2600,
-                    UpCategoryId=productContext.UpCategories.FirstOrDefault(p=>p.UpCategoryName=="Giyim").Id,
+                    UpCategoryId=productContext.UpCategories.FirstOrDefault(p=>p.UpCategoryName=="Aksesuar").Id,
                     DownCategoryId=productContext.DownCategories.FirstOrDefault(p=>p.DownCategoryName=="Gözlük").Id,
                     //Category={
                     //    Id=1,

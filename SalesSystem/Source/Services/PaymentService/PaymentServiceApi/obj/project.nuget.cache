@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4jNsUXMcOaF4a3+E3kLFEWmI69XpVNy1tg+Gi2chiBJb4p7Kzgqj5FULYx5mbLgs85on1mqgd8WbDCBlKrXBag==",
+  "dgSpecHash": "tRFzBSPHPI7eBoUCk4iA+sYGNtfUDmlY+baRTDf6hHE38lkNd1hEhW0ZRYNH/2OMfz/PvMVcDH8tFHincGoDnA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\Bitirme\\SalesSystem\\Source\\Services\\PaymentService\\PaymentServiceApi\\PaymentServiceApi.csproj",
+  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\Yeni klasör (4)\\FinalProject\\SalesSystem\\Source\\Services\\PaymentService\\PaymentServiceApi\\PaymentServiceApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Abdullah\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\Abdullah\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",

@@ -1,4 +1,6 @@
-﻿@page "/Product/"
+﻿@*@page "/Product/"*@
+@page "/Product"
+@page "/Product/{search}"
 @*@page "/Product/UpCategory/{_upCategory:int}/DownCategory/{_downCategory:int}"*@
 
 @*<h3>Products @_upCategory / @_downCategory/ @_brand</h3>*@
@@ -77,7 +79,7 @@
                                     {
                                         @if (downCategory.UpCategoryId == selectedUpCategoryId)
                                         {
-                                            if (downCategory.Id==selectedDownCategoryId)
+                                            if (downCategory.Id == selectedDownCategoryId)
                                             {
                                                 <option value="@downCategory.Id" selected>@downCategory.DownCategoryName</option>
                                             }
@@ -107,73 +109,73 @@
                     </div>
                     <ul>
                         @*<li class="col-md-3">asd</li>
-            <li class="col-md-3">asd</li>
-            <li class="col-md-3">asd</li>
-            <li class="col-md-3"><button>Filtrele</button></li>*@
+                            <li class="col-md-3">asd</li>
+                            <li class="col-md-3">asd</li>
+                            <li class="col-md-3"><button>Filtrele</button></li>*@
                         @*@if (CurUpCategory == null && CurDownCategory == null && CurBrand == null)
-                        {
-                            <li class="active" @onclick="()=>GetProductsAsync(page:0)">Tümü</li>
-                        }
-                        else
-                        {
-                            <li @onclick="()=>GetProductsAsync(page:0)">All</li>
-                        }
-                        @foreach (var upCategory in upCategories)
-                        {
-                            if (CurUpCategory == null)
                             {
-                                <li @onclick="()=>GetProductsAsync(page:0,upCategory:upCategory)">@upCategory.UpCategoryName</li>
+                                <li class="active" @onclick="()=>GetProductsAsync(page:0)">Tümü</li>
                             }
                             else
                             {
-                                if (CurUpCategory.Id != upCategory.Id)
+                                <li @onclick="()=>GetProductsAsync(page:0)">All</li>
+                            }
+                            @foreach (var upCategory in upCategories)
+                            {
+                                if (CurUpCategory == null)
                                 {
                                     <li @onclick="()=>GetProductsAsync(page:0,upCategory:upCategory)">@upCategory.UpCategoryName</li>
                                 }
                                 else
                                 {
-                                    <li class="active" @onclick="()=>GetProductsAsync(page:0,upCategory:upCategory)">@upCategory.UpCategoryName</li>
+                                    if (CurUpCategory.Id != upCategory.Id)
+                                    {
+                                        <li @onclick="()=>GetProductsAsync(page:0,upCategory:upCategory)">@upCategory.UpCategoryName</li>
+                                    }
+                                    else
+                                    {
+                                        <li class="active" @onclick="()=>GetProductsAsync(page:0,upCategory:upCategory)">@upCategory.UpCategoryName</li>
+                                    }
                                 }
                             }
-                        }
-                        @foreach (var downCategory in downCategories)
-                        {
+                            @foreach (var downCategory in downCategories)
+                            {
 
-                            if (CurDownCategory == null)
-                            {
-                                <li @onclick="()=>GetProductsAsync(page:0,downCategory: downCategory)">@downCategory.DownCategoryName</li>
-                            }
-                            else
-                            {
-                                if (CurDownCategory.Id != downCategory.Id)
+                                if (CurDownCategory == null)
                                 {
                                     <li @onclick="()=>GetProductsAsync(page:0,downCategory: downCategory)">@downCategory.DownCategoryName</li>
                                 }
                                 else
                                 {
-                                    <li class="active" @onclick="()=>GetProductsAsync(page:0,downCategory: downCategory)">@downCategory.DownCategoryName</li>
+                                    if (CurDownCategory.Id != downCategory.Id)
+                                    {
+                                        <li @onclick="()=>GetProductsAsync(page:0,downCategory: downCategory)">@downCategory.DownCategoryName</li>
+                                    }
+                                    else
+                                    {
+                                        <li class="active" @onclick="()=>GetProductsAsync(page:0,downCategory: downCategory)">@downCategory.DownCategoryName</li>
+                                    }
                                 }
                             }
-                        }
-                        @foreach (var brand in brands)
-                        {
+                            @foreach (var brand in brands)
+                            {
 
-                            if (CurBrand == null)
-                            {
-                                <li @onclick="()=>GetProductsAsync(page:0,brand:brand)">@brand.BrandName</li>
-                            }
-                            else
-                            {
-                                if (CurBrand.Id != brand.Id)
+                                if (CurBrand == null)
                                 {
                                     <li @onclick="()=>GetProductsAsync(page:0,brand:brand)">@brand.BrandName</li>
                                 }
                                 else
                                 {
-                                    <li class="active" @onclick="()=>GetProductsAsync(page:0,brand:brand)">@brand.BrandName</li>
+                                    if (CurBrand.Id != brand.Id)
+                                    {
+                                        <li @onclick="()=>GetProductsAsync(page:0,brand:brand)">@brand.BrandName</li>
+                                    }
+                                    else
+                                    {
+                                        <li class="active" @onclick="()=>GetProductsAsync(page:0,brand:brand)">@brand.BrandName</li>
+                                    }
                                 }
-                            }
-                        }*@
+                            }*@
                     </ul>
                 </div>
             </div>
@@ -235,6 +237,8 @@
 
 
 @code {
+    [Parameter]
+    public string search { get; set; } = string.Empty;
     [Inject]
     public IJSRuntime jsRuntime { get; set; }
     [Inject]
@@ -265,6 +269,8 @@
     int selectedUpCategoryId;
     int selectedDownCategoryId;
     int selectedBrandId;
+
+    bool changeSearch = false;
 
     public void AccessControl()
     {
@@ -315,7 +321,14 @@
         upCategories = await productService.GetUpCategoryItems();
         downCategories = await productService.GetDownCategoryItems();
         brands = await productService.GetBrandItems();
-        await GetProductsDataAsync(CurPage-1, CurUpCategoryId, CurDownCategoryId, CurBrandId);
+        if (!string.IsNullOrEmpty(search))
+        {
+            SearchProducts(CurPage - 1);
+        }
+        else
+        {
+            await GetProductsDataAsync(CurPage - 1, CurUpCategoryId, CurDownCategoryId, CurBrandId);
+        }
     }
 
     //protected async override Task OnAfterRenderAsync(bool firstRender)
@@ -370,8 +383,21 @@
         CurDownCategoryId = selectedDownCategoryId;
         CurBrandId = selectedBrandId;
         await GetProductsDataAsync(0, CurUpCategoryId, CurDownCategoryId, CurBrandId);
+        if (!string.IsNullOrEmpty(search))
+        {
+            search = string.Empty;
+            CurPage = 1;
+        }
+        navigationManager.NavigateTo("/Product");
     }
-    private async Task GetProductsDataAsync(int page,int upCategoryId,int downCategoryId,int brandId)
+    private async void SearchProducts(int page)
+    {
+        var inComingProducts = await productService.GetSearchProductsItem(page, search);
+        _products = inComingProducts.Data;
+        _productCount = inComingProducts.Count;
+        stateManager.UpdateContent(this, "ProductPage");
+    }
+    private async Task GetProductsDataAsync(int page, int upCategoryId, int downCategoryId, int brandId)
     {
         var inComingProducts = await productService.GetProductsItem(page, upCategoryId, downCategoryId, brandId, null);
 
@@ -400,7 +426,19 @@
     private async void Pagination(int page)
     {
         CurPage = page + 1;
-        await GetProductsDataAsync(page, CurUpCategoryId, CurDownCategoryId, CurBrandId);
+        if (changeSearch)
+        {
+            CurPage = 1;
+            changeSearch = false;
+        }
+        if (!string.IsNullOrEmpty(search))
+        {
+            SearchProducts(page);
+        }
+        else
+        {
+            await GetProductsDataAsync(page, CurUpCategoryId, CurDownCategoryId, CurBrandId);
+        }
 
         //await GetProductsAsync(page, CurUpCategory, CurDownCategory, CurBrand);
     }
@@ -456,7 +494,7 @@
         {
 
             CurPage++;
-            await GetProductsDataAsync(CurPage - 1,CurUpCategoryId,CurDownCategoryId,CurBrandId);
+            await GetProductsDataAsync(CurPage - 1, CurUpCategoryId, CurDownCategoryId, CurBrandId);
         }
     }
     protected async Task PrevPage()
@@ -475,7 +513,7 @@
     private void OptionDownCategorySelected(ChangeEventArgs e)
     {
         selectedDownCategoryId = Convert.ToInt32(e.Value);
-        if (selectedDownCategoryId!=0)
+        if (selectedDownCategoryId != 0)
         {
             selectedUpCategoryId = downCategories.FirstOrDefault(p => p.Id == selectedDownCategoryId).UpCategoryId;
         }
