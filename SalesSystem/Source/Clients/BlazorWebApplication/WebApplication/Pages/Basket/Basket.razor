@@ -28,9 +28,9 @@
                                     <th class="product-remove"></th>
                                     <th class="product-image">Ürün Resimi</th>
                                     <th class="product-name">Ürün Adı</th>
-                                    <th class="product-price">Ürün Fiyatı</th>
-                                    <th class="product-quantity">Ürün Adeti</th>
+                                    <th class="product-price">Ürün Birim Fiyatı</th>
                                     <th class="product-total">Toplam Ürün Adeti</th>
+                                    <th class="product-price">Toplam Ürün Fiyatı</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,23 +39,23 @@
                                     @foreach (var basketItem in basketModel.BasketItems)
                                     {
 
-                                        <tr class="table-body-row">
-                                            <td class="product-remove"><a @onclick="@(async()=>await RemoveItemFromList(basketItem))"><i class="far fa-window-close"></i></a></td>
-                                            <td class="product-image">
-                                                @if (basketItem.PictureUrl!=null)
-                                                {
-                                                    <img src="@("http://localhost:5001/pics" + basketItem.PictureUrl)" alt="">
-                                                }
-                                                else
-                                                {
-                                                    <img src="assets/img/default-product.png" alt="">
-                                                }
-                                            </td>
-                                            <td class="product-name">@basketItem.ProductName</td>
-                                            <td class="product-price">@basketItem.UnitPrice.ToString("N2") TL</td>
-                                            <td class="product-quantity"><input type="number" placeholder="@basketItem.Quantity" value="@basketItem.Quantity" @oninput= "(e)=>UpdateProductQuantity(e,basketItem)"></td>
-                                            <td class="product-total">@basketItem.Quantity</td>
-                                        </tr>
+                                <tr class="table-body-row">
+                                    <td class="product-remove"><a @onclick="@(async()=>await RemoveItemFromList(basketItem))"><i class="far fa-window-close"></i></a></td>
+                                    <td class="product-image">
+                                        @if (basketItem.PictureUrl != null)
+                                        {
+                                            <img src="@("http://localhost:5001/pics" + basketItem.PictureUrl)" alt="">
+                                        }
+                                        else
+                                        {
+                                            <img src="assets/img/default-product.png" alt="">
+                                        }
+                                    </td>
+                                    <td class="product-name">@basketItem.ProductName</td>
+                                    <td class="product-price">@basketItem.UnitPrice.ToString("N2") TL</td>
+                                    <td class="product-total">@basketItem.Quantity</td>
+                                    <td class="product-quantity">@((basketItem.Quantity * basketItem.UnitPrice).ToString("N2"))</td>
+                                </tr>
                                     }
                                 }
                             </tbody>
@@ -68,13 +68,13 @@
                         <table class="total-table">
                             <thead class="total-table-head">
                                 <tr class="table-total-row">
-                                    <th>Total</th>
-                                    <th>Price</th>
+                                    <th>Toplam</th>
+                                    <th>Birim</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr class="total-data">
-                                    <td><strong>Total Adet: </strong></td>
+                                    <td><strong>Adet: </strong></td>
                                     <td>@basketModel.TotalQuantity()</td>
                                 </tr>
                                 @*<tr class="total-data">
@@ -82,7 +82,7 @@
                                     <td>$45</td>
                                 </tr>*@
                             <tr class="total-data">
-                                <td><strong>Total Fiyat: </strong></td>
+                                <td><strong>Fiyat: </strong></td>
                                 <td>@basketModel.TotalUnitPrice() TL</td>
                             </tr>
                             </tbody>
@@ -91,7 +91,7 @@
                             <a @onclick="(()=>ReloadPage())" class="boxed-btn">Sepeti Yenile</a>
                             @if (basketModel.BasketItems.Count > 0)
                             {
-                                <a class="boxed-btn black" @onclick="@(()=>CheckOut())">Check Out</a>
+                                <a class="boxed-btn black" @onclick="@(()=>CheckOut())">Alışverişi Tamamla</a>
                             }
                         </div>
                     </div>

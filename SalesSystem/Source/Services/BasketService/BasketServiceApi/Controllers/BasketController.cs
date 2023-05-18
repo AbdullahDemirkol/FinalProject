@@ -18,12 +18,13 @@ namespace BasketServiceApi.Controllers
     [Authorize]
     public class BasketController : ControllerBase
     {
-        private readonly IBasketRepository _basketRepository;
+        //IBasketRepository yada IBasketService kullanabilirsin
+        private readonly IBasketService _basketRepository;
         private readonly IIdentityService _identityService;
         private readonly IEventBus _eventBus;
         private readonly ILogger<BasketController> _logger;
 
-        public BasketController(IBasketRepository basketRepository, IIdentityService identityService, IEventBus eventBus, ILogger<BasketController> logger)
+        public BasketController(IBasketService basketRepository, IIdentityService identityService, IEventBus eventBus, ILogger<BasketController> logger)
         {
             _basketRepository = basketRepository;
             _identityService = identityService;

@@ -3,11 +3,13 @@ using BasketServiceApi.Business.Concrete;
 using BasketServiceApi.Configuration;
 using BasketServiceApi.DataAccess.Abstract;
 using BasketServiceApi.DataAccess.Concrete;
+using BasketServiceApi.DataAccess.PostgreSqlConnect;
 using BasketServiceApi.IntegrationEvents.EventHandlers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -40,6 +42,11 @@ namespace BasketServiceApi
             });
 
             //-----------------------------------------------------------------
+
+
+            var p = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<BasketDbContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy", builder =>
@@ -63,6 +70,7 @@ namespace BasketServiceApi
 
             services.AddHttpContextAccessor();
             services.AddTransient<IBasketRepository, RedisBasketRepository>();
+            services.AddTransient<IBasketService, BasketManager>();
             services.AddTransient<IIdentityService, IdentityManager>();
             services.AddTransient<OrderCreatedIntegrationEventHandler>();
         }

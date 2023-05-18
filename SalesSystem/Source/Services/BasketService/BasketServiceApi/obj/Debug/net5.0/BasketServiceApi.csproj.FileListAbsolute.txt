@@ -64,10 +64,6 @@ C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Services\BasketService\Bask
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Services\BasketService\BasketServiceApi\obj\Debug\net5.0\ref\BasketServiceApi.dll
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Services\BasketService\BasketServiceApi\obj\Debug\net5.0\BasketServiceApi.pdb
 C:\Users\Abdullah\Desktop\Bitirme\SalesSystem\Source\Services\BasketService\BasketServiceApi\obj\Debug\net5.0\BasketServiceApi.genruntimeconfig.cache
-C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\bin\Debug\net5.0\Configurations\appsettings.Development.json
-C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\bin\Debug\net5.0\Configurations\appsettings.json
-C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\bin\Debug\net5.0\Configurations\serilog.Development.json
-C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\bin\Debug\net5.0\Configurations\serilog.json
 C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\bin\Debug\net5.0\BasketServiceApi.exe
 C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\bin\Debug\net5.0\BasketServiceApi.deps.json
 C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\bin\Debug\net5.0\BasketServiceApi.runtimeconfig.json
@@ -130,3 +126,16 @@ C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Servi
 C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\obj\Debug\net5.0\ref\BasketServiceApi.dll
 C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\obj\Debug\net5.0\BasketServiceApi.pdb
 C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\obj\Debug\net5.0\BasketServiceApi.genruntimeconfig.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\bin\Debug\net5.0\Npgsql.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\bin\Debug\net5.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\bin\Debug\net5.0\Humanizer.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\bin\Debug\net5.0\Configurations\appsettings.Development.json
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\bin\Debug\net5.0\Configurations\appsettings.json
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\bin\Debug\net5.0\Configurations\serilog.Development.json
+C:\Users\Abdullah\Desktop\Yeni klasör (4)\FinalProject\SalesSystem\Source\Services\BasketService\BasketServiceApi\bin\Debug\net5.0\Configurations\serilog.json

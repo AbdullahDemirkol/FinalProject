@@ -1,6 +1,8 @@
-﻿using BasketServiceApi.DataAccess.Abstract;
+﻿using BasketServiceApi.Business.Abstract;
+using BasketServiceApi.DataAccess.Abstract;
 using BasketServiceApi.IntegrationEvents.Events;
 using EventBus.Base.Entity.Abstract;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -11,19 +13,27 @@ namespace BasketServiceApi.IntegrationEvents.EventHandlers
 {
     public class OrderCreatedIntegrationEventHandler : IIntegrationEventHandler<OrderCreatedIntegrationEvent>
     {
-        private readonly IBasketRepository _basketRepository;
+        //IBasketRepository yada IBasketService kullanabilirsin
+        //private readonly IBasketService _basketRepository;
+        private IServiceScopeFactory _serviceScopeFactory;
         private readonly ILogger<OrderCreatedIntegrationEvent> _logger;
 
-        public OrderCreatedIntegrationEventHandler(IBasketRepository basketRepository, ILogger<OrderCreatedIntegrationEvent> logger)
+        public OrderCreatedIntegrationEventHandler(IServiceScopeFactory serviceScopeFactory, ILogger<OrderCreatedIntegrationEvent> logger)
         {
-            _basketRepository = basketRepository;
+            _serviceScopeFactory = serviceScopeFactory;
             _logger = logger;
         }
 
         public async Task Handle(OrderCreatedIntegrationEvent integrationEvent)
         {
-            _logger.LogInformation(" Entegrasyon işlemi devam ediyor: {IntegrationEventId}(IntegrationEventId) BasketServiceApi - ({@IntegrationEvent})", integrationEvent.Id,integrationEvent);
-            await _basketRepository.DeleteBasketAsync(integrationEvent.Username);
+            using (var scope = _serviceScopeFactory.CreateScope())
+            {
+                var scopedServices = scope.ServiceProvider;
+
+                var _basketRepository = scopedServices.GetRequiredService<IBasketService>();
+                _logger.LogInformation(" Entegrasyon işlemi devam ediyor: {IntegrationEventId}(IntegrationEventId) BasketServiceApi - ({@IntegrationEvent})", integrationEvent.Id, integrationEvent);
+                await _basketRepository.DeleteBasketAsync(integrationEvent.Username);
+            }
         }
     }
 }
