@@ -5,13 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ocelot" Version="17.0.1" />
-    <PackageReference Include="Ocelot.Provider.Consul" Version="17.0.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <Compile Remove="Entity\Abstract\**" />
+    <Content Remove="Entity\Abstract\**" />
+    <EmbeddedResource Remove="Entity\Abstract\**" />
+    <None Remove="Entity\Abstract\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Entity\Abstract\" />
+    <PackageReference Include="Ocelot" Version="17.0.1" />
+    <PackageReference Include="Ocelot.Provider.Consul" Version="17.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
 </Project>

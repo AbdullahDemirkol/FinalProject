@@ -1,5 +1,6 @@
 ﻿
 using MediatR;
+using Microsoft.Extensions.Logging;
 using OrderServiceApi.DataAccess;
 using OrderServiceApi.DataAccess.Repositories.Abstract;
 using OrderServiceApi.Entity.Concrete.Buyer;
@@ -20,25 +21,26 @@ namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetOrderDeta
         IOrderRepository _orderRepository;
         IBuyerRepository _buyerRepository;
         IPaymentMethodRepository _paymentMethodRepository;
-
-        public GetOrdersByUserNameQueryHandler(IOrderRepository orderRepository, IBuyerRepository buyerRepository, IPaymentMethodRepository paymentMethodRepository)
+        ILogger<GetOrdersByUserNameQueryHandler> _logger;
+        public GetOrdersByUserNameQueryHandler(IOrderRepository orderRepository, IBuyerRepository buyerRepository, IPaymentMethodRepository paymentMethodRepository, ILogger<GetOrdersByUserNameQueryHandler> logger)
         {
             _orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
             _buyerRepository = buyerRepository ?? throw new ArgumentNullException(nameof(buyerRepository));
             _paymentMethodRepository = paymentMethodRepository ?? throw new ArgumentNullException(nameof(paymentMethodRepository));
+            _logger = logger;
         }
 
         public async Task<PaginatedViewModel<OrderDetailViewModel>> Handle(GetOrdersByUserNameQuery request, CancellationToken cancellationToken)
         {
-            var buyer= await _buyerRepository.GetSingleAsync(p => p.Name == request.BuyerName,p=>p._paymentMethods);
+            var buyer = await _buyerRepository.GetSingleAsync(p => p.Name == request.BuyerName, p => p._paymentMethods);
             int orderCount = 0;
-            List<Order> orders=new List<Order>();
-            if (buyer!=null)
+            List<Order> orders = new List<Order>();
+            if (buyer != null)
             {
                 if (request.OrderStatusId == 0)
                 {
                     orders = await _orderRepository.Get(p => p.BuyerId == buyer.Id, orderBy: i => i.OrderByDescending(p => p.OrderDate), i => i.OrderItems, p => p.OrderStatus, p => p.Address, p => p.Buyer, p => p.Buyer);
-                    
+
                 }
                 else
                 {
@@ -53,30 +55,31 @@ namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetOrderDeta
             //var ordersList = (List<Order>)orders;
             foreach (var order in orders)
             {
-                var paymentMethodCardNumber = _paymentMethodRepository.GetSingleAsync(p=>p.Id==order.PaymentMethodId).Result.CardNumber;
+                var paymentMethodCardNumber = _paymentMethodRepository.GetSingleAsync(p => p.Id == order.PaymentMethodId).Result.CardNumber;
                 var orderDetailViewModel = new OrderDetailViewModel()
                 {
-                    Neighbourhood=order.Address.Neighbourhood,
+                    Neighbourhood = order.Address.Neighbourhood,
                     Street = order.Address.Street,
                     BuildingNo = order.Address.BuildingNo,
                     ApartmentNo = order.Address.ApartmentNo,
                     District = order.Address.District,
                     City = order.Address.City,
                     Country = order.Address.Country,
-                    Description=order.Description,
-                    OrderItems=(List<OrderItem>)order.OrderItems,
-                    OrderNumber=order.Id,
-                    Status=order.OrderStatus.Name,
-                    ZipCode=order.Address.ZipCode,
-                    Total=order.Total(),
-                    Date=order.OrderDate,
-                    BuyerName=order.Buyer.Name,
-                    PaymentMethodPrefix= paymentMethodCardNumber.Substring(0, 4),
+                    Description = order.Description,
+                    OrderItems = (List<OrderItem>)order.OrderItems,
+                    OrderNumber = order.Id,
+                    Status = order.OrderStatus.Name,
+                    ZipCode = order.Address.ZipCode,
+                    Total = order.Total(),
+                    Date = order.OrderDate,
+                    BuyerName = order.Buyer.Name,
+                    PaymentMethodPrefix = paymentMethodCardNumber.Substring(0, 4),
                     PaymentMethodSuffix = paymentMethodCardNumber.Substring(paymentMethodCardNumber.Length - 4)
                 };
                 orderDetailViewModels.Add(orderDetailViewModel);
             }
-            var model = new PaginatedViewModel<OrderDetailViewModel>(request.PageIndex,request.PageSize,(int)orderCount, orderDetailViewModels);
+            _logger.LogInformation($"{request.BuyerName} ismine sahip kullanıcının siparişleri getirildi.");
+            var model = new PaginatedViewModel<OrderDetailViewModel>(request.PageIndex, request.PageSize, (int)orderCount, orderDetailViewModels);
             return model;
         }
     }

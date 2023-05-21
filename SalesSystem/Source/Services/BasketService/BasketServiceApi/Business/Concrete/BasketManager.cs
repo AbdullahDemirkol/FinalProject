@@ -24,10 +24,9 @@ namespace BasketServiceApi.Business.Concrete
         {
             try
             {
-                //var customerBasket = await GetBasketAsync(username);
-                var customerBasket = await _basketDbContext.CustomerBaskets.Include(p=>p.BasketItems).FirstOrDefaultAsync(p => p.UserName == username);
+                var customerBasket = await _basketDbContext.CustomerBaskets.Include(p => p.BasketItems).FirstOrDefaultAsync(p => p.UserName == username);
 
-                if (customerBasket.BasketItems.Count>0)
+                if (customerBasket.BasketItems.Count > 0)
                 {
                     foreach (var basketItem in customerBasket.BasketItems)
                     {
@@ -36,10 +35,13 @@ namespace BasketServiceApi.Business.Concrete
                 }
                 _basketDbContext.CustomerBaskets.Remove(customerBasket);
                 await _basketDbContext.SaveChangesAsync();
+
+                _logger.LogInformation($"{username} kullanıcıya ait sepet databaseden silindi.");
                 return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                _logger.LogError($"{username} kullanıcıya ait sepet databaseden silinirken hata oluştu.Hata Mesajı: {e.Message}");
                 return false;
             }
         }
@@ -48,19 +50,7 @@ namespace BasketServiceApi.Business.Concrete
         {
             try
             {
-                //var customerBasket = await _basketDbContext.CustomerBaskets.Include(p => p.BasketItems).FirstOrDefaultAsync(p => p.UserName == UpdateCustomerBasket.UserName);
-
-                //if (customerBasket != null)
-                //{
-                //    // customerBasket nesnesinin özelliklerini UpdateCustomerBasket nesnesinin özellikleriyle güncelle
-                //    customerBasket.UserName = UpdateCustomerBasket.UserName;
-                //    customerBasket.BasketItems = UpdateCustomerBasket.BasketItems;
-
-                //    _basketDbContext.CustomerBaskets.Update(customerBasket);
-                //    await _basketDbContext.SaveChangesAsync();
-                //    _logger.LogInformation("Sepet başarıyla güncellenildi.");
-                //}
-                if (UpdateCustomerBasket!=null)
+                if (UpdateCustomerBasket != null)
                 {
                     var customerBasket = await _basketDbContext.CustomerBaskets.Include(p => p.BasketItems).FirstOrDefaultAsync(p => p.UserName == UpdateCustomerBasket.UserName);
                     if (customerBasket == null)
@@ -77,14 +67,14 @@ namespace BasketServiceApi.Business.Concrete
                                 _basketDbContext.BasketItems.Remove(basketItem);
                             }
                         }
-                        if (UpdateCustomerBasket.BasketItems.Count>0)
+                        if (UpdateCustomerBasket.BasketItems.Count > 0)
                         {
                             customerBasket.BasketItems = UpdateCustomerBasket.BasketItems;
                             _basketDbContext.CustomerBaskets.Update(customerBasket);
                         }
                     }
                     await _basketDbContext.SaveChangesAsync();
-                    _logger.LogInformation("Sepet başarıyla güncellenildi.");
+                    _logger.LogInformation($"{UpdateCustomerBasket.UserName} kullanıcıya ait sepete ürün eklenildi.");
                     return await GetBasketAsync(UpdateCustomerBasket.UserName);
                 }
                 return await GetBasketAsync(UpdateCustomerBasket.UserName);
@@ -92,12 +82,11 @@ namespace BasketServiceApi.Business.Concrete
             }
             catch (Exception e)
             {
-                var asdas = e.Message;
-                _logger.LogInformation("Sepet güncellenirken sorun oluştu.");
+                _logger.LogError($"Sepete ürün eklenirken sorun oluştu.Hata Mesajı:{e.Message}");
                 return await GetBasketAsync(UpdateCustomerBasket.UserName);
             }
 
-            
+
         }
         public async Task<CustomerBasket> GetBasketAsync(string username)
         {
@@ -105,21 +94,13 @@ namespace BasketServiceApi.Business.Concrete
 
             if (customerBasket == null)
             {
+                _logger.LogInformation($"{username} kullanıcıya ait sepet bulunamadığı için yeni sepet oluşturuluyor.");
                 return null;
             }
+            _logger.LogInformation($"{username} kullanıcıya ait sepet getirildi.");
             return customerBasket;
-            //if (_basketDbContext.CustomerBaskets.Find())
-            //{
-
-            //}
         }
 
-        //public IEnumerable<string> GetUsers()
-        //{
-        //    var server = GetServer();
-        //    var data = server.Keys();
-        //    return data?.Select(p => p.ToString());
-        //}
 
     }
 }

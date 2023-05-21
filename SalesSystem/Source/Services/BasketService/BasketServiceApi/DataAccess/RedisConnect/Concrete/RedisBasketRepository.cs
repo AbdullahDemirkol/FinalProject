@@ -16,28 +16,41 @@ namespace BasketServiceApi.DataAccess.Concrete
         private readonly ConnectionMultiplexer _connectionMultiplexer;
         private readonly IDatabase _database;
 
-        public RedisBasketRepository(ILoggerFactory loggerFactory, ConnectionMultiplexer redis)
+        public RedisBasketRepository(ILogger<RedisBasketRepository> loggerFactory, ConnectionMultiplexer redis)
         {
-            _logger = loggerFactory.CreateLogger<RedisBasketRepository>();
+            _logger = loggerFactory;
             _connectionMultiplexer = redis;
             _database = redis.GetDatabase();
         }
 
         public async Task<bool> DeleteBasketAsync(string UserName)
         {
-            return await _database.KeyDeleteAsync(UserName);
+            var isDeleteBool = await _database.KeyDeleteAsync(UserName);
+            if (isDeleteBool)
+            {
+                _logger.LogInformation($"{UserName} kullanıcıya ait sepet databaseden silindi.");
+            }
+            return isDeleteBool;
         }
 
         public async Task<CustomerBasket> UpdateBasketAsync(CustomerBasket customerBasket)
         {
-            bool setCustomerBasket = await _database.StringSetAsync(customerBasket.UserName, JsonConvert.SerializeObject(customerBasket));
-            if (!setCustomerBasket)
+            try
             {
-                _logger.LogInformation("Sepet güncellenirken sorun oluştu.");
-                return null;
+                bool setCustomerBasket = await _database.StringSetAsync(customerBasket.UserName, JsonConvert.SerializeObject(customerBasket));
+                if (!setCustomerBasket)
+                {
+                    _logger.LogInformation($"{customerBasket.UserName} kullanıcıya ait sepet bulunamadığı için yeni sepet oluşturuluyor.");
+                    return null;
+                }
+                _logger.LogInformation($"{customerBasket.UserName} kullanıcıya ait sepete ürün eklenildi.");
+                return await GetBasketAsync(customerBasket.UserName);
             }
-            _logger.LogInformation("Sepet başarıyla güncellenildi.");
-            return await GetBasketAsync(customerBasket.UserName);
+            catch (Exception e)
+            {
+                _logger.LogError($"{customerBasket.UserName} kullanıcıya ait sepete ürün eklenirken hata oluştu. Hata Mesajı: {e.Message}");
+                return await GetBasketAsync(customerBasket.UserName);
+            }
         }
         public async Task<CustomerBasket> GetBasketAsync(string UserName)
         {
@@ -45,8 +58,10 @@ namespace BasketServiceApi.DataAccess.Concrete
 
             if (data.IsNullOrEmpty)
             {
+                _logger.LogInformation($"{UserName} kullanıcıya ait sepet bulunamadığı için yeni sepet oluşturuluyor.");
                 return null;
             }
+            _logger.LogInformation($"{UserName} kullanıcıya ait sepet getirildi.");
             return JsonConvert.DeserializeObject<CustomerBasket>(data);
         }
 
@@ -60,8 +75,7 @@ namespace BasketServiceApi.DataAccess.Concrete
         private IServer GetServer()
         {
             var endPoint = _connectionMultiplexer.GetEndPoints();
-            var x = _connectionMultiplexer.GetServer(endPoint.First());
-            return x;
+            return _connectionMultiplexer.GetServer(endPoint.First());
         }
     }
 }

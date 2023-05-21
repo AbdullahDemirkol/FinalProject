@@ -32,33 +32,33 @@ namespace IdentityCheckServiceApi.Controllers
             return Ok(result);
         }
         [HttpPost("Register")]
-        public async Task<IActionResult> Register([FromBody]UserModel user)
+        public async Task<IActionResult> Register([FromBody] UserModel user)
         {
             var roleName = Role.FromName("user").Name;
             var result = await _identityService.Register(user, roleName);
             return Ok(result);
         }
         [HttpGet("users")]
-        public async Task<ActionResult<PaginatedViewModel<UserModel>>> GetUsers(int pageSize=6,int pageIndex=0)
+        public async Task<ActionResult<PaginatedViewModel<UserModel>>> GetUsers(int pageSize = 6, int pageIndex = 0)
         {
-            var result = await _identityService.GetUsers(pageSize,pageIndex);
+            var result = await _identityService.GetUsers(pageSize, pageIndex);
             return result;
         }
         [HttpGet("Users/{userStatus:bool}")]
-        public async Task<ActionResult<PaginatedViewModel<UserModel>>> GetUserStatus(bool userStatus,int pageSize = 6, int pageIndex = 0)
+        public async Task<ActionResult<PaginatedViewModel<UserModel>>> GetUserStatus(bool userStatus, int pageSize = 6, int pageIndex = 0)
         {
-            var result = await _identityService.GetUsers(pageSize,pageIndex,p => p.Status == userStatus);
+            var result = await _identityService.GetUsers(pageSize, pageIndex, p => p.Status == userStatus);
             return result;
         }
         [HttpPost("SetUserStatus/{userId:int}")]
         public async Task<ActionResult<string>> SetUserStatus(int userId, [FromBody] bool userStatus)
         {
-            var result = await _identityService.SetStatusCancel(userId,userStatus);
+            var result = await _identityService.SetStatusCancel(userId, userStatus);
 
             return result;
         }
         [HttpPost("ChangePicture/{userName}")]
-        public async Task<bool> ChangePicture([FromBody]byte[] userProfilePicture, string userName)
+        public async Task<bool> ChangePicture([FromBody] byte[] userProfilePicture, string userName)
         {
             var result = await _identityService.ChangeProfilePicture(userProfilePicture, userName);
             if (result)
@@ -80,20 +80,20 @@ namespace IdentityCheckServiceApi.Controllers
             return Ok(result);
         }
         [HttpPost("AddUser/{roleId:int}")]
-        public async Task<bool> AddUser([FromBody]UserModelDTO addUserModel, int roleId)
+        public async Task<bool> AddUser([FromBody] UserModelDTO addUserModel, int roleId)
         {
-            var result = await _identityService.AddUser(addUserModel,roleId);
+            var result = await _identityService.AddUser(addUserModel, roleId);
             if (result)
             {
-                return true; 
+                return true;
             }
             return false;
         }
         [HttpPost("UpdateUser/{newPas}")]
         ///{newPas:string}
-        public async Task<bool> UpdateUser([FromBody]UserModelDTO updateUserModel, string newPas)
+        public async Task<bool> UpdateUser([FromBody] UserModelDTO updateUserModel, string newPas)
         {
-            var result = await _identityService.UpdateUser(updateUserModel,newPas);
+            var result = await _identityService.UpdateUser(updateUserModel, newPas);
             if (result)
             {
                 return true;

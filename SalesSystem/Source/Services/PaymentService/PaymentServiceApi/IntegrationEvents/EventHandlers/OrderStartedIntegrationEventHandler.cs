@@ -27,6 +27,7 @@ namespace PaymentServiceApi.IntegrationEvents.EventHandlers
 
         public Task Handle(OrderStartedIntegrationEvent integrationEvent)
         {
+            _logger.LogInformation($"Ödeme işlemi başlatıldı.");
             //Fake ödeme yöntemi
             string keyword = "PaymentSuccess";
             bool paymentSuccess = _configuration.GetValue<bool>(keyword);
@@ -40,7 +41,7 @@ namespace PaymentServiceApi.IntegrationEvents.EventHandlers
             {
                 paymentEvent = new OrderPaymentFailedIntegrationEvent(integrationEvent.OrderId, $"Ödeme işlemi başarısız oldu.");
             }
-            _logger.LogInformation($"OrderStartedIntegrationEvent PaymentServis içinde tetiklendi. PaymentService:{paymentSuccess},orderId:{integrationEvent.OrderId}");
+            _logger.LogInformation($"Ödeme işlemi yapıldı. PaymentService:{paymentSuccess},orderId:{integrationEvent.OrderId}");
             _eventBus.Publish(paymentEvent);
             return Task.CompletedTask;
 

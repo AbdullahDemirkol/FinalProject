@@ -31,12 +31,12 @@ namespace BasketServiceApi.Controllers
             _eventBus = eventBus;
             _logger = logger;
         }
-        
+
         [HttpGet("{requestUserName}")]
         public async Task<ActionResult> GetBasketByIdAsync(string requestUserName)
         {
             var userName = _identityService.GetUserName();
-            if (userName==requestUserName)
+            if (userName == requestUserName)
             {
                 var basket = await _basketRepository.GetBasketAsync(requestUserName);
                 if (basket == null)
@@ -93,7 +93,7 @@ namespace BasketServiceApi.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogInformation(ex, "Hata. Publish entegrasyon eventi sırasında hata oluştu:{IntegrationEventId} from {BasketService.App}", eventMessage.Id);
+                _logger.LogInformation(ex, "Hata. Publish işlemi sırasında hata oluştu:{IntegrationEventId} from {BasketService.App}", eventMessage.Id);
                 throw;
             }
 

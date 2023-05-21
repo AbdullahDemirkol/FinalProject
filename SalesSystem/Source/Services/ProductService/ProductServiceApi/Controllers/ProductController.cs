@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using ProductServiceApi.DataAccess;
 using ProductServiceApi.Entity.Concrete;
 using ProductServiceApi.Entity.Concrete.Helper;
@@ -19,10 +20,12 @@ namespace ProductServiceApi.Controllers
     public class ProductController : ControllerBase
     {
         private readonly ProductContext _productContext;
+        ILogger<ProductController> _logger;
 
-        public ProductController(ProductContext productContext)
+        public ProductController(ProductContext productContext, ILogger<ProductController> logger)
         {
             _productContext = productContext ?? throw new ArgumentNullException(nameof(productContext));
+            _logger = logger;
         }
 
 
@@ -44,12 +47,12 @@ namespace ProductServiceApi.Controllers
                     .Where(p => upCategoryId != 0 ? p.UpCategoryId == upCategoryId : true)
                     .Where(p => downCategoryId != 0 ? p.DownCategoryId == downCategoryId : true)
                     .Where(p => brandId != 0 ? p.BrandId == brandId : true);
-            
+
             var totalProductCount = await productQuery.LongCountAsync();
 
             var productsOnPage = await productQuery.OrderBy(p => p.Name).Skip(pageSize * pageIndex).Take(pageSize).ToListAsync();
 
-
+            _logger.LogInformation("Ürünler getirildi.");
             var model = new PaginatedViewModel<Product>(pageIndex, pageSize, (int)totalProductCount, productsOnPage);
 
             return Ok(model);
@@ -64,14 +67,16 @@ namespace ProductServiceApi.Controllers
 
             var idsToSelect = numIds.Select(id => id.Value);
 
-            var products = await _productContext.Products.Include(p=>p.Pictures).Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Where(p => idsToSelect.Contains(p.Id)).ToListAsync();
+            var products = await _productContext.Products.Include(p => p.Pictures).Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Where(p => idsToSelect.Contains(p.Id)).ToListAsync();
             return products;
         }
+
+
         [HttpGet]
         [Route("products/Search")]
         public IActionResult SearchProductAsync(string searchText, int pageIndex = 0, int pageSize = 6)
         {
-            if (searchText!=null)
+            if (searchText != null)
             {
                 if (!string.IsNullOrEmpty(searchText))
                 {
@@ -84,28 +89,11 @@ namespace ProductServiceApi.Controllers
 
 
                     var model = new PaginatedViewModel<Product>(pageIndex, pageSize, (int)totalProductCount, productsOnPage);
+                    _logger.LogInformation("Aranılan ürünler getirildi.");
                     return Ok(model);
                 }
             }
             return Ok();
-            //if (productQuery.Count!=0)
-            //{
-            //    foreach (var item in productQuery)
-            //    {
-            //        var name = item.Name; 
-            //        if (item != null && item.Name != null )
-            //        {
-            //            // item.Name içinde searchText değeri bulunuyor
-            //            // İlgili işlemleri burada yapabilirsiniz
-            //        }
-            //        var sad=name.ToString().IndexOf(searchText, StringComparison.OrdinalIgnoreCase) >= 0;
-            //        if (sad)
-            //        {
-
-            //        }
-            //    }
-            //    var pasd = productQuery.Where(p => p.Name.Contains(searchText)).ToList();
-            //}
 
         }
 
@@ -120,21 +108,26 @@ namespace ProductServiceApi.Controllers
                 return BadRequest();
             }
 
-            var product = await _productContext.Products.Include(p=>p.Pictures).Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).SingleOrDefaultAsync(p => p.Id == id);
-            
+            var product = await _productContext.Products.Include(p => p.Pictures).Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).SingleOrDefaultAsync(p => p.Id == id);
+
             if (product != null)
             {
+                _logger.LogInformation($"{id} id'li ürün getirildi.");
                 return product;
             }
+            _logger.LogInformation($"{id} id'li ürün bulunamadı.");
             return NotFound();
         }
+
+
+        //----------------------------------------------------------------------------------------------------------
 
 
         [HttpGet]
         [Route("products/withname/{name:minlength(1)}")]
         public async Task<ActionResult<PaginatedViewModel<Product>>> ProductByNameAsync(string name, int pageSize = 6, int pageIndex = 0, string ids = null)
         {
-            var products = _productContext.Products.Include(p=>p.Pictures).Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Where(p => p.Name.StartsWith(name));
+            var products = _productContext.Products.Include(p => p.Pictures).Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Where(p => p.Name.StartsWith(name));
             var totalProductCount = await products.LongCountAsync();
 
             var productsOnPage = await products.Skip(pageSize * pageIndex).Take(pageSize).ToListAsync();
@@ -144,114 +137,6 @@ namespace ProductServiceApi.Controllers
             return Ok(model);
         }
 
-        //----------------------------------------------------------------------------------------------------------
-
-        [HttpGet]
-        [Route("products/upCategoryId/{upCategoryId:int}")]
-        public async Task<ActionResult<PaginatedViewModel<Product>>> ProductsByUpCatalogIdAsync(int upCategoryId, int pageSize = 6, int pageIndex = 0, string ids = null)
-        {
-            var products = _productContext.Products.Include(p => p.Pictures).Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Where(p => p.UpCategoryId == upCategoryId);
-
-            var totalProductCount = await products.LongCountAsync();
-
-            var productsOnPage = await products.Skip(pageSize * pageIndex).Take(pageSize).ToListAsync();
-
-            var model = new PaginatedViewModel<Product>(pageIndex, pageSize, (int)totalProductCount, productsOnPage);
-
-            return Ok(model);
-        }
-
-        [HttpGet]
-        [Route("products/downCategoryId/{downCategoryId:int}")]
-        public async Task<ActionResult<PaginatedViewModel<Product>>> ProductsByDownCatalogIdAsync(int downCategoryId, int pageSize = 6, int pageIndex = 0, string ids = null)
-        {
-            var products = _productContext.Products.Include(p=>p.Pictures).Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Where(p => p.DownCategoryId == downCategoryId);
-
-            var totalProductCount = await products.LongCountAsync();
-
-            var productsOnPage = await products.Skip(pageSize * pageIndex).Take(pageSize).ToListAsync();
-
-            var model = new PaginatedViewModel<Product>(pageIndex, pageSize, (int)totalProductCount, productsOnPage);
-
-            return Ok(model);
-        }
-
-        [HttpGet]
-        [Route("products/brandId/{brandId:int}")]
-        public async Task<ActionResult<PaginatedViewModel<Product>>> ProductsByBrandIdAsync(int brandId, int pageSize = 6, int pageIndex = 0, string ids = null)
-        {
-            var products = _productContext.Products.Include(p => p.Pictures).Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Where(p => p.BrandId == brandId);
-
-            var totalProductCount = await products.LongCountAsync();
-
-            var productsOnPage = await products.Skip(pageSize * pageIndex).Take(pageSize).ToListAsync();
-
-            var model = new PaginatedViewModel<Product>(pageIndex, pageSize, (int)totalProductCount, productsOnPage);
-
-            return Ok(model);
-        }
-        
-        [HttpGet]
-        [Route("products/upCategoryId/{upCategoryId:int}/brandId/{brandId:int}")]
-        public async Task<ActionResult<PaginatedViewModel<Product>>> ProductsByBrandIdAndUpCategoryIdAsync(int brandId, int upCategoryId, int pageSize = 6, int pageIndex = 0, string ids = null)
-        {
-            var products = _productContext.Products.Include(p => p.Pictures).Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Where(p => p.UpCategoryId == upCategoryId && p.BrandId == brandId);
-
-            var totalProductCount = await products.LongCountAsync();
-
-            var productsOnPage = await products.Skip(pageSize * pageIndex).Take(pageSize).ToListAsync();
-
-            var model = new PaginatedViewModel<Product>(pageIndex, pageSize, (int)totalProductCount, productsOnPage);
-
-            return Ok(model);
-        }
-        
-        [HttpGet]
-        [Route("products/downCategoryId/{downCategoryId:int}/brandId/{brandId:int}")]
-        public async Task<ActionResult<PaginatedViewModel<Product>>> ProductsByBrandIdAndDownCategoryIdAsync(int brandId, int downCategoryId, int pageSize = 6, int pageIndex = 0, string ids = null)
-        {
-            var products = _productContext.Products.Include(p => p.Pictures).Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Where(p => p.DownCategoryId == downCategoryId && p.BrandId == brandId);
-
-            var totalProductCount = await products.LongCountAsync();
-
-            var productsOnPage = await products.Skip(pageSize * pageIndex).Take(pageSize).ToListAsync();
-
-            var model = new PaginatedViewModel<Product>(pageIndex, pageSize, (int)totalProductCount, productsOnPage);
-
-            return Ok(model);
-        }
-
-
-        [HttpGet]
-        [Route("products/upCategoryId/{upCategoryId:int}/downCategoryId/{downCategoryId:int}")]
-        public async Task<ActionResult<PaginatedViewModel<Product>>> ProductsByUpAndDownCatalogIdAsync(int upCategoryId,int downCategory, int pageSize = 6, int pageIndex = 0, string ids = null)
-        {
-            var products = _productContext.Products.Include(p => p.Pictures).Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Where(p => p.UpCategoryId == upCategoryId && p.DownCategoryId==downCategory);
-
-            var totalProductCount = await products.LongCountAsync();
-
-            var productsOnPage = await products.Skip(pageSize * pageIndex).Take(pageSize).ToListAsync();
-
-            var model = new PaginatedViewModel<Product>(pageIndex, pageSize, (int)totalProductCount, productsOnPage);
-
-            return Ok(model);
-        }
-
-
-        [HttpGet]
-        [Route("products/upCategoryId/{upCategoryId:int}/downCategoryId/{downCategoryId:int}/brandId/{brandId:int}")]
-        public async Task<ActionResult<PaginatedViewModel<Product>>> ProductsByUpAndDownCatalogIdAsync(int upCategoryId, int downCategoryId,int brandId, int pageSize = 6, int pageIndex = 0, string ids = null)
-        {
-            var products = _productContext.Products.Include(p => p.Pictures).Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Where(p => p.UpCategoryId == upCategoryId && p.DownCategoryId == downCategoryId && p.BrandId == brandId); ;
-
-            var totalProductCount = await products.LongCountAsync();
-
-            var productsOnPage = await products.Skip(pageSize * pageIndex).Take(pageSize).ToListAsync();
-
-            var model = new PaginatedViewModel<Product>(pageIndex, pageSize, (int)totalProductCount, productsOnPage);
-
-            return Ok(model);
-        }
 
         [HttpGet]
         [Route("getSimilarProducts")]
@@ -259,12 +144,13 @@ namespace ProductServiceApi.Controllers
         {
             var product = _productContext.Products.FirstOrDefault(p => p.Id == productId);
             var similarProducts = await _productContext.Products.Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Include(p => p.Pictures).Where(p => p.UpCategoryId == product.UpCategoryId).ToListAsync();
-            similarProducts.Remove(product); 
+            similarProducts.Remove(product);
 
             Random random = new Random();
             List<Product> selectedSimilarProducts = new List<Product>();
+            _logger.LogInformation($"{product.UpCategoryId} üst kategori id'li benzer ürünler getirildi.");
 
-            if (similarProducts.Count>3)
+            if (similarProducts.Count > 3)
             {
                 for (int i = 0; i < 3; i++)
                 {
@@ -281,6 +167,8 @@ namespace ProductServiceApi.Controllers
 
 
         //----------------------------------------------------------------------------------------------------------
+
+
         [HttpPost]
         [Route("products/add")]
         public async Task<string> CreateProductAsync([FromBody] AddProduct newProduct /*Product productToCreate, IFormFile[] formFiles*//*, [FromForm(Name = "Image")] IFormFile file, [FromForm(Name = "Image1")] IFormFile file1, [FromForm(Name = "Image2")] IFormFile file2*/)
@@ -306,7 +194,7 @@ namespace ProductServiceApi.Controllers
                     if (byteFormFile != null)
                     {
                         var stream = new MemoryStream(byteFormFile);
-                        var formFile = new FormFile(stream, 0, byteFormFile.Length, "file", "file.jpg"); 
+                        var formFile = new FormFile(stream, 0, byteFormFile.Length, "file", "file.jpg");
                         files.Add(formFile);
                     }
                 }
@@ -322,11 +210,13 @@ namespace ProductServiceApi.Controllers
                 {
                     if (result != "Ürün Resimi Eklenildi.")
                     {
+                        _logger.LogInformation($"Ürün ekleme işlemi sırasında resim eklenirken hata oluştur. Hata mesajı: {result}");
                         return result;
                     }
                 }
                 await _productContext.SaveChangesAsync();
 
+                _logger.LogInformation($"Ürün ekleme işlemi başarılı bir şekilde gerçekleşti.");
 
                 return "Ürün Eklenildi.";
             }
@@ -339,12 +229,13 @@ namespace ProductServiceApi.Controllers
         public async Task<string> DeleteProductAsync(int id)
         {
             List<string> results = new List<string>();
-            var product = _productContext.Products.Include(p=>p.Pictures).SingleOrDefault(p => p.Id == id);
+            var product = _productContext.Products.Include(p => p.Pictures).SingleOrDefault(p => p.Id == id);
             if (product == null)
             {
-                return $"{id} numaralı id'ye ait ürün bulunamadı.";
+                _logger.LogInformation($"{id} numaralı ürün bulunamadı.");
+                return $"{id} numaralı ürün bulunamadı.";
             }
-            if (product.Pictures!=null)
+            if (product.Pictures != null)
             {
                 for (int i = 0; i < product.Pictures.Count; i++)
                 {
@@ -353,26 +244,30 @@ namespace ProductServiceApi.Controllers
                 }
             }
             _productContext.Products.Remove(product);
-            await _productContext.SaveChangesAsync();
             foreach (var result in results)
             {
                 if (result != "Ürün Resimi Silindi.")
                 {
-                    return "Resimleri silerken hata oluştu.Ama ürün silindi." ;
+                    _logger.LogInformation($"Ürün silme işlemi başarılı bir şekilde gerçekleşti.");
+                    return "Resimleri silerken hata oluştu.Ama ürün silindi.";
                 }
             }
-            return "Başarılı bir şekilde ürün silindi" ;
+            await _productContext.SaveChangesAsync();
+            _logger.LogInformation($"Ürün silme işlemi başarılı bir şekilde gerçekleşti.");
+            return "Başarılı bir şekilde ürün silindi";
         }
 
 
         [HttpPost]
         [Route("products/update")]
-        public async Task<string> UpdateProductAsync([FromBody]AddProduct productToUpdate)
+        public async Task<string> UpdateProductAsync([FromBody] AddProduct productToUpdate)
         {
             var product = await _productContext.Products.SingleOrDefaultAsync(p => p.Id == productToUpdate.Product.Id);
             if (product == null)
             {
-                return $"{productToUpdate.Product.Id} numaralı id'ye ait ürün bulunamadı.";
+                _logger.LogInformation($"{productToUpdate.Product.Id} numaralı ürün bulunamadı.");
+
+                return $"{productToUpdate.Product.Id} numaralı ait ürün bulunamadı.";
             }
             product.Name = productToUpdate.Product.Name;
             product.Price = productToUpdate.Product.Price;
@@ -403,38 +298,150 @@ namespace ProductServiceApi.Controllers
             {
                 if (result != "Ürün Resimi Eklenildi.")
                 {
+                    _logger.LogInformation($"Ürün güncelleme işlemi sırasında resim güncellenirken hata oluştur. Hata mesajı: {result}");
                     return result;
                 }
             }
             _productContext.Products.Update(product);
             await _productContext.SaveChangesAsync();
-            return  "Ürün başarılı bir şekilde güncellenildi." ;
+            _logger.LogInformation($"Ürün başarılı bir şekilde güncellenildi.");
+
+            return "Ürün başarılı bir şekilde güncellenildi.";
         }
 
-        [HttpPut]
-        [Route("products/picture/update/{productId}")]
-        public async Task<ActionResult<string>> UpdateProductAsync([FromForm(Name = "Image")] IFormFile file, int productId)
-        {
-            var picture = await _productContext.Pictures.SingleOrDefaultAsync(p => p.ProductId == productId);
-            if (picture == null)
-            {
-                return $"{productId} numaralı id'ye ait fotoğraf bulunamadı." ;
-            }
-            var result= await PictureManagement.Update(file, picture, _productContext);
-            return Ok(new { Message = result });
-        }
-        [HttpPost]
-        [Route("products/removeProductImage/{productId}")]
-        public async Task<string> RemoveProductPicture([FromBody]string picturePath, int productId)
-        {
-            var picture = await _productContext.Pictures.SingleOrDefaultAsync(p => p.ProductId == productId && p.ImagePath==picturePath);
-            if (picture == null)
-            {
-                return $"{productId} Id'ye ait {picturePath} fotoğrafı bulunamadı.";
-            }
-            var result = await PictureManagement.Remove(picture.Id, productId, _productContext);
-            return result;
-        }
+
+
+
+        //[HttpGet]
+        //[Route("products/upCategoryId/{upCategoryId:int}")]
+        //public async Task<ActionResult<PaginatedViewModel<Product>>> ProductsByUpCatalogIdAsync(int upCategoryId, int pageSize = 6, int pageIndex = 0, string ids = null)
+        //{
+        //    var products = _productContext.Products.Include(p => p.Pictures).Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Where(p => p.UpCategoryId == upCategoryId);
+
+        //    var totalProductCount = await products.LongCountAsync();
+
+        //    var productsOnPage = await products.Skip(pageSize * pageIndex).Take(pageSize).ToListAsync();
+
+        //    var model = new PaginatedViewModel<Product>(pageIndex, pageSize, (int)totalProductCount, productsOnPage);
+
+        //    return Ok(model);
+        //}
+
+        //[HttpGet]
+        //[Route("products/downCategoryId/{downCategoryId:int}")]
+        //public async Task<ActionResult<PaginatedViewModel<Product>>> ProductsByDownCatalogIdAsync(int downCategoryId, int pageSize = 6, int pageIndex = 0, string ids = null)
+        //{
+        //    var products = _productContext.Products.Include(p=>p.Pictures).Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Where(p => p.DownCategoryId == downCategoryId);
+
+        //    var totalProductCount = await products.LongCountAsync();
+
+        //    var productsOnPage = await products.Skip(pageSize * pageIndex).Take(pageSize).ToListAsync();
+
+        //    var model = new PaginatedViewModel<Product>(pageIndex, pageSize, (int)totalProductCount, productsOnPage);
+
+        //    return Ok(model);
+        //}
+
+        //[HttpGet]
+        //[Route("products/brandId/{brandId:int}")]
+        //public async Task<ActionResult<PaginatedViewModel<Product>>> ProductsByBrandIdAsync(int brandId, int pageSize = 6, int pageIndex = 0, string ids = null)
+        //{
+        //    var products = _productContext.Products.Include(p => p.Pictures).Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Where(p => p.BrandId == brandId);
+
+        //    var totalProductCount = await products.LongCountAsync();
+
+        //    var productsOnPage = await products.Skip(pageSize * pageIndex).Take(pageSize).ToListAsync();
+
+        //    var model = new PaginatedViewModel<Product>(pageIndex, pageSize, (int)totalProductCount, productsOnPage);
+
+        //    return Ok(model);
+        //}
+
+        //[HttpGet]
+        //[Route("products/upCategoryId/{upCategoryId:int}/brandId/{brandId:int}")]
+        //public async Task<ActionResult<PaginatedViewModel<Product>>> ProductsByBrandIdAndUpCategoryIdAsync(int brandId, int upCategoryId, int pageSize = 6, int pageIndex = 0, string ids = null)
+        //{
+        //    var products = _productContext.Products.Include(p => p.Pictures).Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Where(p => p.UpCategoryId == upCategoryId && p.BrandId == brandId);
+
+        //    var totalProductCount = await products.LongCountAsync();
+
+        //    var productsOnPage = await products.Skip(pageSize * pageIndex).Take(pageSize).ToListAsync();
+
+        //    var model = new PaginatedViewModel<Product>(pageIndex, pageSize, (int)totalProductCount, productsOnPage);
+
+        //    return Ok(model);
+        //}
+
+        //[HttpGet]
+        //[Route("products/downCategoryId/{downCategoryId:int}/brandId/{brandId:int}")]
+        //public async Task<ActionResult<PaginatedViewModel<Product>>> ProductsByBrandIdAndDownCategoryIdAsync(int brandId, int downCategoryId, int pageSize = 6, int pageIndex = 0, string ids = null)
+        //{
+        //    var products = _productContext.Products.Include(p => p.Pictures).Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Where(p => p.DownCategoryId == downCategoryId && p.BrandId == brandId);
+
+        //    var totalProductCount = await products.LongCountAsync();
+
+        //    var productsOnPage = await products.Skip(pageSize * pageIndex).Take(pageSize).ToListAsync();
+
+        //    var model = new PaginatedViewModel<Product>(pageIndex, pageSize, (int)totalProductCount, productsOnPage);
+
+        //    return Ok(model);
+        //}
+
+
+        //[HttpGet]
+        //[Route("products/upCategoryId/{upCategoryId:int}/downCategoryId/{downCategoryId:int}")]
+        //public async Task<ActionResult<PaginatedViewModel<Product>>> ProductsByUpAndDownCatalogIdAsync(int upCategoryId,int downCategory, int pageSize = 6, int pageIndex = 0, string ids = null)
+        //{
+        //    var products = _productContext.Products.Include(p => p.Pictures).Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Where(p => p.UpCategoryId == upCategoryId && p.DownCategoryId==downCategory);
+
+        //    var totalProductCount = await products.LongCountAsync();
+
+        //    var productsOnPage = await products.Skip(pageSize * pageIndex).Take(pageSize).ToListAsync();
+
+        //    var model = new PaginatedViewModel<Product>(pageIndex, pageSize, (int)totalProductCount, productsOnPage);
+
+        //    return Ok(model);
+        //}
+
+
+        //[HttpGet]
+        //[Route("products/upCategoryId/{upCategoryId:int}/downCategoryId/{downCategoryId:int}/brandId/{brandId:int}")]
+        //public async Task<ActionResult<PaginatedViewModel<Product>>> ProductsByUpAndDownCatalogIdAsync(int upCategoryId, int downCategoryId,int brandId, int pageSize = 6, int pageIndex = 0, string ids = null)
+        //{
+        //    var products = _productContext.Products.Include(p => p.Pictures).Include(p => p.Brand).Include(p => p.DownCategory).Include(p => p.UpCategory).Where(p => p.UpCategoryId == upCategoryId && p.DownCategoryId == downCategoryId && p.BrandId == brandId); ;
+
+        //    var totalProductCount = await products.LongCountAsync();
+
+        //    var productsOnPage = await products.Skip(pageSize * pageIndex).Take(pageSize).ToListAsync();
+
+        //    var model = new PaginatedViewModel<Product>(pageIndex, pageSize, (int)totalProductCount, productsOnPage);
+
+        //    return Ok(model);
+        //}
+        //[HttpPut]
+        //[Route("products/picture/update/{productId}")]
+        //public async Task<ActionResult<string>> UpdateProductAsync([FromForm(Name = "Image")] IFormFile file, int productId)
+        //{
+        //    var picture = await _productContext.Pictures.SingleOrDefaultAsync(p => p.ProductId == productId);
+        //    if (picture == null)
+        //    {
+        //        return $"{productId} numaralı id'ye ait fotoğraf bulunamadı." ;
+        //    }
+        //    var result= await PictureManagement.Update(file, picture, _productContext);
+        //    return Ok(new { Message = result });
+        //}
+        //[HttpPost]
+        //[Route("products/removeProductImage/{productId}")]
+        //public async Task<string> RemoveProductPicture([FromBody]string picturePath, int productId)
+        //{
+        //    var picture = await _productContext.Pictures.SingleOrDefaultAsync(p => p.ProductId == productId && p.ImagePath==picturePath);
+        //    if (picture == null)
+        //    {
+        //        return $"{productId} Id'ye ait {picturePath} fotoğrafı bulunamadı.";
+        //    }
+        //    var result = await PictureManagement.Remove(picture.Id, productId, _productContext);
+        //    return result;
+        //}
 
         //----------------------------------------------------------------------------------------------------------
 

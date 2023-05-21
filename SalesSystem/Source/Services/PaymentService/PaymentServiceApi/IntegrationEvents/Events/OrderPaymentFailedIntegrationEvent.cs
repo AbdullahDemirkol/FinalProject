@@ -8,10 +8,10 @@ namespace PaymentServiceApi.IntegrationEvents.Events
 {
     public class OrderPaymentFailedIntegrationEvent : IntegrationEvent
     {
-        public int OrderId;
+        public Guid OrderId;
         public string FailedMessage;
 
-        public OrderPaymentFailedIntegrationEvent(int orderId, string failedMessage)
+        public OrderPaymentFailedIntegrationEvent(Guid orderId, string failedMessage)
         {
             OrderId = orderId;
             FailedMessage = failedMessage;

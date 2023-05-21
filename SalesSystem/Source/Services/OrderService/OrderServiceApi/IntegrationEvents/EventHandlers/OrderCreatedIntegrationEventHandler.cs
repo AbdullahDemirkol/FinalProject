@@ -23,7 +23,7 @@ namespace OrderServiceApi.IntegrationEvents.EventHandlers
 
         public async Task Handle(OrderCreatedIntegrationEvent integrationEvent)
         {
-            _logger.LogInformation("Handling integration event:{IntegrationEventId} at {AppName}-({IntegrationEvent})", integrationEvent.Id, typeof(Startup).Namespace, integrationEvent);
+            _logger.LogInformation($"{integrationEvent.Id} numaralı sipariş işlemi devam ediyor.)", integrationEvent.Id);
             var createordercommand = new CreateOrderCommand(integrationEvent.BasketCardInformationItem, integrationEvent.CustomerBasket);
             await _mediator.Send(createordercommand);
 

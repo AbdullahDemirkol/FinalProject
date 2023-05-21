@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Logging;
 using OrderServiceApi.DataAccess.Repositories.Abstract;
 using OrderServiceApi.Entity.Concrete.Buyer;
 using OrderServiceApi.Entity.Concrete.Helper;
@@ -14,15 +15,17 @@ using System.Threading.Tasks;
 namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetOrderDetailById.QueryHandlers
 {
 
-    public class GetPaymentMethodsByUserNameQueryHandler  : IRequestHandler<GetPaymentMethodsByUserNameQuery, PaginatedViewModel<PaymentMethod>>
+    public class GetPaymentMethodsByUserNameQueryHandler : IRequestHandler<GetPaymentMethodsByUserNameQuery, PaginatedViewModel<PaymentMethod>>
     {
         IBuyerRepository _buyerRepository;
         IPaymentMethodRepository _paymentMethodRepository;
+        ILogger<GetPaymentMethodsByUserNameQueryHandler> _logger;
 
-        public GetPaymentMethodsByUserNameQueryHandler(IPaymentMethodRepository paymentMethodRepository, IBuyerRepository buyerRepository)
+        public GetPaymentMethodsByUserNameQueryHandler(IPaymentMethodRepository paymentMethodRepository, IBuyerRepository buyerRepository, ILogger<GetPaymentMethodsByUserNameQueryHandler> logger)
         {
             _paymentMethodRepository = paymentMethodRepository ?? throw new ArgumentNullException(nameof(paymentMethodRepository));
             _buyerRepository = buyerRepository ?? throw new ArgumentNullException(nameof(buyerRepository));
+            _logger = logger;
         }
 
         public async Task<PaginatedViewModel<PaymentMethod>> Handle(GetPaymentMethodsByUserNameQuery request, CancellationToken cancellationToken)
@@ -43,6 +46,7 @@ namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetOrderDeta
                 paymentMethodCount = paymentMethods.Count();
                 paymentMethods = paymentMethods.Skip(request.PageSize * request.PageIndex).Take(request.PageSize).ToList();
             }
+            _logger.LogInformation($"{request.BuyerName} isimli kullanıcının ödeme yöntemleri getirildi.");
             var model = new PaginatedViewModel<PaymentMethod>(request.PageIndex, request.PageSize, (int)paymentMethodCount, paymentMethods);
             return model;
         }

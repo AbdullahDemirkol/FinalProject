@@ -28,7 +28,6 @@ namespace BasketServiceApi.DataAccess.PostgreSqlConnect
                 .HasMany(b => b.BasketItems)
                 .WithOne()
                 .HasForeignKey("BasketId");
-            // Diğer yapılandırmalar...
         }
         public DbSet<CustomerBasket> CustomerBaskets{ get; set; }
         public DbSet<BasketItem> BasketItems { get; set; }

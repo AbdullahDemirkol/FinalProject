@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetMethods.QueryHandlers
 {
@@ -17,11 +18,13 @@ namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetMethods.Q
     {
         IOrderRepository _orderRepository;
         IPaymentMethodRepository _paymentMethodRepository;
+        ILogger<GetOrdersQueryHandler> _logger;
 
-        public GetOrdersQueryHandler(IOrderRepository orderRepository, IPaymentMethodRepository paymentMethodRepository)
+        public GetOrdersQueryHandler(IOrderRepository orderRepository, IPaymentMethodRepository paymentMethodRepository, ILogger<GetOrdersQueryHandler> logger)
         {
             _orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
             _paymentMethodRepository = paymentMethodRepository ?? throw new ArgumentNullException(nameof(paymentMethodRepository));
+            _logger = logger;
         }
 
         public async Task<PaginatedViewModel<OrderDetailViewModel>> Handle(GetOrdersQuery request, CancellationToken cancellationToken)
@@ -61,9 +64,10 @@ namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetMethods.Q
                     PaymentMethodPrefix = paymentMethodCardNumber.Substring(0, 4),
                     PaymentMethodSuffix = paymentMethodCardNumber.Substring(paymentMethodCardNumber.Length - 4)
                 };
-                 orderDetailViewModels.Add(orderDetailViewModel);
+                orderDetailViewModels.Add(orderDetailViewModel);
             }
-            PaginatedViewModel<OrderDetailViewModel> models = new PaginatedViewModel<OrderDetailViewModel>(request.PageIndex,request.PageSize,orderListCount, orderDetailViewModels);
+            _logger.LogInformation($"Tüm Siparişler Getirildi.");
+            PaginatedViewModel<OrderDetailViewModel> models = new PaginatedViewModel<OrderDetailViewModel>(request.PageIndex, request.PageSize, orderListCount, orderDetailViewModels);
             return models;
         }
     }

@@ -13,7 +13,7 @@ namespace IdentityCheckServiceApi.Utilities
     {
         public static string Add(IFormFile file, UserModel userModel)
         {
-            var imageMessage = FileHelper.AddPicture(file,userModel.ProfileImagePath);
+            var imageMessage = FileHelper.AddPicture(file, userModel.ProfileImagePath);
             if (imageMessage == "Dosya bulunamadı." || imageMessage == "Yanlış dosya tipi.")
             {
                 return imageMessage;

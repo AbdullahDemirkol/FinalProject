@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Logging;
 using OrderServiceApi.DataAccess.Repositories.Abstract;
 using OrderServiceApi.DataAccess.Repositories.Concrete;
 using OrderServiceApi.Entity.Concrete.Buyer;
@@ -25,15 +26,15 @@ namespace OrderServiceApi.IntegrationEvents.EventHandlers
         public async Task Handle(OrderStartedDomainEvent orderStartedDomainEvent, CancellationToken cancellationToken)
         {
             var cardTypeId = (orderStartedDomainEvent.CardTypeId != 0) ? orderStartedDomainEvent.CardTypeId : 1;
-            var buyer = await _buyerRepository.GetSingleAsync(i => i.Name == orderStartedDomainEvent.UserName,p=>p._paymentMethods);
+            var buyer = await _buyerRepository.GetSingleAsync(i => i.Name == orderStartedDomainEvent.UserName, p => p._paymentMethods);
             bool buyerOriginallyExisted = buyer != null;
             if (!buyerOriginallyExisted)
             {
                 buyer = new Buyer(orderStartedDomainEvent.UserName);
             }
-            var paymentMethods = buyer._paymentMethods;  
+            var paymentMethods = buyer._paymentMethods;
 
-            var (responseInsert,paymentMethod)=buyer.VerifyOrAddPaymentMethod(orderStartedDomainEvent, cardTypeId, $"Payment Method on {DateTime.UtcNow}");
+            var (responseInsert, paymentMethod) = buyer.VerifyOrAddPaymentMethod(orderStartedDomainEvent, cardTypeId, $"{DateTime.UtcNow} tarihinde eklenildi.");
             if (!buyerOriginallyExisted)
             {
                 await _buyerRepository.AddAsync(buyer);

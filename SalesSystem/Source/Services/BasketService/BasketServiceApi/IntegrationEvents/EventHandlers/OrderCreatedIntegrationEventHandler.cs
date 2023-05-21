@@ -31,7 +31,7 @@ namespace BasketServiceApi.IntegrationEvents.EventHandlers
                 var scopedServices = scope.ServiceProvider;
 
                 var _basketRepository = scopedServices.GetRequiredService<IBasketService>();
-                _logger.LogInformation(" Entegrasyon işlemi devam ediyor: {IntegrationEventId}(IntegrationEventId) BasketServiceApi - ({@IntegrationEvent})", integrationEvent.Id, integrationEvent);
+                _logger.LogInformation("Sipariş tamamlama işlemi devam ediyor: {IntegrationEventId}(IntegrationEventId) BasketServiceApi - ({@IntegrationEvent})", integrationEvent.Id, integrationEvent);
                 await _basketRepository.DeleteBasketAsync(integrationEvent.Username);
             }
         }

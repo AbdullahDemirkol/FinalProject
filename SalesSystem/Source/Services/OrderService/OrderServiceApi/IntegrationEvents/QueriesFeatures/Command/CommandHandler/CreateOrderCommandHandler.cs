@@ -33,22 +33,20 @@ namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Command.CommandHandl
 
                 var _orderRepository = scopedServices.GetRequiredService<IOrderRepository>();
 
-                var address = new Address(request.Neighbourhood, request.Street, request.BuildingNo,request.ApartmentNo,request.District, request.City, request.Country, request.ZipCode);
-                Order dbOrder = new Order(request, address/*, null*/);
+                var address = new Address(request.Neighbourhood, request.Street, request.BuildingNo, request.ApartmentNo, request.District, request.City, request.Country, request.ZipCode);
+                Order dbOrder = new Order(request, address);
                 foreach (var orderItem in request.OrderItems.ToList())
                 {
                     dbOrder.AddOrderItem(orderItem);
                 }
                 await _orderRepository.AddAsync(dbOrder);
 
-                //await _orderRepository.AddAsync(dbOrder);
                 await _orderRepository.UnitOfWork.SaveEntityAsync(cancellationToken);
-                var orderStartedIntegrationEvent = new OrderStartedIntegrationEvent(request.UserName);
+                var orderStartedIntegrationEvent = new OrderStartedIntegrationEvent(request.UserName, dbOrder.Id);
                 dbOrder.Address.BuyerId = dbOrder.BuyerId;
                 _eventBus.Publish(orderStartedIntegrationEvent);
             }
             return true;
-
         }
     }
 }

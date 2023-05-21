@@ -23,7 +23,7 @@ namespace OrderServiceApi.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
         [HttpPost("setOrderStatus/{statusId}/buyerName/{buyerName}")]
-        public async Task<IActionResult> SetOrderStatus([FromBody] Guid orderNumber, string buyerName,int statusId)
+        public async Task<IActionResult> SetOrderStatus([FromBody] Guid orderNumber, string buyerName, int statusId)
         {
             try
             {
@@ -40,11 +40,11 @@ namespace OrderServiceApi.Controllers
             }
         }
         [HttpPost("cancelOrderStatusByBuyer/{buyerName}")]
-        public async Task<IActionResult> SetOrderStatusIsCancelledByBuyerName([FromBody]Guid orderNumber,string buyerName)
+        public async Task<IActionResult> SetOrderStatusIsCancelledByBuyerName([FromBody] Guid orderNumber, string buyerName)
         {
             try
             {
-                var result= await _mediator.Send(new UpdateOrderStatusCommand(orderNumber, buyerName, OrderStatus.IptalEdildi.Id));
+                var result = await _mediator.Send(new UpdateOrderStatusCommand(orderNumber, buyerName, OrderStatus.IptalEdildi.Id));
                 if (result)
                 {
                     return Ok();
@@ -59,7 +59,7 @@ namespace OrderServiceApi.Controllers
         [HttpPost("cancelOrderStatus")]
         public async Task<IActionResult> SetOrderStatusIsCancelled([FromBody] Guid orderNumber, int pageSize = 6, int pageIndex = 0)
         {
-            var IsUpdate = await _mediator.Send(new UpdateOrderStatusCommand(orderNumber,"", OrderStatus.IptalEdildi.Id));
+            var IsUpdate = await _mediator.Send(new UpdateOrderStatusCommand(orderNumber, "", OrderStatus.IptalEdildi.Id));
             if (IsUpdate == true)
             {
                 var result = await _mediator.Send(new GetOrdersQuery(0, pageSize, pageIndex));

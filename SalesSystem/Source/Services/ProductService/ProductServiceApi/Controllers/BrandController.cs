@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using ProductServiceApi.DataAccess;
 using ProductServiceApi.Entity.Concrete;
 using System;
@@ -14,16 +15,20 @@ namespace ProductServiceApi.Controllers
     public class BrandController : ControllerBase
     {
         private readonly ProductContext _productContext;
+        ILogger<BrandController> _logger;
 
-        public BrandController(ProductContext productContext)
+        public BrandController(ProductContext productContext, ILogger<BrandController> logger)
         {
             _productContext = productContext ?? throw new ArgumentNullException(nameof(productContext));
+            _logger = logger;
         }
         [HttpGet]
         [Route("brands")]
         public async Task<ActionResult<List<Brand>>> BrandAsync(/*int pageSize = 6, int pageIndex = 0,string ids = null*/)
         {
             var brands = await _productContext.Brands/*.Skip(pageSize * pageIndex).Take(pageSize)*/.ToListAsync();
+            _logger.LogInformation("Markalar getirildi.");
+
             return brands;
         }
         [HttpPost]
@@ -36,6 +41,7 @@ namespace ProductServiceApi.Controllers
             };
             _productContext.Brands.Add(brand);
             await _productContext.SaveChangesAsync();
+            _logger.LogInformation("Marka databaseye eklenildi.");
             return NoContent();
         }
 
@@ -47,10 +53,13 @@ namespace ProductServiceApi.Controllers
             var brand = _productContext.Brands.SingleOrDefault(p => p.Id == id);
             if (brand == null)
             {
-                return NotFound(new { Message = $"{id} numaralı id'ye ait marka bulunamadı." });
+                _logger.LogInformation($"{id} numaralı marka bulunamadı.");
+                return NotFound(new { Message = $"{id} numaralı marka bulunamadı." });
             }
             _productContext.Brands.Remove(brand);
             await _productContext.SaveChangesAsync();
+            _logger.LogInformation($"{id} numaralı marka databaseden silindi.");
+
 
             return NoContent();
         }
@@ -63,11 +72,14 @@ namespace ProductServiceApi.Controllers
             var brand = await _productContext.Brands.SingleOrDefaultAsync(p => p.Id == brandToUpdate.Id);
             if (brand == null)
             {
-                return NotFound(new { Message = $"{brandToUpdate.Id} numaralı id'ye ait marka bulunamadı." });
+                _logger.LogInformation($"{brandToUpdate.Id} numaralı marka bulunamadı.");
+                return NotFound(new { Message = $"{brandToUpdate.Id} numaralı marka bulunamadı." });
             }
             brand = brandToUpdate;
             _productContext.Brands.Update(brand);
             await _productContext.SaveChangesAsync();
+            _logger.LogInformation($"{brandToUpdate.Id} numaralı marka güncellenildi.");
+
             return NoContent();
         }
 

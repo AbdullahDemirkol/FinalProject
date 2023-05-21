@@ -1,5 +1,6 @@
 ﻿
 using MediatR;
+using Microsoft.Extensions.Logging;
 using OrderServiceApi.DataAccess.Repositories.Abstract;
 using OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetMethods.Queries;
 using OrderServiceApi.IntegrationEvents.QueriesFeatures.ViewModel;
@@ -14,12 +15,12 @@ namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetMethods.Q
     public class GetOrderDetailsQueryHandler : IRequestHandler<GetOrderDetailsQuery, OrderDetailViewModel>
     {
         IOrderRepository _orderRepository;
-        //private readonly IMapper mapper;
+        ILogger<GetOrderDetailsQueryHandler> _logger;
 
-        public GetOrderDetailsQueryHandler(IOrderRepository orderRepository/*, IMapper mapper*/)
+        public GetOrderDetailsQueryHandler(IOrderRepository orderRepository, ILogger<GetOrderDetailsQueryHandler> logger)
         {
             _orderRepository = orderRepository ?? throw new ArgumentNullException(nameof(orderRepository));
-            //this.mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<OrderDetailViewModel> Handle(GetOrderDetailsQuery request, CancellationToken cancellationToken)
@@ -30,7 +31,7 @@ namespace OrderServiceApi.IntegrationEvents.QueriesFeatures.Queries.GetMethods.Q
                 City = order.Address.City,
                 Country = order.Address.Country
             };
-            //var result = mapper.Map<OrderDetailViewModel>(order);
+            _logger.LogInformation($"{request.OrderId} siparişin detayı getirildi.");
             return orderDetailViewModel;
         }
     }

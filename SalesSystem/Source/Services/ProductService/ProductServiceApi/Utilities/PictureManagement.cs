@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 using ProductServiceApi.DataAccess;
 using ProductServiceApi.Entity.Concrete;
 using ProductServiceApi.Helper;
@@ -11,12 +12,12 @@ namespace ProductServiceApi.Utilities
 {
     public static class PictureManagement
     {
-        public static async Task<(string,Picture)> Add(IFormFile file,Picture picture,ProductContext productContext)
+        public static async Task<(string, Picture)> Add(IFormFile file, Picture picture, ProductContext productContext)
         {
             var imageMessage = FileHelper.Add(file);
             if (imageMessage == "Dosya bulunamadı." || imageMessage == "Yanlış dosya tipi.")
             {
-                return (imageMessage,picture);
+                return (imageMessage, picture);
             }
             picture.ImagePath = imageMessage;
             productContext.Pictures.Add(picture);
@@ -27,7 +28,7 @@ namespace ProductServiceApi.Utilities
 
         }
 
-        public static async Task<string> Remove(int pictureId,int productId, ProductContext productContext)
+        public static async Task<string> Remove(int pictureId, int productId, ProductContext productContext)
         {
             var image = productContext.Pictures.FirstOrDefault(c => c.Id == pictureId && c.ProductId == productId);
             if (image != null)
@@ -40,6 +41,7 @@ namespace ProductServiceApi.Utilities
             return "Ürün Bulunamadı.";
 
         }
+
         public static async Task<string> Update(IFormFile file, Picture picture, ProductContext productContext)
         {
             var Image = productContext.Pictures.FirstOrDefault(c => c.Id == picture.Id);

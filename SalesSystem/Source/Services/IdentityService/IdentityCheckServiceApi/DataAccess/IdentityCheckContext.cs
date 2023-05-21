@@ -21,10 +21,10 @@ namespace IdentityCheckServiceApi.DataAccess
             //    .HasForeignKey<UserModel>(u => u.RoleId);
             base.OnModelCreating(modelBuilder);
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.EnableSensitiveDataLogging();
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.EnableSensitiveDataLogging();
+        //}
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    optionsBuilder.UseNpgsql("Host=localhost;Database=CatalogDatabase;Username=postgres;Password=1234");

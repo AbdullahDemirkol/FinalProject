@@ -39,7 +39,7 @@
                                 @if (_userDto.Role.Name == "admin")
                                 {
                                     <li>
-                                        <a href="https://localhost:44350/" >Admin Panel</a>
+                                        <a href="" @onclick="GoAdminPanel" >Admin Panel</a>
                                     </li>
                                 }
                                 <li>
@@ -191,6 +191,10 @@ private void GoLoginPage()
 private void GoLogoutPage()
 {
     navigationManager.NavigateTo($"logout?returnUrl={Uri.EscapeDataString(navigationManager.Uri)}");
+}
+private void GoAdminPanel()
+{
+    navigationManager.NavigateTo("https://localhost:44350/");
 }
 private void CheckBasket()
 {

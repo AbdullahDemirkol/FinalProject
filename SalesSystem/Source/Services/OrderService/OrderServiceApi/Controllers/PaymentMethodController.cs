@@ -22,7 +22,7 @@ namespace OrderServiceApi.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
         [HttpPost("addPaymentMethod/{userName}")]
-        public async Task<string> AddPaymentMethod([FromBody] PaymentMethod paymentMethod,string userName, int pageSize = 6, int pageIndex = 0)
+        public async Task<string> AddPaymentMethod([FromBody] PaymentMethod paymentMethod, string userName, int pageSize = 6, int pageIndex = 0)
         {
             var result = await _mediator.Send(new AddPaymentMethodCommand(paymentMethod, userName));
             if (result)
@@ -32,7 +32,7 @@ namespace OrderServiceApi.Controllers
             return "Ödeme Yöntemi Eklenirken Hata Oluştu.";
         }
         [HttpPost("cancelPaymentMethodByBuyer/{buyerName}")]
-        public async Task<IActionResult> SetPaymentMethodStatusIsFalseByBuyerName([FromBody] Guid PaymentMethodId,string buyerName)
+        public async Task<IActionResult> SetPaymentMethodStatusIsFalseByBuyerName([FromBody] Guid PaymentMethodId, string buyerName)
         {
             var result = await _mediator.Send(new UpdatePaymentMethodCommand(PaymentMethodId, buyerName, 0));
             if (result)
@@ -52,7 +52,7 @@ namespace OrderServiceApi.Controllers
         [HttpGet("{buyerName}/CardType/{cardTypeId:int}")]
         public async Task<IActionResult> GetPaymentMethodsByBuyerName(string buyerName, int cardTypeId, int pageSize = 6, int pageIndex = 0)
         {
-            var result = await _mediator.Send(new GetPaymentMethodsByUserNameQuery(buyerName, cardTypeId,pageSize,pageIndex));
+            var result = await _mediator.Send(new GetPaymentMethodsByUserNameQuery(buyerName, cardTypeId, pageSize, pageIndex));
             return Ok(result);
         }
         [HttpGet("cardTypes")]
