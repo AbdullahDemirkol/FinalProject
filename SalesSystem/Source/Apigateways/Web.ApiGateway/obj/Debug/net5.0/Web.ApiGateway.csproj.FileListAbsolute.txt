@@ -118,3 +118,83 @@ C:\Users\Abdullah\Desktop\Yeni klasör (5)\FinalProject\SalesSystem\Source\Apiga
 C:\Users\Abdullah\Desktop\Yeni klasör (5)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\ref\Web.ApiGateway.dll
 C:\Users\Abdullah\Desktop\Yeni klasör (5)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.pdb
 C:\Users\Abdullah\Desktop\Yeni klasör (5)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.genruntimeconfig.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\appsettings.Development.json
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\appsettings.json
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\OcelotConfiguration\Ocelot.json
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Web.ApiGateway.exe
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Web.ApiGateway.deps.json
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Web.ApiGateway.runtimeconfig.json
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Web.ApiGateway.runtimeconfig.dev.json
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Web.ApiGateway.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\ref\Web.ApiGateway.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Web.ApiGateway.pdb
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Consul.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\FluentValidation.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Microsoft.AspNetCore.MiddlewareAnalysis.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Microsoft.Extensions.DiagnosticAdapter.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Microsoft.OpenApi.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Ocelot.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Ocelot.Provider.Consul.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.csproj.AssemblyReference.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.AssemblyInfoInputs.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.AssemblyInfo.cs
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.csproj.CoreCompileInputs.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\staticwebassets\Web.ApiGateway.StaticWebAssets.Manifest.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\staticwebassets\Web.ApiGateway.StaticWebAssets.xml
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\scopedcss\bundle\Web.ApiGateway.styles.css
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.RazorTargetAssemblyInfo.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.csproj.CopyComplete
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\ref\Web.ApiGateway.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.pdb
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.genruntimeconfig.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\appsettings.Development.json
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\appsettings.json
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\OcelotConfiguration\Ocelot.json
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Web.ApiGateway.exe
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Web.ApiGateway.deps.json
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Web.ApiGateway.runtimeconfig.json
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Web.ApiGateway.runtimeconfig.dev.json
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Web.ApiGateway.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\ref\Web.ApiGateway.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Web.ApiGateway.pdb
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Consul.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\FluentValidation.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Microsoft.AspNetCore.MiddlewareAnalysis.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Microsoft.Extensions.DiagnosticAdapter.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Microsoft.OpenApi.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Ocelot.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Ocelot.Provider.Consul.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.csproj.AssemblyReference.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.AssemblyInfoInputs.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.AssemblyInfo.cs
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.csproj.CoreCompileInputs.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\staticwebassets\Web.ApiGateway.StaticWebAssets.Manifest.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\staticwebassets\Web.ApiGateway.StaticWebAssets.xml
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\scopedcss\bundle\Web.ApiGateway.styles.css
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.RazorTargetAssemblyInfo.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.csproj.CopyComplete
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\ref\Web.ApiGateway.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.pdb
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Apigateways\Web.ApiGateway\obj\Debug\net5.0\Web.ApiGateway.genruntimeconfig.cache

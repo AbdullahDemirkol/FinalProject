@@ -89,13 +89,16 @@
                     <select @bind="productDto.Product.DownCategoryId">
                         @foreach (var downCategory in downCategories)
                         {
-                            if (productDto.Product.DownCategoryId == downCategory.Id)
+                            if (downCategory.UpCategoryId == productDto.Product.UpCategoryId)
                             {
-                                <option value="@downCategory.Id" selected>@downCategory.DownCategoryName</option>
-                            }
-                            else
-                            {
-                                <option value="@downCategory.Id">@downCategory.DownCategoryName</option>
+                                if (productDto.Product.DownCategoryId == downCategory.Id)
+                                {
+                                    <option value="@downCategory.Id" selected>@downCategory.DownCategoryName</option>
+                                }
+                                else
+                                {
+                                    <option value="@downCategory.Id">@downCategory.DownCategoryName</option>
+                                }
                             }
                         }
                     </select>

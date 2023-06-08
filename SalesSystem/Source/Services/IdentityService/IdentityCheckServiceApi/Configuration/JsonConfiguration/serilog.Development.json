@@ -1,7 +1,7 @@
 {
   "Serilog": {
-    "Using": [ "Serilog.Sinks.Graylog", "Serilog.Sinks.Console" ],
-    "MinimumLevel": "Debug",
+    "Using": [ "Serilog.Sinks.Graylog" ],
+    "MinimumLevel": "Information",
     "WriteTo": [
       {
         "Name": "Graylog",
@@ -9,15 +9,12 @@
           "hostnameOrAddress": "127.0.0.1",
           "port": "12201",
           "transportType": "Udp",
-          "facility": "BasketService"
+          "facility": "IdentityService"
         }
-      },
-      {
-        "Name": "Console"
       }
     ],
     "Properties": {
-      "Application": "BasketService"
+      "Application": "IdentityService"
     }
   }
 }

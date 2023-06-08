@@ -196,3 +196,155 @@ C:\Users\Abdullah\Desktop\Yeni klasör (5)\FinalProject\SalesSystem\Source\Servi
 C:\Users\Abdullah\Desktop\Yeni klasör (5)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.Sinks.File.dll
 C:\Users\Abdullah\Desktop\Yeni klasör (5)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.Sinks.Graylog.Core.dll
 C:\Users\Abdullah\Desktop\Yeni klasör (5)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.Sinks.Graylog.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Configurations\JsonConfiguration\appsettings.Development.json
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Configurations\JsonConfiguration\serilog.Development.json
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Configurations\JsonConfiguration\serilog.json
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Configurations\JsonConfiguration\appsettings.json
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\OrderServiceApi.exe
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\OrderServiceApi.deps.json
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\OrderServiceApi.runtimeconfig.json
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\OrderServiceApi.runtimeconfig.dev.json
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\OrderServiceApi.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\ref\OrderServiceApi.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\OrderServiceApi.pdb
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Consul.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Humanizer.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\MediatR.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\MediatR.Contracts.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.OpenApi.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Npgsql.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Polly.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\RabbitMQ.Client.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.AspNetCore.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.Extensions.Hosting.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.Extensions.Logging.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.Formatting.Compact.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.Settings.Configuration.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.Sinks.Console.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.Sinks.Debug.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.Sinks.File.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.Sinks.Graylog.Core.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.Sinks.Graylog.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\EventBus.Base.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\EventBus.RabbitMQ.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\EventBus.Redirect.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\EventBus.Base.pdb
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\EventBus.Redirect.pdb
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\EventBus.RabbitMQ.pdb
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.csproj.AssemblyReference.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.AssemblyInfoInputs.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.AssemblyInfo.cs
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.csproj.CoreCompileInputs.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\staticwebassets\OrderServiceApi.StaticWebAssets.Manifest.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\staticwebassets\OrderServiceApi.StaticWebAssets.xml
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\scopedcss\bundle\OrderServiceApi.styles.css
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.RazorTargetAssemblyInfo.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.csproj.CopyComplete
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\ref\OrderServiceApi.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.pdb
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.genruntimeconfig.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Configurations\JsonConfiguration\appsettings.Development.json
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Configurations\JsonConfiguration\appsettings.json
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Configurations\JsonConfiguration\serilog.Development.json
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Configurations\JsonConfiguration\serilog.json
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\OrderServiceApi.exe
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\OrderServiceApi.deps.json
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\OrderServiceApi.runtimeconfig.json
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\OrderServiceApi.runtimeconfig.dev.json
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\OrderServiceApi.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\ref\OrderServiceApi.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\OrderServiceApi.pdb
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Consul.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Humanizer.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\MediatR.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\MediatR.Contracts.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\MediatR.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Microsoft.OpenApi.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Npgsql.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Polly.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\RabbitMQ.Client.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.AspNetCore.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.Extensions.Hosting.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.Extensions.Logging.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.Formatting.Compact.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.Settings.Configuration.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.Sinks.Console.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.Sinks.Debug.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.Sinks.File.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.Sinks.Graylog.Core.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Serilog.Sinks.Graylog.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\EventBus.Base.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\EventBus.RabbitMQ.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\EventBus.Redirect.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\EventBus.Base.pdb
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\EventBus.Redirect.pdb
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\bin\Debug\net5.0\EventBus.RabbitMQ.pdb
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.csproj.AssemblyReference.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.AssemblyInfoInputs.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.AssemblyInfo.cs
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.csproj.CoreCompileInputs.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\staticwebassets\OrderServiceApi.StaticWebAssets.Manifest.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\staticwebassets\OrderServiceApi.StaticWebAssets.xml
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\scopedcss\bundle\OrderServiceApi.styles.css
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.RazorTargetAssemblyInfo.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.csproj.CopyComplete
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\ref\OrderServiceApi.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.pdb
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\OrderService\OrderServiceApi\obj\Debug\net5.0\OrderServiceApi.genruntimeconfig.cache

@@ -4103,11 +4103,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Abdullah\\Desktop\\Yeni klasör (5)\\FinalProject\\SalesSystem\\Source\\Services\\PaymentService\\PaymentServiceApi\\PaymentServiceApi.csproj",
+      "projectUniqueName": "C:\\Users\\Abdullah\\Desktop\\yedek\\son hale\\yedekk\\SalesSystem\\Source\\Services\\PaymentService\\PaymentServiceApi\\PaymentServiceApi.csproj",
       "projectName": "PaymentServiceApi",
-      "projectPath": "C:\\Users\\Abdullah\\Desktop\\Yeni klasör (5)\\FinalProject\\SalesSystem\\Source\\Services\\PaymentService\\PaymentServiceApi\\PaymentServiceApi.csproj",
+      "projectPath": "C:\\Users\\Abdullah\\Desktop\\yedek\\son hale\\yedekk\\SalesSystem\\Source\\Services\\PaymentService\\PaymentServiceApi\\PaymentServiceApi.csproj",
       "packagesPath": "C:\\Users\\Abdullah\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Abdullah\\Desktop\\Yeni klasör (5)\\FinalProject\\SalesSystem\\Source\\Services\\PaymentService\\PaymentServiceApi\\obj\\",
+      "outputPath": "C:\\Users\\Abdullah\\Desktop\\yedek\\son hale\\yedekk\\SalesSystem\\Source\\Services\\PaymentService\\PaymentServiceApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4128,11 +4128,11 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\Abdullah\\Desktop\\Yeni klasör (5)\\FinalProject\\SalesSystem\\Source\\BuildingBlocks\\EventBus\\EventBus.Base\\EventBus.Base.csproj": {
-              "projectPath": "C:\\Users\\Abdullah\\Desktop\\Yeni klasör (5)\\FinalProject\\SalesSystem\\Source\\BuildingBlocks\\EventBus\\EventBus.Base\\EventBus.Base.csproj"
+            "C:\\Users\\Abdullah\\Desktop\\yedek\\son hale\\yedekk\\SalesSystem\\Source\\BuildingBlocks\\EventBus\\EventBus.Base\\EventBus.Base.csproj": {
+              "projectPath": "C:\\Users\\Abdullah\\Desktop\\yedek\\son hale\\yedekk\\SalesSystem\\Source\\BuildingBlocks\\EventBus\\EventBus.Base\\EventBus.Base.csproj"
             },
-            "C:\\Users\\Abdullah\\Desktop\\Yeni klasör (5)\\FinalProject\\SalesSystem\\Source\\BuildingBlocks\\EventBus\\EventBus.Redirect\\EventBus.Redirect.csproj": {
-              "projectPath": "C:\\Users\\Abdullah\\Desktop\\Yeni klasör (5)\\FinalProject\\SalesSystem\\Source\\BuildingBlocks\\EventBus\\EventBus.Redirect\\EventBus.Redirect.csproj"
+            "C:\\Users\\Abdullah\\Desktop\\yedek\\son hale\\yedekk\\SalesSystem\\Source\\BuildingBlocks\\EventBus\\EventBus.Redirect\\EventBus.Redirect.csproj": {
+              "projectPath": "C:\\Users\\Abdullah\\Desktop\\yedek\\son hale\\yedekk\\SalesSystem\\Source\\BuildingBlocks\\EventBus\\EventBus.Redirect\\EventBus.Redirect.csproj"
             }
           }
         }

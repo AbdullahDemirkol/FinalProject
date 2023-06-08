@@ -77,7 +77,7 @@ namespace IdentityCheckServiceApi
 
             //-----------------------------------------------------------------
 
-            app.ConfigurationInConsul(lifetime);
+            app.ConfigurationInConsul(lifetime,Configuration);
         }
     }
 }

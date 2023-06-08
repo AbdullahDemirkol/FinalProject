@@ -43,3 +43,33 @@ C:\Users\Abdullah\Desktop\Yeni klasör (5)\FinalProject\SalesSystem\Source\Build
 C:\Users\Abdullah\Desktop\Yeni klasör (5)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\obj\Debug\net5.0\EventBus.RabbitMQ.dll
 C:\Users\Abdullah\Desktop\Yeni klasör (5)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\obj\Debug\net5.0\ref\EventBus.RabbitMQ.dll
 C:\Users\Abdullah\Desktop\Yeni klasör (5)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\obj\Debug\net5.0\EventBus.RabbitMQ.pdb
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\bin\Debug\net5.0\EventBus.RabbitMQ.deps.json
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\bin\Debug\net5.0\EventBus.RabbitMQ.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\bin\Debug\net5.0\ref\EventBus.RabbitMQ.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\bin\Debug\net5.0\EventBus.RabbitMQ.pdb
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\bin\Debug\net5.0\EventBus.Base.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\bin\Debug\net5.0\EventBus.Base.pdb
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\obj\Debug\net5.0\EventBus.RabbitMQ.csproj.AssemblyReference.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\obj\Debug\net5.0\EventBus.RabbitMQ.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\obj\Debug\net5.0\EventBus.RabbitMQ.AssemblyInfoInputs.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\obj\Debug\net5.0\EventBus.RabbitMQ.AssemblyInfo.cs
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\obj\Debug\net5.0\EventBus.RabbitMQ.csproj.CoreCompileInputs.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\obj\Debug\net5.0\EventBus.RabbitMQ.csproj.CopyComplete
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\obj\Debug\net5.0\EventBus.RabbitMQ.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\obj\Debug\net5.0\ref\EventBus.RabbitMQ.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\obj\Debug\net5.0\EventBus.RabbitMQ.pdb
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\bin\Debug\net5.0\EventBus.RabbitMQ.deps.json
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\bin\Debug\net5.0\EventBus.RabbitMQ.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\bin\Debug\net5.0\ref\EventBus.RabbitMQ.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\bin\Debug\net5.0\EventBus.RabbitMQ.pdb
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\bin\Debug\net5.0\EventBus.Base.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\bin\Debug\net5.0\EventBus.Base.pdb
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\obj\Debug\net5.0\EventBus.RabbitMQ.csproj.AssemblyReference.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\obj\Debug\net5.0\EventBus.RabbitMQ.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\obj\Debug\net5.0\EventBus.RabbitMQ.AssemblyInfoInputs.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\obj\Debug\net5.0\EventBus.RabbitMQ.AssemblyInfo.cs
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\obj\Debug\net5.0\EventBus.RabbitMQ.csproj.CoreCompileInputs.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\obj\Debug\net5.0\EventBus.RabbitMQ.csproj.CopyComplete
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\obj\Debug\net5.0\EventBus.RabbitMQ.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\obj\Debug\net5.0\ref\EventBus.RabbitMQ.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\BuildingBlocks\EventBus\EventBus.RabbitMQ\obj\Debug\net5.0\EventBus.RabbitMQ.pdb

@@ -1,0 +1,27 @@
+
+
+Graylog  
+	--> http://127.0.0.1:9000/
+	--> Username:admin Password:admin
+	--> System>Inputs menüsüne git.
+	--> Select input seçeneðini "GELF UDP" ayarýný seçip Launch new input butonuna basýyoruz.
+	--> Bu baðlantýya bir isim veriyoruz. Ben title kýsmýna "GELF UDP" ismini veriyorum.
+	--> Baðlantý saðlanýldýktan sonra Search menüsüne gidiyoruz.
+	--> Sol taraftan Fields menüsünü açýyoruz.
+	--> Application, level, stringLevel seçeneklerini teker teker tabloya ekliyoruz.
+Consul   
+	--> http://localhost:8500/
+PgAdmin4 
+	--> http://localhost:5050/
+	--> Email:admin@email.com Password:admin
+	--> Servers menüsüne sað týklayýp Register>Server menüsünü seçiyoruz.
+	--> General menüsünden databaseye bir isim veriyoruz. Ben "postgres" ismini veriyorum.
+	--> Connection menüsünden ise host name ayarýna konteynýrýmýzýn adýný veriyoruz. 
+			Ben konteynýrýmýn adýný "c_postgres" olarak vermiþtim.
+	--> Username ve password sunucuyu ayaða kaldýrýrken vermiþtik o deðerleri yazýyoruz.
+			Ben Username: postgres ve Password: 1234 olarak belirlemiþtim.
+	--> Ardýndan save butonuna basarak ayarlarýmýzý kaydedip postgres sunucumuza baðlanmýþ oluyoruz.
+RabbitMQ 
+	--> http://localhost:15672/
+	--> Username:guest Password:guest
+	--> Projede SalesEventBus adýnda Exchange içinde oluþturmuþ olduðum kuyruklar görülebiliyor.

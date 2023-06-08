@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4ukvjS33EHqnD6zCTNpppz4q/nQ5O0fwezPTK/o3l+5XURHQDJ9OyHJB7EkdRZH9g1YZqpKepF4Ae5lNEMMtxQ==",
+  "dgSpecHash": "1iUR73tbL/OiE2khHEG0IJfNYOQiBRAnrV2YZIjqFyfwgGzyXDssXfSnrTg2YeW3p4UuI0mtkxA8mOiJKqR1bA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\Yeni klasör (5)\\FinalProject\\SalesSystem\\Source\\Services\\NotificationService\\NotificationService\\NotificationService.csproj",
+  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\yedek\\son hale\\yedekk\\SalesSystem\\Source\\Services\\NotificationService\\NotificationService\\NotificationService.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Abdullah\\.nuget\\packages\\microsoft.dotnet.platformabstractions\\2.0.4\\microsoft.dotnet.platformabstractions.2.0.4.nupkg.sha512",
     "C:\\Users\\Abdullah\\.nuget\\packages\\microsoft.extensions.configuration\\5.0.0\\microsoft.extensions.configuration.5.0.0.nupkg.sha512",

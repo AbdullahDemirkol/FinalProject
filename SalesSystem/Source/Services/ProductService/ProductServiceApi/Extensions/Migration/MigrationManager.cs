@@ -42,15 +42,17 @@ namespace ProductServiceApi.Extensions.Migration
                 try
                 {
                     var productContext = scope.ServiceProvider.GetRequiredService<ProductContext>();
-
+                    //Microsoft.EntityFrameworkCore.InMemory
                     if (productContext.Database.ProviderName != "Microsoft.EntityFrameworkCore.InMemory")
                     {
                         productContext.Database.Migrate();
                         ProductContextSeed.SeedAsync(productContext).Wait();
                     }
                 }
-                catch (Exception)
+                catch (Exception E)
                 {
+                    var P = E.Message;
+
                     throw;
                 }
             }

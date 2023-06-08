@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using PaymentServiceApi.IntegrationEvents.EventHandlers;
 using PaymentServiceApi.IntegrationEvents.Events;
+using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,11 @@ namespace PaymentServiceApi.Configuration
                         ConnectionTryCount = 5,
                         EventNameSuffix = "IntegrationEvent",
                         SubscriberClientAppName = "PaymentService",
-                        EventBusType = EventBusType.RabbitMQ
+                        EventBusType = EventBusType.RabbitMQ,
+                        Connection = new ConnectionFactory()
+                        {
+                            HostName = "c_rabbitmq"
+                        }
                     };
                     return EventBusRedirect.CreateEventBus(eventBusConfig, serviceProvider);
                 }

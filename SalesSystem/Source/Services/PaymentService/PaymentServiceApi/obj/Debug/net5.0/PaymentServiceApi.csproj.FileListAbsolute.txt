@@ -133,3 +133,113 @@ C:\Users\Abdullah\Desktop\Yeni klasör (5)\FinalProject\SalesSystem\Source\Servi
 C:\Users\Abdullah\Desktop\Yeni klasör (5)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\ref\PaymentServiceApi.dll
 C:\Users\Abdullah\Desktop\Yeni klasör (5)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.pdb
 C:\Users\Abdullah\Desktop\Yeni klasör (5)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.genruntimeconfig.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Configuration\JsonConfiguration\appsettings.Development.json
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Configuration\JsonConfiguration\appsettings.json
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Configuration\JsonConfiguration\serilog.Development.json
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Configuration\JsonConfiguration\serilog.json
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\PaymentServiceApi.exe
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\PaymentServiceApi.deps.json
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\PaymentServiceApi.runtimeconfig.json
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\PaymentServiceApi.runtimeconfig.dev.json
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\PaymentServiceApi.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\ref\PaymentServiceApi.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\PaymentServiceApi.pdb
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Microsoft.OpenApi.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Polly.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\RabbitMQ.Client.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.AspNetCore.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.Extensions.Hosting.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.Extensions.Logging.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.Formatting.Compact.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.Settings.Configuration.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.Sinks.Console.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.Sinks.Debug.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.Sinks.File.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.Sinks.Graylog.Core.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.Sinks.Graylog.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\EventBus.Base.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\EventBus.RabbitMQ.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\EventBus.Redirect.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\EventBus.Base.pdb
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\EventBus.Redirect.pdb
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\EventBus.RabbitMQ.pdb
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.csproj.AssemblyReference.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.AssemblyInfoInputs.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.AssemblyInfo.cs
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.csproj.CoreCompileInputs.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\staticwebassets\PaymentServiceApi.StaticWebAssets.Manifest.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\staticwebassets\PaymentServiceApi.StaticWebAssets.xml
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\scopedcss\bundle\PaymentServiceApi.styles.css
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.RazorTargetAssemblyInfo.cache
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.csproj.CopyComplete
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\ref\PaymentServiceApi.dll
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.pdb
+C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.genruntimeconfig.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Configuration\JsonConfiguration\appsettings.Development.json
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Configuration\JsonConfiguration\appsettings.json
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Configuration\JsonConfiguration\serilog.Development.json
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Configuration\JsonConfiguration\serilog.json
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\PaymentServiceApi.exe
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\PaymentServiceApi.deps.json
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\PaymentServiceApi.runtimeconfig.json
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\PaymentServiceApi.runtimeconfig.dev.json
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\PaymentServiceApi.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\ref\PaymentServiceApi.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\PaymentServiceApi.pdb
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Microsoft.OpenApi.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Newtonsoft.Json.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Polly.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\RabbitMQ.Client.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.AspNetCore.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.Extensions.Hosting.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.Extensions.Logging.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.Formatting.Compact.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.Settings.Configuration.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.Sinks.Console.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.Sinks.Debug.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.Sinks.File.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.Sinks.Graylog.Core.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Serilog.Sinks.Graylog.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\EventBus.Base.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\EventBus.RabbitMQ.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\EventBus.Redirect.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\EventBus.Base.pdb
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\EventBus.Redirect.pdb
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\bin\Debug\net5.0\EventBus.RabbitMQ.pdb
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.csproj.AssemblyReference.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.AssemblyInfoInputs.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.AssemblyInfo.cs
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.csproj.CoreCompileInputs.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\staticwebassets\PaymentServiceApi.StaticWebAssets.Manifest.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\staticwebassets\PaymentServiceApi.StaticWebAssets.xml
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\scopedcss\bundle\PaymentServiceApi.styles.css
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.RazorTargetAssemblyInfo.cache
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.csproj.CopyComplete
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\ref\PaymentServiceApi.dll
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.pdb
+C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\PaymentService\PaymentServiceApi\obj\Debug\net5.0\PaymentServiceApi.genruntimeconfig.cache

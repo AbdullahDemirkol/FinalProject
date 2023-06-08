@@ -27,13 +27,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateways", "ApiGateways", "{CD99B323-B0A9-4F88-AD31-6F646E6E69F3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{DF2F48C5-ACA6-470C-8342-CA54727B356C}"
-	ProjectSection(SolutionItems) = preProject
-		..\..\Bitirme Projesi\Docker\docker-compose.yml = ..\..\Bitirme Projesi\Docker\docker-compose.yml
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServicePorts", "ServicePorts", "{0FF0E550-B2A3-42F8-8A78-2550ED66DEB5}"
 	ProjectSection(SolutionItems) = preProject
+		DockerPort.txt = DockerPort.txt
 		ServicePort.txt = ServicePort.txt
 	EndProjectSection
 EndProject
@@ -66,6 +62,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlazorWebApplicationAdminPanel", "BlazorWebApplicationAdminPanel", "{C7313BC1-C329-4A06-ADE9-43D5E8A41DE2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationAdminPanel", "Source\Clients\BlazorWebApplicationAdminPanel\WebApplicationAdminPanel\WebApplicationAdminPanel.csproj", "{BDBF0758-2105-4F87-A11F-FF4EF0EC3CC4}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{861F112F-2790-404B-B556-48A1EADA0FA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -121,6 +119,10 @@ Global
 		{BDBF0758-2105-4F87-A11F-FF4EF0EC3CC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDBF0758-2105-4F87-A11F-FF4EF0EC3CC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDBF0758-2105-4F87-A11F-FF4EF0EC3CC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{861F112F-2790-404B-B556-48A1EADA0FA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{861F112F-2790-404B-B556-48A1EADA0FA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{861F112F-2790-404B-B556-48A1EADA0FA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{861F112F-2790-404B-B556-48A1EADA0FA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -136,7 +138,6 @@ Global
 		{ED9D3429-7EDA-4E15-BD25-4B518650F44F} = {55DC8071-87A6-45AC-B1E5-370691BFBEB8}
 		{7DA8B692-5D4C-46A3-8F08-51FA17B2D56C} = {55DC8071-87A6-45AC-B1E5-370691BFBEB8}
 		{CD99B323-B0A9-4F88-AD31-6F646E6E69F3} = {55DC8071-87A6-45AC-B1E5-370691BFBEB8}
-		{DF2F48C5-ACA6-470C-8342-CA54727B356C} = {496B5D58-CC92-4C46-BAE8-C0B682F57DA5}
 		{0FF0E550-B2A3-42F8-8A78-2550ED66DEB5} = {496B5D58-CC92-4C46-BAE8-C0B682F57DA5}
 		{4F010D67-D69E-4CCB-A935-DBBD48C76176} = {7DA8B692-5D4C-46A3-8F08-51FA17B2D56C}
 		{569BFE0A-CA0B-4ABC-92AE-58F2FA46C583} = {4F010D67-D69E-4CCB-A935-DBBD48C76176}

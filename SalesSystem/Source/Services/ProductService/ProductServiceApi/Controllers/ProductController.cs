@@ -273,8 +273,17 @@ namespace ProductServiceApi.Controllers
             product.Price = productToUpdate.Product.Price;
             product.Description = productToUpdate.Product.Description;
             product.BrandId = productToUpdate.Product.BrandId;
-            product.DownCategoryId = productToUpdate.Product.DownCategoryId;
-            product.UpCategoryId = productToUpdate.Product.UpCategoryId;
+            if (product.DownCategoryId!=productToUpdate.Product.DownCategoryId)
+            {
+                var downCategory = _productContext.DownCategories.SingleOrDefault(p => p.Id == productToUpdate.Product.DownCategoryId);
+                product.UpCategoryId = downCategory.UpCategoryId;
+                product.DownCategoryId = downCategory.Id;
+            }
+            else if(product.UpCategoryId!=productToUpdate.Product.UpCategoryId)
+            {
+                product.UpCategoryId = productToUpdate.Product.UpCategoryId;
+            }
+            
             List<IFormFile> files = new List<IFormFile>();
             List<string> results = new List<string>();
             foreach (var byteFormFile in productToUpdate.ProductImageFiles)

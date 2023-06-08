@@ -22,8 +22,8 @@ namespace BasketServiceApi
             {
                 return new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile($"Configurations/appsettings.json", optional: false)
-                    .AddJsonFile($"Configurations/appsettings.{env}.json", optional: true)
+                    .AddJsonFile($"Configuration/JsonConfiguration/appsettings.json", optional: false)
+                    .AddJsonFile($"Configuration/JsonConfiguration/appsettings.{env}.json", optional: true)
                     .AddEnvironmentVariables()
                     .Build();
             }
@@ -34,8 +34,8 @@ namespace BasketServiceApi
             {
                 return new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
-                    .AddJsonFile($"Configurations/serilog.json", optional: false)
-                    .AddJsonFile($"Configurations/serilog.{env}.json", optional: true)
+                    .AddJsonFile($"Configuration/JsonConfiguration/serilog.json", optional: false)
+                    .AddJsonFile($"Configuration/JsonConfiguration/serilog.{env}.json", optional: true)
                     .AddEnvironmentVariables()
                     .Build();
             }
@@ -69,14 +69,14 @@ namespace BasketServiceApi
                 .Build();
         }
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-    Host.CreateDefaultBuilder(args)
-        .ConfigureWebHostDefaults(webBuilder =>
-        {
-            webBuilder.ConfigureAppConfiguration(p => p.AddConfiguration(configuration));
-            webBuilder.UseStartup<Startup>();
-            webBuilder.ConfigureLogging(p => p.ClearProviders());
-            webBuilder.UseSerilog();
-        });
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.ConfigureAppConfiguration(p => p.AddConfiguration(configuration));
+                    webBuilder.UseStartup<Startup>();
+                    webBuilder.ConfigureLogging(p => p.ClearProviders());
+                    webBuilder.UseSerilog();
+                });
         //public static IHostBuilder CreateHostBuilder(string[] args) =>
         //    Host.CreateDefaultBuilder(args)
         //        .ConfigureWebHostDefaults(webBuilder =>

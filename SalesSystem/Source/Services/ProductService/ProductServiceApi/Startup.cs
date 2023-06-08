@@ -81,7 +81,7 @@ namespace ProductServiceApi
 
             //-----------------------------------------------------------------
 
-            app.ConfigurationInConsul(lifetime);
+            app.ConfigurationInConsul(lifetime,Configuration);
         }
     }
 }

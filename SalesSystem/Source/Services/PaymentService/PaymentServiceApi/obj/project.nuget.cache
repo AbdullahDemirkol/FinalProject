@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pGy8hNVTS1+5EbfFwfpQwdcEwGBx6wysJTjgT2WQPjBPcBJQdQeunF6MOj64lviCRVmR4ZhgeAyGSNQY1MT+7g==",
+  "dgSpecHash": "bPtuiO5PeR1FBuIw3MfNyW/a2sO9JwxA0FzUwCXFn0xP4GmbBw+xnjzQkVyPzRY2/tXkwRNrku4lvBW1B8H8eQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\Yeni klasör (5)\\FinalProject\\SalesSystem\\Source\\Services\\PaymentService\\PaymentServiceApi\\PaymentServiceApi.csproj",
+  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\yedek\\son hale\\yedekk\\SalesSystem\\Source\\Services\\PaymentService\\PaymentServiceApi\\PaymentServiceApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Abdullah\\.nuget\\packages\\microsoft.dotnet.platformabstractions\\2.0.4\\microsoft.dotnet.platformabstractions.2.0.4.nupkg.sha512",
     "C:\\Users\\Abdullah\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",

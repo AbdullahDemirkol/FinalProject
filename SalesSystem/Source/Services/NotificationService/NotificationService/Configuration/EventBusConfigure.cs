@@ -3,6 +3,7 @@ using EventBus.Base.Entity.Concrete.Enum;
 using EventBus.Base.EventBus.Abstract;
 using EventBus.Redirect;
 using Microsoft.Extensions.DependencyInjection;
+using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,11 @@ namespace NotificationService.Configuration
                         ConnectionTryCount = 5,
                         EventNameSuffix = "IntegrationEvent",
                         SubscriberClientAppName = "NotificationService",
-                        EventBusType = EventBusType.RabbitMQ
+                        EventBusType = EventBusType.RabbitMQ,
+                        Connection = new ConnectionFactory()
+                        {
+                            HostName = "c_rabbitmq"
+                        }
                     };
                     return EventBusRedirect.CreateEventBus(eventBusConfig, serviceProvider);
                 }

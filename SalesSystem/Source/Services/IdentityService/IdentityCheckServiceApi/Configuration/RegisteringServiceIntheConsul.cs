@@ -26,7 +26,7 @@ namespace IdentityCheckServiceApi.Configuration
                     }));
             return services;
         }
-        public static IApplicationBuilder ConfigurationInConsul(this IApplicationBuilder app, IHostApplicationLifetime lifetime)
+        public static IApplicationBuilder ConfigurationInConsul(this IApplicationBuilder app, IHostApplicationLifetime lifetime,IConfiguration configuration)
         {
             var consulClient = app.ApplicationServices.GetRequiredService<IConsulClient>();
 
@@ -41,18 +41,21 @@ namespace IdentityCheckServiceApi.Configuration
 
             //await ctx.Response.WriteAsync("IP Address: " + ipAddress);
 
-            var features = app.Properties["server.Features"] as FeatureCollection;
-            var addresses = features.Get<IServerAddressesFeature>().Addresses;
-            var address = addresses.First();
+            //var features = app.Properties["server.Features"] as FeatureCollection;
+            //var addresses = features.Get<IServerAddressesFeature>().Addresses;
+            //var address = addresses.First();
 
-            var uri = new Uri(address);
+            //var uri = new Uri(address);
+            var uri = configuration.GetValue<Uri>("ConsulConfig:ServiceAddress");
+            var serviceName = configuration.GetValue<string>("ConsulConfig:ServiceName");
+            var serviceId = configuration.GetValue<string>("ConsulConfig:ServiceId");
             var registration = new AgentServiceRegistration()
             {
-                ID = "IdentityService",
-                Name = "IdentityService",
+                ID = serviceId ?? "Identity",
+                Name = serviceName ?? "IdentityService",
                 Address = $"{uri.Host}",
                 Port = uri.Port,
-                Tags = new[] { "IdentityService", "Identity" }
+                Tags = new[] { serviceName, serviceId}
             };
 
             logger.LogInformation("Consula kayıt oluşturuluyor.");

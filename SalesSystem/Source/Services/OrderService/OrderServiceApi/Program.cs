@@ -44,11 +44,6 @@ namespace OrderServiceApi
         public static IWebHost BuildWebHost(IConfiguration configuration, string[] args)
         {
             return WebHost.CreateDefaultBuilder()
-                //.UseDefaultServiceProvider((context, options) =>
-                //{
-                //    options.ValidateScopes = false;
-                //    options.ValidateOnBuild = false;
-                //})
                 .ConfigureAppConfiguration(p => p.AddConfiguration(configuration))
                 .UseStartup<Startup>()
                 .ConfigureLogging(p => p.ClearProviders())

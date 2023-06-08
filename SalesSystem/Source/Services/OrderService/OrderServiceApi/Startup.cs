@@ -93,7 +93,7 @@ namespace OrderServiceApi
             //-----------------------------------------------------------------
 
             app.ConfigureEventBus();
-            app.ConfigurationInConsul(lifetime);
+            app.ConfigurationInConsul(lifetime,Configuration);
         }
     }
 }

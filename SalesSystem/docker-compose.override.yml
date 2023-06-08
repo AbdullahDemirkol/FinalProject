@@ -1,0 +1,56 @@
+version: '3.4'
+
+services:
+    s_redis:
+        ports:
+            - 6379:6379
+        volumes:
+            - /opt/app_data/redis:/data
+    s_rabbitmq:
+        ports:
+            - 5672:5672
+            - 15672:15672
+        volumes:
+            - rabbitmq:/var/lib/rabbitmq
+    s_consul:
+        ports:
+            - 8500:8500
+            - 8600:8600/tcp
+            - 8600:8600/udp
+    s_graylog:
+        environment:
+            - GRAYLOG_PASSWORD_SECRET=somepasswordpepper
+            - GRAYLOG_ROOT_PASSWORD_SHA2=8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+            - GRAYLOG_HTTP_EXTERNAL_URI=http://127.0.0.1:9000/
+        restart: always
+        links:
+            - mongodb:mongo
+            - elasticsearch
+        depends_on:
+            - mongodb
+            - elasticsearch
+        ports:
+            - 9000:9000 # Graylog web interface and REST API
+            - 5555:5555 # Raw/Plaintext TCP
+            - 1514:1514 # Syslog TCP
+            - 1514:1514/udp # Syslog UDP
+            - 12201:12201 # GELF TCP
+            - 12201:12201/udp # GELF UDP
+    s_postgres:
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=1234
+            # - POSTGRES_DB=mydatabase
+        ports:
+            - "5432:5432"
+    s_pg-admin:
+        environment:
+            - PGADMIN_DEFAULT_EMAIL=admin@email.com
+            - PGADMIN_DEFAULT_PASSWORD=admin 
+            - PGADMIN_LISTEN_PORT=5050
+        ports:
+            -  "5050:5050"
+volumes:
+  redis:
+  rabbitmq:
+  data:

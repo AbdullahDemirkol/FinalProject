@@ -103,7 +103,7 @@ namespace BasketServiceApi
             //-----------------------------------------------------------------
 
             app.ConfigureEventBus(app.ApplicationServices);
-            app.ConfigurationInConsul(lifetime);
+            app.ConfigurationInConsul(lifetime,Configuration);
         }
     }
 }

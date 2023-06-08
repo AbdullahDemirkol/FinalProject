@@ -6,6 +6,7 @@ using EventBus.Base.EventBus.Abstract;
 using EventBus.Redirect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,11 @@ namespace BasketServiceApi.Configuration
                         ConnectionTryCount = 5,
                         EventNameSuffix = "IntegrationEvent",
                         SubscriberClientAppName = "BasketService",
-                        EventBusType = EventBusType.RabbitMQ
+                        EventBusType = EventBusType.RabbitMQ,
+                        Connection = new ConnectionFactory()
+                        {
+                            HostName = "c_rabbitmq"
+                        }
                     };
                     return EventBusRedirect.CreateEventBus(eventBusConfig, serviceProvider);
                 }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using OrderServiceApi.IntegrationEvents.EventHandlers;
 using OrderServiceApi.IntegrationEvents.Events;
+using RabbitMQ.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,11 @@ namespace OrderServiceApi.Configurations
                         ConnectionTryCount = 5,
                         EventNameSuffix = "IntegrationEvent",
                         SubscriberClientAppName = "OrderService",
-                        EventBusType = EventBusType.RabbitMQ
+                        EventBusType = EventBusType.RabbitMQ,
+                        Connection = new ConnectionFactory()
+                        {
+                            HostName = "c_rabbitmq"
+                        }
                     };
                     return EventBusRedirect.CreateEventBus(eventBusConfig, serviceProvider);
                 }

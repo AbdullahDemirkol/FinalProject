@@ -70,8 +70,9 @@ namespace Web.ApiGateway.Controllers
                 await _basketService.UpdateAsync(currentBasket);
                 return Ok(true);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                var p = e.Message;
                 return BadRequest(false);
             }
 
