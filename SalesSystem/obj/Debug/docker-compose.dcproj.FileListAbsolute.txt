@@ -1,2 +1,3 @@
 C:\Users\Abdullah\Desktop\Yeni klasör (11)\FinalProject\SalesSystem\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
 C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
+C:\Users\Abdullah\Desktop\Bitirme Projesi\FinalProject\SalesSystem\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache

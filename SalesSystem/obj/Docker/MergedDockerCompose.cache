@@ -1,4 +1,4 @@
-name: dockercompose13071648349057131679
+name: dockercompose8120647700595082657
 services:
   elasticsearch:
     deploy:
@@ -146,7 +146,7 @@ services:
         create_host_path: true
 networks:
   default:
-    name: dockercompose13071648349057131679_default
+    name: dockercompose8120647700595082657_default
 volumes:
   rabbitmq:
-    name: dockercompose13071648349057131679_rabbitmq
+    name: dockercompose8120647700595082657_rabbitmq

@@ -4748,11 +4748,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Abdullah\\Desktop\\yedek\\son hale\\yedekk\\SalesSystem\\Source\\Services\\IdentityService\\IdentityCheckServiceApi\\IdentityCheckServiceApi.csproj",
+      "projectUniqueName": "C:\\Users\\Abdullah\\Desktop\\Bitirme Projesi\\FinalProject\\SalesSystem\\Source\\Services\\IdentityService\\IdentityCheckServiceApi\\IdentityCheckServiceApi.csproj",
       "projectName": "IdentityCheckServiceApi",
-      "projectPath": "C:\\Users\\Abdullah\\Desktop\\yedek\\son hale\\yedekk\\SalesSystem\\Source\\Services\\IdentityService\\IdentityCheckServiceApi\\IdentityCheckServiceApi.csproj",
+      "projectPath": "C:\\Users\\Abdullah\\Desktop\\Bitirme Projesi\\FinalProject\\SalesSystem\\Source\\Services\\IdentityService\\IdentityCheckServiceApi\\IdentityCheckServiceApi.csproj",
       "packagesPath": "C:\\Users\\Abdullah\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Abdullah\\Desktop\\yedek\\son hale\\yedekk\\SalesSystem\\Source\\Services\\IdentityService\\IdentityCheckServiceApi\\obj\\",
+      "outputPath": "C:\\Users\\Abdullah\\Desktop\\Bitirme Projesi\\FinalProject\\SalesSystem\\Source\\Services\\IdentityService\\IdentityCheckServiceApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = NotificationService
-build_property.ProjectDir = C:\Users\Abdullah\Desktop\yedek\son hale\yedekk\SalesSystem\Source\Services\NotificationService\NotificationService\
+build_property.ProjectDir = C:\Users\Abdullah\Desktop\Bitirme Projesi\FinalProject\SalesSystem\Source\Services\NotificationService\NotificationService\

@@ -219,11 +219,11 @@
       "mscorlib.dll": "sha256-pOPJrGSp+RVyYmvcT+PTaEq9fVhEFzvMs\/3Ue3S2j+A=",
       "netstandard.dll": "sha256-bY3Q1RCB\/lmUAo5AG5YDHBu5uD8OxCGAiJ+wukrs1pw=",
       "System.Private.CoreLib.dll": "sha256-25IZl0xgoqOBdkTlEjUBLmiiRGYCYI1BaFevKzE+EHk=",
-      "WebApplicationAdminPanel.dll": "sha256-rDMAWraiOzzE5+ilC892tXHtU9SwPHaF2XdOg\/w50aE="
+      "WebApplicationAdminPanel.dll": "sha256-7HgoHVkAuGlRdn4ofBTXjYY+E+cqdA69yUVdHB0sorw="
     },
     "lazyAssembly": null,
     "pdb": {
-      "WebApplicationAdminPanel.pdb": "sha256-kakLfGaETaWRRw+bRA+ZbRnXDFlGMtFsqu+Q0pCE9Zk="
+      "WebApplicationAdminPanel.pdb": "sha256-oCGoD9sOCTXDiPV81FBoYRPnUlzM1\/M8eI76DFoXsQk="
     },
     "runtime": {
       "dotnet.timezones.blat": "sha256-Ek+C0V\/4GBnUGH1\/X20UjHhjyp7se2MX+2RHWSpKSDE=",

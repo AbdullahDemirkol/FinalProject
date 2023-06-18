@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tXPtwnpboXMa62y2Ms+IAQaWeg6fo9cBOszEwiyeudwdkMxNVd+3r/oDDdQRo7FHsLr4uIDZAGgoPn6KHKdeFw==",
+  "dgSpecHash": "8WT3JNsy+UTS2jsjeN4XdiFBPu2Hs5smNTas8/ZfvpiMxSL+Hmhy4eudckc1pp6BbU+aAMIe66E+IxvJVDKXwA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\yedek\\son hale\\yedekk\\SalesSystem\\Source\\Services\\BasketService\\BasketServiceApi\\BasketServiceApi.csproj",
+  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\Bitirme Projesi\\FinalProject\\SalesSystem\\Source\\Services\\BasketService\\BasketServiceApi\\BasketServiceApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Abdullah\\.nuget\\packages\\consul\\1.6.10.7\\consul.1.6.10.7.nupkg.sha512",
     "C:\\Users\\Abdullah\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
