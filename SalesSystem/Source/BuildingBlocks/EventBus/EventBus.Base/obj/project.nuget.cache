@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tAjyr566vCa5YKR1PVz2A1DijysI5M3b5l3lTMBG/R5v4etmi5lNii/sUrPe9Ay8993A7yfTOoi+Dgt5ZkaSxQ==",
+  "dgSpecHash": "Qs1OWLE7q/NVHjf/9bnpJRhPhpEeEeaG6HywOc3DgPHyLLnbXI8hcZVgoPycsd4jno+i7zjUk8neZ4dbPmGHdw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\Bitirme Projesi\\FinalProject\\SalesSystem\\Source\\BuildingBlocks\\EventBus\\EventBus.Base\\EventBus.Base.csproj",
+  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\asdas\\FinalProject\\SalesSystem\\Source\\BuildingBlocks\\EventBus\\EventBus.Base\\EventBus.Base.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Abdullah\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\Abdullah\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512"

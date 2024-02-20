@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mGc82EW9SvXIoeVIh4/xF2mTu+DMRPD6t//szFNLbMRmorqp99mqoeQDYLKF3C3IZrRC15QBZdrv71rkGBEBAw==",
+  "dgSpecHash": "jVmyuEMtIpy6hmDSADn25HnyRlzztQx4Tqx4u+06yLdCno2eH8FzEnxfZvbwAvyq7hKeVecJgcTPbTMgV8RdTQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\Bitirme Projesi\\FinalProject\\SalesSystem\\Source\\BuildingBlocks\\EventBus\\EventBus.Redirect\\EventBus.Redirect.csproj",
+  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\asdas\\FinalProject\\SalesSystem\\Source\\BuildingBlocks\\EventBus\\EventBus.Redirect\\EventBus.Redirect.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Abdullah\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\Abdullah\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.2\\microsoft.extensions.logging.abstractions.6.0.2.nupkg.sha512",

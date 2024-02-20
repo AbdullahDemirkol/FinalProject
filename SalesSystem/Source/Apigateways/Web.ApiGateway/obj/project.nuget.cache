@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OVfHE8BfXSLbXkK8P/GCFD7pGwsEwtpowTJIKMi4CiVdA7FjePa/IzOh6OZ5E78OteRCwYOU8o2spynCHVLF+w==",
+  "dgSpecHash": "eBxOw1CfH4mEI1OHKAoO9T/Tc5faWCXT8DH9hHZuadKUtWf03S1DPq0aAgLuEmH9iJnR1QYBdsOWZFh26sK7VA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\Bitirme Projesi\\FinalProject\\SalesSystem\\Source\\Apigateways\\Web.ApiGateway\\Web.ApiGateway.csproj",
+  "projectFilePath": "C:\\Users\\Abdullah\\Desktop\\asdas\\FinalProject\\SalesSystem\\Source\\Apigateways\\Web.ApiGateway\\Web.ApiGateway.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Abdullah\\.nuget\\packages\\consul\\1.6.1.1\\consul.1.6.1.1.nupkg.sha512",
     "C:\\Users\\Abdullah\\.nuget\\packages\\fluentvalidation\\9.3.0\\fluentvalidation.9.3.0.nupkg.sha512",

@@ -1,0 +1,152 @@
+name: dockercompose16745375738133821509
+services:
+  elasticsearch:
+    deploy:
+      resources:
+        limits:
+          memory: "1073741824"
+    environment:
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
+      http.host: 0.0.0.0
+      network.host: 0.0.0.0
+      transport.host: localhost
+    image: docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.2
+    networks:
+      default: null
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+  mongodb:
+    image: mongo:4.2
+    networks:
+      default: null
+  s_consul:
+    container_name: c_consul
+    image: consul
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 8500
+      published: "8500"
+      protocol: tcp
+    - mode: ingress
+      target: 8600
+      published: "8600"
+      protocol: tcp
+    - mode: ingress
+      target: 8600
+      published: "8600"
+      protocol: udp
+  s_graylog:
+    container_name: c_graylog
+    depends_on:
+      elasticsearch:
+        condition: service_started
+      mongodb:
+        condition: service_started
+    environment:
+      GRAYLOG_HTTP_EXTERNAL_URI: http://127.0.0.1:9000/
+      GRAYLOG_PASSWORD_SECRET: somepasswordpepper
+      GRAYLOG_ROOT_PASSWORD_SHA2: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+    image: graylog/graylog:4.0
+    links:
+    - mongodb:mongo
+    - elasticsearch
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 9000
+      published: "9000"
+      protocol: tcp
+    - mode: ingress
+      target: 5555
+      published: "5555"
+      protocol: tcp
+    - mode: ingress
+      target: 1514
+      published: "1514"
+      protocol: tcp
+    - mode: ingress
+      target: 1514
+      published: "1514"
+      protocol: udp
+    - mode: ingress
+      target: 12201
+      published: "12201"
+      protocol: tcp
+    - mode: ingress
+      target: 12201
+      published: "12201"
+      protocol: udp
+    restart: always
+  s_pg-admin:
+    container_name: c_pg-admin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@email.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_LISTEN_PORT: "5050"
+    image: dpage/pgadmin4:latest
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 5050
+      published: "5050"
+      protocol: tcp
+  s_postgres:
+    container_name: c_postgres
+    environment:
+      POSTGRES_PASSWORD: "1234"
+      POSTGRES_USER: postgres
+    image: postgres
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 5432
+      published: "5432"
+      protocol: tcp
+  s_rabbitmq:
+    container_name: c_rabbitmq
+    image: rabbitmq:3-management
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 5672
+      published: "5672"
+      protocol: tcp
+    - mode: ingress
+      target: 15672
+      published: "15672"
+      protocol: tcp
+    volumes:
+    - type: volume
+      source: rabbitmq
+      target: /var/lib/rabbitmq
+      volume: {}
+  s_redis:
+    container_name: c_redis
+    image: redis
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 6379
+      published: "6379"
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: /opt/app_data/redis
+      target: /data
+      bind:
+        create_host_path: true
+networks:
+  default:
+    name: dockercompose16745375738133821509_default
+volumes:
+  rabbitmq:
+    name: dockercompose16745375738133821509_rabbitmq
